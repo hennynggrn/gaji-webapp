@@ -16,10 +16,16 @@ class M_tunjangan extends CI_Model{
 		return $this->db->get('pegawai');
 	}
 
+	public function get_masakerja()
+	{
+
+		return $this->db->get('masakerja');
+	}
+
 	public function add_tunjangan($data)
 	{
 		$this->db->insert("tunjangan",$data);
-	}
+	}	
 
 	public function detail_tunjangan($data)
 	{

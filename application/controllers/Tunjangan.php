@@ -12,6 +12,7 @@ class Tunjangan extends CI_Controller {
 	{
 		$this->load->model('M_tunjangan');
 		$data['tampil']= $this->M_tunjangan->get_pegawai()->result();
+		$data['masakerja']= $this->M_tunjangan->get_masakerja()->result_array();
 		$this->template->load('index','tunjangan/table_tunjangan',$data);
 	}
 

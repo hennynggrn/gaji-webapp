@@ -130,13 +130,6 @@
         </li>
 
         <li>
-          <a href="<?php echo base_url('index.php/masakerja/table'); ?>">
-            <i class="fa fa-money"></i>
-            <span>Masa Kerja</span>
-          </a>
-        </li>
-
-        <li>
           <a href="<?php echo base_url('index.php/gaji/table'); ?>">
             <i class="fa fa-money"></i>
             <span>Gaji</span>
