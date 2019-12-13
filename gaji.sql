@@ -125,21 +125,15 @@ insert  into `keluarga`(`id_keluarga`,`nama`,`id_status`,`s_hidup`,`gender`,`id_
 DROP TABLE IF EXISTS `masakerja`;
 
 CREATE TABLE `masakerja` (
-  `id_masakerja` int(11) NOT NULL AUTO_INCREMENT,
-  `id_pegawai` int(11) NOT NULL,
-  `id_bulan` int(11) NOT NULL,
+  `id_masakerja` int(11) NOT NULL,
   `tahun` int(11) NOT NULL,
   `jml_mk` int(50) NOT NULL,
-  PRIMARY KEY (`id_masakerja`),
-  KEY `id_pegawai` (`id_pegawai`),
-  KEY `id_bulan` (`id_bulan`),
-  CONSTRAINT `masakerja_ibfk_1` FOREIGN KEY (`id_pegawai`) REFERENCES `pegawai` (`id_pegawai`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `masakerja_ibfk_2` FOREIGN KEY (`id_bulan`) REFERENCES `bulan` (`id_bulan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id_masakerja`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `masakerja` */
 
-insert  into `masakerja`(`id_masakerja`,`id_pegawai`,`id_bulan`,`tahun`,`jml_mk`) values (1,1,1,2018,1);
+insert  into `masakerja`(`id_masakerja`,`tahun`,`jml_mk`) values (1,1,2000),(2,2,4000),(3,3,6000),(4,4,8000),(5,5,20000),(6,6,22000),(7,7,24000),(8,8,26000),(9,9,28000),(10,10,40000),(11,11,42000),(12,12,44000),(13,13,46000),(14,14,48000),(15,15,65000),(16,16,67000),(17,17,69000),(18,18,71000),(19,19,73000),(20,20,93000),(21,21,95000),(22,22,97000),(23,23,99000),(24,24,101000),(25,25,125000),(26,26,127000),(27,27,129000),(28,28,131000),(29,29,133000),(30,30,160000),(31,31,162000),(32,32,164000),(33,33,166000),(34,34,168000),(35,35,200000),(36,36,202000),(37,37,204000),(38,38,206000),(39,39,208000),(40,40,245000);
 
 /*Table structure for table `pegawai` */
 
