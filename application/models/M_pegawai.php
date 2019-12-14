@@ -26,7 +26,7 @@ class M_pegawai extends CI_Model{
 		return $this->db->get_where('pegawai');
 	}
 
-	public function add_pegawai()
+	public function add_pegawai($upload_foto)
 	{
 		$id_pegawai=$this->input->post('id_pegawai');
 		$nbm=$this->input->post('nbm');
@@ -46,6 +46,7 @@ class M_pegawai extends CI_Model{
 			'id_pegawai' => $id_pegawai,
 			'nbm' => $nbm,
 			'nama' => $nama,
+			'foto' => $upload_foto,
 			'tempat_lahir' => $tempat_lahir,
 			'tgl_lahir' => $tgl_lahir,
 			'agama' => $agama,

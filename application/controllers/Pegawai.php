@@ -31,7 +31,22 @@ class Pegawai extends CI_Controller {
 		var_dump($_POST);
 
 		$this->load->model('M_pegawai');
-		$res['pegawai']=$this->M_pegawai->add_pegawai();
+		$config['upload_path'] = 'assets/img/foto_pegawai';
+		$config['allowed_types'] = 'jpeg|jpg|gif|png';
+		$config['max_size'] = 100000*1024;
+		$config['max_width'] = 2000;
+		$config['max_height'] = 2000;
+
+		$this->load->library('upload', $config);
+		if (!$this->upload->do_upload('userfile')) {
+			$errors = array('error' => $this->upload->display_errors());
+			$upload_foto = 'noimage.png';
+		}else {
+			$data = array('upload_data' => $this->upload->data());
+			$upload_foto = $_FILES['foto']['name'];
+		}
+
+		$res['pegawai']=$this->M_pegawai->add_pegawai($upload_foto);
 		$res['jabatan']=$this->M_pegawai->add_jabatan();
 		if($this->input->post('status') == 1) {
 			$res['keluarga']=$this->M_pegawai->add_keluarga(); };

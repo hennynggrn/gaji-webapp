@@ -14,7 +14,6 @@
     </section>
 
     <!-- Main content -->
-    Helloooooooo
     <section class="content">
       <div class="row">
         <div class="col-md-12">
@@ -37,6 +36,14 @@
 
                   <div class="col-sm-10">
                     <input type="varchar" class="form-control" name="nama" placeholder="Nama">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Foto</label>
+
+                  <div class="col-sm-10">
+                    <input type="file" class="form-control" id="foto" name="foto" size="20" value="">
+                    <input type="hidden" id="foto_old" name="foto_old" size="20" value="">
                   </div>
                 </div>
                 <div class="form-group">
