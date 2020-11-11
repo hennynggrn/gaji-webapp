@@ -35,6 +35,7 @@
                   <th>Telepon</th>
                   <th>Jenis Pegawai</th>
                   <th>Status Pegawai</th>
+                  <th>Honorarium</th>
                   <th style="width: 220px">Menu</th>
                 </tr>
                 <?php
@@ -48,13 +49,18 @@
                   <td><?php echo $key['email'] ?></td>
                   <td><?php echo $key['telepon'] ?></td>
                   <td><?php echo $key['jns_pegawai'] ?></td>
-                  <td><?php echo $key['ket'] ?></td>
+                  <td><?php echo $key['status_pegawai'] ?></td>
+                  <td><?php echo 'Rp. '.$key['honor'] ?></td>
                   <td>
-                    <a href = "<?php echo base_url('index.php/pegawai/detail_pegawai');?>/<?php echo $key['id_pegawai']?>">
+                    <a href = "<?php echo base_url('pegawai/detail_pegawai/'.$key['id_pegawai']);?>">
                       <span class="badge bg-green">  <i class="fa fa-fw fa-info-circle"></i>Detail</span>
                     </a>
-                    <span class="badge bg-blue"> <i class="fa fa-fw fa-pencil-square-o"></i>Edit</span>
-                    <span class="badge bg-red"> <i class="fa fa-fw fa-trash-o"></i>Hapus</span>
+                    <a href = "<?php echo base_url('pegawai/edit_pegawai/'.$key['id_pegawai']);?>">
+                      <span class="badge bg-blue">  <i class="fa fa-fw fa-pencil-square-o"></i>Edit</span>
+                    </a>
+                    <a href = "<?php echo base_url('pegawai/hapus_pegawai/'.$key['id_pegawai']);?>">
+                      <span class="badge bg-red">  <i class="fa fa-fw fa-trash-o"></i>Hapus</span>
+                    </a>
                   </td>
                 </tr>
                 <?php } ?> 

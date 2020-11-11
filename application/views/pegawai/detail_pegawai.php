@@ -86,14 +86,19 @@
                       <td><?php echo $value->status; ?></td>
                     </tr>
                     <tr>
-                      <td width="1">Jenis Karyawan</td>
+                      <td width="1">Jenis Pegawai</td>
                       <td>:</td>
                       <td><?php echo $value->jns_pegawai; ?></td>
                     </tr>
                     <tr>
-                      <td width="1">StatusKaryawan</td>
+                      <td width="3">Status Pegawai</td>
                       <td>:</td>
                       <td><?php echo $value->status_pegawai; ?></td>
+                    </tr>
+                    <tr>
+                      <td width="1">Honorarium</td>
+                      <td>:</td>
+                      <td><?php echo 'Rp. '.$value->honor; ?></td>
                     </tr>
 
                     <?php } ?>
@@ -104,7 +109,7 @@
 
               <div class="col-md-12">
                 <td>
-                  <a href = "<?php echo base_url('index.php/pegawai/table_pegawai');?>">
+                  <a href = "<?php echo base_url('pegawai/table_pegawai');?>">
                     <span class="badge bg-yellow">  <i class="fa fa-fw fa-info-circle"></i>Kembali</span>
                   </a>
                     <span class="badge bg-blue"> <i class="fa fa-fw fa-pencil-square-o"></i>Edit</span>

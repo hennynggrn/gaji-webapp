@@ -86,13 +86,13 @@
 
               <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">
-                  <b>Jenis / Status Pegawai</b> <a class="pull-right">Guru / Tetap</a>
+                  <b>Jenis Pegawai</b> <a class="pull-right">Guru / Karyawan</a>
                 </li>
                 <li class="list-group-item">
                   <b>Jabatan</b> <a class="pull-right">1,322</a>
                 </li>
                 <li class="list-group-item">
-                  <b>Masa Kerja (Kontrak)</b> <a class="pull-right">1,322</a>
+                  <b>Masa Kerja</b> <a class="pull-right">1,322</a>
                 </li>
                 <li class="list-group-item">
                   <b>Honorarium</b> <a class="pull-right">1,322</a>
@@ -131,6 +131,13 @@
             </div>
           </div>
         </div>
+
+        <div class="col-md-6">
+          <a href = "<?php echo base_url('index.php/gaji/print_det_gaji');?>/<?php echo $key['id_gaji']?>">
+            <span class="badge bg-green">  <i class="fa fa-fw fa-print"></i>Print</span>
+          </a>
+        </div>
+        
       
     </div>
           <!-- /.box -->

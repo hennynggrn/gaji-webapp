@@ -5,8 +5,9 @@ class M_pegawai extends CI_Model{
 
 	public function get_pegawai()
 	{
-		$this->db->SELECT('p.*,sp.ket');
-		$this->db->JOIN('status_pgw sp','sp.id_status = p.id_status');
+		$this->db->SELECT('p.*');
+		// $this->db->JOIN('status_pgw sp','sp.id_status = p.id_status');
+		// $this->db->JOIN('honor h','h.id_honor = p.id_honor');
 		return $this->db->get('pegawai p');
 	}
 
@@ -15,10 +16,10 @@ class M_pegawai extends CI_Model{
 		return $this->db->get('jabatan');
 	}
 
-	public function get_status_pgw()
-	{
-		return $this->db->get('status_pgw');
-	}
+	// public function get_status_pgw()
+	// {
+	// 	return $this->db->get('status_pgw');
+	// }
 
 	public function get_id_pegawai()
 	{
@@ -40,8 +41,30 @@ class M_pegawai extends CI_Model{
 		$telepon=$this->input->post('telepon');
 		$status=$this->input->post('status');
 		$jns_pegawai=$this->input->post('jns_pegawai');
-		$status_pgw=$this->input->post('status_pgw');
-
+		$status_pegawai = $this->input->post('status_pgw');
+		switch ($status_pegawai) {
+			case 'guru_PNS':
+				$status_pgw = 'PNS';
+				break;
+			case 'guru_T1':
+				$status_pgw = 'Tetap';
+				break;
+			case 'guru_T0':
+				$status_pgw = 'Tidak Tetap';
+				break;
+			case 'karyawan_T1':
+				$status_pgw = 'Tetap';
+				break;
+			case 'karyawan_T0':
+				$status_pgw = 'Tidak Tetap';
+				break;
+		}		
+		// $status_pgw=$this->input->post('status_pgw');
+		$honor = $this->input->post('honor');
+		if (empty($honor)) {
+			$honor = 0;
+		}
+		// var_dump($status_pgw);
 		$data = array(
 			'id_pegawai' => $id_pegawai,
 			'nbm' => $nbm,
@@ -55,7 +78,8 @@ class M_pegawai extends CI_Model{
 			'telepon' => $telepon,
 			'status' => $status,
 			'jns_pegawai' => $jns_pegawai,
-			'id_status' => $status_pgw
+			'status_pegawai' => $status_pgw,
+			'honor' => $honor
 		);
 		$this->db->insert("pegawai",$data);
 	}
@@ -103,7 +127,9 @@ class M_pegawai extends CI_Model{
 
 	public function get_pegawai_detail($where, $table)
 	{
-
+		$this->db->select($table.'.*');
+		// $this->db->JOIN('honor h','h.id_honor = '.$table.'.id_honor');
+		// $this->db->JOIN('status_pgw sp','sp.id_status = '.$table.'.id_status');
 		return $this->db->get_where($table, $where);
 	}
 

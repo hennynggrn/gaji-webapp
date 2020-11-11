@@ -25,27 +25,27 @@
                   <tbody>
                     <tr>
                       <th>Beras</th>
-                      <td>80.000</td>
+                      <td><?php echo $tampil['beras']; ?></td>
                     </tr>
                     <tr>
                       <th>Jamsostek</th>
-                      <td>40.000</td>
+                      <td><?php echo $tampil['jamsostek']; ?></td>
                     </tr>
                     <tr>
                       <th>Keluarga</th>
-                      <td style="width: 20px">100.000</td>
+                      <td><?php echo 'Pasangan:'.$tampil['klg_psg'].'%, Anak:'.$tampil['klg_anak'].'%'; ?></td>
                     </tr>
                     <tr>
                       <th>Jabatan</th>
-                      <td style="width: 20px">100.000</td>
+                      <td><?php echo $tampil['jabatan']; ?></td>
                     </tr>
                     <tr>
                       <th>Masa Kerja</th>
-                      <td style="width: 20px"></td>
+                      <td></td>
                     </tr>
 
                     <tr>
-                      <td>
+                      <td colspan="2">
                         <div class="pull-left col-md-3">
                           <table class="table text-center table-bordered table-hover">
                             <tr>
@@ -77,37 +77,35 @@
                         </div>
                         <div class="pull-left col-md-3">
                           <table class="table text-center table-bordered table-hover">
-                        <tr>
-                          <th>Tahun</th>
-                          <th>Jumlah</th>
-                        </tr>
-                        <?php $tahun = 21; foreach ($masakerja as $key => $value) :
-                        if ($key<20) continue; ?>
-
-                        <tr>
-                          <td><?php echo $tahun++; ?></td>
-                          <td><?php echo $value['jml_mk']; ?></td>
-                        </tr>
-                        <?php  if ($key === 29) break; endforeach;  ?>
-                      </table>
+                            <tr>
+                              <th>Tahun</th>
+                              <th>Jumlah</th>
+                            </tr>
+                            <?php $tahun = 21; foreach ($masakerja as $key => $value) :
+                            if ($key<20) continue; ?>
+                            <tr>
+                              <td><?php echo $tahun++; ?></td>
+                              <td><?php echo $value['jml_mk']; ?></td>
+                            </tr>
+                            <?php  if ($key === 29) break; endforeach;  ?>
+                          </table>
                         </div>
                         <div class="pull-left col-md-3">
                           <table class="table text-center table-bordered table-hover">
-                        <tr>
-                          <th>Tahun</th>
-                          <th>Jumlah</th>
-                        </tr>
-                        <?php $tahun = 31; foreach ($masakerja as $key => $value) :
-                        if ($key<30) continue; ?>
-
-                        <tr>
-                          <td><?php echo $tahun++; ?></td>
-                          <td><?php echo $value['jml_mk']; ?></td>
-                        </tr>
-                        <?php endforeach;  ?>
-                      </table>
+                            <tr>
+                              <th>Tahun</th>
+                              <th>Jumlah</th>
+                            </tr>
+                            <?php $tahun = 31; foreach ($masakerja as $key => $value) :
+                            if ($key<30) continue; ?>
+                            <tr>
+                              <td><?php echo $tahun++; ?></td>
+                              <td><?php echo $value['jml_mk']; ?></td>
+                            </tr>
+                            <?php endforeach;  ?>
+                          </table>
                         </div>
-                     </td>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -117,7 +115,7 @@
             <!-- /.box-body -->
             <div class="box-footer text-center">
               <div class="col-md-12">
-                <a href = "<?php echo base_url('index.php/tunjangan/add_tunjangan');?>">
+                <a href = "<?php echo base_url('index.php/tunjangan/edit_tunjangan');?>">
                     <button type="submit" class="btn btn-primary btn-block">Edit</button>
                   </a>
                   </div>

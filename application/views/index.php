@@ -20,6 +20,20 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/select2/select2.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/colorpicker/bootstrap-colorpicker.min.css">
 
+  <style type="text/css">
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+  </style>
+
 
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 
@@ -123,14 +137,14 @@
         <li class="header">MAIN NAVIGATION</li>
 
         <li>
-          <a href="<?php echo base_url('index.php/home'); ?>">
+          <a href="<?php echo base_url('home'); ?>">
             <i class="fa fa-folder"></i>
             <span>Home</span>
           </a>
         </li>
 
         <li>
-          <a href="<?php echo base_url('index.php/gaji/table'); ?>">
+          <a href="<?php echo base_url('gaji/table'); ?>">
             <i class="fa fa-money"></i>
             <span>Gaji</span>
           </a>
@@ -144,19 +158,26 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo base_url('index.php/pegawai/table_pegawai'); ?>"><i class="fa fa-circle-o"></i>Data Pegawai </a></li>
-            <li><a href="<?php echo base_url('index.php/honor/table_honor'); ?>"><i class="fa fa-circle-o"></i> Data Honorarium</a></li>
-            <li><a href="<?php echo base_url('index.php/tunjangan/table'); ?>"><i class="fa fa-circle-o"></i> Data Tunjangan</a></li>
-            <li><a href="<?php echo base_url('index.php/potongan/table'); ?>"><i class="fa fa-circle-o"></i> Data Potongan</a></li>
-            <li><a href="<?php echo base_url('index.php/keluarga/table_keluarga'); ?>"><i class="fa fa-circle-o"></i> Data Keluarga</a></li>
-            <li><a href="<?php echo base_url('index.php/jabatan/table_jabatan'); ?>"><i class="fa fa-circle-o"></i> Data Jabatan</a></li>
+            <li><a href="<?php echo base_url('pegawai/table_pegawai'); ?>"><i class="fa fa-circle-o"></i>Data Pegawai </a></li>
+            <li><a href="<?php echo base_url('honor/table_honor'); ?>"><i class="fa fa-circle-o"></i>Data Honorarium</a></li>
+            <li><a href="<?php echo base_url('tunjangan/table'); ?>"><i class="fa fa-circle-o"></i>Data Tunjangan</a></li>
+            <li><a href="<?php echo base_url('keluarga/table_keluarga'); ?>"><i class="fa fa-circle-o"></i>Data Keluarga</a></li>
+            <li><a href="<?php echo base_url('jabatan/table_jabatan'); ?>"><i class="fa fa-circle-o"></i>Data Jabatan</a></li>
+            <li><a href="<?php echo base_url('potongan/table'); ?>"><i class="fa fa-circle-o"></i>Data Potongan</a></li>
+            <li><a href="<?php echo base_url('pinjaman/table_pjm_kop'); ?>"><i class="fa fa-circle-o"></i>Data Pinjaman</a></li>
           </ul>
         </li>
 
         <li>
-          <a href="<?php echo base_url('index.php/laporan/form_laporan'); ?>">
+          <a href="<?php echo base_url('laporan/form_laporan'); ?>">
             <i class="fa fa-book"></i>
             <span>Laporan</span>
+          </a>
+        </li>
+        <li>
+          <a href="<?php echo base_url('pengguna/table_pengguna'); ?>">
+            <i class="fa fa-book"></i>
+            <span>Daftar Pengguna</span>
           </a>
         </li>
       </ul>
@@ -478,12 +499,12 @@
 </script>
 <script>
   function add_keluarga(that) {
-    if (that.value == "menikah") {
+    if (that.value == 1) {
       document.getElementById("tambah_keluarga").style.display = "block";
     }
   }
   function close_keluarga(that) {
-    if (that.value == "belum_menikah") {
+    if (that.value == 0) {
       document.getElementById("tambah_keluarga").style.display = "none";
     }
   }
@@ -519,5 +540,84 @@ function kirimContactForm(){
     }
 }
 </script>
+<script type="text/javascript">
+    var rowCount = 0;
+    var j = 0;
+    document.getElementById('jumlahAng').value = rowCount;
+    $(function () {
+      $('body').on('click', '.remove', function () {
+        $(this).closest('tr').remove();
+
+        // count
+        $('.tableAngsuran tbody .num').each(function(i){
+          $($(this).find('td')[0]).html(i+1);
+        });
+        var rowCount = $('.tableAngsuran tbody .num').length;
+        document.getElementById('jumlahAng').value = rowCount;
+      });
+      $('#btnAdd').bind('click', function () {
+        // var j = 0; j++;
+        var div = $('<tr class="num" />');
+        div.html(GetDynamicTextBox(''));
+        $('#angsuranTable').append(div);
+
+        // count
+        $('.tableAngsuran tbody .num').each(function(i){
+          $($(this).find('td')[0]).html(i+1);
+        });   
+        var rowCount = $('.tableAngsuran tbody .num').length;
+        document.getElementById('jumlahAng').value = rowCount;     
+      });
+    });
+    function GetDynamicTextBox(value) {
+      j = j + 1;
+      return '<td></td>' + '<td><input type="hidden" name="ids[' + j + ']" value= "' + j + '"><input type="date" class="form-control" name="tgl_kembali[' + j + ']" placeholder="Tanggal Kembali" value= "' + value + '">' + '</td>' + '</td>' + '<td> <div class="input-group"><span class="input-group-addon">Rp.</span><input type="text" class="form-control" name="nom_angsuran[' + j + ']" placeholder="Nilai Angsuran" value="' + value + '"><div class="input-group-addon">.00</span></div></div></td>' + '<td><div class="remove btn-group"><a href="#" class="btn btn-danger" ><i class="fa fa-close"></i></a></div></td>'; }
+  </script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      var optarray = $("#status_pgw").children('option').map(function() {
+          return {
+              "value": this.value,
+              "option": "<option value='" + this.value + "'>" + this.text + "</option>"
+          }
+      })
+          
+      $("#jns_pegawai").change(function() {
+          $("#status_pgw").children('option').remove();
+          var addoptarr = [];
+          for (i = 0; i < optarray.length; i++) {
+              if (optarray[i].value.indexOf($(this).val()) > -1) {
+                  addoptarr.push(optarray[i].option);
+              }
+          }
+          $("#status_pgw").html(addoptarr.join(''))
+      }).change();
+    })
+  </script>
+  <script>
+    function snowhonor(){
+      document.getElementById('honor').style.display = 'none';
+    }
+    $('#status_pgw').change(function(){
+      var option = $('#status_pgw').val();
+
+      if(option === 'guru_T1'){
+        $('#honor').show();
+      } else if(option === 'karyawan_T1') {
+        $('#honor').show();
+      } else{
+        $('#honor').hide();
+      }
+    })
+    // function honorshow(that) {
+    //   if (that.value == 'guru_T1') {
+    //     document.getElementById("honor").style.display = "block";
+    //   } else if (that.value == 'karyawan_T1') {
+    //     document.getElementById("honor").style.display = "block";
+    //   } else {
+    //     document.getElementById("honor").style.display = "none";
+    //   }
+    // }
+  </script>
 </body>
 </html>

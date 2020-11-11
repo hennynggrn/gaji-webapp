@@ -5,9 +5,7 @@ class M_jabatan extends CI_Model{
 
 	public function get_jabatan()
 	{
-		$this->db->JOIN('pegawai','pegawai.id_pegawai = jabatan.id_pegawai');
-		 $query = $this->db->get('jabatan');
-		 return $query;
+		return $this->db->get('jabatan');
 	}
 
 	public function get_pegawai()
@@ -34,7 +32,6 @@ class M_jabatan extends CI_Model{
 
 	public function edit_jabatan($data)
 	{
-		$this->db->JOIN('pegawai','pegawai.id_pegawai = jabatan.id_pegawai');
 		$this->db->where('jabatan.id_jabatan',$data);
 		 $query = $this->db->get('jabatan');
 		 return $query;

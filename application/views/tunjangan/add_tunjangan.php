@@ -25,31 +25,36 @@
               <form class="form-horizontal" role="form" method="post" action="<?php echo base_url().'index.php/tunjangan/add_tunjangan_proses' ?>">
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Beras</label>
-
                   <div class="col-sm-10">
                     <input type="varchar" class="form-control" name="t_beras">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Jamsostek</label>
-
                   <div class="col-sm-10">
                     <input type="varchar" class="form-control" name="t_jamsostek">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Keluarga</label>
-
                   <div class="col-sm-10">
                     <input type="varchar" class="form-control" name="t_keluarga">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Jabatan</label>
-         <div class="col-sm-10">
+                  <div class="col-sm-10">
                     <input type="varchar" class="form-control" name="t_jabatan">
                   </div>
                 </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Masa Kerja</label>
+                  <div class="col-sm-10">
+                    <input type="varchar" class="form-control" name="t_jabatan">
+                  </div>
+                </div>
+
+                
                 
                 <div class="form-group">
                   <div class="col-sm-offset-2 col-sm-10">

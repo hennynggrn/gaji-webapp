@@ -15,7 +15,7 @@
     <section class="content">
       <!-- Info boxes -->
       <div class="row">
-        <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="col-md-3 col-sm-2 col-xs-12">
           <div class="info-box">
             <span class="info-box-icon bg-aqua"><i class="fa fa-fw fa-money"></i></span>
 
@@ -28,7 +28,7 @@
           <!-- /.info-box -->
         </div>
         <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="col-md-3 col-sm-2 col-xs-12">
           <div class="info-box">
             <span class="info-box-icon bg-red"><i class="fa fa-fw fa-plus-circle"></i></span>
 
@@ -45,7 +45,7 @@
         <!-- fix for small devices only -->
         <div class="clearfix visible-sm-block"></div>
 
-        <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="col-md-3 col-sm-2 col-xs-12">
           <div class="info-box">
             <span class="info-box-icon bg-green"><i class="fa fa-fw fa-hand-scissors-o"></i></span>
             <div class="info-box-content">
@@ -57,12 +57,12 @@
           <!-- /.info-box -->
         </div>
         <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="col-md-3 col-sm-2 col-xs-12">
           <div class="info-box">
             <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">New Members</span>
+              <span class="info-box-text">Gaji</span>
               <span class="info-box-number">2,000</span>
             </div>
             <!-- /.info-box-content -->

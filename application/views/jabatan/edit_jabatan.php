@@ -25,37 +25,21 @@
               <form class="form-horizontal" role="form" method="post" action="<?php echo base_url().'index.php/jabatan/edit_jabatan_proses' ?>" >
                 <!-- text input -->
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Select Pegawai</label>
-                  <div class="col-sm-10">
-                    <?php foreach ($pegawai as $key => $value) {
-                     ?>
-                      <select class="form-control" name="id_pegawai">
-                        <option value="<?php echo $value->id_pegawai ?>"><?php echo $value->nama ?></option>
-                      </select>
-                    <?php } ?>
-                  </div>
-                </div>
-                <div class="form-group">
                   <label class="col-sm-2 control-label">Nama Jabatan</label>
 
                   <div class="col-sm-10">
-                    <?php foreach ($pegawai as $key => $value) {
-                       ?>
-                    <input type="text" class="form-control" name="nama_jabatan" value="<?php echo $value->nama_jabatan ?>">
-                  <?php } ?>
+                    <input type="hidden" class="form-control" name="id_jabatan" value="<?php echo $jabatan['id_jabatan']; ?>">
+                    <input type="text" class="form-control" name="jabatan" value="<?php echo $jabatan['jabatan']; ?>">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Jumlah Jam</label>
 
                   <div class="col-sm-10">
-                    <?php foreach ($pegawai as $key => $value) {
-                       ?>
-                    <input type="text" class="form-control" name="jml_jam" value="<?php echo $value->jml_jam ?>">
-                  <?php } ?>
+                    <input type="text" class="form-control" name="jml_jam" value="<?php echo $jabatan['jml_jam']; ?>">
                   </div>
                 </div>
-                <input type="hidden" value="<?php echo $value->id_jabatan ?>">
+                <input type="hidden" value="<?php echo $jabatan['id_jabatan']; ?>">
                 
 
                 <div class="form-group">

@@ -25,21 +25,13 @@
               <form class="form-horizontal" role="form" method="post" action="<?php echo base_url().'index.php/honor/add_honor_proses' ?>" >
                 <!-- text input -->
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Select Pegawai</label>
+                  <label class="col-sm-2 control-label">Kode HR</label>
                   <div class="col-sm-10">
-                    <select class="form-control" name="id_pegawai">
-                       <option>---Pilih Pegawai!---</option>
-                      <?php foreach ($pegawai as $key => $value) {
-                       ?>
-
-                      <option value="<?php echo $value->id_pegawai ?>"><?php echo $value->nama ?></option>
-                      <?php } ?>
-                    </select>
+                    <input type="varchar" class="form-control" name="kode_hr" placeholder="Kode HR">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Honorarium</label>
-
                   <div class="col-sm-10">
                     <input type="varchar" class="form-control" name="honor" placeholder="Honorarium">
                   </div>

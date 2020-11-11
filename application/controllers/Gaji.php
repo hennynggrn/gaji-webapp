@@ -5,14 +5,14 @@ class Gaji extends CI_Controller {
 
 	public function index()
 	{
-		$this->template->load('index','gaji/tabel');
+		$this->template->load('index','gaji/table');
 	}
 
 	public function table()
 	{
 		$this->load->model('M_gaji');
 		$data['tampil']= $this->M_gaji->get_gaji()->result_array();
-		$data['tahun'] = $this->M_tahun->get_tahun()->result_array();
+		// $data['tahun'] = $this->M_tahun->get_tahun()->result_array();
 		$this->template->load('index','gaji/table',$data);
 	}
 
@@ -24,24 +24,10 @@ class Gaji extends CI_Controller {
 		$this->template->load('index','gaji/detail_gaji',$data);
 	}
 
-	  public function laporan_surat()
-	  {
-	    $id_kategori = $this->input->post('id_kategori');
-	    if ($id_kategori==1){
-	      $data['status'] = 'MASUK';
-	    } else {
-	      $data['status'] = 'KELUAR';
-	    }
-	    
-		$id_tahun = $this->input->post('id_tahun');
-	    $urutan = $this->input->post('urutan');
-	    if ($this->input->post('bulan')==0){
-	      $data['surat'] = $this->m_surat->get_surat($id_kategori,$id_tahun,$urutan)->result_array();
-	    } else{
-	      $bulan = $this->input->post('bulan');
-	      $data['surat'] = $this->m_surat->get_surat($id_kategori,$id_tahun,$urutan,$bulan)->result_array();
-	    }
-	    $this->load->view('laporan_surat',$data);
-	  }
-	
+	public function print_det_gaji()
+	{
+		$this->load->model('M_gaji');
+		$data['tampil']= $this->M_gaji->get_gaji()->result_array();
+		$this->template->load('index','gaji/print_det_gaji',$data);
+	}
 }

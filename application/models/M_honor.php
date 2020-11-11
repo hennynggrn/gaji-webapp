@@ -5,15 +5,7 @@ class M_honor extends CI_Model{
 
 	public function get_honor()
 	{
-		$this->db->JOIN('pegawai','pegawai.id_pegawai = honor.id_pegawai');
-		 $query = $this->db->get('honor');
-		 return $query;
-	}
-
-	public function get_pegawai()
-	{
-
-		return $this->db->get('pegawai');
+		return $this->db->get('honor');
 	}
 
 	public function get_honor_detail($where, $table)
@@ -27,14 +19,8 @@ class M_honor extends CI_Model{
 		$this->db->insert("honor",$data);
 	}
 
-	public function detail_honor($data)
-	{
-		$this->db->insert("honor",$data);
-	}
-
 	public function edit_honor($data)
 	{
-		$this->db->JOIN('pegawai','pegawai.id_pegawai = honor.id_pegawai');
 		$this->db->where('id_honor',$data);
 		 $query = $this->db->get('honor');
 		 return $query;

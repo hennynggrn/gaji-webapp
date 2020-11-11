@@ -21,17 +21,16 @@ class Honor extends CI_Controller {
 
 	public function add_honor()
 	{
-		$data['pegawai']= $this->M_honor->get_pegawai()->result();
-		$this->template->load('index','honor/add_honor',$data);
+		$this->template->load('index','honor/add_honor');
 	}
 
 	public function add_honor_proses()
 	{
-		$id_pegawai=$this->input->post('id_pegawai');
+		$kode_hr=$this->input->post('kode_hr');
 		$honor=$this->input->post('honor');
 
 		$res=$this->M_honor->add_honor(array(
-			'id_pegawai' => $id_pegawai,
+			'kode_hr' => $kode_hr,
 			'honor' => $honor
 			));
 		if($res=1){
@@ -44,22 +43,24 @@ class Honor extends CI_Controller {
 	public function edit_honor()
 	{
 		$id= $this->uri->segment(3);
-		$data['pegawai']= $this->M_honor->edit_honor($id)->result();
+		$data['tampil']= $this->M_honor->edit_honor($id)->row_array();
 		$this->template->load('index','honor/edit_honor',$data);
+
+		var_dump($data['tampil']);
 	}
 
 	public function edit_honor_proses()
 	{
 		$id_honor=$this->input->post('id_honor');
+		$kode_hr=$this->input->post('kode_hr');
 		$honor=$this->input->post('honor');
-		$id_pegawai=$this->input->post('id_pegawai');
 
 		$data= array(
-			'honor' => $honor,
-			'id_pegawai'=>$id_pegawai
+			'kode_hr'=>$kode_hr,
+			'honor' => $honor
 		);
 		$where = array(
-			'id_pegawai' => $id_pegawai
+			'id_honor' => $id_honor
 			);
 		//print_r($data);
 		 $this->M_honor->edit_honor_proses($where, $data,'honor');

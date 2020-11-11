@@ -28,7 +28,7 @@
               <table class="table table-bordered">
                 <tr>
                   <th style="width: 10px">No</th>
-                  <th>Nama</th>
+                  <th>Kode HR</th>
                   <th>Honorarium</th>
                   <th style="width: 300px">Menu</th>
                 </tr>
@@ -37,7 +37,7 @@
                   foreach ($tampil as $key => $value) { ?>
                 <tr>
                   <td><?php echo $no++; ?></td>
-                  <td><?php echo $value->nama; ?></td>
+                  <td><?php echo $value->kode_hr; ?></td>
                   <td><?php echo $value->honor; ?></td>
                   <td>
                     <a href = "<?php echo base_url('index.php/honor/edit_honor');?>/<?php echo $value->id_honor; ?>">

@@ -25,30 +25,18 @@
               <form class="form-horizontal" role="form" method="post" action="<?php echo base_url().'index.php/honor/edit_honor_proses' ?>" >
                 <!-- text input -->
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Select Pegawai</label>
+                  <label class="col-sm-2 control-label">Kode HR</label>
                   <div class="col-sm-10">
-                    
-                       
-                      <?php foreach ($pegawai as $key => $value) {
-                       ?>
-                       <select class="form-control" name="id_pegawai">
-                         <option value="<?php echo $value->id_pegawai ?>"><?php echo $value->nama ?></option>
-                       </select>
-                      
-                      <?php } ?>
+                    <input type="text" class="form-control" name="kode_hr" value="<?php echo $tampil['kode_hr']; ?>">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Honorarium</label>
-
                   <div class="col-sm-10">
-                    <?php foreach ($pegawai as $key => $value) {
-                       ?>
-                    <input type="text" class="form-control" name="honor" value="<?php echo $value->honor ?>">
-                  <?php } ?>
+                    <input type="text" class="form-control" name="honor" value="<?php echo $tampil['honor']; ?>">
                   </div>
                 </div>
-                <input type="hidden" value="<?php echo $value->id_honor ?>">
+                <input type="hidden" name="id_honor" value="<?php echo $tampil['id_honor']; ?>">
                 
                 <div class="form-group">
                   <div class="col-sm-offset-2 col-sm-10">

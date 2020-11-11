@@ -24,39 +24,32 @@
                 <table class="table table-hover">
                   <tbody>
                     <tr>
-                      <th style="width:50%;padding-left:300px">Infaq</th>
-                      <td style="width: 20px">:</td>
-                      <td style="width: 20px">80.000</td>
+                      <th>Infaq</th>
+                      <td><?php echo $tampil['infaq']; ?></td>
                     </tr>
                     <tr>
-                      <th style="width:50%;padding-left:300px">Sosial</th>
-                      <td style="width: 20px">:</td>
-                      <td style="width: 20px">80.000</td>
+                      <th>Sosial</th>
+                      <td><?php echo $tampil['sosial']; ?></td>
                     </tr>
                     <tr>
-                      <th style="width:50%;padding-left:300px">Jasa Raharja</th>
-                      <td style="width: 20px">:</td>
-                      <td style="width: 20px">80.000</td>
+                      <th>Jasa Raharja</th>
+                      <td><?php echo $tampil['jsr']; ?></td>
                     </tr>
                     <tr>
-                      <th style="width:50%;padding-left:300px">Jamsostek</th>
-                      <td style="width: 20px">:</td>
-                      <td style="width: 20px">80.000</td>
+                      <th>Jamsostek</th>
+                      <td><?php echo $tampil['jamsostek']; ?></td>
                     </tr>
                     <tr>
-                      <th style="width:50%;padding-left:300px">Aisiyah</th>
-                      <td style="width: 20px">:</td>
-                      <td style="width: 20px">40.000</td>
+                      <th>Aisiyah</th>
+                      <td><?php echo $tampil['aisiyah']; ?></td>
                     </tr>
                     <tr>
-                      <th style="width:50%;padding-left:300px">Koperasi Murni</th>
-                      <td>:</td>
-                      <td style="width: 20px">100.000</td>
+                      <th>Koperasi Murni</th>
+                      <td><?php echo $tampil['kop']; ?></td>
                     </tr>
                     <tr>
-                      <th style="width:50%;padding-left:300px">Bank Bina Drajat Warga</th>
-                      <td>:</td>
-                      <td style="width: 20px">100.000</td>
+                      <th>Bank Bina Drajat Warga</th>
+                      <td><?php echo $tampil['bank']; ?></td>
                     </tr>
                   </tbody>
                 </table>
@@ -64,9 +57,9 @@
             </div>
             
             <!-- /.box-body -->
-            <div class="box-footer text-center" style="padding-left:300px">
-              <div class="col-md-7">
-                <a href = "<?php echo base_url('index.php/potongan/add_potongan');?>">
+            <div class="box-footer text-center">
+              <div class="col-md-12">
+                <a href = "<?php echo base_url('index.php/potongan/edit_potongan');?>">
                     <button type="submit" class="btn btn-primary btn-block">Edit</button>
                   </a>
                   </div>

@@ -25,44 +25,33 @@
               <form class="form-horizontal" role="form" method="post" action="<?php echo base_url().'index.php/keluarga/edit_keluarga_proses' ?>" >
                 <!-- text input -->
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Select Pegawai</label>
+                  <label class="col-sm-2 control-label">Nama Pegawai</label>
                   <div class="col-sm-10">
-                    <?php foreach ($pegawai as $key => $value) {
-                     ?>
-                      <select class="form-control" name="id_pegawai">
-                        <option value="<?php echo $value->id_pegawai ?>"><?php echo $value->nama ?></option>
-                      </select>
-                    <?php } ?>
+                    <input disabled type="text" class="form-control" name="nama" value="<?php echo $pegawai['nama']; ?>">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Nama Pasangan</label>
 
                   <div class="col-sm-10">
-                    <?php foreach ($pegawai as $key => $value) { ?>
-                      <input type="text" class="form-control" name="nama_pasangan" value="<?php echo $value->nama_pasangan ?>">
-                    <?php } ?>
+                      <input type="text" class="form-control" name="nama_pasangan" value="<?php echo $pegawai['nama_pasangan']; ?>">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Nama Anak Pertama</label>
+                  <label class="col-sm-2 control-label">Status Hidup</label>
 
                   <div class="col-sm-10">
-                    <?php foreach ($pegawai as $key => $value) { ?>
-                      <input type="text" class="form-control" name="nama_anaksatu" value="<?php echo $value->nama_anaksatu ?>">
-                    <?php } ?>
+                      <input type="text" class="form-control" name="s_hidup" value="<?php if($pegawai['s_hidup'] === 0) { echo 'Meninggal'; } else {  echo 'Hidup'; } ?>">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Nama Anak Kedua</label>
+                  <label class="col-sm-2 control-label">Gender</label>
 
                   <div class="col-sm-10">
-                    <?php foreach ($pegawai as $key => $value) { ?>
-                      <input type="text" class="form-control" name="nama_anakdua" value="<?php echo $value->nama_anakdua ?>">
-                    <?php } ?>
+                      <input type="text" class="form-control" name="gender" value="<?php echo $pegawai['gender']; ?>">
                   </div>
                 </div>
-                <input type="hidden" value="<?php echo $value->id_keluarga ?>">
+                <input type="hidden" value="<?php echo $pegawai['id_keluarga'] ?>">
                 
 
                 <div class="form-group">

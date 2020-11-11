@@ -3,6 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Potongan extends CI_Controller {
 
+	function __construct() {
+		parent::__construct();
+		$this->load->model('M_potongan');
+	}
+
 	public function index()
 	{
 		$this->template->load('index');
@@ -10,8 +15,7 @@ class Potongan extends CI_Controller {
 
 	public function table()
 	{
-		$this->load->model('M_potongan');
-		$data['tampil']= $this->M_potongan->get_potongan()->result_array();
+		$data['tampil']= $this->M_potongan->get_potongan()->row_array();
 		$this->template->load('index','potongan/table_potongan',$data);
 	}
 

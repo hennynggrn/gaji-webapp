@@ -24,8 +24,6 @@
                 <tr>
                   <th style="width: 10px">No</th>
                   <th>Nama Pegawai</th>
-                  <!-- <th>Bulan</th>
-                  <th>Tahun</th> -->
                   <th>Jumlah Masa Kerja</th>
                   <th style="width: 100px">Menu</th>
                 </tr>
@@ -35,8 +33,6 @@
                 <tr>
                   <td><?php echo $no++;?></td>
                   <td><?php echo $value['nama'];?></td>
-                  <!-- <td>Januari</td>
-                  <td>2018</td> -->
                   <td><?php
                   if ($value['jml_mk'] !== NULL) {
                      echo $value['jml_mk'];
@@ -44,9 +40,6 @@
                      echo 'Belum ditambah';
                   }?></td>
                   <td>
-                    <!-- <a href="" class="badge bg-blue" data-toggle="input_mk" data-target="#formmk"> 
-                      <i class="fa fa-fw fa-plus-square-o"></i>Tambah
-                    </a> -->
                     <?php
                     if ($value['jml_mk'] !== NULL) {
                        echo '
@@ -80,18 +73,10 @@
                             <div class="modal-body">
                                 <p class="statusMsg"></p>
                                 <form role="form">
-                                    <div class="form-group">
-                                        <label for="masukkanMK">Masa Kerja</label>
-                                        <input type="number" class="form-control" value="" id="masukkanMK" placeholder="Masukkan jumlah masa kerja"/>
-                                    </div>
-                                    <!-- <div class="form-group">
-                                        <label for="masukkanEmail">Email</label>
-                                        <input type="email" class="form-control" id="masukkanEmail" placeholder="Masukkan email Anda"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="masukkanPesan">Pesan</label>
-                                        <textarea class="form-control" id="masukkanPesan" placeholder="Masukkan pesan Anda"></textarea>
-                                    </div> -->
+                                  <div class="form-group">
+                                      <label for="masukkanMK">Masa Kerja</label>
+                                      <input type="number" class="form-control" value="" id="masukkanMK" placeholder="Masukkan jumlah masa kerja"/>
+                                  </div>
                                 </form>
                             </div>
                             <!-- Modal Footer -->

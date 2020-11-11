@@ -15,8 +15,10 @@ class Jabatan extends CI_Controller {
 
 	public function table_jabatan()
 	{
-		$data['tampil']= $this->M_jabatan->get_jabatan()->result();
+		$data['tampil']= $this->M_jabatan->get_jabatan()->result_array();
 		$this->template->load('index','jabatan/table_jabatan',$data);
+
+		// var_dump($data['tampil']);
 	}
 
 	public function add_jabatan()
@@ -27,13 +29,11 @@ class Jabatan extends CI_Controller {
 	
 	public function add_jabatan_proses()
 	{
-		$id_pegawai=$this->input->post('id_pegawai');
-		$nama_jabatan=$this->input->post('nama_jabatan');
+		$jabatan=$this->input->post('jabatan');
 		$jml_jam=$this->input->post('jml_jam');
 
 		$res=$this->M_jabatan->add_jabatan(array(
-			'id_pegawai' => $id_pegawai,
-			'nama_jabatan' => $nama_jabatan,
+			'jabatan' => $jabatan,
 			'jml_jam' => $jml_jam
 			));
 		if($res=1){
@@ -46,24 +46,24 @@ class Jabatan extends CI_Controller {
 	public function edit_jabatan()
 	{
 		$id= $this->uri->segment(3);
-		$data['pegawai']= $this->M_jabatan->edit_jabatan($id)->result();
+		$data['jabatan']= $this->M_jabatan->edit_jabatan($id)->row_array();
 		$this->template->load('index','jabatan/edit_jabatan',$data);
+
+		// var_dump($data['jabatan']);
 	}
 
 	public function edit_jabatan_proses()
 	{
 		$id_jabatan=$this->input->post('id_jabatan');
-		$nama_jabatan=$this->input->post('nama_jabatan');
+		$jabatan=$this->input->post('jabatan');
 		$jml_jam=$this->input->post('jml_jam');
-		$id_pegawai=$this->input->post('id_pegawai');
-
+		// var_dump($id_jabatan);
 		$data= array(
-			'nama_jabatan' => $nama_jabatan,
-			'jml_jam' => $jml_jam,
-			'id_pegawai'=>$id_pegawai
+			'jabatan' => $jabatan,
+			'jml_jam' => $jml_jam
 		);
 		$where = array(
-			'id_pegawai' => $id_pegawai
+			'id_jabatan' => $id_jabatan
 		);
 		//print_r($data);
 		$this->M_jabatan->edit_jabatan_proses($where, $data,'jabatan');
