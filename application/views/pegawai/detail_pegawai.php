@@ -26,7 +26,7 @@
 							<div class="col-md-12">
 								<table class="table table-hover">
 									<tbody>
-										<?php foreach ($lihat as $key => $value) {
+										<?php foreach ($pegawai as $key => $value) :
 										?>
 										<tr>
 											<td colspan="3">
@@ -83,7 +83,7 @@
 											<td>:</td>
 											<td><?php echo $value->status == 0 ? 'Belum Menikah':'Menikah'; ?></td>
 										</tr>
-										<?php } ?>
+										<?php endforeach; ?>
 									</tbody>
 								</table>
 							</div>
@@ -103,7 +103,7 @@
 							<div class="col-md-12">
 								<table class="table table-hover">
 									<tbody>
-										<?php foreach ($lihat as $key => $value) {
+										<?php foreach ($pegawai as $key => $value) :
 										?>
 										<tr>
 											<td style="width: 150px">Jenis Pegawai</td>
@@ -118,15 +118,17 @@
 										<tr>
 											<td width="1">Honorarium</td>
 											<td>:</td>
-											<td><?php echo 'Rp. '.$value->honor; ?></td>
+											<td><?php echo 'Rp. '.number_format($value->honor,2,',','.');
+											echo '<small>'; if($value->honor == 0) echo ' (belum ditetapkan) </small>';?></td>
 										</tr>
-										<?php } ?>
+										<?php endforeach; ?>
 									</tbody>
 								</table>
 							</div>
-						</div>
+						</div>e
 					</div>
 				</div>
+				<?php if($value->status == 1) :?>
 				<div class="col-md-7">
 					<div class="box box-success">
 						<div class="box-header with-border">
@@ -140,36 +142,45 @@
 							<div class="col-md-12">
 								<table class="table text-center table-bordered table-hover">
 									<thead>
-										<th>Anggota Keluarga</th>
+										<th>Anggota</th>
 										<th>Nama</th>
 										<th>Status</th>
 										<th>Gender</th>
 									</thead>
 									<tbody>
+									<?php foreach ($keluarga as $key => $value) : ?>
 										<tr>
-											<td>Istri</td>
-											<td>edsedwerfawr dAFASAHSDJDFKDF VZDFASDFAGAWSFA</td>
-											<td>value</td>
-											<td>value</td>
+											<td class="text-bold">
+												<?php switch ($value['id_status']) {
+													case '1':
+														echo 'Istri';
+														break;
+													case '2':
+														echo 'Anak Pertama';
+														break;
+													case '3':
+														echo 'Anak Kedua';
+														break;
+												}?>
+											</td>
+											<td><?php echo (!empty($value['nama'])) ? $value['nama'] : '-';?></td>
+											<td><?php echo ($value['s_hidup'] == 1) ? 'Hidup' : 'Meninggal';?></td>
+											<td><?php echo ($value['gender'] == 'P') ? 'Perempuan' : 'Laki-laki';?></td>
 										</tr>
-										<tr>
-											<td>Anak Pertama</td>
-											<td>value</td>
-											<td>value</td>
-											<td>value</td>
-										</tr>
-										<tr>
-											<td>Anak Kedua</td>
-											<td>value</td>
-											<td>value</td>
-											<td>value</td>
-										</tr>
+									<?php endforeach;?>										
 									</tbody>
 								</table>
 							</div>
 						</div>
+						<div class="box-footer">
+							<h5>Catatan :</h5>
+							<ul>
+								<li>Edit untuk menambahkan/mengubah anggota keluarga</li>
+							</ul>
+						</div>
 					</div>
 				</div>
+				<?php endif;?>
 				<div class="col-md-12">
 						<a href="<?php echo base_url('pegawai/table_pegawai')?>" class="btn btn-default">Kembali</a>
 						<a href="<?php echo base_url('pegawai/edit_pegawai')?>" class="pull-right btn btn-warning edit-btn">Edit</a></td>

@@ -10,20 +10,14 @@ class M_keluarga extends CI_Model{
 		$this->db->ORDER_BY('sk.id_status');
 		$this->db->JOIN('pegawai p','p.id_pegawai = k.id_pegawai', 'RIGHT');
 		$this->db->JOIN('status_klg sk','sk.id_status = k.id_status', 'RIGHT');
-		 $query = $this->db->get('keluarga k');
-		 return $query;
+		$query = $this->db->get('keluarga k');
+		return $query;
 	}
 
-	public function get_pegawai()
+	public function get_keluarga_pegawai($id, $table)
 	{
-
-		return $this->db->get('pegawai');
-	}
-
-	public function get_keluarga_detail($where, $table)
-	{
-
-		return $this->db->get_where($table, $where);
+		$this->db->order_by('id_status', 'ASC');
+		return $this->db->get_where($table, array('id_pegawai'=>$id));
 	}
 
 	public function add_keluarga($data)
