@@ -36,7 +36,7 @@ class M_pegawai extends CI_Model{
 		$tgl_lahir=$this->input->post('tgl_lahir');
 		$agama=$this->input->post('agama');
 		$umur=$this->input->post('umur');
-		$jns_klmn=$this->input->post('jns_klmn');
+		$gender=$this->input->post('gender');
 		$email=$this->input->post('email');
 		$telepon=$this->input->post('telepon');
 		$status=$this->input->post('status');
@@ -73,7 +73,7 @@ class M_pegawai extends CI_Model{
 			'tgl_lahir' => $tgl_lahir,
 			'agama' => $agama,
 			'umur' => $umur,
-			'jns_klmn' => $jns_klmn,
+			'gender' => $gender,
 			'email' => $email,
 			'telepon' => $telepon,
 			'status' => $status,

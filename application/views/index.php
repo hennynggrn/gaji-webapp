@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Blank Page</title>
+  <title>SIP GuKar</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -13,37 +13,13 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/css/styles.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/css/skins/_all-skins.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/select2/select2.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/colorpicker/bootstrap-colorpicker.min.css">
-
-  <style type="text/css">
-    /* Chrome, Safari, Edge, Opera */
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-
-    /* Firefox */
-    input[type=number] {
-      -moz-appearance: textfield;
-    }
-  </style>
-
-
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
@@ -498,14 +474,19 @@
   });
 </script>
 <script>
+	$(document).ready(function(){
+		$('[data-toggle="tooltip"]').tooltip();   
+	});
+</script>
+<script>
   function add_keluarga(that) {
     if (that.value == 1) {
-      document.getElementById("tambah_keluarga").style.display = "block";
+      document.getElementById('tambah_keluarga').style.display = 'block';
     }
   }
   function close_keluarga(that) {
     if (that.value == 0) {
-      document.getElementById("tambah_keluarga").style.display = "none";
+      document.getElementById('tambah_keluarga').style.display = 'none';
     }
   }
 </script>
@@ -572,7 +553,27 @@ function kirimContactForm(){
     function GetDynamicTextBox(value) {
       j = j + 1;
       return '<td></td>' + '<td><input type="hidden" name="ids[' + j + ']" value= "' + j + '"><input type="date" class="form-control" name="tgl_kembali[' + j + ']" placeholder="Tanggal Kembali" value= "' + value + '">' + '</td>' + '</td>' + '<td> <div class="input-group"><span class="input-group-addon">Rp.</span><input type="text" class="form-control" name="nom_angsuran[' + j + ']" placeholder="Nilai Angsuran" value="' + value + '"><div class="input-group-addon">.00</span></div></div></td>' + '<td><div class="remove btn-group"><a href="#" class="btn btn-danger" ><i class="fa fa-close"></i></a></div></td>'; }
-  </script>
+	</script>
+	<!-- <script>
+		$(document).ready(function(){
+			$('#jns_pegawai').change(function(){
+				var a = 'guru';
+				var b = 'karyawan';
+				var p = 'pns';
+				var t1 = 'tetap';
+				var t0 = 'tidak tetap';
+				if ($('#jns_pegawai').val() = b) {
+
+				$('#status_pgw').change(function(){
+					
+						$('#status_pgw option[value="'+ p +'"]').attr('disabled', true);
+					})
+				} 
+				
+			})
+		})              
+	</script> -->
+
   <script type="text/javascript">
     $(document).ready(function() {
       var optarray = $("#status_pgw").children('option').map(function() {
@@ -595,7 +596,7 @@ function kirimContactForm(){
     })
   </script>
   <script>
-    function snowhonor(){
+    function showhonor(){
       document.getElementById('honor').style.display = 'none';
     }
     $('#status_pgw').change(function(){

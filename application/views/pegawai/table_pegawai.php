@@ -25,7 +25,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table class="table table-bordered">
+              <table class="table table-bordered responsive text-center">
                 <tr>
                   <th style="width: 10px">No</th>
                   <th>NBM</th>
@@ -36,7 +36,7 @@
                   <th>Jenis Pegawai</th>
                   <th>Status Pegawai</th>
                   <th>Honorarium</th>
-                  <th style="width: 220px">Menu</th>
+                  <th>Menu</th>
                 </tr>
                 <?php
                   $no=1; foreach ($tampil as $key) {
@@ -45,21 +45,21 @@
                   <td><?php echo $no++; ?></td>
                   <td><?php echo $key['nbm'] ?></td>
                   <td><?php echo $key['nama'] ?></td>
-                  <td><?php echo $key['jns_klmn'] ?></td>
+                  <td><?php echo $key['gender'] ?></td>
                   <td><?php echo $key['email'] ?></td>
                   <td><?php echo $key['telepon'] ?></td>
                   <td><?php echo $key['jns_pegawai'] ?></td>
                   <td><?php echo $key['status_pegawai'] ?></td>
                   <td><?php echo 'Rp. '.$key['honor'] ?></td>
                   <td>
-                    <a href = "<?php echo base_url('pegawai/detail_pegawai/'.$key['id_pegawai']);?>">
-                      <span class="badge bg-green">  <i class="fa fa-fw fa-info-circle"></i>Detail</span>
+                    <a href="<?php echo base_url('pegawai/detail_pegawai/'.$key['id_pegawai']);?>" title="Detail" data-toggle="tooltip" data-placement="left">
+                      <span class="badge bg-green"><i class="fa fa-fw fa-info-circle"></i></span>
                     </a>
-                    <a href = "<?php echo base_url('pegawai/edit_pegawai/'.$key['id_pegawai']);?>">
-                      <span class="badge bg-blue">  <i class="fa fa-fw fa-pencil-square-o"></i>Edit</span>
+                    <a href="<?php echo base_url('pegawai/edit_pegawai/'.$key['id_pegawai']);?>" title="Edit" data-toggle="tooltip" data-placement="top">
+                      <span class="badge bg-orange"><i class="fa fa-fw fa-pencil-square-o"></i></span>
                     </a>
-                    <a href = "<?php echo base_url('pegawai/hapus_pegawai/'.$key['id_pegawai']);?>">
-                      <span class="badge bg-red">  <i class="fa fa-fw fa-trash-o"></i>Hapus</span>
+                    <a href="<?php echo base_url('pegawai/hapus_pegawai/'.$key['id_pegawai']);?>" title="Hapus" data-toggle="tooltip" data-placement="right">
+                      <span class="badge bg-red"><i class="fa fa-fw fa-trash-o"></i></span>
                     </a>
                   </td>
                 </tr>
