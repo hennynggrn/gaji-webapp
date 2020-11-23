@@ -11,11 +11,6 @@ class M_pegawai extends CI_Model{
 		return $this->db->get('pegawai p');
 	}
 
-	public function get_jabatan()
-	{
-		return $this->db->get('jabatan');
-	}
-
 	// public function get_status_pgw()
 	// {
 	// 	return $this->db->get('status_pgw');
@@ -44,19 +39,19 @@ class M_pegawai extends CI_Model{
 		$status_pegawai = $this->input->post('status_pgw');
 		switch ($status_pegawai) {
 			case 'guru_PNS':
-				$status_pgw = 'PNS';
+				$status_pgw = 'P';
 				break;
 			case 'guru_T1':
-				$status_pgw = 'Tetap';
+				$status_pgw = 'T1';
 				break;
 			case 'guru_T0':
-				$status_pgw = 'Tidak Tetap';
+				$status_pgw = 'T0';
 				break;
 			case 'karyawan_T1':
-				$status_pgw = 'Tetap';
+				$status_pgw = 'T1';
 				break;
 			case 'karyawan_T0':
-				$status_pgw = 'Tidak Tetap';
+				$status_pgw = 'T0';
 				break;
 		}		
 		// $status_pgw=$this->input->post('status_pgw');
@@ -82,28 +77,6 @@ class M_pegawai extends CI_Model{
 			'honor' => $honor
 		);
 		$this->db->insert("pegawai",$data);
-	}
-
-	public function add_keluarga()
-	{
-		$id_pegawai=$this->input->post('id_pegawai');
-		$id_status=$this->input->post('anggota');
-		$nama_anggota=$this->input->post('nama_anggota');
-		$s_hidup_anggota=$this->input->post('s_hidup_anggota');
-		$gender_anggota=$this->input->post('gender_anggota');
-
-		for ($i=0; $i <= 2 ; $i++) {
-				if (!empty($id_status[$i] && $nama_anggota[$i])) {
-					$data = array(
-						'id_pegawai' => $id_pegawai,
-						'id_status' => $id_status[$i],
-						'nama' => $nama_anggota[$i],
-						's_hidup' => $s_hidup_anggota[$i],
-						'gender' => $gender_anggota[$i]
-					);
-					$this->db->insert("keluarga",$data);
-				}
-		}
 	}
 
 	public function add_jabatan()

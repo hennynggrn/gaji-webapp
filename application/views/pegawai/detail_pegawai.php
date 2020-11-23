@@ -27,10 +27,12 @@
 								<table class="table table-hover">
 									<tbody>
 										<?php foreach ($pegawai as $key => $value) :
+										$id = $value->id_pegawai;
+										$gender = $value->gender;
 										?>
 										<tr>
 											<td colspan="3">
-												<img class="profile-user-img img-responsive img-circle" src="<?php echo base_url(); ?>assets/dist/img/user1-128x128.jpg" alt="">
+												<img class="profile-user-img img-responsive img-circle" src="<?php echo base_url('assets/dist/img/upload/user1-128x128.jpg'); ?>" alt="">
 											</td>
 										</tr>
 										<tr>
@@ -96,15 +98,15 @@
 							<h3 class="box-title">Informasi Pekerjaan Pegawai</h3>
 							<div class="box-tools pull-right">
 								<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-									<i class="fa fa-minus"></i></button>
+									<i class="fa fa-minus"></i>
+								</button>
 							</div>
 						</div>
 						<div class="box-body">
 							<div class="col-md-12">
 								<table class="table table-hover">
 									<tbody>
-										<?php foreach ($pegawai as $key => $value) :
-										?>
+									<?php foreach ($pegawai as $key => $value) :?>
 										<tr>
 											<td style="width: 150px">Jenis Pegawai</td>
 											<td style="width: 20px">:</td>
@@ -113,19 +115,33 @@
 										<tr>
 											<td width="3">Status Pegawai</td>
 											<td>:</td>
-											<td><?php echo $value->status_pegawai; ?></td>
+											<td>
+												<?php switch ($value->status_pegawai) {
+													case 'P':
+														echo 'PNS';
+														break;
+													case 'T0':
+														echo 'Tidak Tetap';
+														break;
+													case 'T1':
+														echo 'Tetap';
+														break;
+												}?>
+											</td>
 										</tr>
+										<?php if($value->status_pegawai == 'T1'):?>
 										<tr>
 											<td width="1">Honorarium</td>
 											<td>:</td>
 											<td><?php echo 'Rp. '.number_format($value->honor,2,',','.');
-											echo '<small>'; if($value->honor == 0) echo ' (belum ditetapkan) </small>';?></td>
+											echo '<small class="text-bold">'; if($value->honor == 0) echo ' (belum ditetapkan) </small>';?></td>
 										</tr>
-										<?php endforeach; ?>
+										<?php endif;?>
+									<?php endforeach; ?>
 									</tbody>
 								</table>
 							</div>
-						</div>e
+						</div>
 					</div>
 				</div>
 				<?php if($value->status == 1) :?>
@@ -153,7 +169,7 @@
 											<td class="text-bold">
 												<?php switch ($value['id_status']) {
 													case '1':
-														echo 'Istri';
+														echo ($gender == 'L') ? 'Istri' : 'Suami';
 														break;
 													case '2':
 														echo 'Anak Pertama';
@@ -182,8 +198,8 @@
 				</div>
 				<?php endif;?>
 				<div class="col-md-12">
-						<a href="<?php echo base_url('pegawai/table_pegawai')?>" class="btn btn-default">Kembali</a>
-						<a href="<?php echo base_url('pegawai/edit_pegawai')?>" class="pull-right btn btn-warning edit-btn">Edit</a></td>
+					<a href="<?php echo base_url('pegawai')?>" class="btn btn-default">Kembali</a>
+					<a href="<?php echo base_url('pegawai/edit_pegawai/'.$id)?>" class="pull-right btn btn-warning edit-btn">Edit</a></td>
 				</div>
 			</div>
     </section>

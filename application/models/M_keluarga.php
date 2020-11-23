@@ -20,9 +20,26 @@ class M_keluarga extends CI_Model{
 		return $this->db->get_where($table, array('id_pegawai'=>$id));
 	}
 
-	public function add_keluarga($data)
+	public function add_keluarga()
 	{
-		$this->db->insert("keluarga",$data);
+		$id_pegawai=$this->input->post('id_pegawai');
+		$id_status=$this->input->post('anggota');
+		$nama_anggota=$this->input->post('nama_anggota');
+		$s_hidup_anggota=$this->input->post('s_hidup_anggota');
+		$gender_anggota=$this->input->post('gender_anggota');
+
+		for ($i=0; $i <= 2 ; $i++) {
+				if (!empty($id_status[$i] && $nama_anggota[$i])) {
+					$data = array(
+						'id_pegawai' => $id_pegawai,
+						'id_status' => $id_status[$i],
+						'nama' => $nama_anggota[$i],
+						's_hidup' => $s_hidup_anggota[$i],
+						'gender' => $gender_anggota[$i]
+					);
+					$this->db->insert("keluarga",$data);
+				}
+		}
 	}
 
 	public function detail_keluarga($data)

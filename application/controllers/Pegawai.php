@@ -5,11 +5,6 @@ class Pegawai extends CI_Controller {
 
 	public function index()
 	{
-		$this->template->load('index','pegawai/table_pegawai');
-	}
-
-	public function table_pegawai()
-	{
 		$data['tampil']= $this->M_pegawai->get_pegawai()->result_array();
 		$this->template->load('index','pegawai/table_pegawai',$data);
 	}
@@ -18,7 +13,7 @@ class Pegawai extends CI_Controller {
 	{
 		$data['id_pgw']= $this->M_pegawai->get_id_pegawai()->row_array();
 		$data['id_pegawai']= $data['id_pgw']['id_pegawai'];
-		$data['jabatan']= $this->M_pegawai->get_jabatan()->result();
+		$data['jabatan']= $this->M_jabatan->get_jabatan()->result();
 		// $data['status_pgw']= $this->M_pegawai->get_status_pgw()->result();
 		$this->template->load('index','pegawai/add_pegawai',$data);
 		// var_dump($data['id_pegawai']);
@@ -29,7 +24,7 @@ class Pegawai extends CI_Controller {
 		$res['pegawai']=$this->M_pegawai->add_pegawai();
 		$res['jabatan']=$this->M_pegawai->add_jabatan();
 		if($this->input->post('status') == 1) {
-			$res['keluarga']=$this->M_pegawai->add_keluarga(); };
+			$res['keluarga']=$this->M_keluarga->add_keluarga(); };
 
 		if($res){
 			redirect('pegawai/table_pegawai');
@@ -50,6 +45,15 @@ class Pegawai extends CI_Controller {
 	{
 		$where = array('id_pegawai'=>$id);
 		$data['pegawai']= $this->M_pegawai->get_pegawai_detail($where,'pegawai')->row_array();
+		$data['keluarga']= $this->M_keluarga->get_keluarga_pegawai($id,'keluarga')->result_array();
+		$data['jabatan']= $this->M_jabatan->get_jabatan()->result();
+
+		$data['id_status'] = array();
+		foreach ($data['keluarga'] as $key => $value) {
+			$data['id_status'][] = $data['keluarga'][$key]['id_status'];			
+		}
+		// var_dump($data['keluarga']);
+		// var_dump($data['id_status']);
 		$this->template->load('index','pegawai/edit_pegawai', $data);
 	}
 }
