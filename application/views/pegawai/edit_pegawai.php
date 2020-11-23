@@ -232,7 +232,9 @@
 										<select class="form-control select2" multiple="multiple" name="jabatan[]" data-placeholder="Pilih jabatan" style="width: 100%; background-color: white; ">
 											<option disabled>Pilih Jabatan</option>
 											<?php foreach ($jabatan as $key => $value) : ?>
-											<option value="<?php echo $value->id_jabatan ?>"><?php echo $value->jabatan ?></option>
+											<option value=<?php echo '"'.$value['id_jabatan'].'"'; echo ($value['id_pegawai'] != NULL) ? 'selected' : '';?>>
+												<?php echo $value['jabatan'] ;?>
+											</option>
 											<?php endforeach; ?>
 										</select>
 									</div>
@@ -271,15 +273,6 @@
 										</div>
 									</div>
 								</div>
-                <!-- <div class="form-group">
-                  <label class="col-sm-2 control-label">Honorarium</label>
-                  <div class="col-sm-10">
-                    <select class="form-control" name="jns_klmn">
-                      <option value='01'>Kepala Sekolah</option>
-                      <option value='02'>Wakil Kepala Sekolah</option>
-                    </select>
-                  </div>
-                </div> -->
               </form>
             </div>
 						<div class="box-footer">

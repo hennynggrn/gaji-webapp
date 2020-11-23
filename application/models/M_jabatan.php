@@ -3,14 +3,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_jabatan extends CI_Model{
 
-	public function get_jabatan()
+	public function get_jabatan($id = TRUE)
 	{
-		return $this->db->get('jabatan');
+		if ($id == TRUE) {
+			$this->db->SELECT('jb.id_jabatan, jabatan, jml_jam, id_pegawai');
+			$this->db->JOIN('jbt_pegawai jp', 'jp.id_jabatan = jb.id_jabatan AND jp.id_pegawai ='.$id, 'LEFT OUTER');
+			return $this->db->get('jabatan jb');
+		} else{
+			return $this->db->get('jabatan');
+		}
 	}
 
 	public function get_pegawai()
 	{
-
+		
 		return $this->db->get('pegawai');
 	}
 

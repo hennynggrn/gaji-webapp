@@ -128,13 +128,13 @@
 							</span>
 						</a>
 						<ul class="treeview-menu">
-							<li><a href="<?php echo base_url('pegawai/table_pegawai'); ?>"><i class="fa fa-circle-o"></i>Data Pegawai </a></li>
-							<li><a href="<?php echo base_url('honor/table_honor'); ?>"><i class="fa fa-circle-o"></i>Data Honorarium</a></li>
-							<li><a href="<?php echo base_url('tunjangan/table'); ?>"><i class="fa fa-circle-o"></i>Data Tunjangan</a></li>
-							<li><a href="<?php echo base_url('keluarga/table_keluarga'); ?>"><i class="fa fa-circle-o"></i>Data Keluarga</a></li>
-							<li><a href="<?php echo base_url('jabatan/table_jabatan'); ?>"><i class="fa fa-circle-o"></i>Data Jabatan</a></li>
-							<li><a href="<?php echo base_url('potongan/table'); ?>"><i class="fa fa-circle-o"></i>Data Potongan</a></li>
-							<li><a href="<?php echo base_url('pinjaman/table_pjm_kop'); ?>"><i class="fa fa-circle-o"></i>Data Pinjaman</a></li>
+							<li><a href="<?php echo site_url('pegawai'); ?>"><i class="fa fa-circle-o"></i>Data Pegawai </a></li>
+							<li><a href="<?php echo site_url('honor/table_honor'); ?>"><i class="fa fa-circle-o"></i>Data Honorarium</a></li>
+							<li><a href="<?php echo site_url('tunjangan/table'); ?>"><i class="fa fa-circle-o"></i>Data Tunjangan</a></li>
+							<li><a href="<?php echo site_url('keluarga/table_keluarga'); ?>"><i class="fa fa-circle-o"></i>Data Keluarga</a></li>
+							<li><a href="<?php echo site_url('jabatan/table_jabatan'); ?>"><i class="fa fa-circle-o"></i>Data Jabatan</a></li>
+							<li><a href="<?php echo site_url('potongan/table'); ?>"><i class="fa fa-circle-o"></i>Data Potongan</a></li>
+							<li><a href="<?php echo site_url('pinjaman/table_pjm_kop'); ?>"><i class="fa fa-circle-o"></i>Data Pinjaman</a></li>
 						</ul>
 					</li>
 					<li>
