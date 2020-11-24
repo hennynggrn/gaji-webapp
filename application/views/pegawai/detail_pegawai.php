@@ -78,7 +78,7 @@
 										<tr>
 											<td>No Telepon</td>
 											<td>:</td>
-											<td><?php echo $value->telepon; ?></td>
+											<td><?php echo ($value->telepon != 0) ? $value->telepon : '-'; ?></td>
 										</tr>
 										<tr>
 											<td>Status Nikah</td>
@@ -125,6 +125,9 @@
 														break;
 													case 'T1':
 														echo 'Tetap';
+														break;
+													case NULL:
+														echo '-';
 														break;
 												}?>
 											</td>

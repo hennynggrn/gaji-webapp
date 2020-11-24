@@ -39,26 +39,38 @@
                   <th>Menu</th>
                 </tr>
                 <?php
-                  $no=1; foreach ($tampil as $key) {
+                  $no=1; foreach ($tampil as $value) {
                 ?>
                 <tr>
                   <td><?php echo $no++; ?></td>
-                  <td><?php echo $key['nbm'] ?></td>
-                  <td><?php echo $key['nama'] ?></td>
-                  <td><?php echo $key['gender'] ?></td>
-                  <td><?php echo $key['email'] ?></td>
-                  <td><?php echo $key['telepon'] ?></td>
-                  <td><?php echo $key['jns_pegawai'] ?></td>
-                  <td><?php echo $key['status_pegawai'] ?></td>
-                  <td><?php echo 'Rp. '.$key['honor'] ?></td>
+                  <td><?php echo $value['nbm'] ?></td>
+                  <td><?php echo $value['nama'] ?></td>
+                  <td><?php echo $value['gender'] ?></td>
+                  <td><?php echo $value['email'] ?></td>
+                  <td><?php echo ($value['telepon'] != 0) ? $value['telepon'] : '-';?></td>
+                  <td><?php echo $value['jns_pegawai'] ?></td>
                   <td>
-                    <a href="<?php echo base_url('pegawai/detail_pegawai/'.$key['id_pegawai']);?>" title="Detail" data-toggle="tooltip" data-placement="left">
+										<?php switch ($value['status_pegawai']) {
+											case 'P':
+												echo 'PNS';
+												break;
+											case 'T0':
+												echo 'Tidak Tetap';
+												break;
+											case 'T1':
+												echo 'Tetap';
+												break;
+										}?>
+									</td>
+                  <td><?php echo 'Rp. '.$value['honor'] ?></td>
+                  <td>
+                    <a href="<?php echo base_url('pegawai/detail_pegawai/'.$value['id_pegawai']);?>" title="Detail" data-toggle="tooltip" data-placement="left">
                       <span class="badge bg-green"><i class="fa fa-fw fa-info-circle"></i></span>
                     </a>
-                    <a href="<?php echo base_url('pegawai/edit_pegawai/'.$key['id_pegawai']);?>" title="Edit" data-toggle="tooltip" data-placement="top">
+                    <a href="<?php echo base_url('pegawai/edit_pegawai/'.$value['id_pegawai']);?>" title="Edit" data-toggle="tooltip" data-placement="top">
                       <span class="badge bg-orange"><i class="fa fa-fw fa-pencil-square-o"></i></span>
                     </a>
-                    <a href="<?php echo base_url('pegawai/hapus_pegawai/'.$key['id_pegawai']);?>" title="Hapus" data-toggle="tooltip" data-placement="right">
+                    <a href="<?php echo base_url('pegawai/hapus_pegawai/'.$value['id_pegawai']);?>" title="Hapus" data-toggle="tooltip" data-placement="right">
                       <span class="badge bg-red"><i class="fa fa-fw fa-trash-o"></i></span>
                     </a>
                   </td>

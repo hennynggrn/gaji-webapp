@@ -80,7 +80,7 @@
 							<input type="file" class="form-control" name="foto_diri">
 						</div>
 					</div>
-					<div class="form-group">
+					<div class="form-group">e
 						<label class="col-sm-2 control-label">E-mail</label>
 						<div class="col-sm-10">
 							<input type="email" class="form-control" name="email" placeholder="budi@gmail.com" required>
