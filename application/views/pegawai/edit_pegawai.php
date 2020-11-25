@@ -253,22 +253,22 @@
 									<div class="col-sm-10">
 										<select class="form-control" name="status_pgw" id="status_pgw">
 											<option value="guru_pilih" disabled>Pilih</option>
-											<option value="guru_P1" <?php if($pegawai['status_pegawai'] == 'PNS') {echo 'selected';}?>>PNS</option>
-											<option value="guru_T1" <?php if($pegawai['status_pegawai'] == 'Tetap') {echo 'selected';}?>>Tetap</option>
-											<option value="guru_T0" <?php if($pegawai['status_pegawai'] == 'Tidak Tetap') {echo 'selected';}?>>Tidak Tetap</option>
-											<option value="karyawan_pilih" disabled>Pilih</option>
-											<option value="karyawan_T1" <?php if($pegawai['status_pegawai'] == 'Tetap') {echo 'selected';}?>>Tetap</option>
-											<option value="karyawan_T0" <?php if($pegawai['status_pegawai'] == 'Tidak Tetap') {echo 'selected';}?>>Tidak Tetap</option>
+											<option value="guru_P" <?php if(($pegawai['status_pegawai'] == 'P') && ($pegawai['jns_pegawai'] == 'Guru')) {echo 'selected';}?>>PNS</option>
+											<option value="guru_T1" <?php if(($pegawai['status_pegawai'] == 'T1') && ($pegawai['jns_pegawai'] == 'Guru')) {echo 'selected';}?>>Tetap</option>
+											<option value="guru_T0" <?php if(($pegawai['status_pegawai'] == 'T0') && ($pegawai['jns_pegawai'] == 'Guru')) {echo 'selected';}?>>Tidak Tetap</option>
+											<option value="karyawan_pilih" disabled >Pilih</option>
+											<option value="karyawan_T1"<?php if(($pegawai['status_pegawai'] == 'T1') && ($pegawai['jns_pegawai'] == 'Karyawan')) {echo 'selected';}?>>Tetap</option>
+											<option value="karyawan_T0"<?php if(($pegawai['status_pegawai'] == 'T0') && ($pegawai['jns_pegawai'] == 'Karyawan')) {echo 'selected';}?>>Tidak Tetap</option>
 										</select>
 									</div>
 								</div>
-								<div class="form-group" id="honor" style="display: block;">
+								<div class="form-group">
 									<label class="col-sm-2 control-label">Honorium</label>
 
 									<div class="col-sm-10">
 										<div class="input-group">
 											<span class="input-group-addon">Rp.</span>
-											<input type="number" class="form-control" name="honor" placeholder="2000000" value="<?php echo $pegawai['honor'];?>">
+											<input type="number" id="honor" class="form-control" name="honor" placeholder="0" value="<?php echo $pegawai['honor'];?>">
 											<span class="input-group-addon">.00</span>
 										</div>
 									</div>

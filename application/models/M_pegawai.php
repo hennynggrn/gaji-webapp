@@ -38,7 +38,7 @@ class M_pegawai extends CI_Model{
 		$jns_pegawai=$this->input->post('jns_pegawai');
 		$status_pegawai = $this->input->post('status_pgw');
 		switch ($status_pegawai) {
-			case 'guru_PNS':
+			case 'guru_P':
 				$status_pgw = 'P';
 				break;
 			case 'guru_T1':

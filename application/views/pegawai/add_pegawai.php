@@ -80,7 +80,7 @@
 							<input type="file" class="form-control" name="foto_diri">
 						</div>
 					</div>
-					<div class="form-group">e
+					<div class="form-group">
 						<label class="col-sm-2 control-label">E-mail</label>
 						<div class="col-sm-10">
 							<input type="email" class="form-control" name="email" placeholder="budi@gmail.com" required>
@@ -172,7 +172,7 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Jabatan</label>
 						<div class="col-sm-10">
-							<select class="form-control select2" multiple="multiple" name="jabatan[]" data-placeholder="Pilih jabatan" style="width: 100%; background-color: white;" required>
+							<select class="form-control select2" multiple="multiple" name="jabatan[]" data-placeholder="Pilih Jabatan" style="width: 100%; background-color: white;" required>
 								<option disabled>Pilih Jabatan</option>
 								<?php foreach ($jabatan as $key => $value) : ?>
 								<option value="<?php echo $value->id_jabatan ?>"><?php echo $value->jabatan ?></option>
@@ -192,7 +192,7 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Status Pegawai</label>
 						<div class="col-sm-10">
-							<select class="form-control" name="status_pgw" id="status_pgw">
+							<select class="form-control" name="status_pgw" id="status_pgw" data-placeholder="Pilih">
 								<option value="guru_pilih" disabled>Pilih</option>
 								<option value="guru_P1">PNS</option>
 								<option value="guru_T1">Tetap</option>
@@ -203,12 +203,12 @@
 							</select>
 						</div>
 					</div>
-					<div class="form-group" id="honor" style="display: none;">
+					<div class="form-group">
 						<label class="col-sm-2 control-label">Honorium</label>
 						<div class="col-sm-10">
 							<div class="input-group">
 								<span class="input-group-addon">Rp.</span>
-								<input type="number" class="form-control" name="honor" placeholder="2000000">
+								<input type="number" id="honor" class="form-control" name="honor" placeholder="0">
 								<span class="input-group-addon">.00</span>
 							</div>
 						</div>

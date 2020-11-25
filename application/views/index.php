@@ -581,14 +581,23 @@
 
   <!-- 'Jenis Pegawai' select onchanged will turn 'Status Pegawai' options  -->
 	<script>
+		var honor = $('#honor').val();
     $(document).ready(function() {
-      var optarray = $("#status_pgw").children('option').map(function() {
-          return {
-              "value": this.value,
-              "option": "<option value='" + this.value + "'>" + this.text + "</option>"
-          }
+      var optarray = $('#status_pgw').children('option').map(function() {
+				var disabled = '';
+				var selected = '';
+				if ($(this).prop('disabled') === true) {
+					disabled = 'disabled';
+				}
+				if ($(this).prop('selected') === true) {
+					selected = 'selected';
+				}
+				return {
+					'value': this.value,
+					'option': '<option value="' + this.value + '"'+ disabled + selected +'>' + this.text + '</option>'
+				}
       })
-          
+
       $("#jns_pegawai").change(function() {
           $("#status_pgw").children('option').remove();
           var addoptarr = [];
@@ -597,29 +606,102 @@
                   addoptarr.push(optarray[i].option);
               }
           }
+					var value = addoptarr[1];
+					var guru = 'guru_P';
+					var karyawan = 'karyawan_T1';
+					// alert(value);
+					
+					if(value.indexOf(guru) != -1){
+						// alert(guru + " found");
+						$('#honor').val('');
+						$('#honor').prop('disabled', true);
+					}
+					if(value.indexOf(karyawan) != -1){
+						// alert(guru + " found");
+						$('#honor').val(honor);
+						$('#honor').prop('disabled', false);
+					}
+					
+
           $("#status_pgw").html(addoptarr.join(''))
       }).change();
     })
+		
+		
+		// if (($('#status_pgw').prop('value') == 'guru_T1') || ($('#status_pgw').prop('value') == 'karyawan_T1')) {
+		// 	$('#honor').val(honor);
+		// 	$('#honor').prop('disabled', false);
+		// } else {
+		// 	$('#honor').val('');
+		// 	$('#honor').prop('disabled', true);
+		// }
+		// $('#jns_pegawai').on('change', function(){
+		// 	if (($('#status_pgw').prop('value') == 'guru_T1')
+		// })
+
+
+			// $('#status_pgw').on('change', function(){
+			// 	$('#jns_pegawai').on('change', function(){
+			// 		if ($('#status_pgw').prop('selected') === true) {
+			// 			if (($('#status_pgw').prop('value') == 'guru_T1') || ($('#status_pgw').prop('value') == 'karyawan_T1')) {
+			// 				$('#honor').val(honor);
+			// 				$('#honor').prop('disabled', false);
+			// 			} else {
+			// 				$('#honor').val('');
+			// 				$('#honor').prop('disabled', true);
+			// 			}
+			// 		} else {
+			// 			$('#honor').val('');
+			// 			$('#honor').prop('disabled', true);
+			// 		}
+			// 	})
+			// })  
   </script>
 
 	<!-- show 'Honor' input when 'Tetap' status selected on 'Status Pegawai' option -->
   <script>
-    function showhonor(){
-      document.getElementById('honor').style.display = 'none';
-    }
-    $('#status_pgw').change(function(){
-      var option = $('#status_pgw').val();
+    // function showhonor(){
+    //   document.getElementById('honor').style.display = 'none';
+    // }
+		
+		$(document).ready(function() {	
+			
+		})	
+		// if (($('#status_pgw').prop('value') == 'guru_T1') || ($('#status_pgw').prop('value') == 'karyawan_T1')) {
+		// 	$('#honor').prop('disabled', false);
+		// } else {
+		// 	$('#honor').prop('disabled', true);
+		// }	
+		// var honor = $('#honor').val();
+		// if (($('#status_pgw').prop('value') == 'guru_T1') || ($('#status_pgw').prop('value') == 'karyawan_T1')) {
+		// 	$('#honor').val(honor);
+		// 	$('#honor').prop('disabled', false);
+		// } else {
+		// 	$('#honor').val('');
+		// 	$('#honor').prop('disabled', true);
+		// }
 
-      if(option === 'guru_T1'){
-        $('#honor').show();
-      } else if(option === 'karyawan_T1') {
-        $('#honor').show();
-      } else{
-        $('#honor').hide();
-      }
-    })
-  </script>
-	
+		// $('#status_pgw').on('change', function(){
+		// 	if (($('#status_pgw').prop('value') == 'guru_T1') || ($('#status_pgw').prop('value') == 'karyawan_T1')) {
+		// 		$('#honor').val(honor);
+		// 		$('#honor').prop('disabled', false);
+		// 	} else {
+		// 		$('#honor').val('');
+		// 		$('#honor').prop('disabled', true);
+		// 	}
+		// })  
+
+		// // // $('#jns_pegawai').on('change', function(){
+		// 	$('#status_pgw').on('change', function(){
+		// 		if (($('#jns_pegawai').prop('value') == 'guru') && ($('#status_pgw').prop('value') == 'guru_T1')) {
+		// 			$('#honor').prop('disabled', false);
+		// 		} else if (($('#jns_pegawai').prop('value') == 'karyawan') && ($('#status_pgw').prop('value') == 'karyawan_T1')) {
+		// 			$('#honor').prop('disabled', false);
+		// 		} else {
+		// 			$('#honor').prop('disabled', true);
+		// 		}
+		// 	})
+	</script>
 	<!-- End Page script -->
 </body>
 
