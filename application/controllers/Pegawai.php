@@ -54,4 +54,21 @@ class Pegawai extends CI_Controller {
 		// var_dump($data['keluarga']);
 		$this->template->load('index','pegawai/edit_pegawai', $data);
 	}
+
+	public function update_pegawai()
+	{
+		echo 'update';
+		var_dump($_POST);
+		
+		// $res['pegawai']=$this->M_pegawai->add_pegawai();
+		// $res['jabatan']=$this->M_pegawai->add_jabatan();
+		// if($this->input->post('status') == 1) {
+		// 	$res['keluarga']=$this->M_keluarga->add_keluarga(); };
+
+		// if($res){
+		// 	redirect('pegawai/table_pegawai');
+		// } else {
+		// 	echo "<h2> Gagal Tambah Data </h2>";
+		// }
+	}
 }

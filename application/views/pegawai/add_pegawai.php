@@ -211,14 +211,13 @@
 								<input type="number" id="honor" class="form-control" name="honor" placeholder="0">
 								<span class="input-group-addon">.00</span>
 							</div>
-						</div>
+							<span class="text-red" id='info_honor'><small>* Honorium untuk status pegawai <b>tetap</b></small></span>
+   						</div>
 					</div>
 				</div>
 				<div class="box-footer">
-					<!-- <div class="col-sm-offset-2 col-sm-10"> -->
-						<a href="<?php echo base_url('pegawai')?>" class="btn btn-danger edit-btn">Batal</a>
-						<button type="submit" class="btn btn-primary pull-right edit-btn">Simpan</button>
-					<!-- </div> -->
+					<a href="<?php echo base_url('pegawai')?>" class="btn btn-danger edit-btn">Batal</a>
+					<button type="submit" class="btn btn-primary pull-right edit-btn">Simpan</button>
 				</div>
 			</form>
           </div>

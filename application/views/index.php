@@ -559,149 +559,105 @@
       return '<td></td>' + '<td><input type="hidden" name="ids[' + j + ']" value= "' + j + '"><input type="date" class="form-control" name="tgl_kembali[' + j + ']" placeholder="Tanggal Kembali" value= "' + value + '">' + '</td>' + '</td>' + '<td> <div class="input-group"><span class="input-group-addon">Rp.</span><input type="text" class="form-control" name="nom_angsuran[' + j + ']" placeholder="Nilai Angsuran" value="' + value + '"><div class="input-group-addon">.00</span></div></div></td>' + '<td><div class="remove btn-group"><a href="#" class="btn btn-danger" ><i class="fa fa-close"></i></a></div></td>'; }
 	</script>
 
-	<!-- <script>
-		$(document).ready(function(){
-			$('#jns_pegawai').change(function(){
-				var a = 'guru';
-				var b = 'karyawan';
-				var p = 'pns';
-				var t1 = 'tetap';
-				var t0 = 'tidak tetap';
-				if ($('#jns_pegawai').val() = b) {
 
-				$('#status_pgw').change(function(){
-					
-						$('#status_pgw option[value="'+ p +'"]').attr('disabled', true);
-					})
-				} 
-				
-			})
-		})              
-	</script> -->
-
-  <!-- 'Jenis Pegawai' select onchanged will turn 'Status Pegawai' options  -->
+	<!-- 'Jenis Pegawai' select onchanged will turn 'Status Pegawai' options & 'Honor' -->
 	<script>
 		var honor = $('#honor').val();
-    $(document).ready(function() {
-      var optarray = $('#status_pgw').children('option').map(function() {
-				var disabled = '';
-				var selected = '';
-				if ($(this).prop('disabled') === true) {
-					disabled = 'disabled';
-				}
-				if ($(this).prop('selected') === true) {
-					selected = 'selected';
-				}
-				return {
-					'value': this.value,
-					'option': '<option value="' + this.value + '"'+ disabled + selected +'>' + this.text + '</option>'
-				}
-      })
+		function honorEnabled(){
+			$('#info_honor').hide();
+			$('#honor').val(honor);
+			$('#honor').prop('disabled', false);
+		}
+		function honorDisabled(){
+			$('#info_honor').show();
+			$('#honor').val('');
+			$('#honor').prop('disabled', true);
+		}
 
-      $("#jns_pegawai").change(function() {
-          $("#status_pgw").children('option').remove();
-          var addoptarr = [];
-          for (i = 0; i < optarray.length; i++) {
-              if (optarray[i].value.indexOf($(this).val()) > -1) {
-                  addoptarr.push(optarray[i].option);
-              }
-          }
-					var value = addoptarr[1];
-					var guru = 'guru_P';
-					var karyawan = 'karyawan_T1';
-					// alert(value);
-					
-					if(value.indexOf(guru) != -1){
-						// alert(guru + " found");
-						$('#honor').val('');
-						$('#honor').prop('disabled', true);
+		if (($('#status_pgw').prop('value') == 'guru_T1') || ($('#status_pgw').prop('value') == 'karyawan_T1')) {
+			honorEnabled();
+			var status_load = 'tetap';
+		} else {
+			honorDisabled();
+			var status_load = 'pns_tdktetap';
+		}
+
+		switch ($("#jns_pegawai").val()) {
+			case 'guru':
+				var jenis_load = 'guru';
+				break;
+			case 'karyawan':
+				var jenis_load = 'karyawan';
+				break;
+		}
+
+		$(document).ready(function() {
+		var optarray = $('#status_pgw').children('option').map(function() {
+			var disabled = '';
+			var selected = '';
+			if ($(this).prop('disabled') === true) {
+				disabled = 'disabled';
+			}
+			if ($(this).prop('selected') === true) {
+				selected = 'selected';
+			}
+			return {
+				'value': this.value,
+				'option': '<option value="' + this.value + '"'+ disabled + selected +'>' + this.text + '</option>'
+			}
+		})
+
+		$("#jns_pegawai").change(function() {
+			$("#status_pgw").children('option').remove();
+				var addoptarr = [];
+				for (i = 0; i < optarray.length; i++) {
+					if (optarray[i].value.indexOf($(this).val()) > -1) {
+						addoptarr.push(optarray[i].option);
 					}
-					if(value.indexOf(karyawan) != -1){
-						// alert(guru + " found");
-						$('#honor').val(honor);
-						$('#honor').prop('disabled', false);
-					}
+				}
+
+				$('#status_pgw').on('change', function(){
 					
-
-          $("#status_pgw").html(addoptarr.join(''))
-      }).change();
-    })
-		
-		
-		// if (($('#status_pgw').prop('value') == 'guru_T1') || ($('#status_pgw').prop('value') == 'karyawan_T1')) {
-		// 	$('#honor').val(honor);
-		// 	$('#honor').prop('disabled', false);
-		// } else {
-		// 	$('#honor').val('');
-		// 	$('#honor').prop('disabled', true);
-		// }
-		// $('#jns_pegawai').on('change', function(){
-		// 	if (($('#status_pgw').prop('value') == 'guru_T1')
-		// })
-
-
-			// $('#status_pgw').on('change', function(){
-			// 	$('#jns_pegawai').on('change', function(){
-			// 		if ($('#status_pgw').prop('selected') === true) {
-			// 			if (($('#status_pgw').prop('value') == 'guru_T1') || ($('#status_pgw').prop('value') == 'karyawan_T1')) {
-			// 				$('#honor').val(honor);
-			// 				$('#honor').prop('disabled', false);
-			// 			} else {
-			// 				$('#honor').val('');
-			// 				$('#honor').prop('disabled', true);
-			// 			}
-			// 		} else {
-			// 			$('#honor').val('');
-			// 			$('#honor').prop('disabled', true);
-			// 		}
-			// 	})
-			// })  
-  </script>
-
-	<!-- show 'Honor' input when 'Tetap' status selected on 'Status Pegawai' option -->
-  <script>
-    // function showhonor(){
-    //   document.getElementById('honor').style.display = 'none';
-    // }
-		
-		$(document).ready(function() {	
-			
-		})	
-		// if (($('#status_pgw').prop('value') == 'guru_T1') || ($('#status_pgw').prop('value') == 'karyawan_T1')) {
-		// 	$('#honor').prop('disabled', false);
-		// } else {
-		// 	$('#honor').prop('disabled', true);
-		// }	
-		// var honor = $('#honor').val();
-		// if (($('#status_pgw').prop('value') == 'guru_T1') || ($('#status_pgw').prop('value') == 'karyawan_T1')) {
-		// 	$('#honor').val(honor);
-		// 	$('#honor').prop('disabled', false);
-		// } else {
-		// 	$('#honor').val('');
-		// 	$('#honor').prop('disabled', true);
-		// }
-
-		// $('#status_pgw').on('change', function(){
-		// 	if (($('#status_pgw').prop('value') == 'guru_T1') || ($('#status_pgw').prop('value') == 'karyawan_T1')) {
-		// 		$('#honor').val(honor);
-		// 		$('#honor').prop('disabled', false);
-		// 	} else {
-		// 		$('#honor').val('');
-		// 		$('#honor').prop('disabled', true);
-		// 	}
-		// })  
-
-		// // // $('#jns_pegawai').on('change', function(){
-		// 	$('#status_pgw').on('change', function(){
-		// 		if (($('#jns_pegawai').prop('value') == 'guru') && ($('#status_pgw').prop('value') == 'guru_T1')) {
-		// 			$('#honor').prop('disabled', false);
-		// 		} else if (($('#jns_pegawai').prop('value') == 'karyawan') && ($('#status_pgw').prop('value') == 'karyawan_T1')) {
-		// 			$('#honor').prop('disabled', false);
-		// 		} else {
-		// 			$('#honor').prop('disabled', true);
-		// 		}
-		// 	})
-	</script>
+					if (($('#status_pgw').prop('value') == 'guru_T1') || ($('#status_pgw').prop('value') == 'karyawan_T1')) {
+						honorEnabled();
+					} else {
+						honorDisabled();
+					}
+				}) 	
+							
+				$("#jns_pegawai").on('change', function() {
+					if (status_load == 'pns_tdktetap') {
+						if ($("#jns_pegawai").val() == 'karyawan') {
+							switch (jenis_load) {
+								case 'guru':
+									honorEnabled();
+									break;
+								case 'karyawan':
+									honorDisabled();
+									break;
+							}
+						} else {
+							honorDisabled();
+						}
+					} else if (status_load == 'tetap') {
+						if ($("#jns_pegawai").val() == 'guru') {
+							switch (jenis_load) {
+								case 'karyawan':
+									honorDisabled();
+									break;
+								case 'guru':
+									honorEnabled();
+									break;
+							}
+						} else {
+							honorEnabled();
+						}
+					}
+				})
+				$("#status_pgw").html(addoptarr.join(''))
+			}).change();
+		})		
+  	</script>
 	<!-- End Page script -->
 </body>
 

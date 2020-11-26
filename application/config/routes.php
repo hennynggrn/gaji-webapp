@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+$route['pegawai/update_pegawai'] = 'pegawai/update_pegawai/$1';
 $route['pegawai'] = 'pegawai/index';
 $route['login'] = 'users/index';
 $route['default_controller'] = 'home/index';
