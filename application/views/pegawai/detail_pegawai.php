@@ -110,7 +110,7 @@
 										<tr>
 											<td style="width: 150px">Jenis Pegawai</td>
 											<td style="width: 20px">:</td>
-											<td><?php echo $value->jns_pegawai; ?></td>
+											<td><?php echo ($value->jns_pegawai == 0) ? 'Guru' : 'Karyawan'; ?></td>
 										</tr>
 										<tr>
 											<td width="3">Status Pegawai</td>

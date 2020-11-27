@@ -112,16 +112,16 @@
 							<label class="col-sm-3 control-label">Nama Pasangan</label>
 							<div  class="col-sm-5">
 								<input type="hidden" name="anggota[0]" value="1">
-							<input type="text" class="form-control" name="nama_anggota[0]" placeholder="Nama Pasangan"> </div>
+							<input type="text" class="form-control mate" id="thismate" name="nama_anggota[0]" placeholder="Nama Pasangan"> </div>
 							<div  class="col-sm-2">
-								<select class="form-control" name="gender_anggota[0]" placeholder="Gender">
+								<select class="form-control mate" name="gender_anggota[0]" placeholder="Gender">
 									<option disabled>Pilih Gender</option>
 									<option value='P'>Perempuan</option>
 									<option value='L'>Laki-laki</option>
 								</select>
 							</div>
 							<div  class="col-sm-2">
-								<select class="form-control" name="s_hidup_anggota[0]" placeholder="Status Hidup">
+								<select class="form-control mate" name="s_hidup_anggota[0]" placeholder="Status Hidup">
 									<option disabled>Pilih Status Hidup</option>
 									<option value="1">Hidup</option>
 									<option value="0">Meninggal</option>
@@ -132,16 +132,16 @@
 							<label class="col-sm-3 control-label">Nama Anak Pertama</label>
 							<div  class="col-sm-5">
 								<input type="hidden" name="anggota[1]" value="2">
-							<input type="text" class="form-control" name="nama_anggota[1]" placeholder="Nama Anak Pertama"> </div>
+							<input type="text" class="form-control first-child" id="first-child" name="nama_anggota[1]" placeholder="Nama Anak Pertama"> </div>
 							<div  class="col-sm-2">
-								<select class="form-control" name="gender_anggota[1]" placeholder="Gender">
+								<select class="form-control first-child" name="gender_anggota[1]" placeholder="Gender">
 									<option disabled>Pilih Gender</option>
 									<option value='P'>Perempuan</option>
 									<option value='L'>Laki-laki</option>
 								</select>
 							</div>
 							<div  class="col-sm-2">
-								<select class="form-control" name="s_hidup_anggota[1]" placeholder="Status Hidup">
+								<select class="form-control first-child" name="s_hidup_anggota[1]" placeholder="Status Hidup">
 									<option disabled>Pilih Status Hidup</option>
 									<option value='1'>Hidup</option>
 									<option value='0'>Meninggal</option>
@@ -152,16 +152,16 @@
 							<label class="col-sm-3 control-label">Nama Anak Kedua</label>
 							<div  class="col-sm-5">
 								<input type="hidden" name="anggota[2]" value="3">
-							<input type="text" class="form-control" name="nama_anggota[2]" placeholder="Nama Anak Kedua"> </div>
+							<input type="text" class="form-control second-child" id="second-child" name="nama_anggota[2]" placeholder="Nama Anak Kedua"> </div>
 							<div  class="col-sm-2">
-								<select class="form-control" name="gender_anggota[2]" placeholder="Gender">
+								<select class="form-control second-child" name="gender_anggota[2]" placeholder="Gender">
 									<option disabled>Pilih Gender</option>
 									<option value='P'>Perempuan</option>
 									<option value='L'>Laki-laki</option>
 								</select>
 							</div>
 							<div  class="col-sm-2">
-								<select class="form-control" name="s_hidup_anggota[2]" placeholder="Status Hidup">
+								<select class="form-control second-child" name="s_hidup_anggota[2]" placeholder="Status Hidup">
 									<option disabled>Pilih Status Hidup</option>
 									<option value='1'>Hidup</option>
 									<option value='0'>Meninggal</option>
@@ -183,16 +183,21 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Jenis Pegawai</label>
 						<div class="col-sm-10">
-							<select class="form-control" name="jns_pegawai" id="jns_pegawai" onchange="showhonor()" required>
+							<!-- <select class="form-control" name="jns_pegawai" id="jns_pegawai" onchange="showhonor()" required>
 								<option value="guru">Guru</option>
 								<option value="karyawan">Karyawan</option>
+							</select> -->
+							<select class="form-control" name="jns_pegawai" id="jns_pegawai">
+								<option value="" disabled>Pilih Jenis Pegawai</option>
+								<option value="0">Guru</option>
+								<option value="1">Karyawan</option>
 							</select>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Status Pegawai</label>
 						<div class="col-sm-10">
-							<select class="form-control" name="status_pgw" id="status_pgw" data-placeholder="Pilih">
+							<!-- <select class="form-control" name="status_pgw" id="status_pgw" data-placeholder="Pilih">
 								<option value="guru_pilih" disabled>Pilih</option>
 								<option value="guru_P1">PNS</option>
 								<option value="guru_T1">Tetap</option>
@@ -200,6 +205,9 @@
 								<option value="karyawan_pilih" disabled>Pilih</option>
 								<option value="karyawan_T1">Tetap</option>
 								<option value="karyawan_T0">Tidak Tetap</option>
+							</select> -->
+							<select class="form-control" name="status_pgw" id="status_pgw">
+								<option value="">Pilih Status Pegawai</option>
 							</select>
 						</div>
 					</div>

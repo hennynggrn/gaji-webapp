@@ -69,7 +69,7 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Jenis Kelamin</label>
 						<div class="col-sm-10">
-							<select class="form-control" name="jns_klmn" required>
+							<select class="form-control" name="gender" required>
 							<option value='P' <?php if($pegawai['gender'] == 'P') {echo 'selected';}?>>Perempuan</option>
 							<option value='L' <?php if($pegawai['gender'] == 'L') {echo 'selected';}?>>Laki-laki</option>
 							</select>
@@ -126,6 +126,7 @@
 								} ;?>
 								</label>
 								<div  class="col-sm-5">
+									<input type="hidden" name="id_anggota_klg[<?php echo $key;?>]" value="<?php echo $value['id_anggota_klg'];?>">
 									<input type="hidden" name="anggota[<?php echo $key;?>]" value="<?php echo $value['id_status'];?>">
 									<input type="text" class="form-control" name="nama_anggota[<?php echo $key;?>]" value="<?php echo $value['nama'];?>"> 
 								</div>
@@ -150,7 +151,7 @@
 									<label class="col-sm-3 control-label">Nama Pasangan</label>
 									<div  class="col-sm-5">
 										<input type="hidden" name="anggota[0]" value="1">
-									<input type="text" class="form-control" name="nama_anggota[0]" placeholder="Nama Anak Pertama"> </div>
+										<input type="text" class="form-control" name="nama_anggota[0]" placeholder="Nama Anak Pertama"> </div>
 									<div  class="col-sm-2">
 										<select class="form-control" name="gender_anggota[0]" placeholder="Gender">
 											<option disabled>Pilih Gender</option>
@@ -242,23 +243,31 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Jenis Pegawai</label>
 						<div class="col-sm-10">
-							<select class="form-control" name="jns_pegawai" id="jns_pegawai" onchange="snowhonor()">
+							<!-- <select class="form-control" name="jns_pegawai" id="jns_pegawai" onchange="snowhonor()">
 								<option value="guru" <?php if($pegawai['jns_pegawai'] == 'Guru') {echo 'selected';}?>>Guru</option>
 								<option value="karyawan" <?php if($pegawai['jns_pegawai'] == 'Karyawan') {echo 'selected';}?>>Karyawan</option>
+							</select> -->
+							<select class="form-control" name="jns_pegawai" id="jns_pegawai">
+								<option value="" disabled>Pilih Jenis Pegawai</option>
+								<option value="0" <?php if($pegawai['jns_pegawai'] == 0) {echo 'selected';}?>>Guru</option>
+								<option value="1" <?php if($pegawai['jns_pegawai'] == 1) {echo 'selected';}?>>Karyawan</option>
 							</select>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Status Pegawai</label>
 						<div class="col-sm-10">
-							<select class="form-control" name="status_pgw" id="status_pgw">
+							<!-- <select class="form-control" name="status_pgw" id="status_pgw">
 								<option value="guru_pilih" disabled>Pilih</option>
 								<option value="guru_P" <?php if(($pegawai['status_pegawai'] == 'P') && ($pegawai['jns_pegawai'] == 'Guru')) {echo 'selected';}?>>PNS</option>
 								<option value="guru_T1" <?php if(($pegawai['status_pegawai'] == 'T1') && ($pegawai['jns_pegawai'] == 'Guru')) {echo 'selected';}?>>Tetap</option>
 								<option value="guru_T0" <?php if(($pegawai['status_pegawai'] == 'T0') && ($pegawai['jns_pegawai'] == 'Guru')) {echo 'selected';}?>>Tidak Tetap</option>
-								<option value="karyawan_pilih" disabled >Pilih</option>
+								<option value="karyawan_pilih" disabled >Pilih</option>	
 								<option value="karyawan_T1"<?php if(($pegawai['status_pegawai'] == 'T1') && ($pegawai['jns_pegawai'] == 'Karyawan')) {echo 'selected';}?>>Tetap</option>
 								<option value="karyawan_T0"<?php if(($pegawai['status_pegawai'] == 'T0') && ($pegawai['jns_pegawai'] == 'Karyawan')) {echo 'selected';}?>>Tidak Tetap</option>
+							</select> -->
+							<select class="form-control" name="status_pgw" id="status_pgw">
+								<option value="">Pilih Status Pegawai</option>
 							</select>
 						</div>
 					</div>
@@ -277,7 +286,7 @@
 				</div>
 				<div class="box-footer">
 					<a href="<?php echo base_url('pegawai')?>" class="btn btn-danger edit-btn">Batal</a>
-					<button type="submit" class="btn btn-primary pull-right edit-btn" target="_BLANK">Simpan</button>
+					<button type="submit" class="btn btn-primary pull-right edit-btn">Simpan</button>
 				</div>
 			</form>
           </div>

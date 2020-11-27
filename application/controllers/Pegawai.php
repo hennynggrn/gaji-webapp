@@ -51,19 +51,22 @@ class Pegawai extends CI_Controller {
 		foreach ($data['keluarga'] as $key => $value) {
 			$data['id_status'][] = $data['keluarga'][$key]['id_status'];			
 		}
-		// var_dump($data['keluarga']);
+		var_dump($data['keluarga']);
 		$this->template->load('index','pegawai/edit_pegawai', $data);
 	}
 
 	public function update_pegawai()
 	{
-		echo 'update';
-		var_dump($_POST);
+		// echo 'update';
+		// var_dump($_POST);
 		
-		// $res['pegawai']=$this->M_pegawai->add_pegawai();
+		$res['pegawai'] = $this->M_pegawai->update_pegawai();
 		// $res['jabatan']=$this->M_pegawai->add_jabatan();
-		// if($this->input->post('status') == 1) {
-		// 	$res['keluarga']=$this->M_keluarga->add_keluarga(); };
+		if($this->input->post('status') == 1) {
+			$res['keluarga'] = $this->M_keluarga->update_keluarga(); 
+		} else {
+			$res['keluarga'] = $this->M_keluarga->delete_keluarga(); 
+		}
 
 		// if($res){
 		// 	redirect('pegawai/table_pegawai');

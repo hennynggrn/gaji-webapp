@@ -464,6 +464,20 @@
 		});
 	</script>
 
+	<!-- Set 'Keluarga' close input when delete member-->
+	<script>
+		$(document).ready(function(){
+			$('.mate').prop('disabled', false);
+			$('.first-child').prop('disabled', true);
+			$('.second-child').prop('disabled', true);
+			// console.log($('#mate').val());
+			if($('#thismate').focus().keyup()){
+				$('.first-child').prop('disabled', false);
+			}
+			
+		})
+	</script>
+
 	<!-- Show form input family member when 'Menikah' on checked -->
 	<script>
 		$(document).ready(function(){
@@ -526,42 +540,117 @@
 	
 	<!-- Dynamic Insert for 'Peminjaman' -->
 	<script>
-    var rowCount = 0;
-    var j = 0;
-    document.getElementById('jumlahAng').value = rowCount;
-    $(function () {
-      $('body').on('click', '.remove', function () {
-        $(this).closest('tr').remove();
+		var rowCount = 0;
+		var j = 0;
+		document.getElementById('jumlahAng').value = rowCount;
+		$(function () {
+			$('body').on('click', '.remove', function () {
+				$(this).closest('tr').remove();
 
-        // count
-        $('.tableAngsuran tbody .num').each(function(i){
-          $($(this).find('td')[0]).html(i+1);
-        });
-        var rowCount = $('.tableAngsuran tbody .num').length;
-        document.getElementById('jumlahAng').value = rowCount;
-      });
-      $('#btnAdd').bind('click', function () {
-        // var j = 0; j++;
-        var div = $('<tr class="num" />');
-        div.html(GetDynamicTextBox(''));
-        $('#angsuranTable').append(div);
+				// count
+				$('.tableAngsuran tbody .num').each(function(i){
+					$($(this).find('td')[0]).html(i+1);
+				});
+				var rowCount = $('.tableAngsuran tbody .num').length;
+				document.getElementById('jumlahAng').value = rowCount;
+			});
+			$('#btnAdd').bind('click', function () {
+				// var j = 0; j++;
+				var div = $('<tr class="num" />');
+				div.html(GetDynamicTextBox(''));
+				$('#angsuranTable').append(div);
 
-        // count
-        $('.tableAngsuran tbody .num').each(function(i){
-          $($(this).find('td')[0]).html(i+1);
-        });   
-        var rowCount = $('.tableAngsuran tbody .num').length;
-        document.getElementById('jumlahAng').value = rowCount;     
-      });
-    });
-    function GetDynamicTextBox(value) {
-      j = j + 1;
-      return '<td></td>' + '<td><input type="hidden" name="ids[' + j + ']" value= "' + j + '"><input type="date" class="form-control" name="tgl_kembali[' + j + ']" placeholder="Tanggal Kembali" value= "' + value + '">' + '</td>' + '</td>' + '<td> <div class="input-group"><span class="input-group-addon">Rp.</span><input type="text" class="form-control" name="nom_angsuran[' + j + ']" placeholder="Nilai Angsuran" value="' + value + '"><div class="input-group-addon">.00</span></div></div></td>' + '<td><div class="remove btn-group"><a href="#" class="btn btn-danger" ><i class="fa fa-close"></i></a></div></td>'; }
+				// count
+				$('.tableAngsuran tbody .num').each(function(i){
+					$($(this).find('td')[0]).html(i+1);
+				});   
+				var rowCount = $('.tableAngsuran tbody .num').length;
+				document.getElementById('jumlahAng').value = rowCount;     
+			});
+		});
+		function GetDynamicTextBox(value) {
+			j = j + 1;
+			return '<td></td>' + '<td><input type="hidden" name="ids[' + j + ']" value= "' + j + '"><input type="date" class="form-control" name="tgl_kembali[' + j + ']" placeholder="Tanggal Kembali" value= "' + value + '">' + '</td>' + '</td>' + '<td> <div class="input-group"><span class="input-group-addon">Rp.</span><input type="text" class="form-control" name="nom_angsuran[' + j + ']" placeholder="Nilai Angsuran" value="' + value + '"><div class="input-group-addon">.00</span></div></div></td>' + '<td><div class="remove btn-group"><a href="#" class="btn btn-danger" ><i class="fa fa-close"></i></a></div></td>'; 
+		}
 	</script>
 
 
 	<!-- 'Jenis Pegawai' select onchanged will turn 'Status Pegawai' options & 'Honor' -->
 	<script>
+		$(document).ready(function(){
+			<?php 
+			$pns = '';
+			$g_tetap = '';
+			$g_tidak_tetap = '';
+			$k_tetap = '';
+			$k_tidak_tetap = '';
+			if(isset($pegawai['jns_pegawai'])) {
+				if (isset($pegawai['status_pegawai'])) {
+					if (($pegawai['status_pegawai'] == 'P') && ($pegawai['jns_pegawai'] == 0)) {
+						$pns = 'selected';
+					} else if (($pegawai['status_pegawai'] == 'T1') && ($pegawai['jns_pegawai'] == 0)) {
+						$g_tetap = 'selected';
+					} else if (($pegawai['status_pegawai'] == 'T0') && ($pegawai['jns_pegawai'] == 0)) {
+						$g_tidak_tetap = 'selected';
+					} else if (($pegawai['status_pegawai'] == 'T1') && ($pegawai['jns_pegawai'] == 1)) {
+						$k_tetap = 'selected';
+					} else if (($pegawai['status_pegawai'] == 'T0') && ($pegawai['jns_pegawai'] == 1)) {
+						$k_tidak_tetap = 'selected';
+					} else {
+						$pns = '';
+						$g_tetap = '';
+						$g_tidak_tetap = '';
+						$k_tetap = '';
+						$k_tidak_tetap = '';
+					}
+				}
+			}?>
+
+			var options = [
+				'<option value="" disabled>Pilih Status Pegawai</option><option value="P" <?php echo $pns;?>>PNS</option><option value="T1" <?php echo $g_tetap;?>>Tetap</option><option value="T0" <?php echo $g_tidak_tetap;?>>Tidak Tetap</option>', 
+				'<option value="" disabled>Pilih Status Pegawai</option><option value="T1" <?php echo $k_tetap;?>>Tetap</option><option value="T0" <?php echo $k_tidak_tetap;?>>Tidak Tetap</option>'
+			];
+
+			var val_load = $('#jns_pegawai').val();
+			$('#status_pgw').html(options[val_load]);
+			if ($('#status_pgw').val() == 'T1') {
+				honorEnabled();
+			} else {
+				honorDisabled();
+			}
+
+			$('#jns_pegawai').change(function(){
+				var val = $(this).val();
+				$('#status_pgw').html(options[val]);
+				if ($('#status_pgw').val() == 'T1') {
+					honorEnabled();
+				} else {
+					honorDisabled();
+				}
+			});
+
+			$('#status_pgw').change(function(){
+				if ($(this).val() == 'T1') {
+					honorEnabled();
+				} else {
+					honorDisabled();
+				}
+			});
+		});
+
+		var honor = $('#honor').val();
+		function honorEnabled(){
+			$('#info_honor').hide();
+			$('#honor').val(honor);
+			$('#honor').prop('disabled', false);
+		}
+		function honorDisabled(){
+			$('#info_honor').show();
+			$('#honor').val('');
+			$('#honor').prop('disabled', true);
+		}
+	</script>
+	<!-- <script>
 		var honor = $('#honor').val();
 		function honorEnabled(){
 			$('#info_honor').hide();
@@ -592,23 +681,23 @@
 		}
 
 		$(document).ready(function() {
-		var optarray = $('#status_pgw').children('option').map(function() {
-			var disabled = '';
-			var selected = '';
-			if ($(this).prop('disabled') === true) {
-				disabled = 'disabled';
-			}
-			if ($(this).prop('selected') === true) {
-				selected = 'selected';
-			}
-			return {
-				'value': this.value,
-				'option': '<option value="' + this.value + '"'+ disabled + selected +'>' + this.text + '</option>'
-			}
-		})
+			var optarray = $('#status_pgw').children('option').map(function() {
+				var disabled = '';
+				var selected = '';
+				if ($(this).prop('disabled') === true) {
+					disabled = 'disabled';
+				}
+				if ($(this).prop('selected') === true) {
+					selected = 'selected';
+				}
+				return {
+					'value': this.value,
+					'option': '<option value="' + this.value + '"'+ disabled + selected +'>' + this.text + '</option>'
+				}
+			});
 
-		$("#jns_pegawai").change(function() {
-			$("#status_pgw").children('option').remove();
+			$("#jns_pegawai").change(function() {
+				$("#status_pgw").children('option').remove();
 				var addoptarr = [];
 				for (i = 0; i < optarray.length; i++) {
 					if (optarray[i].value.indexOf($(this).val()) > -1) {
@@ -623,7 +712,7 @@
 					} else {
 						honorDisabled();
 					}
-				}) 	
+				}); 	
 							
 				$("#jns_pegawai").on('change', function() {
 					if (status_load == 'pns_tdktetap') {
@@ -653,11 +742,11 @@
 							honorEnabled();
 						}
 					}
-				})
+				});
 				$("#status_pgw").html(addoptarr.join(''))
 			}).change();
-		})		
-  	</script>
+		});		
+  	</script> -->
 	<!-- End Page script -->
 </body>
 
