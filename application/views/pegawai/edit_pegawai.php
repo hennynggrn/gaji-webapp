@@ -115,12 +115,15 @@
 								<label class="col-sm-3 control-label">
 								<?php switch ($value['id_status']) {
 									case '1':
+										$member = 'mate';
 										echo 'Nama Pasangan';
 										break;
 									case '2':
+										$member = 'first-child';
 										echo 'Nama Anak Pertama';
 										break;
 									case '3':
+										$member = 'second-child';
 										echo 'Nama Anak Kedua';
 										break;
 								} ;?>
@@ -128,17 +131,17 @@
 								<div  class="col-sm-5">
 									<input type="hidden" name="id_anggota_klg[<?php echo $key;?>]" value="<?php echo $value['id_anggota_klg'];?>">
 									<input type="hidden" name="anggota[<?php echo $key;?>]" value="<?php echo $value['id_status'];?>">
-									<input type="text" class="form-control" name="nama_anggota[<?php echo $key;?>]" value="<?php echo $value['nama'];?>"> 
+									<input type="text" class="form-control <?php echo $member.'" id="'.$member.'"';?> name="nama_anggota[<?php echo $key;?>]" value="<?php echo $value['nama'];?>"> 
 								</div>
 								<div  class="col-sm-2">
-									<select class="form-control" name="gender_anggota[<?php echo $key;?>]">
+									<select class="form-control <?php echo $member;?>" name="gender_anggota[<?php echo $key;?>]">
 										<option disabled>Pilih Gender</option>
 										<option value='P' <?php echo ($value['gender'] == 'P') ? 'selected': '';?>>Perempuan</option>
 										<option value='L' <?php echo ($value['gender'] == 'L') ? 'selected': '';?>>Laki-laki</option>
 									</select>
 								</div>
 								<div  class="col-sm-2">
-									<select class="form-control" name="s_hidup_anggota[<?php echo $key;?>]">
+									<select class="form-control <?php echo $member;?>" name="s_hidup_anggota[<?php echo $key;?>]">
 										<option disabled>Pilih Status Hidup</option>
 										<option value="1" <?php echo ($value['s_hidup'] == 1) ? 'selected': '';?>>Hidup</option>
 										<option value="0" <?php echo ($value['s_hidup'] == 0) ? 'selected': '';?>>Meninggal</option>
@@ -151,16 +154,16 @@
 									<label class="col-sm-3 control-label">Nama Pasangan</label>
 									<div  class="col-sm-5">
 										<input type="hidden" name="anggota[0]" value="1">
-										<input type="text" class="form-control" name="nama_anggota[0]" placeholder="Nama Anak Pertama"> </div>
+										<input type="text" class="form-control mate" id="mate" name="nama_anggota[0]" placeholder="Nama Pasangan"> </div>
 									<div  class="col-sm-2">
-										<select class="form-control" name="gender_anggota[0]" placeholder="Gender">
+										<select class="form-control mate" name="gender_anggota[0]" placeholder="Gender">
 											<option disabled>Pilih Gender</option>
 											<option value="P">Perempuan</option>
 											<option value="L">Laki-laki</option>
 										</select>
 									</div>
 									<div  class="col-sm-2">
-										<select class="form-control" name="s_hidup_anggota[0]" placeholder="Status Hidup">
+										<select class="form-control mate" name="s_hidup_anggota[0]" placeholder="Status Hidup">
 											<option disabled>Pilih Status Hidup</option>
 											<option value="1">Hidup</option>
 											<option value="0">Meninggal</option>
@@ -172,16 +175,16 @@
 									<label class="col-sm-3 control-label">Nama Anak Pertama</label>
 									<div  class="col-sm-5">
 										<input type="hidden" name="anggota[1]" value="2">
-									<input type="text" class="form-control" name="nama_anggota[1]" placeholder="Nama Anak Pertama"> </div>
+										<input type="text" class="form-control first-child" id="first-child" name="nama_anggota[1]" placeholder="Nama Anak Pertama"> </div>
 									<div  class="col-sm-2">
-										<select class="form-control" name="gender_anggota[1]" placeholder="Gender">
+										<select class="form-control first-child" name="gender_anggota[1]" placeholder="Gender">
 											<option disabled>Pilih Gender</option>
 											<option value="P">Perempuan</option>
 											<option value="L">Laki-laki</option>
 										</select>
 									</div>
 									<div  class="col-sm-2">
-										<select class="form-control" name="s_hidup_anggota[1]" placeholder="Status Hidup">
+										<select class="form-control first-child" name="s_hidup_anggota[1]" placeholder="Status Hidup">
 											<option disabled>Pilih Status Hidup</option>
 											<option value="1">Hidup</option>
 											<option value="0">Meninggal</option>
@@ -193,16 +196,16 @@
 									<label class="col-sm-3 control-label">Nama Anak Kedua</label>
 									<div  class="col-sm-5">
 										<input type="hidden" name="anggota[2]" value="3">
-									<input type="text" class="form-control" name="nama_anggota[2]" placeholder="Nama Anak Kedua"> </div>
+										<input type="text" class="form-control second-child" id="second-child" name="nama_anggota[2]" placeholder="Nama Anak Kedua"> </div>
 									<div  class="col-sm-2">
-										<select class="form-control" name="gender_anggota[2]" placeholder="Gender">
+										<select class="form-control second-child" name="gender_anggota[2]" placeholder="Gender">
 											<option disabled>Pilih Gender</option>
 											<option value="P">Perempuan</option>
 											<option value="L">Laki-laki</option>
 										</select>
 									</div>
 									<div  class="col-sm-2">
-										<select class="form-control" name="s_hidup_anggota[2]" placeholder="Status Hidup">
+										<select class="form-control second-child" name="s_hidup_anggota[2]" placeholder="Status Hidup">
 											<option disabled>Pilih Status Hidup</option>
 											<option value="1">Hidup</option>
 											<option value="0">Meninggal</option>
@@ -230,7 +233,7 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Jabatan</label>
 						<div class="col-sm-10">
-							<select class="form-control select2" multiple="multiple" name="jabatan[]" data-placeholder="Pilih jabatan" style="width: 100%; background-color: white; ">
+							<select class="form-control select2" multiple="multiple" name="jabatan[]" data-placeholder="Pilih jabatan" style="width: 100%; background-color: white;" required>
 								<option disabled>Pilih Jabatan</option>
 								<?php foreach ($jabatan as $key => $value) : ?>
 								<option value=<?php echo '"'.$value['id_jabatan'].'"'; echo ($value['id_pegawai'] != NULL) ? 'selected' : '';?>>

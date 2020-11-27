@@ -38,19 +38,13 @@ class M_pegawai extends CI_Model{
 		$jns_pegawai=$this->input->post('jns_pegawai');
 		$status_pegawai = $this->input->post('status_pgw');
 		switch ($status_pegawai) {
-			case 'guru_P':
+			case 'P':
 				$status_pgw = 'P';
 				break;
-			case 'guru_T1':
+			case 'T1':
 				$status_pgw = 'T1';
 				break;
-			case 'guru_T0':
-				$status_pgw = 'T0';
-				break;
-			case 'karyawan_T1':
-				$status_pgw = 'T1';
-				break;
-			case 'karyawan_T0':
+			case 'T0':
 				$status_pgw = 'T0';
 				break;
 		}		
@@ -77,20 +71,6 @@ class M_pegawai extends CI_Model{
 			'honor' => $honor
 		);
 		$this->db->insert("pegawai",$data);
-	}
-
-	public function add_jabatan()
-	{
-		$id_pegawai=$this->input->post('id_pegawai');
-		$id_jabatan=$this->input->post('jabatan');
-
-		foreach ($id_jabatan as $i => $value) {
-			$data = array(
-				'id_pegawai' => $id_pegawai,
-				'id_jabatan' => $id_jabatan[$i]
-			);
-				$this->db->insert("jbt_pegawai",$data);
-			}
 	}
 
 	public function get_pegawai_detail($where, $table)
@@ -147,6 +127,12 @@ class M_pegawai extends CI_Model{
 			'honor' => $honor
 		);
 		$this->db->update("pegawai", $data, array('id_pegawai' => $id_pegawai));
+	}
+
+	public function delete_pegawai($id = TRUE)
+	{
+		$this->db->where('id_pegawai', $id);
+		$this->db->delete('pegawai');
 	}
 
 }

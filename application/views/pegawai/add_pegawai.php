@@ -112,7 +112,7 @@
 							<label class="col-sm-3 control-label">Nama Pasangan</label>
 							<div  class="col-sm-5">
 								<input type="hidden" name="anggota[0]" value="1">
-							<input type="text" class="form-control mate" id="thismate" name="nama_anggota[0]" placeholder="Nama Pasangan"> </div>
+							<input type="text" class="form-control mate" id="mate" name="nama_anggota[0]" placeholder="Nama Pasangan"> </div>
 							<div  class="col-sm-2">
 								<select class="form-control mate" name="gender_anggota[0]" placeholder="Gender">
 									<option disabled>Pilih Gender</option>

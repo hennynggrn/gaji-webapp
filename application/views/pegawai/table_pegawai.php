@@ -45,10 +45,10 @@
                   <td><?php echo $no++; ?></td>
                   <td><?php echo $value['nbm'] ?></td>
                   <td><?php echo $value['nama'] ?></td>
-                  <td><?php echo $value['gender'] ?></td>
+                  <td><?php echo ($value['gender'] == 'P') ? 'Perempuan' : 'Laki-laki';?></td>
                   <td><?php echo $value['email'] ?></td>
                   <td><?php echo ($value['telepon'] != 0) ? $value['telepon'] : '-';?></td>
-                  <td><?php echo $value['jns_pegawai'] ?></td>
+                  <td><?php echo ($value['jns_pegawai'] == 0) ? 'Guru' : 'Karyawan';?></td>
                   <td>
 										<?php switch ($value['status_pegawai']) {
 											case 'P':
@@ -70,7 +70,7 @@
                     <a href="<?php echo base_url('pegawai/edit_pegawai/'.$value['id_pegawai']);?>" title="Edit" data-toggle="tooltip" data-placement="top">
                       <span class="badge bg-orange"><i class="fa fa-fw fa-pencil-square-o"></i></span>
                     </a>
-                    <a href="<?php echo base_url('pegawai/hapus_pegawai/'.$value['id_pegawai']);?>" title="Hapus" data-toggle="tooltip" data-placement="right">
+                    <a href="<?php echo base_url('pegawai/delete_pegawai/'.$value['id_pegawai']);?>" title="Hapus" data-toggle="tooltip" data-placement="right">
                       <span class="badge bg-red"><i class="fa fa-fw fa-trash-o"></i></span>
                     </a>
                   </td>

@@ -72,15 +72,36 @@ class M_keluarga extends CI_Model{
 		$s_hidup_anggota = $this->input->post('s_hidup_anggota');
 		$gender_anggota = $this->input->post('gender_anggota');
 		// update keluarga yang sudah terdaftar
-		foreach ($id_anggota_klg as $i => $value) {
-			$data = array(
-				'nama' => $nama_anggota[$i],
-				's_hidup' => $s_hidup_anggota[$i],
-				'gender' => $gender_anggota[$i]
-			);
-			$this->db->where('id_pegawai', $id_pegawai);
-			$this->db->update('keluarga', $data, array('id_anggota_klg' => $id_anggota_klg[$i]));
+		if (!empty($id_anggota_klg)) {
+			foreach ($id_anggota_klg as $i => $value) {
+				if ((!empty($id_anggota_klg[$i])) && ($nama_anggota[$i] != NULL)) {
+					$data = array(
+						'nama' => $nama_anggota[$i],
+						's_hidup' => $s_hidup_anggota[$i],
+						'gender' => $gender_anggota[$i]
+					);
+					$this->db->where('id_pegawai', $id_pegawai);
+					// $this->db->where('id_anggota_klg' != NULL);
+					$this->db->update('keluarga', $data, array('id_anggota_klg' => $id_anggota_klg[$i]));
+				}
+			}
+		} else {
+			foreach ($nama_anggota as $i => $value) {
+				if (!empty($id_status[$i] && $nama_anggota[$i])) {
+					$data = array(
+						'id_pegawai' => $id_pegawai,
+						'id_status' => $id_status[$i],
+						'nama' => $nama_anggota[$i],
+						's_hidup' => $s_hidup_anggota[$i],
+						'gender' => $gender_anggota[$i]
+					);
+					$this->db->insert("keluarga", $data);
+				}
+			}
 		}
+		
+
+		
 	}
 
 	private function add_new_klg()
@@ -99,28 +120,49 @@ class M_keluarga extends CI_Model{
 		foreach ($keluarga as $key => $value) {
 			$old_id_status[] = $keluarga[$key]['id_status'];			
 		}
-		$delist = array_diff($id_status, $old_id_status);
-		
-		foreach ($delist as $i => $value) {
-			$data = array(
-				'id_pegawai' => $id_pegawai,
-				'id_status' => $id_status[$i],
-				'nama' => $nama_anggota[$i],
-				's_hidup' => $s_hidup_anggota[$i],
-				'gender' => $gender_anggota[$i]
-			);
-			$this->db->insert('keluarga', $data);
+		$deff = array_diff($id_status, $old_id_status);
+
+		foreach ($deff as $i => $value) {
+			if ((!empty($id_anggota_klg[$i])) || ((isset($nama_anggota[$i])) && ($nama_anggota[$i] != NULL))) {
+				$data = array(
+					'id_pegawai' => $id_pegawai,
+					'id_status' => $id_status[$i],
+					'nama' => $nama_anggota[$i],
+					's_hidup' => $s_hidup_anggota[$i],
+					'gender' => $gender_anggota[$i]
+				);
+				$this->db->insert('keluarga', $data);
+			}
+		}
+	}
+
+	private function del_old_klg()
+	{
+		$id_pegawai = $this->input->post('id_pegawai');
+		$id_anggota_klg = $this->input->post('id_anggota_klg');
+		$id_status = $this->input->post('anggota');
+		$nama_anggota = $this->input->post('nama_anggota');
+		$s_hidup_anggota = $this->input->post('s_hidup_anggota');
+		$gender_anggota = $this->input->post('gender_anggota');
+
+		foreach ($nama_anggota as $i => $value) {
+			if ((($nama_anggota[$i] == NULL) || (empty($nama_anggota[$i]))) && !empty($id_anggota_klg[$i])) {
+				echo 'delete';
+				$this->db->where('id_anggota_klg', $id_anggota_klg[$i]);
+				$this->db->delete('keluarga');
+			}
 		}
 	}
 	
-	public function update_keluarga()
+	public function update_keluarga_pegawai()
 	{		
-		$data['old'] = $this->update_old_klg();
-		$data['new'] = $this->add_new_klg();
-		return $data;
+		$res['old'] = $this->update_old_klg();
+		$res['new'] = $this->add_new_klg();
+		$res['del'] = $this->del_old_klg();
+		return $res;
 	}
 
-	public function delete_keluarga()
+	public function delete_keluarga_pegawai()
 	{
 		$id_pegawai = $this->input->post('id_pegawai');
 		$status = $this->input->post('status');

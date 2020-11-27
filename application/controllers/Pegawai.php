@@ -21,22 +21,24 @@ class Pegawai extends CI_Controller {
 	public function add_pegawai_proses()
 	{
 		$res['pegawai']=$this->M_pegawai->add_pegawai();
-		$res['jabatan']=$this->M_pegawai->add_jabatan();
+		$res['jabatan']=$this->M_jabatan->add_jabatan();
 		if($this->input->post('status') == 1) {
 			$res['keluarga']=$this->M_keluarga->add_keluarga(); };
 
 		if($res){
-			redirect('pegawai/table_pegawai');
+			redirect('pegawai');
 		} else {
 			echo "<h2> Gagal Tambah Data </h2>";
 		}
 	}
 		
-	public function detail_pegawai($id)
+	public function detail_pegawai($id = TRUE)
 	{
 		$where = array('id_pegawai'=>$id);
 		$data['pegawai']= $this->M_pegawai->get_pegawai_detail($where,'pegawai')->result();
 		$data['keluarga']= $this->M_keluarga->get_keluarga_pegawai($id,'keluarga')->result_array();
+		$data['jabatan']= $this->M_jabatan->get_jabatan_pegawai($id)->result_array();
+		// var_dump($data['jabatan']);
 		$this->template->load('index','pegawai/detail_pegawai',$data);
 	}
 
@@ -46,32 +48,41 @@ class Pegawai extends CI_Controller {
 		$data['pegawai']= $this->M_pegawai->get_pegawai_detail($where,'pegawai')->row_array();
 		$data['keluarga']= $this->M_keluarga->get_keluarga_pegawai($id,'keluarga')->result_array();
 		$data['jabatan']= $this->M_jabatan->get_jabatan($id)->result_array();
+		// var_dump($data['jabatan']);
 
 		$data['id_status'] = array();
 		foreach ($data['keluarga'] as $key => $value) {
 			$data['id_status'][] = $data['keluarga'][$key]['id_status'];			
 		}
-		var_dump($data['keluarga']);
+		// var_dump($data['keluarga']);
 		$this->template->load('index','pegawai/edit_pegawai', $data);
 	}
 
 	public function update_pegawai()
-	{
-		// echo 'update';
-		// var_dump($_POST);
-		
+	{		
 		$res['pegawai'] = $this->M_pegawai->update_pegawai();
-		// $res['jabatan']=$this->M_pegawai->add_jabatan();
+		$res['jabatan']=$this->M_jabatan->update_jabatan_pegawai();
 		if($this->input->post('status') == 1) {
-			$res['keluarga'] = $this->M_keluarga->update_keluarga(); 
+			$res['keluarga'] = $this->M_keluarga->update_keluarga_pegawai(); 
 		} else {
-			$res['keluarga'] = $this->M_keluarga->delete_keluarga(); 
+			$res['keluarga'] = $this->M_keluarga->delete_keluarga_pegawai(); 
 		}
 
-		// if($res){
-		// 	redirect('pegawai/table_pegawai');
-		// } else {
-		// 	echo "<h2> Gagal Tambah Data </h2>";
-		// }
+		if($res){
+			redirect('pegawai');
+		} else {
+			echo "<h2> Gagal Edit Data </h2>";
+		}
+	}
+
+	public function delete_pegawai($id = TRUE)
+	{		
+		$res['pegawai'] = $this->M_pegawai->delete_pegawai($id);
+
+		if($res){
+			redirect('pegawai');
+		} else {
+			echo "<h2> Gagal Hapus Data </h2>";
+		}
 	}
 }

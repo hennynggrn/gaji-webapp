@@ -467,15 +467,33 @@
 	<!-- Set 'Keluarga' close input when delete member-->
 	<script>
 		$(document).ready(function(){
-			$('.mate').prop('disabled', false);
-			$('.first-child').prop('disabled', true);
-			$('.second-child').prop('disabled', true);
-			// console.log($('#mate').val());
-			if($('#thismate').focus().keyup()){
-				$('.first-child').prop('disabled', false);
+			$('.first-child').attr('disabled', true);
+			$('.second-child').attr('disabled', true);
+			if ($('#mate').val() != "") {
+				$('.first-child').prop('disabled', false);               
 			}
-			
-		})
+			if ($('#first-child').val() != "") {
+				$('.second-child').prop('disabled', false);               
+			}
+			$('#mate').keyup(function () {
+				var disable = false;
+				$('#mate').each(function(){
+					if($(this).val()==""){
+						disable = true;                
+					}
+				});
+				$('.first-child').prop('disabled', disable); 
+			});
+			$('#first-child').keyup(function () {
+				var disable = false;
+				$('#first-child').each(function(){
+						if($(this).val() == ""){
+							disable = true;                
+						}
+				});
+				$('.second-child').prop('disabled', disable);
+			});
+		});
 	</script>
 
 	<!-- Show form input family member when 'Menikah' on checked -->
@@ -483,13 +501,16 @@
 		$(document).ready(function(){
 			if ($('#married').prop('checked') === true) {
 				$('#tambah_keluarga').show();
+				$('#mate').prop('required', true);
 			}
 			$('.radio input[type="radio"]').on('change', function(){
 				if ($('#married').prop('checked') === true) {
 					$('#tambah_keluarga').show();
+					$('#mate').prop('required', true);
 				}
 				if ($('#single').prop('checked') === true) {
 					$('#tambah_keluarga').hide();
+					$('#mate').prop('required', false);
 				}
 			})
 		})
@@ -497,11 +518,13 @@
 		function add_keluarga(that) {
 			if (that.value == 1) {
 				document.getElementById('tambah_keluarga').style.display = 'block';
+				$('#mate').prop('required', true);
 			}
 		}
 		function close_keluarga(that) {
 			if (that.value == 0) {
 				document.getElementById('tambah_keluarga').style.display = 'none';
+				$('#mate').prop('required', false);
 			}
 		}
 	</script>

@@ -108,8 +108,17 @@
 									<tbody>
 									<?php foreach ($pegawai as $key => $value) :?>
 										<tr>
-											<td style="width: 150px">Jenis Pegawai</td>
+											<td style="width: 150px">Jabatan Pegawai</td>
 											<td style="width: 20px">:</td>
+											<td>
+											<?php foreach ($jabatan as $key => $val) { ?>
+												<span class="badge bg-grey"><?php echo $val['jabatan'];?></span>
+											<?php } ?>
+											</td>
+										</tr>
+										<tr>
+											<td>Jenis Pegawai</td>
+											<td>:</td>
 											<td><?php echo ($value->jns_pegawai == 0) ? 'Guru' : 'Karyawan'; ?></td>
 										</tr>
 										<tr>
