@@ -1,65 +1,61 @@
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Tabel Honorarium
-        <small>preview of simple tables</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Tables</a></li>
-        <li class="active">Simple</li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">
-                <a href="<?php echo site_url('honor/add_honor');?>" class='btn btn-primary' >
-                <i class="fa fa-plus-square-o"></i> Tambah Data 
-              </a>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table class="table table-bordered">
-                <tr>
-                  <th style="width: 10px">No</th>
-                  <th>Kode HR</th>
-                  <th>Honorarium</th>
-                  <th style="width: 300px">Menu</th>
-                </tr>
-                <?php
-                  $no=1; 
-                  foreach ($tampil as $key => $value) { ?>
-                <tr>
-                  <td><?php echo $no++; ?></td>
-                  <td><?php echo $value->kode_hr; ?></td>
-                  <td><?php echo $value->honor; ?></td>
-                  <td>
-                    <a href = "<?php echo base_url('index.php/honor/edit_honor');?>/<?php echo $value->id_honor; ?>">
-                      <span class="badge bg-blue">  <i class="fa fa-pencil-square-o"></i>Edit</span>
-                    </a>
-                    <span class="badge bg-red"> <i class="fa fa-trash-o"></i> Hapus </span>
-                </tr>
-                <?php } ?>
-              </table>
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer clearfix">
-              <ul class="pagination pagination-sm no-margin pull-right">
-                <li><a href="#">&laquo;</a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">&raquo;</a></li>
-              </ul>
-            </div>
-          </div>
-          <!-- /.box -->
-    </section>
-    <!-- /.content -->
-  </div>
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title"> 
+						<a href="<?php echo site_url('honor/add');?>" class='btn btn-primary' >
+							<i class="fa fa-plus-square-o"></i> Tambah Data 
+						</a>
+					</h3>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<table class="table table-bordered table-hover responsive text-center">
+						<thead>
+							<th style="width: 10px">No</th>
+							<th>Honorarium</th>
+							<th>Jumlah Pegawai</th>
+							<th>Jenis Jabatan Pegawai</th>
+							<th>Menu</th>
+						</thead>
+						<tbody>
+						<?php
+							$no=1; foreach ($honors as $key => $honor) : ?>
+							<tr>
+								<td style="width: 10px"><?php echo $no++;?></td>
+								<td style="text-align: left; padding-left: 50px;"><?php echo 'Rp. &nbsp;&nbsp;'.number_format($honor['honor'],2,',','.');?></td>
+								<td><?php echo $honor['ids'];?></td>
+								<td><?php echo $honor['ids'];?></td>
+								<td>
+									<a href="<?php echo site_url('honor/detail/'.$honor['honor']);?>" title="Detail" data-toggle="tooltip" data-placement="left">
+										<span class="badge bg-green"><i class="fa fa-fw fa-info-circle"></i></span>
+									</a>
+									<a href="<?php echo site_url('honor/edit/'.$honor['honor']);?>" title="Edit" data-toggle="tooltip" data-placement="top">
+										<span class="badge bg-orange"><i class="fa fa-fw fa-pencil-square-o"></i></span>
+									</a>
+									<a href="<?php echo site_url('honor/delete/'.$honor['honor']);?>" title="Hapus" data-toggle="tooltip" data-placement="right">
+										<span class="badge bg-red"><i class="fa fa-fw fa-trash-o"></i></span>
+									</a>
+								</td>
+							</tr>
+							<?php endforeach; ?>
+						</tbody>
+					</table>
+				</div>
+				<!-- /.box-body -->
+				<div class="box-footer clearfix">
+					<ul class="pagination pagination-sm no-margin pull-right">
+						<li><a href="#">&laquo;</a></li>
+						<li><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">&raquo;</a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- /.box -->
+</section>
+<!-- /.content -->
+</div>

@@ -78,6 +78,19 @@
 				</div>
 			</nav>
 		</header>
+		<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<h1>
+				<?php echo $title;?>
+				<small><b><?php if(isset($desc)) {echo $desc;};?></b></small>
+			</h1>
+			<ol class="breadcrumb">
+				<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+				<li><a href="#">Tables</a></li>
+				<li class="active">Simple</li>
+			</ol>
+		</section>
 		<!-- =============================================== -->
 		<?php echo $contents ;?>
 		<!-- Left side column. contains the sidebar -->
@@ -129,7 +142,7 @@
 						</a>
 						<ul class="treeview-menu">
 							<li><a href="<?php echo site_url('pegawai'); ?>"><i class="fa fa-circle-o"></i>Data Pegawai </a></li>
-							<li><a href="<?php echo site_url('honor/table_honor'); ?>"><i class="fa fa-circle-o"></i>Data Honorarium</a></li>
+							<li><a href="<?php echo site_url('honor'); ?>"><i class="fa fa-circle-o"></i>Data Honorarium</a></li>
 							<li><a href="<?php echo site_url('tunjangan/table'); ?>"><i class="fa fa-circle-o"></i>Data Tunjangan</a></li>
 							<li><a href="<?php echo site_url('keluarga/table_keluarga'); ?>"><i class="fa fa-circle-o"></i>Data Keluarga</a></li>
 							<li><a href="<?php echo site_url('jabatan/table_jabatan'); ?>"><i class="fa fa-circle-o"></i>Data Jabatan</a></li>

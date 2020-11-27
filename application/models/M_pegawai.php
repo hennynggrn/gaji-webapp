@@ -6,15 +6,8 @@ class M_pegawai extends CI_Model{
 	public function get_pegawai()
 	{
 		$this->db->SELECT('p.*');
-		// $this->db->JOIN('status_pgw sp','sp.id_status = p.id_status');
-		// $this->db->JOIN('honor h','h.id_honor = p.id_honor');
 		return $this->db->get('pegawai p');
 	}
-
-	// public function get_status_pgw()
-	// {
-	// 	return $this->db->get('status_pgw');
-	// }
 
 	public function get_id_pegawai()
 	{
@@ -48,12 +41,11 @@ class M_pegawai extends CI_Model{
 				$status_pgw = 'T0';
 				break;
 		}		
-		// $status_pgw=$this->input->post('status_pgw');
 		$honor = $this->input->post('honor');
 		if (empty($honor)) {
 			$honor = 0;
 		}
-		// var_dump($status_pgw);
+
 		$data = array(
 			'id_pegawai' => $id_pegawai,
 			'nbm' => $nbm,
@@ -105,12 +97,11 @@ class M_pegawai extends CI_Model{
 				$status_pgw = 'T0';
 				break;
 		}		
-		// $status_pgw=$this->input->post('status_pgw');
 		$honor = $this->input->post('honor');
 		if (empty($honor)) {
 			$honor = 0;
 		}
-		// var_dump($status_pgw);
+
 		$data = array(
 			'nbm' => $nbm,
 			'nama' => $nama,
@@ -126,13 +117,13 @@ class M_pegawai extends CI_Model{
 			'status_pegawai' => $status_pgw,
 			'honor' => $honor
 		);
-		$this->db->update("pegawai", $data, array('id_pegawai' => $id_pegawai));
+		return $this->db->update("pegawai", $data, array('id_pegawai' => $id_pegawai));
 	}
 
 	public function delete_pegawai($id = TRUE)
 	{
 		$this->db->where('id_pegawai', $id);
-		$this->db->delete('pegawai');
+		return $this->db->delete('pegawai');
 	}
 
 }

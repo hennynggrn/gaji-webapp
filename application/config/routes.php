@@ -1,7 +1,16 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$route['pegawai/update_pegawai'] = 'pegawai/update_pegawai/$1';
+$route['honor/delete/(:any)'] = 'honor/delete_honor/$1';
+$route['honor/edit/(:any)'] = 'honor/edit_honor/$1';
+$route['honor/detail/(:any)'] = 'honor/detail_honor/$1';
+$route['honor/add'] = 'honor/add_honor';
+$route['honor'] = 'honor/index';
+
+$route['pegawai/delete/(:any)'] = 'pegawai/delete_pegawai/$1';
+$route['pegawai/edit/(:any)'] = 'pegawai/edit_pegawai/$1';
+$route['pegawai/detail/(:any)'] = 'pegawai/detail_pegawai/$1';
+$route['pegawai/add'] = 'pegawai/add_pegawai';
 $route['pegawai'] = 'pegawai/index';
 $route['login'] = 'users/index';
 $route['default_controller'] = 'home/index';
