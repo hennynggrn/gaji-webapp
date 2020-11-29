@@ -5,8 +5,8 @@
 			<div class="box box-primary">
 				<div class="box-header with-border">
 					<h3 class="box-title"> 
-						<a href="" data-toggle="modal" data-target="#editHonor<?php echo $honor_val;?>" class='btn btn-primary'>
-							<i class="fa fa-plus-square-o"></i> Edit Honorium 
+						<a href="" data-toggle="modal" data-target="#editHonor<?php echo $honor_val;?>" class='btn btn-warning'>
+							<i class="fa fa-pencil-square-o"></i> Edit Honorium 
 						</a>
 					</h3>
 				</div>
@@ -55,7 +55,7 @@
 									<div class="modal-content">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-											<h4 class="modal-title" id="myModalLabel">Edit Data Honor Pegawai <?php echo $honor['nama'];?></h4>
+											<h4 class="modal-title" id="myModalLabel">Edit Data Honor Pegawai <b class="text-primary"><?php echo $honor['nama'];?></b></h4>
 										</div>
 										<form class="form-horizontal" role="form" method="post" action="<?php echo site_url('honor/update_honor');?>">
 											<div class="modal-body">
@@ -106,7 +106,7 @@
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								<h4 class="modal-title" id="myModalLabel">Edit Data Honor Rp. <?php echo number_format($honor_val,0,',','.');?></h4>
+								<h4 class="modal-title" id="myModalLabel">Edit Data Honor <b class="text-primary"> Rp. <?php echo number_format($honor_val,0,',','.');?></b></h4>
 							</div>
 							<form class="form-horizontal" role="form" method="post" action="<?php echo site_url('honor/update_honor');?>">
 								<div class="modal-body">
@@ -137,6 +137,11 @@
 					</ul>
 				</div>
 			</div>
+		</div>
+		<div class="col-md-12">
+			<a href="<?php echo base_url('honor')?>" class="pull-left btn btn-default">Kembali</a>
+		</div>
+	</div>
 			<!-- /.box -->
 </section>
 <!-- /.content -->

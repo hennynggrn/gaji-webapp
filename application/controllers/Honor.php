@@ -38,6 +38,7 @@ class Honor extends CI_Controller {
 
 		$data['honors'] = $this->M_honor->get_honor($honor)->result_array();
 		$data['honor_val'] = $data['honors'][0]['honor'];
+		// var_dump($data['honors']);
 
 		$this->template->load('index','honor/detail_honor', $data);
 		

@@ -5,7 +5,7 @@ class M_honor extends CI_Model{
 
 	public function get_honor($honor = TRUE)
 	{
-		if ($honor == TRUE) {
+		if ($honor != NULL) {
 			$this->db->select('p.*, GROUP_CONCAT(DISTINCT jbt.jabatan) jbt_list, 
 							   GROUP_CONCAT(DISTINCT CONCAT(jbt.jabatan, "</span>&nbsp;<span>") ORDER BY p.nama SEPARATOR "</span>&nbsp;<span>") as result_list');
 			$this->db->join('jbt_pegawai jp', 'jp.id_pegawai = p.id_pegawai', 'LEFT');
@@ -21,6 +21,7 @@ class M_honor extends CI_Model{
 			$this->db->join('jabatan jbt', 'jbt.id_jabatan = jp.id_jabatan', 'LEFT');
 			$this->db->group_by('honor');
 			return $this->db->get('pegawai p');
+			// echo 'wrong';
 		}
 	}
 

@@ -3,22 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Jabatan extends CI_Controller {
 
-	function __construct() {
-		parent::__construct();
-		$this->load->model('M_jabatan');
-	}
-
 	public function index()
 	{
-		$this->template->load('index');
-	}
-
-	public function table_jabatan()
-	{
-		$data['tampil']= $this->M_jabatan->get_jabatan()->result_array();
+		$data['title'] = 'Tabel Jabatan';
+		$data['jabatans']= $this->M_jabatan->get_jabatan()->result_array();
 		$this->template->load('index','jabatan/table_jabatan',$data);
-
-		// var_dump($data['tampil']);
 	}
 
 	public function add_jabatan()
