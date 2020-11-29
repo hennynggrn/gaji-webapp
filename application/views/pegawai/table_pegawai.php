@@ -32,9 +32,9 @@
 							<tr>
 								<td><?php echo $no++; ?></td>
 								<td><?php echo $pegawai['nbm'] ?></td>
-								<td><?php echo $pegawai['nama'] ?></td>
+								<td style="text-align: left; padding-left: 5px;"><?php echo $pegawai['nama'] ?></td>
 								<td><?php echo ($pegawai['gender'] == 'P') ? 'Perempuan' : 'Laki-laki';?></td>
-								<td><?php echo $pegawai['email'] ?></td>
+								<td style="text-align: left; padding-left: 5px;"><?php echo $pegawai['email'] ?></td>
 								<td><?php echo ($pegawai['telepon'] != 0) ? $pegawai['telepon'] : '-';?></td>
 								<td><?php echo ($pegawai['jns_pegawai'] == 0) ? 'Guru' : 'Karyawan';?></td>
 								<td>
@@ -50,7 +50,7 @@
 											break;
 									}?>
 								</td>
-								<td><?php echo 'Rp. '.number_format($pegawai['honor'],0,',','.');?></td>
+								<td style="text-align: left; padding-left: 5px;"><?php echo 'Rp. '.number_format($pegawai['honor'],0,',','.');?></td>
 								<td>
 									<a href="<?php echo base_url('pegawai/detail/'.$pegawai['id_pegawai']);?>" title="Detail" data-tooltip="tooltip" data-placement="left">
 										<span class="badge bg-green"><i class="fa fa-fw fa-info-circle"></i></span>

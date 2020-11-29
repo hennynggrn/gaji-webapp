@@ -179,7 +179,7 @@
 													break;
 											}?>
 										</td>
-										<td><?php echo (!empty($keluarga['nama'])) ? $keluarga['nama'] : '-';?></td>
+										<td style="text-align: left; padding-left: 10px;"><?php echo (!empty($keluarga['nama'])) ? $keluarga['nama'] : '-';?></td>
 										<td><?php echo ($keluarga['gender'] == 'P') ? 'Perempuan' : 'Laki-laki';?></td>
 										<td><?php echo ($keluarga['s_hidup'] == 1) ? 'Hidup' : 'Meninggal';?></td>
 									</tr>

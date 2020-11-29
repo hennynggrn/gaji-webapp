@@ -48,7 +48,7 @@
 										echo 'Hidup';
 										break;
 								}?></td>
-								<td class="badge-edit"><?php echo $keluarga['nama_pegawai'];?></td>
+								<td style="text-align: left; padding-left: 15px;"><?php echo $keluarga['nama_pegawai'];?></td>
 								<td>
 									<a href="<?php echo site_url('keluarga/detail/'.$keluarga['id_anggota_klg']);?>" title="Detail" data-toggle="tooltip" data-placement="left">
 										<span class="badge bg-green"><i class="fa fa-fw fa-info-circle"></i></span>

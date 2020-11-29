@@ -9,7 +9,7 @@
 							<i class="fa fa-plus-square-o"></i> Edit Honorium 
 						</a>
 					</h3>
-				</div>-
+				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
 					<table class="table table-bordered table-hover responsive text-center">
@@ -59,13 +59,11 @@
 										</div>
 										<form class="form-horizontal" role="form" method="post" action="<?php echo site_url('honor/update_honor');?>">
 											<div class="modal-body">
-												<div class="form-group">
-													<div class="input-group">
-														<span class="input-group-addon">Rp.</span>
-														<input type="hidden" class="form-control" name="id_pegawai" value="<?php echo $honor['id_pegawai'];?>">
-														<input type="number" class="form-control" name="honor" placeholder="0" value="<?php echo $honor['honor'];?>">
-														<span class="input-group-addon">.00</span>
-													</div>
+												<div class="input-group">
+													<span class="input-group-addon">Rp.</span>
+													<input type="hidden" class="form-control" name="id_pegawai" value="<?php echo $honor['id_pegawai'];?>">
+													<input type="number" class="form-control" name="honor" placeholder="0" value="<?php echo $honor['honor'];?>">
+													<span class="input-group-addon">.00</span>
 												</div>
 											</div>
 											<div class="modal-footer">
@@ -112,13 +110,11 @@
 							</div>
 							<form class="form-horizontal" role="form" method="post" action="<?php echo site_url('honor/update_honor');?>">
 								<div class="modal-body">
-									<div class="form-group">
-										<div class="input-group">
-											<span class="input-group-addon">Rp.</span>
-											<input type="hidden" class="form-control" name="id_honor" value="<?php echo $honor_val;?>">
-											<input type="number" class="form-control" name="honor" placeholder="0" value="<?php echo $honor_val;?>">
-											<span class="input-group-addon">.00</span>
-										</div>
+									<div class="input-group">
+										<span class="input-group-addon">Rp.</span>
+										<input type="hidden" class="form-control" name="id_honor" value="<?php echo $honor_val;?>">
+										<input type="number" class="form-control" name="honor" placeholder="0" value="<?php echo $honor_val;?>">
+										<span class="input-group-addon">.00</span>
 									</div>
 								</div>
 								<div class="modal-footer">

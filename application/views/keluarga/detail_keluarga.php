@@ -23,7 +23,7 @@
 						<tbody>
 							<tr>
 								<td style="width: 10px">1</td>
-								<td style="text-align: left; padding-left: 20px;"><?php echo $pegawai['nama'];?> &nbsp;
+								<td style="text-align: left; padding-left: 15px;"><?php echo $pegawai['nama'];?> &nbsp;
 									<span class="badge bg-blue">pegawai</span>
 								</td>
 								<td><?php echo ($pegawai['gender'] == 'L') ? 'Suami' : 'Istri';?></td>
@@ -34,7 +34,7 @@
 							$no=2; foreach ($keluargas as $key => $keluarga) : ?>
 							<tr>
 								<td style="width: 10px"><?php echo $no++;?></td>
-								<td style="text-align: left; padding-left: 20px;"><?php echo $keluarga['nama'];?></td>
+								<td style="text-align: left; padding-left: 15px;"><?php echo $keluarga['nama'];?></td>
 								<td class="badge-edit"><?php switch ($keluarga['id_status']) {
 									case '1':
 										echo ($keluarga['gender_pegawai'] == 'L') ? 'Istri' : 'Suami';
