@@ -15,6 +15,7 @@
 							</div>
 						</div>
 						<div class="form-group">
+							<input type="hidden" name="id_anggota_keluarga" value="<?php if(isset($id_anggota_keluarga)) {echo $id_anggota_keluarga;} ?>">
 							<input type="hidden" name="id_pegawai" value="<?php echo $pegawai['id_pegawai']; ?>">
 							<label class="col-sm-2 control-label">Nama</label>
 							<div class="col-sm-10">

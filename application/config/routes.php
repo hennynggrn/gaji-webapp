@@ -1,10 +1,18 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+$route['keluarga/edit/(:any)'] = 'keluarga/edit_keluarga/$1';
+$route['keluarga/delete/(:any)'] = 'keluarga/delete_keluarga/$1';
+$route['keluarga/detail/(:any)'] = 'keluarga/detail_keluarga/$1';
+$route['keluarga'] = 'keluarga/index';
+
+$route['tunjangan/edit'] = 'tunjangan/edit_tunjangan';
+$route['tunjangan/delete/(:any)'] = 'tunjangan/delete_tunjangan/$1';
+$route['tunjangan/detail/(:any)'] = 'tunjangan/detail_tunjangan/$1';
+$route['tunjangan'] = 'tunjangan/index';
+
 $route['honor/delete/(:any)'] = 'honor/delete_honor/$1';
-$route['honor/edit/(:any)'] = 'honor/edit_honor/$1';
 $route['honor/detail/(:any)'] = 'honor/detail_honor/$1';
-$route['honor/add'] = 'honor/add_honor';
 $route['honor'] = 'honor/index';
 
 $route['pegawai/delete/(:any)'] = 'pegawai/delete_pegawai/$1';

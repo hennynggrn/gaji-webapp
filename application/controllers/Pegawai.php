@@ -3,11 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Pegawai extends CI_Controller { 
 
-	public function index()
+	public function index($id_pegawai = NULL)
 	{
 		$data['title'] = 'Table Pegawai';
 
-		$data['pegawais'] = $this->M_pegawai->get_pegawai()->result_array();
+		$data['pegawais'] = $this->M_pegawai->get_pegawai($id_pegawai)->result_array();
+
 		$this->template->load('index', 'pegawai/table_pegawai', $data);
 	}
 
@@ -18,6 +19,7 @@ class Pegawai extends CI_Controller {
 		$data['id_pgw'] = $this->M_pegawai->get_id_pegawai()->row_array();
 		$data['id_pegawai'] = $data['id_pgw']['id_pegawai'];
 		$data['jabatans'] = $this->M_jabatan->get_jabatan($id)->result_array();
+		
 		$this->template->load('index', 'pegawai/add_pegawai', $data);
 	}
 
@@ -32,7 +34,7 @@ class Pegawai extends CI_Controller {
 		if ($res) {
 			redirect('pegawai');
 		} else {
-			echo "<h2> Gagal Tambah Data </h2>";
+			echo "<h2> Gagal Tambah Data Pegawai </h2>";
 		}
 	}
 		
@@ -44,15 +46,15 @@ class Pegawai extends CI_Controller {
 		$data['pegawais'] = $this->M_pegawai->get_pegawai_detail($where,'pegawai')->result_array();
 		$data['keluargas'] = $this->M_keluarga->get_keluarga_pegawai($id,'keluarga')->result_array();
 		$data['jabatans'] = $this->M_jabatan->get_jabatan_pegawai($id)->result_array();
-		// var_dump($data['jabatan']);
+
 		$this->template->load('index', 'pegawai/detail_pegawai', $data);
 	}
 
 	public function edit_pegawai($id  = TRUE)
 	{
 		$data['title'] = 'Edit Pegawai';
-
-		$where = array('id_pegawai'=>$id);
+		
+		$where = array('id_pegawai' => $id);
 		$data['pegawai'] = $this->M_pegawai->get_pegawai_detail($where,'pegawai')->row_array();
 		$data['keluargas'] = $this->M_keluarga->get_keluarga_pegawai($id,'keluarga')->result_array();
 		$data['jabatans'] = $this->M_jabatan->get_jabatan($id)->result_array();
@@ -74,11 +76,19 @@ class Pegawai extends CI_Controller {
 			$res['keluarga'] = $this->M_keluarga->delete_keluarga_pegawai(); 
 		}
 
+		$id = $this->input->post('id_pegawai');
+		$id_anggota_keluarga = $this->input->post('id_anggota_keluarga');
 		if ($res) {
-			redirect('pegawai/detail');
+			if ((isset($id_anggota_keluarga)) && ($id_anggota_keluarga != NULL)) {
+				redirect('keluarga/detail/'.$id_anggota_keluarga);
+			} 
+			if ($id_anggota_keluarga == NULL) {
+				redirect('pegawai/detail/'.$id);
+			}
 		} else {
-			echo "<h2> Gagal Edit Data </h2>";
+			echo "<h2> Gagal Edit Data Pegawai </h2>";
 		}
+		var_dump($_POST);
 	}
 
 	public function delete_pegawai($id = TRUE)
@@ -88,7 +98,7 @@ class Pegawai extends CI_Controller {
 		if ($res) {
 			redirect('pegawai');
 		} else {
-			echo "<h2> Gagal Hapus Data </h2>";
+			echo "<h2> Gagal Hapus Data  </h2>";
 		}
 	}
 }

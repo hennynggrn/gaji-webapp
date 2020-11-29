@@ -180,8 +180,8 @@
 											}?>
 										</td>
 										<td><?php echo (!empty($keluarga['nama'])) ? $keluarga['nama'] : '-';?></td>
-										<td><?php echo ($keluarga['s_hidup'] == 1) ? 'Hidup' : 'Meninggal';?></td>
 										<td><?php echo ($keluarga['gender'] == 'P') ? 'Perempuan' : 'Laki-laki';?></td>
+										<td><?php echo ($keluarga['s_hidup'] == 1) ? 'Hidup' : 'Meninggal';?></td>
 									</tr>
 								<?php endforeach;?>										
 								</tbody>
@@ -198,7 +198,7 @@
 			</div>
 			<?php endif;?>
 			<div class="col-md-12">
-				<a href="<?php echo base_url('pegawai')?>" class="btn btn-default">Kembali</a>
+				<a href="<?php echo base_url('pegawai')?>" class="pull-left btn btn-default">Kembali</a>
 				<a href="<?php echo base_url('pegawai/edit/'.$id)?>" class="pull-right btn btn-warning edit-btn">Edit</a></td>
 			</div>
 		</div>

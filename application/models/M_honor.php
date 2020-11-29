@@ -3,39 +3,46 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_honor extends CI_Model{
 
-	public function get_honor()
+	public function get_honor($honor = TRUE)
 	{
-		// SELECT honor, id_pegawai, COUNT(id_pegawai)
-		// FROM `pegawai` 
-		// GROUP BY honor
-		
-		$this->db->select('honor, id_pegawai, COUNT(id_pegawai) ids');
-		$this->db->group_by('honor');
-		return $this->db->get('pegawai');
+		if ($honor == TRUE) {
+			$this->db->select('p.*, GROUP_CONCAT(DISTINCT jbt.jabatan) jbt_list, 
+							   GROUP_CONCAT(DISTINCT CONCAT(jbt.jabatan, "</span>&nbsp;<span>") ORDER BY p.nama SEPARATOR "</span>&nbsp;<span>") as result_list');
+			$this->db->join('jbt_pegawai jp', 'jp.id_pegawai = p.id_pegawai', 'LEFT');
+			$this->db->join('jabatan jbt', 'jbt.id_jabatan = jp.id_jabatan', 'LEFT');
+			$this->db->group_by('p.id_pegawai');
+			return $this->db->get_where('pegawai p', array('p.honor' => $honor));
+		} else {
+			$this->db->select('p.honor, p.id_pegawai, GROUP_CONCAT(DISTINCT p.id_pegawai) pegawai,
+							   GROUP_CONCAT(DISTINCT jbt.jabatan) jbt_list,
+							   GROUP_CONCAT(DISTINCT CONCAT(jbt.jabatan, "</span>&nbsp;<span>") ORDER BY p.nama SEPARATOR "</span>&nbsp;<span>") as result_list');
+			$this->db->order_by('p.honor', 'DESC');
+			$this->db->join('jbt_pegawai jp', 'jp.id_pegawai = p.id_pegawai', 'LEFT');
+			$this->db->join('jabatan jbt', 'jbt.id_jabatan = jp.id_jabatan', 'LEFT');
+			$this->db->group_by('honor');
+			return $this->db->get('pegawai p');
+		}
 	}
 
-	// public function get_honor_detail($where, $table)
-	// {
+	public function update_honor($id, $id_honor)
+	{
+		$honor = $this->input->post('honor');
+		if (!empty($id_honor)) {
+			$this->db->where('honor', $id_honor);
+			return $this->db->update('pegawai', array('honor' => $honor));
+		} else {
+			$this->db->where('id_pegawai', $id);
+			return $this->db->update('pegawai', array('honor' => $honor));
+		}
+		
+		
+	}
 
-	// 	return $this->db->get_where($table, $where);
-	// }
-
-	// public function add_honor($data)
-	// {
-	// 	$this->db->insert("honor",$data);
-	// }
-
-	// public function edit_honor($data)
-	// {
-	// 	$this->db->where('id_honor',$data);
-	// 	 $query = $this->db->get('honor');
-	// 	 return $query;
-	// }
-
-	// public function edit_honor_proses($where, $data, $table)
-	// {
-	// 	$this->db->where($where);
-	// 	$this->db->update($table,$data);
-	// }
+	public function delete_honor($id)
+	{
+		$honor = 0;
+		$this->db->where('id_pegawai', $id);
+		return $this->db->update('pegawai', array('honor' => $honor));
+	}
 
 }

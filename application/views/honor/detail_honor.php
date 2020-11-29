@@ -1,75 +1,147 @@
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        <?php echo $title;?>
-        <small>preview of simple tables</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Tables</a></li>
-        <li class="active">Simple</li>
-      </ol> 
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title"> 
-                <a href="<?php echo site_url('honor/add_honor');?>" class='btn btn-primary' >
-                  <i class="fa fa-plus-square-o"></i> Tambah Data 
-                </a>
-							</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table class="table table-bordered table-hover responsive text-center">
-                <thead>
-                  <th style="width: 10px">No</th>
-                  <th>Honorarium</th>
-                  <th>Jumlah Pegawai</th>
-                  <th>Jenis Jabatan Pegawai</th>
-                  <th>Menu</th>
-                </thead>
-								<tbody>
-								<?php
-                  $no=1; foreach ($honors as $key => $honor) : ?>
-									<tr>
-										<td style="width: 10px"><?php echo $no++;?></td>
-										<td style="text-align: left; padding-left: 50px;"><?php echo 'Rp. &nbsp;&nbsp;'.number_format($honor['honor'],2,',','.');?></td>
-										<td><?php echo $honor['ids'];?></td>
-										<td><?php echo $honor['ids'];?></td>
-										<td>
-											<a href="<?php echo site_url('pegawai/detail_pegawai/');?>" title="Detail" data-toggle="tooltip" data-placement="left">
-												<span class="badge bg-green"><i class="fa fa-fw fa-info-circle"></i></span>
-											</a>
-											<a href="<?php echo site_url('pegawai/edit_pegawai/');?>" title="Edit" data-toggle="tooltip" data-placement="top">
-												<span class="badge bg-orange"><i class="fa fa-fw fa-pencil-square-o"></i></span>
-											</a>
-											<a href="<?php echo site_url('pegawai/delete_pegawai/');?>" title="Hapus" data-toggle="tooltip" data-placement="right">
-												<span class="badge bg-red"><i class="fa fa-fw fa-trash-o"></i></span>
-											</a>
-										</td>
-									</tr>
-									<?php endforeach; ?>
-								</tbody>
-              </table>
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer clearfix">
-              <ul class="pagination pagination-sm no-margin pull-right">
-                <li><a href="#">&laquo;</a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">&raquo;</a></li>
-              </ul>
-            </div>
-          </div>
-          <!-- /.box -->
-    </section>
-    <!-- /.content -->
-  </div>
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title"> 
+						<a href="" data-toggle="modal" data-target="#editHonor<?php echo $honor_val;?>" class='btn btn-primary'>
+							<i class="fa fa-plus-square-o"></i> Edit Honorium 
+						</a>
+					</h3>
+				</div>-
+				<!-- /.box-header -->
+				<div class="box-body">
+					<table class="table table-bordered table-hover responsive text-center">
+						<thead>
+							<th style="width: 10px">No</th>
+							<th>Nama</th>
+							<th>Jenis Pegawai</th>
+							<th>Status Pegawai</th>
+							<th>Jabatan</th>
+							<th>Menu</th>
+						</thead>
+						<tbody>
+						<?php
+							$no=1; foreach ($honors as $key => $honor) : ?>
+							<tr>
+								<td style="width: 10px"><?php echo $no++;?></td>
+								<td style="text-align: left; padding-left: 50px;"><?php echo $honor['nama'];?></td>
+								<td><?php echo ($honor['jns_pegawai'] == 0) ? 'Guru' : 'Karyawan';?></td>
+								<td><?php switch ($honor['status_pegawai']) {
+									case 'P':
+										echo 'PNS';
+										break;
+									case 'T1':
+										echo 'Tetap';
+										break;
+									case 'T0':
+										echo 'Tidak Tetap';
+										break;
+								}?></td>
+								<td class="badge-edit"><span><?php echo $honor['result_list'];?></span></td>
+								<td>
+									<a href="" data-toggle="modal" data-target="#editHonorPegawai<?php echo $honor['id_pegawai'];?>" title="Edit" data-tooltip="tooltip" data-placement="left">
+										<span class="badge bg-orange"><i class="fa fa-fw fa-pencil-square-o"></i></span>
+									</a>
+									<a href="" data-toggle="modal" data-target="#deleteHonorPegawai<?php echo $honor['id_pegawai'];?>" title="Hapus" data-tooltip="tooltip" data-placement="right">
+										<span class="badge bg-red"><i class="fa fa-fw fa-trash-o"></i></span>
+									</a>
+								</td>
+							</tr>
+							<!-- Modal Edit Honor per Pegawai-->
+							<div class="modal fade" id="editHonorPegawai<?php echo $honor['id_pegawai'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+											<h4 class="modal-title" id="myModalLabel">Edit Data Honor Pegawai <?php echo $honor['nama'];?></h4>
+										</div>
+										<form class="form-horizontal" role="form" method="post" action="<?php echo site_url('honor/update_honor');?>">
+											<div class="modal-body">
+												<div class="form-group">
+													<div class="input-group">
+														<span class="input-group-addon">Rp.</span>
+														<input type="hidden" class="form-control" name="id_pegawai" value="<?php echo $honor['id_pegawai'];?>">
+														<input type="number" class="form-control" name="honor" placeholder="0" value="<?php echo $honor['honor'];?>">
+														<span class="input-group-addon">.00</span>
+													</div>
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+												<button type="submit" class="btn btn-primary">Simpan</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+							<!-- End Modal -->
+							<!-- Modal Delete Honor per Pegawai-->
+							<div class="modal fade" id="deleteHonorPegawai<?php echo $honor['id_pegawai'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+											<h4 class="modal-title" id="myModalLabel">Hapus Data Honor</h4>
+										</div>
+										<div class="modal-body">
+											<p>
+												Menghapus akan mengatur honor <b class="text-primary"><?php echo $honor['nama'];?></b> menjadi <b class="text-primary">Rp. 0</b>. Lanjutkan ?
+											</p>
+											</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+											<a href="<?php echo site_url('honor/delete/'.$honor['id_pegawai']);?>" class="btn btn-primary">Hapus</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- End Modal -->
+							<?php endforeach; ?>
+						</tbody>
+					</table>
+				</div>
+				<!-- Modal Edit Honor-->
+				<div class="modal fade" id="editHonor<?php echo $honor_val;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="myModalLabel">Edit Data Honor Rp. <?php echo number_format($honor_val,0,',','.');?></h4>
+							</div>
+							<form class="form-horizontal" role="form" method="post" action="<?php echo site_url('honor/update_honor');?>">
+								<div class="modal-body">
+									<div class="form-group">
+										<div class="input-group">
+											<span class="input-group-addon">Rp.</span>
+											<input type="hidden" class="form-control" name="id_honor" value="<?php echo $honor_val;?>">
+											<input type="number" class="form-control" name="honor" placeholder="0" value="<?php echo $honor_val;?>">
+											<span class="input-group-addon">.00</span>
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+									<button type="submit" class="btn btn-primary">Simpan</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<!-- End Modal -->
+				<!-- /.box-body -->
+				<div class="box-footer clearfix">
+					<ul class="pagination pagination-sm no-margin pull-right">
+						<li><a href="#">&laquo;</a></li>
+						<li><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">&raquo;</a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- /.box -->
+</section>
+<!-- /.content -->
+</div>

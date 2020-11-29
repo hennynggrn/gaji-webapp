@@ -3,10 +3,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_pegawai extends CI_Model{
 
-	public function get_pegawai()
+	public function get_pegawai($id_pegawai = TRUE)
 	{
-		$this->db->SELECT('p.*');
-		return $this->db->get('pegawai p');
+		if (isset($id_pegawai)) {
+			$this->db->select('p.*');
+			return $this->db->get_where('pegawai p', array('id_pegawai' => $id_pegawai));
+		} else {
+			$this->db->select('p.*');
+			$this->db->order_by('p.nama', 'ASC');
+			return $this->db->get('pegawai p');
+		}
 	}
 
 	public function get_id_pegawai()
@@ -62,7 +68,7 @@ class M_pegawai extends CI_Model{
 			'status_pegawai' => $status_pgw,
 			'honor' => $honor
 		);
-		$this->db->insert("pegawai",$data);
+		return $this->db->insert("pegawai", $data);
 	}
 
 	public function get_pegawai_detail($where, $table)

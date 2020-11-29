@@ -3,21 +3,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_keluarga extends CI_Model{
 
-	public function get_keluarga()
+	public function get_keluarga($id = TRUE)
 	{
-		$this->db->SELECT('k.*, k.id_keluarga id, k.nama nama_anggota, sk.*, p.*');
-		$this->db->ORDER_BY('p.id_pegawai');
-		$this->db->ORDER_BY('sk.id_status');
-		$this->db->JOIN('pegawai p','p.id_pegawai = k.id_pegawai', 'RIGHT');
-		$this->db->JOIN('status_klg sk','sk.id_status = k.id_status', 'RIGHT');
-		$query = $this->db->get('keluarga k');
-		return $query;
+		if ($id == TRUE) {
+			return $this->db->get_where('keluarga', array('id_anggota_klg' => $id));
+		} else {
+			$this->db->SELECT('k.*, p.nama nama_pegawai, p.gender gender_pegawai');
+			$this->db->ORDER_BY('k.nama');
+			$this->db->JOIN('pegawai p','p.id_pegawai = k.id_pegawai', 'LEFT');
+			return $this->db->get('keluarga k');
+		}
 	}
-
-	public function get_keluarga_pegawai($id, $table)
+	
+	 public function get_keluarga_pegawai($id, $table)
 	{
 		$this->db->order_by('id_status', 'ASC');
 		return $this->db->get_where($table, array('id_pegawai'=>$id));
+	}
+
+	public function get_anggota_keluarga($id_pegawai)
+	{
+		$this->db->SELECT('k.*, p.nama nama_pegawai, p.gender gender_pegawai');
+		$this->db->ORDER_BY('k.id_status');
+		$this->db->JOIN('pegawai p','p.id_pegawai = k.id_pegawai', 'LEFT OUTER');
+		return $this->db->get_where('keluarga k', array('k.id_pegawai' => $id_pegawai));
 	}
 
 	public function add_keluarga()
@@ -40,27 +49,6 @@ class M_keluarga extends CI_Model{
 				$this->db->insert("keluarga",$data);
 			}
 		}
-	}
-
-	public function detail_keluarga($data)
-	{
-		$this->db->insert("keluarga",$data);
-	}
-
-	public function edit_keluarga($data)
-	{
-		$this->db->SELECT('k.*, k.nama nama_pasangan, p.*');
-		$this->db->JOIN('pegawai p','p.id_pegawai = k.id_pegawai','LEFT');
-		$this->db->where('k.id_keluarga',$data);
-		$query = $this->db->get('keluarga k');
-		 // var_dump($data);
-		return $query;
-	}
-
-	public function edit_keluarga_proses($where, $data, $table)
-	{
-		$this->db->where($where);
-		$this->db->update($table,$data);
 	}
 
 	private function update_old_klg()
@@ -95,13 +83,10 @@ class M_keluarga extends CI_Model{
 						's_hidup' => $s_hidup_anggota[$i],
 						'gender' => $gender_anggota[$i]
 					);
-					$this->db->insert("keluarga", $data);
+					return $this->db->insert("keluarga", $data);
 				}
 			}
 		}
-		
-
-		
 	}
 
 	private function add_new_klg()
@@ -131,7 +116,7 @@ class M_keluarga extends CI_Model{
 					's_hidup' => $s_hidup_anggota[$i],
 					'gender' => $gender_anggota[$i]
 				);
-				$this->db->insert('keluarga', $data);
+				return $this->db->insert('keluarga', $data);
 			}
 		}
 	}
@@ -149,7 +134,7 @@ class M_keluarga extends CI_Model{
 			if ((($nama_anggota[$i] == NULL) || (empty($nama_anggota[$i]))) && !empty($id_anggota_klg[$i])) {
 				echo 'delete';
 				$this->db->where('id_anggota_klg', $id_anggota_klg[$i]);
-				$this->db->delete('keluarga');
+				return $this->db->delete('keluarga');
 			}
 		}
 	}
@@ -162,13 +147,26 @@ class M_keluarga extends CI_Model{
 		return $res;
 	}
 
+	public function update_keluarga()
+	{		
+		$id_anggota = $this->input->post('id_anggota');
+		$nama_anggota = $this->input->post('nama_anggota');
+		$s_hidup_anggota = $this->input->post('s_hidup_anggota');
+		$data = array(
+			'nama' => $nama_anggota,
+			's_hidup' => $s_hidup_anggota,
+		);
+		$this->db->where('id_anggota_klg', $id_anggota);
+		return $this->db->update('keluarga', $data);
+	}
+
 	public function delete_keluarga_pegawai()
 	{
 		$id_pegawai = $this->input->post('id_pegawai');
 		$status = $this->input->post('status');
 		if ($status == 0) {
 			$this->db->where('id_pegawai', $id_pegawai);
-			$this->db->delete('keluarga');
+			return $this->db->delete('keluarga');
 		}
 	}
 }

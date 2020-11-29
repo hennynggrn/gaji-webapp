@@ -143,11 +143,11 @@
 						<ul class="treeview-menu">
 							<li><a href="<?php echo site_url('pegawai'); ?>"><i class="fa fa-circle-o"></i>Data Pegawai </a></li>
 							<li><a href="<?php echo site_url('honor'); ?>"><i class="fa fa-circle-o"></i>Data Honorarium</a></li>
-							<li><a href="<?php echo site_url('tunjangan/table'); ?>"><i class="fa fa-circle-o"></i>Data Tunjangan</a></li>
-							<li><a href="<?php echo site_url('keluarga/table_keluarga'); ?>"><i class="fa fa-circle-o"></i>Data Keluarga</a></li>
-							<li><a href="<?php echo site_url('jabatan/table_jabatan'); ?>"><i class="fa fa-circle-o"></i>Data Jabatan</a></li>
-							<li><a href="<?php echo site_url('potongan/table'); ?>"><i class="fa fa-circle-o"></i>Data Potongan</a></li>
-							<li><a href="<?php echo site_url('pinjaman/table_pjm_kop'); ?>"><i class="fa fa-circle-o"></i>Data Pinjaman</a></li>
+							<li><a href="<?php echo site_url('tunjangan'); ?>"><i class="fa fa-circle-o"></i>Data Tunjangan</a></li>
+							<li><a href="<?php echo site_url('keluarga'); ?>"><i class="fa fa-circle-o"></i>Data Keluarga</a></li>
+							<li><a href="<?php echo site_url('jabatan'); ?>"><i class="fa fa-circle-o"></i>Data Jabatan</a></li>
+							<li><a href="<?php echo site_url('potongan'); ?>"><i class="fa fa-circle-o"></i>Data Potongan</a></li>
+							<li><a href="<?php echo site_url('pinjaman'); ?>"><i class="fa fa-circle-o"></i>Data Pinjaman</a></li>
 						</ul>
 					</li>
 					<li>
@@ -396,7 +396,7 @@
 	<!-- bootstrap datepicker -->
 	<script src="<?php echo base_url(); ?>assets/plugins/datepicker/bootstrap-datepicker.js"></script>
 	<!-- bootstrap color picker -->
-	<script src="<?php echo base_url(); ?>assets/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+	<script src="<?php echo base_url(); ?>assets/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>--
 	<!-- bootstrap time picker -->
 	<script src="<?php echo base_url(); ?>assets/plugins/timepicker/bootstrap-timepicker.min.js"></script>
 	<!-- iCheck 1.0.1 -->
@@ -473,8 +473,17 @@
 
 		// Tooltip
 		$(document).ready(function(){
-			$('[data-toggle="tooltip"]').tooltip();   
+			$('[data-tooltip="tooltip"]').tooltip();   
 		});
+	</script>
+
+	<!-- Styling -->
+	<script>
+		$('.badge-edit > span').attr('class', 'badge bg-grey');
+
+		$('.edit-keluarga').on('click', function(){
+			$('#tambah_keluarga > #mate').focus();
+		})
 	</script>
 
 	<!-- Set 'Keluarga' close input when delete member-->
@@ -491,7 +500,7 @@
 			$('#mate').keyup(function () {
 				var disable = false;
 				$('#mate').each(function(){
-					if($(this).val()==""){
+					if($(this).val() == ""){
 						disable = true;                
 					}
 				});
@@ -508,7 +517,7 @@
 			});
 		});
 	</script>
-
+	
 	<!-- Show form input family member when 'Menikah' on checked -->
 	<script>
 		$(document).ready(function(){

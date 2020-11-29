@@ -50,19 +50,40 @@
 											break;
 									}?>
 								</td>
-								<td><?php echo 'Rp. '.$pegawai['honor'] ?></td>
+								<td><?php echo 'Rp. '.number_format($pegawai['honor'],0,',','.');?></td>
 								<td>
-									<a href="<?php echo base_url('pegawai/detail/'.$pegawai['id_pegawai']);?>" title="Detail" data-toggle="tooltip" data-placement="left">
+									<a href="<?php echo base_url('pegawai/detail/'.$pegawai['id_pegawai']);?>" title="Detail" data-tooltip="tooltip" data-placement="left">
 										<span class="badge bg-green"><i class="fa fa-fw fa-info-circle"></i></span>
 									</a>
-									<a href="<?php echo base_url('pegawai/edit/'.$pegawai['id_pegawai']);?>" title="Edit" data-toggle="tooltip" data-placement="top">
+									<a href="<?php echo base_url('pegawai/edit/'.$pegawai['id_pegawai']);?>" title="Edit" data-tooltip="tooltip" data-placement="top">
 										<span class="badge bg-orange"><i class="fa fa-fw fa-pencil-square-o"></i></span>
 									</a>
-									<a href="<?php echo base_url('pegawai/delete/'.$pegawai['id_pegawai']);?>" title="Hapus" data-toggle="tooltip" data-placement="right">
+									<a href="" data-toggle="modal" data-target="#deletePegawai<?php echo $pegawai['id_pegawai'];?>" title="Hapus" data-tooltip="tooltip" data-placement="right">
 										<span class="badge bg-red"><i class="fa fa-fw fa-trash-o"></i></span>
 									</a>
 								</td>
 							</tr>
+							<!-- Modal Delete Honor per Pegawai-->
+							<div class="modal fade" id="deletePegawai<?php echo $pegawai['id_pegawai'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+											<h4 class="modal-title" id="myModalLabel">Hapus Data Pegawai</h4>
+										</div>
+										<div class="modal-body">
+											<p>
+												Anda yakin menghapus data pegawai <b class="text-primary"><?php echo $pegawai['nama'];?></b> ?
+											</p>
+											</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+											<a href="<?php echo site_url('pegawai/delete/'.$pegawai['id_pegawai']);?>" class="btn btn-primary">Hapus</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- End Modal -->
 						<?php } ?> 
 						</tbody>
 					</table>

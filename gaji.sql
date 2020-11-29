@@ -1,143 +1,234 @@
-/*
-SQLyog Ultimate v10.42 
-MySQL - 5.6.26-log : Database - gaji
-*********************************************************************
-*/
+-- phpMyAdmin SQL Dump
+-- version 5.0.2
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 29 Nov 2020 pada 11.56
+-- Versi server: 10.4.14-MariaDB
+-- Versi PHP: 7.4.9
 
-/*!40101 SET NAMES utf8 */;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
-/*!40101 SET SQL_MODE=''*/;
 
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`gaji` /*!40100 DEFAULT CHARACTER SET latin1 */;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
-USE `gaji`;
+--
+-- Database: `gaji`
+--
 
-/*Table structure for table `bulan` */
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `bulan`;
+--
+-- Struktur dari tabel `angsuran`
+--
+
+CREATE TABLE `angsuran` (
+  `id_angsuran` int(11) NOT NULL,
+  `kode_pinjaman` char(11) DEFAULT NULL,
+  `no_pinjaman` int(11) DEFAULT NULL,
+  `bulan` date DEFAULT NULL,
+  `nominal` int(11) DEFAULT NULL,
+  `ket` enum('1','0') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `bulan`
+--
 
 CREATE TABLE `bulan` (
   `id_bulan` int(11) NOT NULL,
   `bulan` varchar(50) DEFAULT NULL,
-  `angka` int(2) DEFAULT NULL,
-  PRIMARY KEY (`id_bulan`)
+  `angka` int(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*Data for the table `bulan` */
+--
+-- Dumping data untuk tabel `bulan`
+--
 
-insert  into `bulan`(`id_bulan`,`bulan`,`angka`) values (1,'Januari',1),(2,'Februari',2),(3,'Maret',3),(4,'April',4),(5,'Mei',5),(6,'Juni',6),(7,'Juli',7),(8,'Agustus',8),(9,'September',9),(10,'Oktober',10),(11,'November',11),(12,'Desember',12);
+INSERT INTO `bulan` (`id_bulan`, `bulan`, `angka`) VALUES
+(1, 'Januari', 1),
+(2, 'Februari', 2),
+(3, 'Maret', 3),
+(4, 'April', 4),
+(5, 'Mei', 5),
+(6, 'Juni', 6),
+(7, 'Juli', 7),
+(8, 'Agustus', 8),
+(9, 'September', 9),
+(10, 'Oktober', 10),
+(11, 'November', 11),
+(12, 'Desember', 12);
 
-/*Table structure for table `gaji` */
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `gaji`;
+--
+-- Struktur dari tabel `gaji`
+--
 
 CREATE TABLE `gaji` (
-  `id_gaji` int(11) NOT NULL AUTO_INCREMENT,
+  `id_gaji` int(11) NOT NULL,
   `id_honor` int(11) NOT NULL,
   `id_potongan` int(11) NOT NULL,
   `id_tunjangan` int(11) NOT NULL,
   `jml_gaji` varchar(100) NOT NULL,
   `date_dinamins` date NOT NULL,
   `date_statis` date NOT NULL,
-  `id_pegawai` int(11) NOT NULL,
-  PRIMARY KEY (`id_gaji`)
+  `id_pegawai` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*Data for the table `gaji` */
+-- --------------------------------------------------------
 
-/*Table structure for table `honor` */
-
-DROP TABLE IF EXISTS `honor`;
-
-CREATE TABLE `honor` (
-  `id_honor` int(11) NOT NULL AUTO_INCREMENT,
-  `id_pegawai` int(11) DEFAULT NULL,
-  `honor` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id_honor`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
-
-/*Data for the table `honor` */
-
-insert  into `honor`(`id_honor`,`id_pegawai`,`honor`) values (1,1,'900000'),(2,2,'700000'),(3,3,'700000'),(4,9,'800000');
-
-/*Table structure for table `jabatan` */
-
-DROP TABLE IF EXISTS `jabatan`;
+--
+-- Struktur dari tabel `jabatan`
+--
 
 CREATE TABLE `jabatan` (
-  `id_jabatan` int(11) NOT NULL AUTO_INCREMENT,
+  `id_jabatan` int(11) NOT NULL,
   `jabatan` varchar(100) DEFAULT NULL,
-  `jml_jam` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_jabatan`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+  `jml_jam` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*Data for the table `jabatan` */
+--
+-- Dumping data untuk tabel `jabatan`
+--
 
-insert  into `jabatan`(`id_jabatan`,`jabatan`,`jml_jam`) values (1,'Wali Kelas 7',6),(2,'Bendahara',6),(3,'Kurikulum',7),(4,'Kesiswaan',8),(5,'Piket',6);
+INSERT INTO `jabatan` (`id_jabatan`, `jabatan`, `jml_jam`) VALUES
+(1, 'Kepala Sekolah', 10),
+(2, 'Bendahara', 24),
+(3, 'PAI', 4),
+(4, 'Humas', 12),
+(5, 'Tatip', 4),
+(6, 'Ko. BK', 6),
+(7, 'Koordinator PAI', 8),
+(8, 'Koordinator Mata Pelajaran', 4),
+(9, 'Laboran', 10),
+(10, 'Koordinator Literasi', 4),
+(11, 'Koordinator Ortonom', 6),
+(12, 'Ka Perpus', 12),
+(13, 'Sarpras', 12);
 
-/*Table structure for table `jbt_pegawai` */
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `jbt_pegawai`;
+--
+-- Struktur dari tabel `jbt_pegawai`
+--
 
 CREATE TABLE `jbt_pegawai` (
-  `id_jbt_pegawai` int(11) NOT NULL AUTO_INCREMENT,
+  `id_jbt_pegawai` int(11) NOT NULL,
   `id_jabatan` int(11) DEFAULT NULL,
-  `id_pegawai` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_jbt_pegawai`),
-  KEY `fk_jabatan` (`id_jabatan`),
-  KEY `fk_pegawai` (`id_pegawai`),
-  CONSTRAINT `fk_jabatan` FOREIGN KEY (`id_jabatan`) REFERENCES `jabatan` (`id_jabatan`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_pegawai` FOREIGN KEY (`id_pegawai`) REFERENCES `pegawai` (`id_pegawai`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+  `id_pegawai` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*Data for the table `jbt_pegawai` */
+--
+-- Dumping data untuk tabel `jbt_pegawai`
+--
 
-insert  into `jbt_pegawai`(`id_jbt_pegawai`,`id_jabatan`,`id_pegawai`) values (11,1,11),(12,2,11),(13,3,11),(17,1,13),(18,3,13),(19,4,13);
+INSERT INTO `jbt_pegawai` (`id_jbt_pegawai`, `id_jabatan`, `id_pegawai`) VALUES
+(22, 2, 2),
+(45, 2, 5),
+(46, 5, 5),
+(47, 2, 6),
+(52, 3, 7),
+(53, 11, 7);
 
-/*Table structure for table `keluarga` */
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `keluarga`;
+--
+-- Struktur dari tabel `keluarga`
+--
 
 CREATE TABLE `keluarga` (
-  `id_keluarga` int(11) NOT NULL AUTO_INCREMENT,
+  `id_anggota_klg` int(11) NOT NULL,
   `nama` varchar(100) DEFAULT NULL,
-  `id_status` int(11) unsigned DEFAULT NULL,
+  `id_status` int(1) UNSIGNED DEFAULT NULL,
   `s_hidup` enum('0','1') DEFAULT NULL,
   `gender` enum('P','L') DEFAULT NULL,
-  `id_pegawai` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_keluarga`),
-  KEY `id_status` (`id_status`),
-  KEY `fk_pegawai_keluarga` (`id_pegawai`),
-  CONSTRAINT `fk_pegawai_keluarga` FOREIGN KEY (`id_pegawai`) REFERENCES `pegawai` (`id_pegawai`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `keluarga_ibfk_1` FOREIGN KEY (`id_status`) REFERENCES `status_klg` (`id_status`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+  `id_pegawai` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*Data for the table `keluarga` */
+--
+-- Dumping data untuk tabel `keluarga`
+--
 
-insert  into `keluarga`(`id_keluarga`,`nama`,`id_status`,`s_hidup`,`gender`,`id_pegawai`) values (1,'Nimas',1,'1','P',1),(2,'Ayu',1,'0','P',2),(4,'Aris',2,'1','L',3),(24,'istri',1,'1','P',11),(25,'aa',2,'1','P',11);
+INSERT INTO `keluarga` (`id_anggota_klg`, `nama`, `id_status`, `s_hidup`, `gender`, `id_pegawai`) VALUES
+(74, 'Bumi', 1, '1', 'L', 6),
+(75, 'Nirwana', 2, '0', 'L', 6),
+(76, 'Waff', 1, '1', 'L', 7),
+(77, 'Martin', 2, '1', 'L', 7),
+(79, 'Aznas', 3, '0', 'P', 7),
+(80, 'Santi', 1, '0', 'P', 5),
+(81, 'Anas', 2, '0', 'L', 5);
 
-/*Table structure for table `masakerja` */
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `masakerja`;
+--
+-- Struktur dari tabel `masakerja`
+--
 
 CREATE TABLE `masakerja` (
   `id_masakerja` int(11) NOT NULL,
   `tahun` int(11) NOT NULL,
-  `jml_mk` int(50) NOT NULL,
-  PRIMARY KEY (`id_masakerja`)
+  `jml_mk` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*Data for the table `masakerja` */
+--
+-- Dumping data untuk tabel `masakerja`
+--
 
-insert  into `masakerja`(`id_masakerja`,`tahun`,`jml_mk`) values (1,1,2000),(2,2,4000),(3,3,6000),(4,4,8000),(5,5,20000),(6,6,22000),(7,7,24000),(8,8,26000),(9,9,28000),(10,10,40000),(11,11,42000),(12,12,44000),(13,13,46000),(14,14,48000),(15,15,65000),(16,16,67000),(17,17,69000),(18,18,71000),(19,19,73000),(20,20,93000),(21,21,95000),(22,22,97000),(23,23,99000),(24,24,101000),(25,25,125000),(26,26,127000),(27,27,129000),(28,28,131000),(29,29,133000),(30,30,160000),(31,31,162000),(32,32,164000),(33,33,166000),(34,34,168000),(35,35,200000),(36,36,202000),(37,37,204000),(38,38,206000),(39,39,208000),(40,40,245000);
+INSERT INTO `masakerja` (`id_masakerja`, `tahun`, `jml_mk`) VALUES
+(1, 1, 2000),
+(2, 2, 4000),
+(3, 3, 6000),
+(4, 4, 8000),
+(5, 5, 20000),
+(6, 6, 22000),
+(7, 7, 24000),
+(8, 8, 26000),
+(9, 9, 28000),
+(10, 10, 42000),
+(11, 11, 42000),
+(12, 12, 44000),
+(13, 13, 46000),
+(14, 14, 48000),
+(15, 15, 65000),
+(16, 16, 67000),
+(17, 17, 69000),
+(18, 18, 71000),
+(19, 19, 73000),
+(20, 20, 93000),
+(21, 21, 95000),
+(22, 22, 97000),
+(23, 23, 99000),
+(24, 24, 101000),
+(25, 25, 125000),
+(26, 26, 127000),
+(27, 27, 129000),
+(28, 28, 131000),
+(29, 29, 133000),
+(30, 30, 160000),
+(31, 31, 162000),
+(32, 32, 164000),
+(33, 33, 166000),
+(34, 34, 168000),
+(35, 35, 200000),
+(36, 36, 202000),
+(37, 37, 204000),
+(38, 38, 206000),
+(39, 39, 208000),
+(40, 40, 245000);
 
-/*Table structure for table `pegawai` */
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `pegawai`;
+--
+-- Struktur dari tabel `pegawai`
+--
 
 CREATE TABLE `pegawai` (
   `id_pegawai` int(11) NOT NULL,
@@ -146,104 +237,269 @@ CREATE TABLE `pegawai` (
   `tempat_lahir` varchar(100) NOT NULL,
   `tgl_lahir` date NOT NULL,
   `telepon` int(20) NOT NULL,
-  `jns_pegawai` enum('Guru','Karyawan') NOT NULL,
-  `jns_klmn` varchar(20) NOT NULL,
+  `jns_pegawai` enum('0','1') NOT NULL,
+  `gender` enum('P','L') NOT NULL,
   `email` varchar(100) NOT NULL,
-  `id_status` int(11) DEFAULT NULL,
-  `status` enum('Menikah','Belum_menikah') NOT NULL,
-  `agama` varchar(20) NOT NULL,
+  `status_pegawai` enum('P','T0','T1') DEFAULT NULL,
+  `status` int(1) NOT NULL,
+  `agama` enum('Islam','Protestan','Katolik','Hindu','Buddha','Khonghucu') NOT NULL,
   `umur` varchar(20) NOT NULL,
-  `id_keluarga` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_pegawai`),
-  KEY `fk_status_pgw` (`id_status`),
-  CONSTRAINT `fk_status_pgw` FOREIGN KEY (`id_status`) REFERENCES `status_pgw` (`id_status`) ON DELETE CASCADE ON UPDATE CASCADE
+  `honor` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*Data for the table `pegawai` */
+--
+-- Dumping data untuk tabel `pegawai`
+--
 
-insert  into `pegawai`(`id_pegawai`,`nbm`,`nama`,`tempat_lahir`,`tgl_lahir`,`telepon`,`jns_pegawai`,`jns_klmn`,`email`,`id_status`,`status`,`agama`,`umur`,`id_keluarga`) values (1,'222','Rahmat S.Pd','Yogyakarta','1996-04-09',98098,'Guru','L','rahmat@gmail.com',2,'Menikah','islam','23',1),(2,'223','Eko S.Kom','Blora','1996-09-20',9876,'Karyawan','L','eko@gmail.com',2,'Menikah','islam','23',2),(3,'224','Meirista S.Kom','Palembang','1996-05-05',8123,'Guru','P','mei@gmail.com',1,'Belum_menikah','islam','23',0),(9,'225','Novii','ntb','1998-11-16',98664,'Guru','P','novii@gmail.com',2,'Belum_menikah','Islam','21',0),(10,'226','Rifky','Baubau','1998-02-12',9876578,'Karyawan','L','rifky@gmail.com',3,'Belum_menikah','Islam','21',0),(11,'227','saya','ntb','2019-12-01',9866499,'Guru','L','rifky@gmail.com',2,'Menikah','Islam','21',NULL),(13,'228','mereka','ntb','2019-12-01',98664999,'Guru','L','rifky@gmail.com',2,'Belum_menikah','Islam','21',NULL);
+INSERT INTO `pegawai` (`id_pegawai`, `nbm`, `nama`, `tempat_lahir`, `tgl_lahir`, `telepon`, `jns_pegawai`, `gender`, `email`, `status_pegawai`, `status`, `agama`, `umur`, `honor`) VALUES
+(2, '124', 'Rifky', 'Baubau', '1998-02-12', 1897656, '0', 'P', 'rifky@gmail.com', 'T1', 0, 'Hindu', '21', 0),
+(5, '123', 'Budi', 'Taman', '1889-03-12', 2121212, '0', 'L', 'budi@gmail.com', 'T1', 1, 'Islam', '31', 56000000),
+(6, '212', 'Dizzy', 'Taman', '1111-11-12', 1212, '0', 'P', 'qsqs@czsd', 'T1', 1, 'Islam', '21', 0),
+(7, '1212', 'Henuiii', 'Taman', '1111-11-11', 90787, '0', 'P', 'wodi@gmail.com', 'T1', 1, 'Islam', '48', 90000);
 
-/*Table structure for table `potongan` */
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `potongan`;
+--
+-- Struktur dari tabel `pjm_bank`
+--
+
+CREATE TABLE `pjm_bank` (
+  `id_pjm_bank` int(11) NOT NULL,
+  `kode_pjm_bank` char(11) DEFAULT NULL,
+  `total_pjm_bank` int(11) DEFAULT NULL,
+  `jml_asr_bank` varchar(50) DEFAULT NULL,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `status_pjm_bank` enum('0','1') DEFAULT NULL,
+  `ket_pjm_bank` enum('0','1') DEFAULT NULL,
+  `id_pegawai` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pjm_kop`
+--
+
+CREATE TABLE `pjm_kop` (
+  `id_pjm_kop` int(11) NOT NULL,
+  `kode_pjm_kop` char(11) DEFAULT NULL,
+  `total_pjm_kop` int(11) DEFAULT NULL,
+  `jml_asr_kop` varchar(50) DEFAULT NULL,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `ket_pjm_kop` enum('0','1') DEFAULT NULL,
+  `id_pegawai` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `pjm_kop`
+--
+
+INSERT INTO `pjm_kop` (`id_pjm_kop`, `kode_pjm_kop`, `total_pjm_kop`, `jml_asr_kop`, `start_date`, `end_date`, `ket_pjm_kop`, `id_pegawai`) VALUES
+(0, '01', 500000, '1 kali', '2020-03-01', '2020-03-07', '0', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `potongan`
+--
 
 CREATE TABLE `potongan` (
-  `id_potongan` int(11) NOT NULL AUTO_INCREMENT,
-  `nama` varchar(100) NOT NULL,
-  `pot_sosial` varchar(100) NOT NULL,
-  `pot_infaq` varchar(100) NOT NULL,
-  `pot_kopmurni` varchar(100) DEFAULT NULL,
-  `pot_jsr` varchar(100) NOT NULL,
-  `pot_aisiyah` varchar(100) DEFAULT NULL,
-  `pot_jamsostek` varchar(100) DEFAULT NULL,
-  `pot_bdw` varchar(100) DEFAULT NULL,
-  `jml_potongan` varchar(100) NOT NULL,
-  PRIMARY KEY (`id_potongan`)
+  `id_potongan` int(11) NOT NULL,
+  `sosial` varchar(100) NOT NULL,
+  `infaq` varchar(100) NOT NULL,
+  `jsr` varchar(100) NOT NULL,
+  `aisiyah` varchar(100) DEFAULT NULL,
+  `jamsostek` varchar(100) DEFAULT NULL,
+  `kop` varchar(100) DEFAULT NULL,
+  `bank` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*Data for the table `potongan` */
+--
+-- Dumping data untuk tabel `potongan`
+--
 
-/*Table structure for table `status_klg` */
+INSERT INTO `potongan` (`id_potongan`, `sosial`, `infaq`, `jsr`, `aisiyah`, `jamsostek`, `kop`, `bank`) VALUES
+(1, '5000', '5000', '10000', '11000', '66500', '-', '-');
 
-DROP TABLE IF EXISTS `status_klg`;
+-- --------------------------------------------------------
 
-CREATE TABLE `status_klg` (
-  `id_status` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `kode` char(11) DEFAULT NULL,
-  `ket` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id_status`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-
-/*Data for the table `status_klg` */
-
-insert  into `status_klg`(`id_status`,`kode`,`ket`) values (1,'P1','Pasangan'),(2,'A1','Anak Pertama'),(3,'A2','Anak Kedua');
-
-/*Table structure for table `status_pgw` */
-
-DROP TABLE IF EXISTS `status_pgw`;
-
-CREATE TABLE `status_pgw` (
-  `id_status` int(11) NOT NULL AUTO_INCREMENT,
-  `kode` char(11) DEFAULT NULL,
-  `ket` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id_status`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-
-/*Data for the table `status_pgw` */
-
-insert  into `status_pgw`(`id_status`,`kode`,`ket`) values (1,'P1','PNS'),(2,'T1','Tetap'),(3,'T0','Tidak Tetap');
-
-/*Table structure for table `tahun` */
-
-DROP TABLE IF EXISTS `tahun`;
+--
+-- Struktur dari tabel `tahun`
+--
 
 CREATE TABLE `tahun` (
-  `id_tahun` int(11) NOT NULL AUTO_INCREMENT,
-  `tahun` year(4) DEFAULT NULL,
-  PRIMARY KEY (`id_tahun`)
+  `id_tahun` int(11) NOT NULL,
+  `tahun` year(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*Data for the table `tahun` */
+-- --------------------------------------------------------
 
-/*Table structure for table `tunjangan` */
-
-DROP TABLE IF EXISTS `tunjangan`;
+--
+-- Struktur dari tabel `tunjangan`
+--
 
 CREATE TABLE `tunjangan` (
-  `id_tunjangan` int(11) NOT NULL AUTO_INCREMENT,
-  `t_jabatan` varchar(100) NOT NULL,
-  `t_keluarga` varchar(100) NOT NULL,
-  `t_jamsostek` varchar(100) NOT NULL,
-  `t_masakerja` varchar(100) NOT NULL,
-  `t_beras` varchar(100) NOT NULL,
-  `jml_tunjangan` varchar(100) NOT NULL,
-  `id_pegawai` int(11) NOT NULL,
-  PRIMARY KEY (`id_tunjangan`)
+  `id_tunjangan` set('1') NOT NULL,
+  `beras` int(11) DEFAULT NULL,
+  `jamsostek` int(11) DEFAULT NULL,
+  `klg_psg` float DEFAULT NULL,
+  `klg_anak` float DEFAULT NULL,
+  `jabatan` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*Data for the table `tunjangan` */
+--
+-- Dumping data untuk tabel `tunjangan`
+--
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+INSERT INTO `tunjangan` (`id_tunjangan`, `beras`, `jamsostek`, `klg_psg`, `klg_anak`, `jabatan`) VALUES
+('1', 80000, 400000, 0.05, 0.025, 25000);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indeks untuk tabel `angsuran`
+--
+ALTER TABLE `angsuran`
+  ADD PRIMARY KEY (`id_angsuran`);
+
+--
+-- Indeks untuk tabel `bulan`
+--
+ALTER TABLE `bulan`
+  ADD PRIMARY KEY (`id_bulan`);
+
+--
+-- Indeks untuk tabel `gaji`
+--
+ALTER TABLE `gaji`
+  ADD PRIMARY KEY (`id_gaji`);
+
+--
+-- Indeks untuk tabel `jabatan`
+--
+ALTER TABLE `jabatan`
+  ADD PRIMARY KEY (`id_jabatan`);
+
+--
+-- Indeks untuk tabel `jbt_pegawai`
+--
+ALTER TABLE `jbt_pegawai`
+  ADD PRIMARY KEY (`id_jbt_pegawai`),
+  ADD KEY `fk_jabatan` (`id_jabatan`),
+  ADD KEY `fk_pegawai` (`id_pegawai`);
+
+--
+-- Indeks untuk tabel `keluarga`
+--
+ALTER TABLE `keluarga`
+  ADD PRIMARY KEY (`id_anggota_klg`),
+  ADD KEY `fk_pegawai_keluarga` (`id_pegawai`);
+
+--
+-- Indeks untuk tabel `masakerja`
+--
+ALTER TABLE `masakerja`
+  ADD PRIMARY KEY (`id_masakerja`);
+
+--
+-- Indeks untuk tabel `pegawai`
+--
+ALTER TABLE `pegawai`
+  ADD PRIMARY KEY (`id_pegawai`),
+  ADD KEY `fk_status_pgw` (`status_pegawai`);
+
+--
+-- Indeks untuk tabel `pjm_bank`
+--
+ALTER TABLE `pjm_bank`
+  ADD PRIMARY KEY (`id_pjm_bank`);
+
+--
+-- Indeks untuk tabel `pjm_kop`
+--
+ALTER TABLE `pjm_kop`
+  ADD PRIMARY KEY (`id_pjm_kop`);
+
+--
+-- Indeks untuk tabel `potongan`
+--
+ALTER TABLE `potongan`
+  ADD PRIMARY KEY (`id_potongan`);
+
+--
+-- Indeks untuk tabel `tahun`
+--
+ALTER TABLE `tahun`
+  ADD PRIMARY KEY (`id_tahun`);
+
+--
+-- Indeks untuk tabel `tunjangan`
+--
+ALTER TABLE `tunjangan`
+  ADD PRIMARY KEY (`id_tunjangan`);
+
+--
+-- AUTO_INCREMENT untuk tabel yang dibuang
+--
+
+--
+-- AUTO_INCREMENT untuk tabel `gaji`
+--
+ALTER TABLE `gaji`
+  MODIFY `id_gaji` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `jabatan`
+--
+ALTER TABLE `jabatan`
+  MODIFY `id_jabatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT untuk tabel `jbt_pegawai`
+--
+ALTER TABLE `jbt_pegawai`
+  MODIFY `id_jbt_pegawai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+
+--
+-- AUTO_INCREMENT untuk tabel `keluarga`
+--
+ALTER TABLE `keluarga`
+  MODIFY `id_anggota_klg` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+
+--
+-- AUTO_INCREMENT untuk tabel `potongan`
+--
+ALTER TABLE `potongan`
+  MODIFY `id_potongan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT untuk tabel `tahun`
+--
+ALTER TABLE `tahun`
+  MODIFY `id_tahun` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
+
+--
+-- Ketidakleluasaan untuk tabel `jbt_pegawai`
+--
+ALTER TABLE `jbt_pegawai`
+  ADD CONSTRAINT `fk_jabatan` FOREIGN KEY (`id_jabatan`) REFERENCES `jabatan` (`id_jabatan`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_pegawai` FOREIGN KEY (`id_pegawai`) REFERENCES `pegawai` (`id_pegawai`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `keluarga`
+--
+ALTER TABLE `keluarga`
+  ADD CONSTRAINT `fk_pegawai_keluarga` FOREIGN KEY (`id_pegawai`) REFERENCES `pegawai` (`id_pegawai`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
