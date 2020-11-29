@@ -60,12 +60,13 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="modal-footer">
-					<a href="<?php echo base_url('keluarga')?>" class="pull-left btn btn-default">Kembali</a>
-					<a href="<?php echo base_url('keluarga/edit/'.$id_keluarga)?>" class="edit-keluarga pull-right btn btn-warning edit-btn">Edit</a></td>
-				</div>
 			</div>
-			<!-- /.box -->
+		</div>
+		<div class="col-md-12">
+			<a href="<?php echo base_url('keluarga')?>" class="pull-left btn btn-default">Kembali</a>
+			<a href="<?php echo base_url('keluarga/edit/'.$id_keluarga)?>" class="edit-keluarga pull-right btn btn-warning edit-btn">Edit</a></td>
+		</div>
+	</div>
 </section>
 <!-- /.content -->
 </div>
