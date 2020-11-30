@@ -5,7 +5,7 @@ class M_jabatan extends CI_Model{
 
 	public function get_jabatan($id = TRUE)
 	{
-		if ($id == TRUE) {
+		if ($id != NULL) {
 			$this->db->select('jb.id_jabatan, jabatan, jml_jam, id_pegawai');
 			$this->db->join('jbt_pegawai jp', 'jp.id_jabatan = jb.id_jabatan AND jp.id_pegawai ='.$id, 'LEFT OUTER');
 			return $this->db->get('jabatan jb');
@@ -21,8 +21,8 @@ class M_jabatan extends CI_Model{
 
 	public function get_jabatan_pegawai($id = TRUE)
 	{
-		$this->db->SELECT('jb.id_jabatan, jabatan, jml_jam, id_pegawai');
-		$this->db->JOIN('jbt_pegawai jp', 'jp.id_jabatan = jb.id_jabatan', 'LEFT');
+		$this->db->select('jb.id_jabatan, jabatan, jml_jam, id_pegawai');
+		$this->db->join('jbt_pegawai jp', 'jp.id_jabatan = jb.id_jabatan', 'LEFT');
 		return $this->db->get_where('jabatan jb', array('id_pegawai' => $id));
 	}
 

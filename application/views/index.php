@@ -121,19 +121,21 @@
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu">
 					<li class="header">MAIN NAVIGATION</li>
-					<li>
+					<li class="">
 						<a href="<?php echo site_url('home'); ?>">
 							<i class="fa fa-folder"></i>
 							<span>Home</span>
 						</a>
 					</li>
-					<li>
+					<li class="<?php if($this->uri->segment(1) == 'gaji'){echo 'active';}?>">
 						<a href="<?php echo site_url('gaji/table'); ?>">
 							<i class="fa fa-money"></i>
 							<span>Gaji</span>
 						</a>
 					</li>
-					<li class="treeview">
+					<li class="treeview <?php $segment = $this->uri->segment(1); 
+					if(($segment == 'pegawai') || ($segment == 'honor') || ($segment == 'tunjangan') || ($segment == 'keluarga') 
+					|| ($segment == 'jabatan') || ($segment == 'potongan') || ($segment == 'pinjaman')){echo 'active';}?>">
 						<a href="#">
 							<i class="fa fa-dashboard"></i> <span>Data Master</span>
 							<span class="pull-right-container">
@@ -141,13 +143,13 @@
 							</span>
 						</a>
 						<ul class="treeview-menu">
-							<li><a href="<?php echo site_url('pegawai'); ?>"><i class="fa fa-circle-o"></i>Data Pegawai </a></li>
-							<li><a href="<?php echo site_url('honor'); ?>"><i class="fa fa-circle-o"></i>Data Honorarium</a></li>
-							<li><a href="<?php echo site_url('tunjangan'); ?>"><i class="fa fa-circle-o"></i>Data Tunjangan</a></li>
-							<li><a href="<?php echo site_url('keluarga'); ?>"><i class="fa fa-circle-o"></i>Data Keluarga</a></li>
-							<li><a href="<?php echo site_url('jabatan'); ?>"><i class="fa fa-circle-o"></i>Data Jabatan</a></li>
-							<li><a href="<?php echo site_url('potongan'); ?>"><i class="fa fa-circle-o"></i>Data Potongan</a></li>
-							<li><a href="<?php echo site_url('pinjaman'); ?>"><i class="fa fa-circle-o"></i>Data Pinjaman</a></li>
+							<li class="<?php if($this->uri->segment(1) == 'pegawai'){echo 'active';}?>"><a href="<?php echo site_url('pegawai'); ?>"><i class="fa fa-circle-o"></i>Data Pegawai </a></li>
+							<li class="<?php if($this->uri->segment(1) == 'honor'){echo 'active';}?>"><a href="<?php echo site_url('honor'); ?>"><i class="fa fa-circle-o"></i>Data Honorarium</a></li>
+							<li class="<?php if($this->uri->segment(1) == 'tunjangan'){echo 'active';}?>"><a href="<?php echo site_url('tunjangan'); ?>"><i class="fa fa-circle-o"></i>Data Tunjangan</a></li>
+							<li class="<?php if($this->uri->segment(1) == 'keluarga'){echo 'active';}?>"><a href="<?php echo site_url('keluarga'); ?>"><i class="fa fa-circle-o"></i>Data Keluarga</a></li>
+							<li class="<?php if($this->uri->segment(1) == 'jabatan'){echo 'active';}?>"><a href="<?php echo site_url('jabatan'); ?>"><i class="fa fa-circle-o"></i>Data Jabatan</a></li>
+							<li class="<?php if($this->uri->segment(1) == 'potongan'){echo 'active';}?>"><a href="<?php echo site_url('potongan'); ?>"><i class="fa fa-circle-o"></i>Data Potongan</a></li>
+							<li class="<?php if($this->uri->segment(1) == 'pinjaman'){echo 'active';}?>"><a href="<?php echo site_url('pinjaman'); ?>"><i class="fa fa-circle-o"></i>Data Pinjaman</a></li>
 						</ul>
 					</li>
 					<li>

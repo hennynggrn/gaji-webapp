@@ -29,7 +29,8 @@ class Keluarga extends CI_Controller {
 		$data['pegawai'] = $this->M_pegawai->get_pegawai($id_pegawai)->row_array();
 		$data['keluargas'] = $this->M_keluarga->get_anggota_keluarga($id_pegawai)->result_array();
 		$data['id_keluarga'] = $id;
-		$data['title'] = 'Detail Anggota Keluarga '.$data['anggota']['nama'];
+		$data['title'] = 'Detail Anggota Keluarga';
+		$data['desc'] = $data['anggota']['nama'];
 		$this->template->load('index','keluarga/detail_keluarga', $data);
 	}
 	

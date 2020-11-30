@@ -5,7 +5,7 @@
 			<div class="box box-primary">
 				<div class="box-header with-border">
 					<h3 class="box-title">
-						<a href="<?php echo site_url('jabatan/add_jabatan');?>" class='btn btn-primary' >
+						<a href="<?php echo site_url('jabatan/add');?>" class='btn btn-primary' >
 						<i class="fa fa-plus-square-o"></i> Tambah Data </a>
 				</div>
 					<!-- /.box-header -->
@@ -27,13 +27,13 @@
 								<td><?php echo $jabatan['jml_jam']; ?></td>
 								<td><?php echo ($jabatan['result'] != NULL) ? $jabatan['result'].' orang' : '-';?></td>
 								<td>
-									<a href="<?php echo site_url('pegawai/detail/'.$jabatan['id_jabatan']);?>" title="Detail" data-tooltip="tooltip" data-placement="left">
+									<a href="<?php echo site_url('jabatan/detail/'.$jabatan['id_jabatan']);?>" title="Detail" data-tooltip="tooltip" data-placement="left">
 										<span class="badge bg-green"><i class="fa fa-fw fa-info-circle"></i></span>
 									</a>
-									<a href="<?php echo site_url('pegawai/edit/'.$jabatan['id_jabatan']);?>" title="Edit" data-tooltip="tooltip" data-placement="top">
+									<a href="<?php echo site_url('jabatan/edit/'.$jabatan['id_jabatan']);?>" title="Edit" data-tooltip="tooltip" data-placement="top">
 										<span class="badge bg-orange"><i class="fa fa-fw fa-pencil-square-o"></i></span>
 									</a>
-									<a href="" data-toggle="modal" data-target="#deletePegawai<?php echo $jabatan['id_jabatan'];?>" title="Hapus" data-tooltip="tooltip" data-placement="right">
+									<a href="" data-toggle="modal" data-target="#deleteJabatan<?php echo $jabatan['id_jabatan'];?>" title="Hapus" data-tooltip="tooltip" data-placement="right">
 										<span class="badge bg-red"><i class="fa fa-fw fa-trash-o"></i></span>
 									</a>
 							</tr>

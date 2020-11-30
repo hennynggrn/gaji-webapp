@@ -100,9 +100,7 @@
 				</div>
 				<!-- /.box-body -->
 				<div class="box-footer">
-					<div class="col-md-12">
-						<a href="<?php echo site_url('tunjangan/edit')?>" class="pull-right btn btn-warning edit-btn btn-block">Edit</a>
-					</div>
+					<a href="<?php echo site_url('tunjangan/edit')?>" class="pull-right btn btn-warning edit-btn btn-block">Edit</a>
 				</div>
 			</div>
 		</div>

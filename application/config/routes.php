@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 // $route['jabatan/edit/(:any)'] = 'jabatan/edit_jabatan/$1';
 // $route['jabatan/detail/(:any)'] = 'jabatan/detail_jabatan/$1';
+$route['jabatan/add'] = 'jabatan/add_jabatan';
 $route['jabatan'] = 'jabatan/index';
 
 $route['keluarga/edit/(:any)'] = 'keluarga/edit_keluarga/$1';

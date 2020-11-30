@@ -157,10 +157,8 @@
 					</div>
 					<!-- /.box-body -->
 					<div class="box-footer">
-						<div class="col-md-12">
-							<a href="<?php echo site_url('tunjangan')?>" class="pull-left btn btn-danger">Batal</a>
-							<button type="submit" class="pull-right btn btn-primary">Simpan</button>
-						</div>
+						<a href="<?php echo site_url('tunjangan')?>" class="pull-left btn btn-danger">Batal</a>
+						<button type="submit" class="pull-right btn btn-primary">Simpan</button>
 					</div>
 				</form>
 			</div>
