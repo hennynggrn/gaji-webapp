@@ -8,19 +8,19 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css');?>">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/css/styles.css">
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/styles.css');?>">
+  <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/AdminLTE.min.css');?>">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/css/skins/_all-skins.min.css">
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/select2/select2.min.css">
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/colorpicker/bootstrap-colorpicker.min.css">
+  <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/skins/_all-skins.min.css');?>">
+  <link rel="stylesheet" href="<?php echo base_url('assets/plugins/select2/select2.min.css');?>">
+  <link rel="stylesheet" href="<?php echo base_url('assets/plugins/colorpicker/bootstrap-colorpicker.min.css');?>">
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -28,7 +28,7 @@
 	<div class="wrapper">
 		<header class="main-header">
 			<!-- Logo -->
-			<a href="<?php echo base_url(); ?>assets/index2.html" class="logo">
+			<a href="<?php echo base_url('assets/index2.html');?>" class="logo">
 				<!-- mini logo for sidebar mini 50x50 pixels -->
 				<span class="logo-mini"><b>A</b>LT</span>
 				<!-- logo for regular state and mobile devices -->
@@ -48,13 +48,13 @@
 						<!-- User Account: style can be found in dropdown.less -->
 						<li class="dropdown user user-menu">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								<img class="user-image" src="<?php echo base_url();?>assets/dist/img/smpmuh9.jpeg"/ alt="User Image">
+								<img class="user-image" src="<?php echo base_url('assets/dist/img/smpmuh9.jpeg');?>" alt="User Image">
 								<span class="hidden-xs">Alexander Pierce</span>
 							</a>
 							<ul class="dropdown-menu">
 								<!-- User image -->
 								<li class="user-header">
-									<img src="<?php echo base_url();?>assets/dist/img/smpmuh9.jpeg" class="img-circle" alt="User Image">
+									<img src="<?php echo base_url('assets/dist/img/smpmuh9.jpeg');?>" class="img-circle" alt="User Image">
 									<p>
 										<small>SMP Muhammadiyah 9</small>
 									</p>
@@ -100,7 +100,7 @@
 				<!-- Sidebar user panel -->
 				<div class="user-panel">
 					<div class="pull-left image">
-						<img class="img-circle" src="<?php echo base_url();?>assets/dist/img/smpmuh9.jpeg"/ alt="User Image">
+						<img class="img-circle" src="<?php echo base_url('assets/dist/img/smpmuh9.jpeg');?>" alt="User Image">
 					</div>
 					<div class="pull-left info">
 						<p>SMP Muhammadiyah 9</p>
@@ -122,13 +122,13 @@
 				<ul class="sidebar-menu">
 					<li class="header">MAIN NAVIGATION</li>
 					<li>
-						<a href="<?php echo base_url('home'); ?>">
+						<a href="<?php echo site_url('home'); ?>">
 							<i class="fa fa-folder"></i>
 							<span>Home</span>
 						</a>
 					</li>
 					<li>
-						<a href="<?php echo base_url('gaji/table'); ?>">
+						<a href="<?php echo site_url('gaji/table'); ?>">
 							<i class="fa fa-money"></i>
 							<span>Gaji</span>
 						</a>
@@ -151,13 +151,13 @@
 						</ul>
 					</li>
 					<li>
-						<a href="<?php echo base_url('laporan/form_laporan'); ?>">
+						<a href="<?php echo site_url('laporan/form_laporan'); ?>">
 							<i class="fa fa-book"></i>
 							<span>Laporan</span>
 						</a>
 					</li>
 					<li>
-						<a href="<?php echo base_url('pengguna/table_pengguna'); ?>">
+						<a href="<?php echo site_url('pengguna/table_pengguna'); ?>">
 							<i class="fa fa-book"></i>
 							<span>Daftar Pengguna</span>
 						</a>
@@ -373,34 +373,34 @@
 
 	<!-- jQuery 2.2.3 -->
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script> -->
-	<script src="<?php echo base_url(); ?>assets/plugins/jQuery/jquery-2.2.3.min.js"></script>
+	<script src="<?php echo base_url('assets/plugins/jQuery/jquery-2.2.3.min.js');?>"></script>
 	<!-- Bootstrap 3.3.6 -->
-	<script src="<?php echo base_url(); ?>assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="<?php echo base_url('assets/bootstrap/js/bootstrap.min.js');?>"></script>
 	<!-- SlimScroll -->
-	<script src="<?php echo base_url(); ?>assets/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+	<script src="<?php echo base_url('assets/plugins/slimScroll/jquery.slimscroll.min.js');?>"></script>
 	<!-- FastClick -->
-	<script src="<?php echo base_url(); ?>assets/plugins/fastclick/fastclick.js"></script>
+	<script src="<?php echo base_url('assets/plugins/fastclick/fastclick.js');?>"></script>
 	<!-- AdminLTE App -->
-	<script src="<?php echo base_url(); ?>assets/dist/js/app.min.js"></script>
+	<script src="<?php echo base_url('assets/dist/js/app.min.js');?>"></script>
 	<!-- AdminLTE for demo purposes -->
-	<script src="<?php echo base_url(); ?>assets/dist/js/demo.js"></script>
+	<script src="<?php echo base_url('assets/dist/js/demo.js');?>"></script>
 	<!-- Select2 -->
-	<script src="<?php echo base_url(); ?>assets/plugins/select2/select2.full.min.js"></script>
+	<script src="<?php echo base_url('assets/plugins/select2/select2.full.min.js');?>"></script>
 	<!-- InputMask -->
-	<script src="<?php echo base_url(); ?>assets/plugins/input-mask/jquery.inputmask.js"></script>
-	<script src="<?php echo base_url(); ?>assets/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-	<script src="<?php echo base_url(); ?>assets/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+	<script src="<?php echo base_url('assets/plugins/input-mask/jquery.inputmask.js');?>"></script>
+	<script src="<?php echo base_url('assets/plugins/input-mask/jquery.inputmask.date.extensions.js');?>"></script>
+	<script src="<?php echo base_url('assets/plugins/input-mask/jquery.inputmask.extensions.js');?>"></script>
 	<!-- date-range-picker -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-	<script src="<?php echo base_url(); ?>assets/plugins/daterangepicker/daterangepicker.js"></script>
+	<script src="<?php echo base_url('assets/plugins/daterangepicker/daterangepicker.js');?>"></script>
 	<!-- bootstrap datepicker -->
-	<script src="<?php echo base_url(); ?>assets/plugins/datepicker/bootstrap-datepicker.js"></script>
+	<script src="<?php echo base_url('assets/plugins/datepicker/bootstrap-datepicker.js');?>"></script>
 	<!-- bootstrap color picker -->
-	<script src="<?php echo base_url(); ?>assets/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>--
+	<script src="<?php echo base_url('assets/plugins/colorpicker/bootstrap-colorpicker.min.js');?>"></script>
 	<!-- bootstrap time picker -->
-	<script src="<?php echo base_url(); ?>assets/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+	<script src="<?php echo base_url('assets/plugins/timepicker/bootstrap-timepicker.min.js');?>"></script>
 	<!-- iCheck 1.0.1 -->
-	<script src="<?php echo base_url(); ?>assets/plugins/iCheck/icheck.min.js"></script>
+	<script src="<?php echo base_url('assets/plugins/iCheck/icheck.min.js');?>"></script>
 
 	<!-- Page script -->
 	<!-- Libraries/Plugin -->
@@ -562,7 +562,7 @@
 			}else{
 				$.ajax({
 						type:'POST',
-						url:'<?php echo base_url('masakerja/kirim_form');?>',
+						url:'<?php echo site_url('masakerja/kirim_form');?>',
 						data:'formMKSubmit=1&jumlah='+jumlah,
 						beforeSend: function () {
 								$('.submitBtn').attr("disabled","disabled");

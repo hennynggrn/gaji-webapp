@@ -26,7 +26,7 @@
 							$no=1; foreach ($honors as $key => $honor) : ?>
 							<tr>
 								<td style="width: 10px"><?php echo $no++;?></td>
-								<td style="text-align: left; padding-left: 50px;"><?php echo $honor['nama'];?></td>
+								<td style="text-align: left; padding-left: 10px;"><?php echo $honor['nama'];?></td>
 								<td><?php echo ($honor['jns_pegawai'] == 0) ? 'Guru' : 'Karyawan';?></td>
 								<td><?php switch ($honor['status_pegawai']) {
 									case 'P':
@@ -44,9 +44,11 @@
 									<a href="" data-toggle="modal" data-target="#editHonorPegawai<?php echo $honor['id_pegawai'];?>" title="Edit" data-tooltip="tooltip" data-placement="left">
 										<span class="badge bg-orange"><i class="fa fa-fw fa-pencil-square-o"></i></span>
 									</a>
-									<a href="" data-toggle="modal" data-target="#deleteHonorPegawai<?php echo $honor['id_pegawai'];?>" title="Hapus" data-tooltip="tooltip" data-placement="right">
-										<span class="badge bg-red"><i class="fa fa-fw fa-trash-o"></i></span>
-									</a>
+									<?php if($honor['honor'] != 0) { ?>
+										<a href="" data-toggle="modal" data-target="#deleteHonorPegawai<?php echo $honor['id_pegawai'];?>" title="Hapus" data-tooltip="tooltip" data-placement="right">
+											<span class="badge bg-red"><i class="fa fa-fw fa-trash-o"></i></span>
+										</a>
+									<?php } ?>
 								</td>
 							</tr>
 							<!-- Modal Edit Honor per Pegawai-->
@@ -85,6 +87,9 @@
 										</div>
 										<div class="modal-body">
 											<p>
+												<?php if ($honor['status_pegawai'] == "T1") {
+													echo '<b class="text-red">Peringatan! </b>'.$honor['nama'].' adalah pegawai <b class="text-red">tetap</b>.<br><br>';
+												}?>
 												Menghapus akan mengatur honor <b class="text-primary"><?php echo $honor['nama'];?></b> menjadi <b class="text-primary">Rp. 0</b>. Lanjutkan ?
 											</p>
 											</div>
@@ -139,7 +144,7 @@
 			</div>
 		</div>
 		<div class="col-md-12">
-			<a href="<?php echo base_url('honor')?>" class="pull-left btn btn-default">Kembali</a>
+			<a href="<?php echo site_url('honor')?>" class="pull-left btn btn-default">Kembali</a>
 		</div>
 	</div>
 			<!-- /.box -->

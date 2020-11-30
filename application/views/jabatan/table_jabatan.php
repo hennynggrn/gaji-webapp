@@ -15,6 +15,7 @@
 								<th style="width: 10px">No</th>
 								<th>Nama Jabatan</th>
 								<th>Jumlah Jam</th>
+								<th>Jumlah Pegawai</th>
 								<th style="width: 200px">Menu</th>
 							</tr>
 							<?php
@@ -24,11 +25,12 @@
 								<td><?php echo $no++; ?></td>
 								<td style="text-align: left; padding-left: 50px;"><?php echo $jabatan['jabatan']; ?></td>
 								<td><?php echo $jabatan['jml_jam']; ?></td>
+								<td><?php echo ($jabatan['result'] != NULL) ? $jabatan['result'].' orang' : '-';?></td>
 								<td>
-									<a href="<?php echo base_url('pegawai/detail/'.$jabatan['id_jabatan']);?>" title="Detail" data-tooltip="tooltip" data-placement="left">
+									<a href="<?php echo site_url('pegawai/detail/'.$jabatan['id_jabatan']);?>" title="Detail" data-tooltip="tooltip" data-placement="left">
 										<span class="badge bg-green"><i class="fa fa-fw fa-info-circle"></i></span>
 									</a>
-									<a href="<?php echo base_url('pegawai/edit/'.$jabatan['id_jabatan']);?>" title="Edit" data-tooltip="tooltip" data-placement="top">
+									<a href="<?php echo site_url('pegawai/edit/'.$jabatan['id_jabatan']);?>" title="Edit" data-tooltip="tooltip" data-placement="top">
 										<span class="badge bg-orange"><i class="fa fa-fw fa-pencil-square-o"></i></span>
 									</a>
 									<a href="" data-toggle="modal" data-target="#deletePegawai<?php echo $jabatan['id_jabatan'];?>" title="Hapus" data-tooltip="tooltip" data-placement="right">

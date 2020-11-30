@@ -52,10 +52,10 @@
 								</td>
 								<td style="text-align: left; padding-left: 5px;"><?php echo 'Rp. '.number_format($pegawai['honor'],0,',','.');?></td>
 								<td>
-									<a href="<?php echo base_url('pegawai/detail/'.$pegawai['id_pegawai']);?>" title="Detail" data-tooltip="tooltip" data-placement="left">
+									<a href="<?php echo site_url('pegawai/detail/'.$pegawai['id_pegawai']);?>" title="Detail" data-tooltip="tooltip" data-placement="left">
 										<span class="badge bg-green"><i class="fa fa-fw fa-info-circle"></i></span>
 									</a>
-									<a href="<?php echo base_url('pegawai/edit/'.$pegawai['id_pegawai']);?>" title="Edit" data-tooltip="tooltip" data-placement="top">
+									<a href="<?php echo site_url('pegawai/edit/'.$pegawai['id_pegawai']);?>" title="Edit" data-tooltip="tooltip" data-placement="top">
 										<span class="badge bg-orange"><i class="fa fa-fw fa-pencil-square-o"></i></span>
 									</a>
 									<a href="" data-toggle="modal" data-target="#deletePegawai<?php echo $pegawai['id_pegawai'];?>" title="Hapus" data-tooltip="tooltip" data-placement="right">
