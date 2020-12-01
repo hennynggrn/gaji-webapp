@@ -1,73 +1,58 @@
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Tabel potongan
-        <small>preview of simple tables</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Tables</a></li>
-        <li class="active">Simple</li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="box box-primary">
-            <div class="box-header"></div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <div class="col-md-12">
-                <table class="table table-hover">
-                  <tbody>
-                    <tr>
-                      <th>Infaq</th>
-                      <td><?php echo $tampil['infaq']; ?></td>
-                    </tr>
-                    <tr>
-                      <th>Sosial</th>
-                      <td><?php echo $tampil['sosial']; ?></td>
-                    </tr>
-                    <tr>
-                      <th>Jasa Raharja</th>
-                      <td><?php echo $tampil['jsr']; ?></td>
-                    </tr>
-                    <tr>
-                      <th>Jamsostek</th>
-                      <td><?php echo $tampil['jamsostek']; ?></td>
-                    </tr>
-                    <tr>
-                      <th>Aisiyah</th>
-                      <td><?php echo $tampil['aisiyah']; ?></td>
-                    </tr>
-                    <tr>
-                      <th>Koperasi Murni</th>
-                      <td><?php echo $tampil['kop']; ?></td>
-                    </tr>
-                    <tr>
-                      <th>Bank Bina Drajat Warga</th>
-                      <td><?php echo $tampil['bank']; ?></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            
-            <!-- /.box-body -->
-            <div class="box-footer text-center">
-              <div class="col-md-12">
-                <a href = "<?php echo base_url('index.php/potongan/edit_potongan');?>">
-                    <button type="submit" class="btn btn-primary btn-block">Edit</button>
-                  </a>
-                  </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-1"></div>
-      </div>
-    </section>
-    <!-- /.content -->
-  </div>
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="box box-primary">
+				<div class="box-header"></div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<div class="col-md-12">
+						<table class="table table-hover text-left">
+							<tbody>
+								<tr>
+									<th width="120px">Infaq</th>
+									<td width="20px" style="padding-right: 20px">:</td>
+									<td class=""><?php echo 'Rp. &nbsp;&nbsp;'.number_format($potongan['infaq'],0,',','.');?></td>
+								</tr>
+								<tr>
+									<th>Sosial</th>
+									<td>:</td>
+									<td><?php echo 'Rp. &nbsp;&nbsp;'.number_format($potongan['sosial'],0,',','.');?></td>
+								</tr>
+								<tr>
+									<th>Aisiyah</th>
+									<td>:</td>
+									<td><?php echo 'Rp. &nbsp;&nbsp;'.number_format($potongan['aisiyah'],0,',','.');?></td>
+								</tr>
+								<tr>
+									<th>Jasa Raharja</th>
+									<td>:</td>
+									<td><?php echo 'Rp. &nbsp;&nbsp;'.number_format($potongan['jsr'],0,',','.');?></td>
+								</tr>
+								<tr>
+									<th>Jamsostek</th>
+									<td>:</td>
+									<td><?php echo 'Rp. &nbsp;&nbsp;'.number_format($potongan['jamsostek'],0,',','.');?></td>
+								</tr>
+								<tr>
+									<th>Pinjaman</th>
+									<td>:</td>
+									<td>
+										Koperasi Murni dan Bank Bina Drajat Warga (BDW) <a href="<?php echo site_url('pinjaman');?>" class="badge bg-blue">Tambah Pinjaman Pegawai <i class="fa fa-fw fa-mail-forward (alias)"></i></a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!-- /.box-body -->
+				<div class="box-footer">
+					<a href="<?php echo site_url('potongan/edit')?>" class="pull-right btn btn-warning edit-btn btn-block">Edit</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-1"></div>
+	</div>
+</section>
+<!-- /.content -->
+</div>
