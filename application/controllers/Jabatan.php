@@ -32,7 +32,7 @@ class Jabatan extends CI_Controller {
 	{
 		$data['title'] = 'Tambah Jabatan';
 
-		$data['pegawais'] = $this->M_pegawai->get_pegawai($id_pegawai)->result_array();
+		$data['pegawais'] = $this->M_pegawai->get_pegawai($e)->result_array();
 
 		$this->template->load('index','jabatan/add_jabatan', $data);
 	}
@@ -97,18 +97,16 @@ class Jabatan extends CI_Controller {
 		}
 	}
 
-	public function delete_pegawai($id)
+	public function delete_pegawai()
 	{		
 		$id_jabatan = $this->uri->segment(3);
 		$id_pegawai = $this->uri->segment(4);
-		var_dump($id_jabatan);
-		var_dump($id_pegawai);
-		// $res['pegawai'] = $this->M_jabatan->delete_pegawai($id);
+		$res['pegawai'] = $this->M_jabatan->delete_pegawai($id_jabatan, $id_pegawai);
 
-		// if ($res) {
-		// 	redirect('jabatan/detail');
-		// } else {
-		// 	echo "<h2> Gagal Hapus Jabatan  </h2>";
-		// }
+		if ($res) {
+			redirect('jabatan/detail/'.$id_jabatan);
+		} else {
+			echo "<h2> Gagal Hapus Jabatan  </h2>";
+		}
 	}
 }

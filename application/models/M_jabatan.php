@@ -116,7 +116,7 @@ class M_jabatan extends CI_Model{
 		$add_list = array_diff($id_jabatan, $old_jabatan);
 		$del_list = array_diff($old_jabatan, $id_jabatan);
 		// var_dump($add_list);
-		// var_dump($del_list);
+		
 		// add
 		foreach ($add_list as $i => $value) {
 			$data = array(
@@ -183,5 +183,12 @@ class M_jabatan extends CI_Model{
 	{
 		$this->db->where('id_jabatan', $id);
 		return $this->db->delete('jabatan');
+	}
+
+	public function delete_pegawai($id_jabatan, $id_pegawai)
+	{
+		$this->db->where('id_jabatan', $id_jabatan);
+		$this->db->where('id_pegawai', $id_pegawai);
+		return $this->db->delete('jbt_pegawai');
 	}
 }
