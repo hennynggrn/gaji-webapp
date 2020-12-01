@@ -37,6 +37,27 @@
 										<span class="badge bg-red"><i class="fa fa-fw fa-trash-o"></i></span>
 									</a>
 							</tr>
+							<!-- Modal Delete Honor per Pegawai-->
+							<div class="modal fade" id="deleteJabatan<?php echo $jabatan['id_jabatan'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+											<h4 class="modal-title" id="myModalLabel">Hapus Data Pegawai</h4>
+										</div>
+										<div class="modal-body">
+											<p>
+												Anda yakin menghapus jabatan <b class="text-primary"><?php echo $jabatan['jabatan'];?></b> ?
+											</p>
+											</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+											<a href="<?php echo site_url('jabatan/delete/'.$jabatan['id_jabatan']);?>" class="btn btn-primary">Hapus</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- End Modal -->
 							<?php } ?>
 						</table>
 					</div>

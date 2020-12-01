@@ -488,6 +488,11 @@
 		})
 	</script>
 
+	<script>
+		// Add new jabatan with list of pegawai
+		
+	</script>
+
 	<!-- Set 'Keluarga' close input when delete member-->
 	<script>
 		$(document).ready(function(){

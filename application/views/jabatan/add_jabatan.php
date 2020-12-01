@@ -13,7 +13,7 @@
 									<label>Nama Jabatan</label>
 									<div class="input-group">
 										<span class="input-group-addon"><i class="fa fa-fw fa-black-tie"></i></span>
-										<input class="form-control" name="jabatan" placeholder="Satpam" style="width: 100%;">
+										<input class="form-control" name="jabatan" placeholder="Satpam" style="width: 100%;" required>
 									</div>
 								</div>
 							</div>
@@ -22,7 +22,7 @@
 									<label>Jumlah Jam</label>
 									<div class="input-group">
 										<span class="input-group-addon"><i class="fa fa-fw fa-clock-o"></i></span>
-										<input class="form-control"  name="jml_jam" placeholder="12" style="width: 100%;">
+										<input class="form-control" type="number"  name="jml_jam" placeholder="12" style="width: 100%;" required>
 									</div>
 								</div>
 							</div>
@@ -33,17 +33,19 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label>Tambah Pegawai dengan Jabatan ini</label>
-									<div class="input-group">
-										<span class="input-group-addon"><i class="fa fa-fw fa-user-plus"></i></span>
-										<input class="form-control"  name="pegawai[]" placeholder="Cari Budi ..." style="width: 100%;">
-									</div>
+									<select class="form-control select2" multiple="multiple" id="pegawai" name="id_pegawai[]" data-placeholder="Pilih Jabatan" style="width: 100%; background-color: white;">
+										<option disabled>Cari Pegawai</option>
+										<?php foreach ($pegawais as $key => $pegawai) : ?>
+										<option value="<?php echo $pegawai['id_pegawai'] ?>"><?php echo $pegawai['nama'] ?></option>
+										<?php endforeach; ?>
+									</select>
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
 									<h6>Daftar pegawai ditambahkan :</h6>
 									<table class="table table-hover text-center">
-										<tbody>
+										<tbody id="pegawai_list">
 											<tr>
 												<td>1</td>
 												<td>Diva</td>
@@ -70,8 +72,8 @@
 					</div>
 					<!-- /.box-body -->
 					<div class="box-footer">
-							<a href="<?php echo site_url('jabatan')?>" class="pull-left btn btn-danger">Batal</a>
-							<button type="submit" class="pull-right btn btn-primary">Simpan</button>
+						<a href="<?php echo site_url('jabatan')?>" class="pull-left btn btn-danger">Batal</a>
+						<button type="submit" class="pull-right btn btn-primary">Simpan</button>
 					</div>
 				</form>
 			</div>

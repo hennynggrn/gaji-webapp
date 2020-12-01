@@ -1,8 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-// $route['jabatan/edit/(:any)'] = 'jabatan/edit_jabatan/$1';
-// $route['jabatan/detail/(:any)'] = 'jabatan/detail_jabatan/$1';
+// $route['jabatan/delete_pegawai/(:any)'] = 'jabatan/delete_jabatan/$1';
+$route['jabatan/delete/(:any)'] = 'jabatan/delete_jabatan/$1';
+$route['jabatan/edit/(:any)'] = 'jabatan/edit_jabatan/$1';
+$route['jabatan/detail/(:any)'] = 'jabatan/detail_jabatan/$1';
 $route['jabatan/add'] = 'jabatan/add_jabatan';
 $route['jabatan'] = 'jabatan/index';
 

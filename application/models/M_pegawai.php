@@ -5,7 +5,7 @@ class M_pegawai extends CI_Model{
 
 	public function get_pegawai($id_pegawai = TRUE)
 	{
-		if (isset($id_pegawai)) {
+		if ($id_pegawai != NULL) {
 			$this->db->select('p.*');
 			return $this->db->get_where('pegawai p', array('id_pegawai' => $id_pegawai));
 		} else {
@@ -131,5 +131,4 @@ class M_pegawai extends CI_Model{
 		$this->db->where('id_pegawai', $id);
 		return $this->db->delete('pegawai');
 	}
-
 }

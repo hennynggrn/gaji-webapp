@@ -28,42 +28,77 @@ class Jabatan extends CI_Controller {
 		$this->template->load('index','jabatan/table_jabatan',$data);
 	}
 
-	public function add_jabatan()
+	public function add_jabatan($id_pegawai = NULL)
 	{
 		$data['title'] = 'Tambah Jabatan';
-		// $data['pegawai']= $this->M_jabatan->get_pegawai()->result();
+
+		$data['pegawais'] = $this->M_pegawai->get_pegawai($id_pegawai)->result_array();
+
 		$this->template->load('index','jabatan/add_jabatan', $data);
 	}
 	
-	public function detail_jabatan()
+	public function insert_jabatan()
 	{
-		$data['title'] = 'Detail Jabatan';
+		$res['jabatan'] = $this->M_jabatan->add_jabatan();
+		$last_id = $res['jabatan'];
+		$res['pegawai'] = $this->M_jabatan->add_pegawai_jabatan($last_id);
+		if ($res) {
+			redirect('jabatan');
+		} else {
+			echo "<h2> Gagal Tambah Jabatan </h2>";
+		}
 	}
 
-	// public function edit_jabatan()
-	// {
-	// 	$id= $this->uri->segment(3);
-	// 	$data['jabatan']= $this->M_jabatan->edit_jabatan($id)->row_array();
-	// 	$this->template->load('index','jabatan/edit_jabatan',$data);
+	public function detail_jabatan($id)
+	{
+		$data['title'] = 'Detail Jabatan';
+		$result = $this->M_jabatan->get_pegawai_jabatan($id)->result_array();
+		$data['id'] = $this->M_jabatan->get_jabatan_detail($id)->row_array();
+		$data['desc'] = $data['id']['jabatan'].' ('.$data['id']['jml_jam'].' jam)';
+		$this_id = $id;
+		$data['pegawais'] = array();
+		// foreach ($result as $key => $value) {
+		// 	if (in_array('17', $result[$key]['jbt_list'])) {
+		// 		$data['pegawais'][] = $result[$key]['id_jabatan'];
+		// 	}
+		// }
+		if (in_array('17', 'this17')) {
+				echo 'this17';
+			}
+		var_dump($result);
+		var_dump($this_id);
+		var_dump($data['pegawais']);
+		$this->template->load('index','jabatan/detail_jabatan', $data);
+	}
 
-	// 	// var_dump($data['jabatan']);
-	// }
+	public function edit_jabatan($id)
+	{
+		$data['title'] = 'Edit Jabatan';
+		$data['pegawais'] = $this->M_jabatan->get_jabatan_pegawai_selected($id)->result_array();
+		$data['id'] = $this->M_jabatan->get_jabatan_detail($id)->row_array();
 
-	// public function edit_jabatan_proses()
-	// {
-	// 	$id_jabatan=$this->input->post('id_jabatan');
-	// 	$jabatan=$this->input->post('jabatan');
-	// 	$jml_jam=$this->input->post('jml_jam');
-	// 	// var_dump($id_jabatan);
-	// 	$data= array(
-	// 		'jabatan' => $jabatan,
-	// 		'jml_jam' => $jml_jam
-	// 	);
-	// 	$where = array(
-	// 		'id_jabatan' => $id_jabatan
-	// 	);
-	// 	//print_r($data);
-	// 	$this->M_jabatan->edit_jabatan_proses($where, $data,'jabatan');
-	// 	redirect('jabatan/table_jabatan');	
-	// }
+		$this->template->load('index','jabatan/edit_jabatan',$data);
+	}
+
+	public function update_jabatan()
+	{
+		$res['jabatan'] = $this->M_jabatan->update_jabatan();
+		$res['pegawai'] = $this->M_jabatan->update_pegawai_jabatan();
+		if ($res) {
+			redirect('jabatan');
+		} else {
+			echo "<h2> Gagal Edit Jabatan </h2>";
+		}
+	}
+
+	public function delete_jabatan($id)
+	{		
+		$res['jabatan'] = $this->M_jabatan->delete_jabatan($id);
+
+		if ($res) {
+			redirect('jabatan');
+		} else {
+			echo "<h2> Gagal Hapus Jabatan  </h2>";
+		}
+	}
 }

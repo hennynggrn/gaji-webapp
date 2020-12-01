@@ -26,7 +26,7 @@ class Pegawai extends CI_Controller {
 	public function insert_pegawai()
 	{
 		$res['pegawai'] = $this->M_pegawai->add_pegawai();
-		$res['jabatan'] = $this->M_jabatan->add_jabatan();
+		$res['jabatan'] = $this->M_jabatan->add_jabatan_pegawai();
 		if ($this->input->post('status') == 1) {
 			$res['keluarga']=$this->M_keluarga->add_keluarga(); 
 		};
