@@ -1,9 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-// $route['potongan/delete/(:any)'] = 'potongan/delete_potongan/$1';
-// $route['potongan/detail/(:any)'] = 'potongan/detail_potongan/$1';
-// $route['potongan/add'] = 'potongan/add_potongan';
+// $route['pinjaman/delete/(:any)'] = 'pinjaman/delete_pinjaman/$1';
+// $route['pinjaman/edit/(:any)'] = 'pinjaman/edit_pinjaman/$1';
+// $route['pinjaman/detail/(:any)'] = 'pinjaman/detail_pinjaman/$1';
+$route['pinjaman/add'] = 'pinjaman/add_pinjaman';
+$route['pinjaman'] = 'pinjaman/index';
+
 $route['potongan/edit'] = 'potongan/edit_potongan';
 $route['potongan'] = 'potongan/index';
 

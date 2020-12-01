@@ -3,14 +3,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Pinjaman extends CI_Controller {
 
-	function __construct() {
-		parent::__construct();
-		$this->load->model('M_pinjaman');
-	}
-
 	public function index()
 	{
-		$this->template->load('index','pinjaman/table_pinjaman');
+		$data['title']= 'Tabel Pinjaman';
+		$this->template->load('index','pinjaman/table_pinjaman', $data);
 	}
 
 	public function table_pjm_kop()
