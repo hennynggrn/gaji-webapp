@@ -34,7 +34,7 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label>Tambah Pegawai dengan Jabatan ini</label>
-									<select class="form-control select2" multiple="multiple" id="pegawai" name="id_pegawai[]" data-placeholder="Pilih Jabatan" style="width: 100%; background-color: white;">
+									<select class="form-control select2" multiple="multiple" id="id_pegawai" name="id_pegawai[]" data-placeholder="Pilih Jabatan" style="width: 100%; background-color: white;">
 										<option disabled>Cari Pegawai</option>
 										<?php foreach ($pegawais as $key => $pegawai) : ?>
 										<option value=<?php echo '"'.$pegawai['id_pegawai'].'"'; echo ($pegawai['id_jabatan'] != NULL) ? 'selected' : '';?>><?php echo $pegawai['nama'] ?></option>

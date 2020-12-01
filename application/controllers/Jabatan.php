@@ -57,17 +57,12 @@ class Jabatan extends CI_Controller {
 		$data['desc'] = $data['id']['jabatan'].' ('.$data['id']['jml_jam'].' jam)';
 		$this_id = $id;
 		$data['pegawais'] = array();
-		// foreach ($result as $key => $value) {
-		// 	if (in_array('17', $result[$key]['jbt_list'])) {
-		// 		$data['pegawais'][] = $result[$key]['id_jabatan'];
-		// 	}
-		// }
-		if (in_array('17', 'this17')) {
-				echo 'this17';
+		foreach ($result as $key => $value) {
+			if ($result[$key]['jbt_id'] == $id) {
+				$data['pegawais'][] = $result[$key];
 			}
-		var_dump($result);
-		var_dump($this_id);
-		var_dump($data['pegawais']);
+		}
+		// var_dump($data['pegawais']);
 		$this->template->load('index','jabatan/detail_jabatan', $data);
 	}
 
@@ -100,5 +95,20 @@ class Jabatan extends CI_Controller {
 		} else {
 			echo "<h2> Gagal Hapus Jabatan  </h2>";
 		}
+	}
+
+	public function delete_pegawai($id)
+	{		
+		$id_jabatan = $this->uri->segment(3);
+		$id_pegawai = $this->uri->segment(4);
+		var_dump($id_jabatan);
+		var_dump($id_pegawai);
+		// $res['pegawai'] = $this->M_jabatan->delete_pegawai($id);
+
+		// if ($res) {
+		// 	redirect('jabatan/detail');
+		// } else {
+		// 	echo "<h2> Gagal Hapus Jabatan  </h2>";
+		// }
 	}
 }

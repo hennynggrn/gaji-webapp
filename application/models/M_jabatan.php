@@ -42,7 +42,7 @@ class M_jabatan extends CI_Model{
 
 	public function get_pegawai_jabatan($id = TRUE)
 	{
-		$this->db->select('p.*, jbt.*, GROUP_CONCAT(jp.id_jabatan) jbt_list,
+		$this->db->select('p.*, jbt.*, GROUP_CONCAT(CONCAT(if(jp.id_jabatan='.$id.',jp.id_jabatan,"")) SEPARATOR "") jbt_id,
 						   GROUP_CONCAT(DISTINCT CONCAT(jbt.jabatan, "</span>&nbsp;<span>") ORDER BY p.nama SEPARATOR "</span>&nbsp;<span>") as result_list');
 		$this->db->order_by('p.nama');
 		$this->db->join('jbt_pegawai jp', 'jp.id_jabatan = jbt.id_jabatan', 'LEFT');

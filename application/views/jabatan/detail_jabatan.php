@@ -62,7 +62,7 @@
 											</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-											<a href="<?php echo site_url('jabatan/delete_pegawai/'.$pegawai['id_pegawai']);?>" class="btn btn-primary">Hapus</a>
+											<a href="<?php echo site_url('jabatan/delete_pegawai/'.$id['id_jabatan'].'/'.$pegawai['id_pegawai']);?>" class="btn btn-primary">Hapus</a>
 										</div>
 									</div>
 								</div>
