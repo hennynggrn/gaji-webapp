@@ -51,18 +51,18 @@ class M_pinjaman extends CI_Model{
 		return  $insert_id;
 	}
 
-	private function update_rest_pinjaman($last_id){
-		$this->db->select('max(tanggal_kembali) end_date');
-		$end_date = $this->db->get_where('angsuran', array('id_pinjaman' => $last_id))->result_array();
-		$result = $this->db->get_where('angsuran', array('id_pinjaman' => $last_id))->result_array();
-		$jml_angsuran = count($result);
-		$data = array(
-			'end_date' => $end_date[0]['end_date'],
-			'jml_angsuran' => $jml_angsuran
-		);
-		$this->db->where('id_pinjaman', $last_id);
-		return $this->db->update('pinjaman', $data);
-	}
+	// private function update_rest_pinjaman($last_id){
+	// 	$this->db->select('max(tanggal_kembali) end_date');
+	// 	$end_date = $this->db->get_where('angsuran', array('id_pinjaman' => $last_id))->result_array();
+	// 	$result = $this->db->get_where('angsuran', array('id_pinjaman' => $last_id))->result_array();
+	// 	$jml_angsuran = count($result);
+	// 	$data = array(
+	// 		'end_date' => $end_date[0]['end_date'],
+	// 		'jml_angsuran' => $jml_angsuran
+	// 	);
+	// 	$this->db->where('id_pinjaman', $last_id);
+	// 	return $this->db->update('pinjaman', $data);
+	// }
 
 	public function add_angsuran_pinjaman($last_id)
 	{
@@ -78,10 +78,8 @@ class M_pinjaman extends CI_Model{
 				'nominal' => $nominal[$i],
 				'status' => '0'
 			);
-			$res['angsuran'] = $this->db->insert("angsuran", $data);
+			return $this->db->insert("angsuran", $data);
 		}
-		$res['pinjaman'] = $this->update_rest_pinjaman($last_id);
-		return $res;
 	}
 
 	public function update_repay()

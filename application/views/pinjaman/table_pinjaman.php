@@ -49,9 +49,9 @@
 									<td style="text-align:left;"><?php echo $pinjaman['nama'];?></td>
 									<td><?php echo $pinjaman['kode_pinjaman'];?></td>
 									<td><?php echo $pinjaman['total_pinjaman'];?></td>
-									<td><?php echo $pinjaman['jml_angsuran'];?></td>
+									<td><?php echo '-----' ;?></td>
 									<td><?php echo $pinjaman['start_date'];?></td>
-									<td><?php echo $pinjaman['end_date'];?></td>
+									<td><?php echo '-----' ;?></td>
 									<td><?php echo ($pinjaman['status_pinjaman'] == 1) ? '<span class="badge bg-green">Lunas</span>' : '<span class="badge bg-red">Belum Lunas</span>';?></td>
 									<td><?php echo ($pinjaman['ket_pinjaman'] == NULL) ? '(kosong)' : $pinjaman['ket_pinjaman'];?></td>
 									<td>
@@ -97,9 +97,9 @@
 									<td style="text-align:left;"><?php echo $pinjaman['nama'];?></td>
 									<td><?php echo $pinjaman['kode_pinjaman'];?></td>
 									<td><?php echo $pinjaman['total_pinjaman'];?></td>
-									<td><?php echo $pinjaman['jml_angsuran'];?></td>
+									<td><?php echo '-----' ;?></td>
 									<td><?php echo $pinjaman['start_date'];?></td>
-									<td><?php echo $pinjaman['end_date'];?></td>
+									<td><?php echo '-----' ;?></td>
 									<td><?php echo ($pinjaman['status_pinjaman'] == 1) ? '<span class="badge bg-green">Lunas</span>' : '<span class="badge bg-red">Belum Lunas</span>';?></td>
 									<td><?php echo ($pinjaman['ket_pinjaman'] == NULL) ? '(kosong)' : $pinjaman['ket_pinjaman'];?></td>
 									<td>
