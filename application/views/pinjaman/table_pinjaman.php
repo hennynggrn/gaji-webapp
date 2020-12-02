@@ -30,7 +30,7 @@
 							<table class="table table-bordered text-center">
 								<tr>
 									<th>No</th>
-									<th>Nama Pegawai</th>
+									<th>Nama Peminjam</th>
 									<th>Kode</th>
 									<th>Total Pinjaman</th>
 									<th>Jumlah Angsuran</th>
@@ -41,31 +41,32 @@
 									<th>Menu</th>
 								</tr>
 								<?php
-									$no=1; 
+									$no=1; foreach ($pinjamans as $key => $pinjaman) :
+										if($pinjaman['kode_pinjaman'] == 'KOP') {
 							 	?>
 								<tr>
 									<td><?php echo $no++;?></td>
-									<td style="text-align:left;"> Pegawai</td>
-									<td>Kode</td>
-									<td>Total</td>
-									<td>Angsuran</td>
-									<td>Pinjam</td>
-									<td>Kembali</td>
-									<td>Status</td>
-									<td>Keterangan</td>
+									<td style="text-align:left;"><?php echo $pinjaman['nama'];?></td>
+									<td><?php echo $pinjaman['kode_pinjaman'];?></td>
+									<td><?php echo $pinjaman['total_pinjaman'];?></td>
+									<td><?php echo $pinjaman['jml_angsuran'];?></td>
+									<td><?php echo $pinjaman['start_date'];?></td>
+									<td><?php echo $pinjaman['end_date'];?></td>
+									<td><?php echo ($pinjaman['status_pinjaman'] == 1) ? '<span class="badge bg-green">Lunas</span>' : '<span class="badge bg-red">Belum Lunas</span>';?></td>
+									<td><?php echo ($pinjaman['ket_pinjaman'] == NULL) ? '(kosong)' : $pinjaman['ket_pinjaman'];?></td>
 									<td>
-										<a href="<?php echo site_url('pegawai/detail/');?>" title="Detail" data-tooltip="tooltip" data-placement="left">
+										<a href="<?php echo site_url('pinjaman/detail/'.$pinjaman['id_pinjaman']);?>" title="Detail" data-tooltip="tooltip" data-placement="left">
 											<span class="badge bg-green"><i class="fa fa-fw fa-info-circle"></i></span>
 										</a>
-										<a href="<?php echo site_url('pegawai/edit/');?>" title="Edit" data-tooltip="tooltip" data-placement="top">
+										<a href="<?php echo site_url('pinjaman/edit/'.$pinjaman['id_pinjaman']);?>" title="Edit" data-tooltip="tooltip" data-placement="top">
 											<span class="badge bg-orange"><i class="fa fa-fw fa-pencil-square-o"></i></span>
 										</a>
-										<a href="" data-toggle="modal" data-target="#deletePinjaman" title="Hapus" data-tooltip="tooltip" data-placement="right">
+										<a href="" data-toggle="modal" data-target="#deletePinjaman<?php echo $pinjaman['id_pinjaman'];?>" title="Hapus" data-tooltip="tooltip" data-placement="right">
 											<span class="badge bg-red"><i class="fa fa-fw fa-trash-o"></i></span>
 										</a>
 									</td>
 								</tr>
-
+									<?php } endforeach;?>
 							</table>
 						</div>
 					</div>
@@ -76,10 +77,10 @@
 						<div class="box-body">
 							<table class="table table-bordered text-center">
 								<tr>
-									<th e>No</th>
-									<th>Nama Pegawai</th>
+									<th>No</th>
+									<th>Nama Peminjam</th>
 									<th>Kode</th>
-									<th>Total Nominal</th>
+									<th>Total Pinjaman</th>
 									<th>Jumlah Angsuran</th>
 									<th>Tanggal Pinjam</th>
 									<th>Tanggal Kembali</th>
@@ -88,31 +89,32 @@
 									<th>Menu</th>
 								</tr>
 								<?php
-									$no=1; 
+									$no=1; foreach ($pinjamans as $key => $pinjaman) :
+										if($pinjaman['kode_pinjaman'] == 'BANK') {
 							 	?>
 								<tr>
 									<td><?php echo $no++;?></td>
-									<td style="text-align:left;"> Pegawai</td>
-									<td>Kode</td>
-									<td>Total</td>
-									<td>Angsuran</td>
-									<td>Pinjam</td>
-									<td>Kembali</td>
-									<td>Status</td>
-									<td>Keterangan</td>
+									<td style="text-align:left;"><?php echo $pinjaman['nama'];?></td>
+									<td><?php echo $pinjaman['kode_pinjaman'];?></td>
+									<td><?php echo $pinjaman['total_pinjaman'];?></td>
+									<td><?php echo $pinjaman['jml_angsuran'];?></td>
+									<td><?php echo $pinjaman['start_date'];?></td>
+									<td><?php echo $pinjaman['end_date'];?></td>
+									<td><?php echo ($pinjaman['status_pinjaman'] == 1) ? '<span class="badge bg-green">Lunas</span>' : '<span class="badge bg-red">Belum Lunas</span>';?></td>
+									<td><?php echo ($pinjaman['ket_pinjaman'] == NULL) ? '(kosong)' : $pinjaman['ket_pinjaman'];?></td>
 									<td>
-										<a href="<?php echo site_url('pegawai/detail/');?>" title="Detail" data-tooltip="tooltip" data-placement="left">
+										<a href="<?php echo site_url('pinjaman/detail/'.$pinjaman['id_pinjaman']);?>" title="Detail" data-tooltip="tooltip" data-placement="left">
 											<span class="badge bg-green"><i class="fa fa-fw fa-info-circle"></i></span>
 										</a>
-										<a href="<?php echo site_url('pegawai/edit/');?>" title="Edit" data-tooltip="tooltip" data-placement="top">
+										<a href="<?php echo site_url('pinjaman/edit/'.$pinjaman['id_pinjaman']);?>" title="Edit" data-tooltip="tooltip" data-placement="top">
 											<span class="badge bg-orange"><i class="fa fa-fw fa-pencil-square-o"></i></span>
 										</a>
-										<a href="" data-toggle="modal" data-target="#deletePinjaman" title="Hapus" data-tooltip="tooltip" data-placement="right">
+										<a href="" data-toggle="modal" data-target="#deletePinjaman<?php echo $pinjaman['id_pinjaman'];?>" title="Hapus" data-tooltip="tooltip" data-placement="right">
 											<span class="badge bg-red"><i class="fa fa-fw fa-trash-o"></i></span>
 										</a>
 									</td>
 								</tr>
-
+									<?php } endforeach;?>
 							</table>
 						</div>
 					</div>
