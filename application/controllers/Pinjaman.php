@@ -8,7 +8,7 @@ class Pinjaman extends CI_Controller {
 		$data['title']= 'Tabel Pinjaman';
 
 		$data['pinjamans'] = $this->M_pinjaman->get_pinjaman($id)->result_array();
-		
+		var_dump($data['pinjamans']);
 		$this->template->load('index','pinjaman/table_pinjaman', $data);
 	}
 
@@ -52,6 +52,15 @@ class Pinjaman extends CI_Controller {
 		} else {
 			echo "<h2> Gagal Tambah Data Pinjaman </h2>";
 		}
+	}
+
+	public function edit_pinjaman($id_pegawai)
+	{
+		$data['title']= 'Edit Pinjaman';
+
+		$data['pegawais'] = $this->M_pegawai->get_pegawai($id_pegawai)->result_array();
+
+		$this->template->load('index','pinjaman/edit_pinjaman', $data);
 	}
 }
 

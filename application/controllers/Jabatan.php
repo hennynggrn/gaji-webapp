@@ -20,7 +20,8 @@ class Jabatan extends CI_Controller {
 		foreach ($explode as $i => $value) {
 			$data['result'][] = count(array_filter($explode[$i], function($x) { return !empty($x); }));
 		}
-		
+		// var_dump($explode);
+		// var_dump($data['result']);
 		foreach ($data['jabatans'] as $key => $value) {
 			$data['jabatans'][$key]['result'] = $data['result'][$key];
 		}
@@ -42,7 +43,7 @@ class Jabatan extends CI_Controller {
 		$res['jabatan'] = $this->M_jabatan->add_jabatan();
 		$last_id = $res['jabatan'];
 		$res['pegawai'] = $this->M_jabatan->add_pegawai_jabatan($last_id);
-		
+
 		if ($res) {
 			redirect('jabatan');
 		} else {

@@ -6,13 +6,15 @@ class M_pinjaman extends CI_Model{
 	public function get_pinjaman($id = TRUE)
 	{
 		if ($id != NULL) {
-			$this->db->select('*');
+			$this->db->select('*, count(a.id_angsuran) jml_angsuran, max(a.tanggal_kembali) end_date, 
+							   sum(a.status) status_ang');
 			$this->db->join('angsuran a', 'a.id_pinjaman = pjm.id_pinjaman', 'LEFT');
 			$this->db->join('pegawai p', 'p.id_pegawai = pjm.id_pegawai', 'LEFT');
 			$this->db->group_by('pjm.id_pinjaman');
 			return $this->db->get_where('pinjaman pjm', array('pjm.id_pinjaman' => $id));
 		} else {
-			$this->db->select('*');
+			$this->db->select('*, count(a.id_angsuran) jml_angsuran, max(a.tanggal_kembali) end_date, 
+							   sum(a.status) status_ang');
 			$this->db->join('angsuran a', 'a.id_pinjaman = pjm.id_pinjaman', 'LEFT');
 			$this->db->join('pegawai p', 'p.id_pegawai = pjm.id_pegawai', 'LEFT');
 			$this->db->group_by('pjm.id_pinjaman');
@@ -23,7 +25,7 @@ class M_pinjaman extends CI_Model{
 	public function get_angsuran($id = TRUE)
 	{
 		$this->db->select('*');
-		$this->db->order_by('a.no_angsuran');
+		$this->db->order_by('tanggal_kembali');
 		return $this->db->get_where('angsuran a', array('a.id_pinjaman' => $id));
 		
 	}

@@ -5,22 +5,23 @@
 			<div class="box box-primary">
 				<div class="box-header">
 				</div>
-				<form class="form-horizontal" role="form" method="post" action="<?php echo site_url('pinjaman/insert_pinjaman');?>" >
+				<form class="form-horizontal" role="form" method="post" action="<?php echo site_url('pinjaman/update_pinjaman');?>" >
 					<div class="box-body">
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Nama Pegawai</label>
 							<div class="col-sm-10">
-								<select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="nama">
+								<select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="pegawai" required>
 									<option disabled>Cari Pegawai</option>
-									<option value="kop">Koperasi Murni</option>
-									<option value="kop">Murni</option>
+									<?php foreach ($pegawais as $key => $pegawai) :?>
+										<option value="<?php echo $pegawai['id_pegawai'];?>"><?php echo $pegawai['nama'];?></option>
+									<?php endforeach;?>
 								</select>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Kode Pinjaman</label>
 							<div class="col-sm-10">
-								<select class="form-control" name="kode" id="kode" placeholder="Pilih Jenis Pinjaman">
+								<select class="form-control" name="kode" id="kode" placeholder="Pilih Jenis Pinjaman" required>
 									<option disabled>Pilih Jenis Pinjaman</option>
 									<option value="kop">Koperasi Murni</option>
 									<option value="bank">Bank Bina Drajat Warga (BDW)</option>
@@ -30,7 +31,7 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Tanggal Pinjam</label>
 							<div class="col-sm-10">
-								<input type="date" id="today_date" class="form-control" name="tgl_pjm" placeholder="">
+								<input type="date" id="today_date" class="form-control" name="tgl_pjm" placeholder="" required>
 							</div>
 						</div>
 						<div class="form-group">
@@ -38,7 +39,7 @@
 							<div class="col-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon">Rp.</span>
-									<input type="number" class="form-control" name="total_pjm" placeholder="2000000">
+									<input type="number" class="form-control" name="total_pjm" placeholder="2000000" required>
 								</div>
 							</div>
 						</div>
@@ -115,10 +116,8 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Keterangan Pinjam</label>
 							<div class="col-sm-10">
-								<select class="form-control" name="ket_pjm_kop">
-									<option value='0'>Belum Lunas</option>
-									<option value='1'>Lunas</option>
-								</select>
+								<textarea class="form-control" placeholder="Alasan peminjaman ..." name="ket_pjm" cols="30" rows="3"></textarea>
+								<span class="text-red" id='info_honor'><small>* Keterangan optional</small></span>
 							</div>
 						</div>
 						<!-- <div class="form-group" id="angsuran">

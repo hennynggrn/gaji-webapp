@@ -26,16 +26,6 @@
 									<td><?php echo ($pinjaman['kode_pinjaman'] == 'KOP') ? 'KOP - Koperasi  Murni' : 'BANK - Bina Drajat Warga (BDW)';?></td>
 								</tr>
 								<tr>
-									<td>Total Pinjaman</td>
-									<td>:</td>
-									<td><?php echo 'Rp. '.number_format($pinjaman['total_pinjaman'],0,',','.');?></td>
-								</tr>
-								<tr>
-									<td>Jumlah Angsuran</td>
-									<td>:</td>
-									<td><?php echo $pinjaman['jml_angsuran'];?></td>
-								</tr>
-								<tr>
 									<td>Tanggal Pinjam</td>
 									<td>:</td>
 									<td><?php echo $pinjaman['start_date'];?></td>
@@ -46,9 +36,19 @@
 									<td><?php echo $pinjaman['end_date'];?></td>
 								</tr>
 								<tr>
+									<td>Total Pinjaman</td>
+									<td>:</td>
+									<td><?php echo 'Rp. '.number_format($pinjaman['total_pinjaman'],0,',','.');?></td>
+								</tr>
+								<tr>
+									<td>Jumlah Angsuran</td>
+									<td>:</td>
+									<td><?php echo $pinjaman['jml_angsuran'];?></td>
+								</tr>
+								<tr>
 									<td>Status</td>
 									<td>:</td>
-									<td><?php echo ($pinjaman['status_pinjaman'] == 1) ? '<span class="badge bg-green">Lunas</span>' : '<span class="badge bg-red">Belum Lunas</span>';?></td>
+									<td><?php echo ($pinjaman['jml_angsuran']-$pinjaman['status_ang'] == 0) ? '<span class="badge bg-green">Lunas</span>' : '<span class="badge bg-red">Belum Lunas</span>';?></td>
 								</tr>
 								<tr>
 									<td>Keterangan</td>
@@ -83,10 +83,10 @@
 								<th>Bayar</th>
 							</thead>
 							<tbody>
-							<?php foreach ($angsurans as $key => $angsuran) : ?>
+							<?php $no = 1; foreach ($angsurans as $key => $angsuran) : ?>
 								<form role="form" method="post" action="<?php echo site_url('pinjaman/update_repay');?>">
 								<tr>
-									<td><?php echo $angsuran['no_angsuran'];?></td>
+									<td><?php echo $no++;?></td>
 									<td style="text-align: left;"><?php echo 'Rp. '.number_format($angsuran['nominal'],0,',','.');?></td>
 									<td><?php echo $angsuran['tanggal_kembali'];?></td>
 									<td><?php echo ($angsuran['status'] == 1) ? '<span class="badge bg-green">Terbayar</span>' : '<span class="badge bg-red">Belum Dibayar</span>';?></td>
