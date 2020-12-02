@@ -49,17 +49,8 @@ class M_jabatan extends CI_Model{
 		$this->db->join('pegawai p', 'p.id_pegawai = jp.id_pegawai', 'LEFT');
 		$this->db->group_by('jp.id_pegawai');
 		return $this->db->get('jabatan jbt');
-		
-// 		SELECT p.nama, p.id_pegawai, jp.*, jbt.*,
-// 	 GROUP_CONCAT(DISTINCT CONCAT(jp.id_jabatan, "</span>&nbsp;<span>") ORDER BY p.nama SEPARATOR "</span>&nbsp;<span>") as result_list
-
-// FROM jabatan jbt
-// LEFT JOIN jbt_pegawai jp ON jp.id_jabatan = jbt.id_jabatan
-// LEFT JOIN pegawai p ON jp.id_pegawai = p.id_pegawai
-
-// GROUP BY jp.id_pegawai
-
 	}
+
 	public function add_jabatan()
 	{
 		$jabatan = $this->input->post('jabatan');
@@ -74,20 +65,6 @@ class M_jabatan extends CI_Model{
 		return  $insert_id;
 	}
 
-	public function add_jabatan_pegawai($last_id)
-	{
-		$id_pegawai = $this->input->post('id_pegawai');
-		$id_jabatan = $this->input->post('jabatan');
-
-		foreach ($id_jabatan as $i => $value) {
-			$data = array(
-				'id_pegawai' => $id_pegawai,
-				'id_jabatan' => $id_jabatan[$i]
-			);
-			$this->db->insert("jbt_pegawai", $data);
-		}
-	}
-
 	public function add_pegawai_jabatan($last_id)
 	{
 		$id_pegawai = $this->input->post('id_pegawai');
@@ -96,6 +73,20 @@ class M_jabatan extends CI_Model{
 			$data = array(
 				'id_pegawai' => $id_pegawai[$i],
 				'id_jabatan' => $last_id
+			);
+			$this->db->insert("jbt_pegawai", $data);
+		}
+	}
+
+	public function add_jabatan_pegawai()
+	{
+		$id_pegawai = $this->input->post('id_pegawai');
+		$id_jabatan = $this->input->post('jabatan');
+
+		foreach ($id_jabatan as $i => $value) {
+			$data = array(
+				'id_pegawai' => $id_pegawai,
+				'id_jabatan' => $id_jabatan[$i]
 			);
 			$this->db->insert("jbt_pegawai", $data);
 		}

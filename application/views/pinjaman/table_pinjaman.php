@@ -32,7 +32,7 @@
 									<th>No</th>
 									<th>Nama Pegawai</th>
 									<th>Kode</th>
-									<th>Total Nominal</th>
+									<th>Total Pinjaman</th>
 									<th>Jumlah Angsuran</th>
 									<th>Tanggal Pinjam</th>
 									<th>Tanggal Kembali</th>

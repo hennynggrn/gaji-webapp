@@ -73,8 +73,8 @@
 					</div>
 					<!-- /.box-body -->
 					<div class="box-footer">
-						<a href="<?php echo site_url('jabatan')?>" class="pull-left btn btn-danger">Batal</a>
-						<button type="submit" class="pull-right btn btn-primary">Simpan</button>
+						<a href="<?php echo site_url('jabatan')?>" class="pull-left btn btn-danger edit-btn">Batal</a>
+						<button type="submit" class="pull-right btn btn-primary edit-btn">Simpan</button>
 					</div>
 				</form>
 			</div>

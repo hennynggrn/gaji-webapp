@@ -9,46 +9,28 @@ class Pinjaman extends CI_Controller {
 		$this->template->load('index','pinjaman/table_pinjaman', $data);
 	}
 
-	public function table_pjm_kop()
+	public function add_pinjaman($id_pegawai = NULL)
 	{
-		$data['tampil']= $this->M_pinjaman->get_pjm_kop()->result_array();
-		$data['pegawai']= $this->M_pinjaman->get_pegawai()->result_array();
-		$this->template->load('index','pinjaman/table',$data);
-
-		// var_dump($data['tampil']);
-	}
-
-	public function add_pjm_kop()
-	{
-		$data['pegawai']= $this->M_pinjaman->get_pegawai()->result();
+		$data['title']= 'Tambah Pinjaman';
+		$data['pegawais'] = $this->M_pegawai->get_pegawai($id_pegawai)->result_array();
 		$this->template->load('index','pinjaman/add_pinjaman',$data);
 	}
 
-	public function add_pjm_kop_proses()
+	public function insert_pinjaman()
 	{
-		$kode_pjm_kop=$this->input->post('kode_pjm_kop');
-		$total_pjm_kop=$this->input->post('total_pjm_kop');
-		$jml_asr_kop=$this->input->post('jml_asr_kop');
-		$start_date=$this->input->post('start_date');
-		$end_date=$this->input->post('end_date');
-		$ket_pjm_kop=$this->input->post('ket_pjm_kop');
-		$id_pegawai=$this->input->post('id_pegawai');
-
-		$res=$this->M_pinjaman->add_pjm_kop(array(
-			'kode_pjm_kop' => $kode_pjm_kop,
-			'total_pjm_kop' => $total_pjm_kop,
-			'jml_asr_kop' => $jml_asr_kop,
-			'start_date' => $start_date,
-			'end_date' => $end_date,
-			'id_pegawai' => $id_pegawai,
-			'ket_pjm_kop' => $ket_pjm_kop,
-			'id_pegawai' => $id_pegawai
-			));
-		if($res=1){
-			redirect('pinjaman/table_pjm_kop');
-		} else {
-			echo "<h2> Gagal Tambah Data </h2>";
-		}
+		// $res['pinjaman'] = $this->M_pinjaman->add_pinjaman();
+		// $last_id = $res['pinjaman'];
+		$last_id = 7;
+		// var_dump($last_id);
+		$res['angsuran'] = $this->M_pinjaman->insert_pinjaman($last_id);
+		var_dump($res['angsuran']);
+		// $res['angsuran'] = $this->M_pinjaman->add_angsuran_pinjaman($last_id);
+		
+		// if ($res) {
+		// 	redirect('pinjaman');
+		// } else {
+		// 	echo "<h2> Gagal Tambah Data Pinjaman </h2>";
+		// }
 	}
 
 }

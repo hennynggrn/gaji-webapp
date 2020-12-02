@@ -32,7 +32,7 @@ class Jabatan extends CI_Controller {
 	{
 		$data['title'] = 'Tambah Jabatan';
 
-		$data['pegawais'] = $this->M_pegawai->get_pegawai($e)->result_array();
+		$data['pegawais'] = $this->M_pegawai->get_pegawai($id_pegawai)->result_array();
 
 		$this->template->load('index','jabatan/add_jabatan', $data);
 	}
@@ -42,6 +42,7 @@ class Jabatan extends CI_Controller {
 		$res['jabatan'] = $this->M_jabatan->add_jabatan();
 		$last_id = $res['jabatan'];
 		$res['pegawai'] = $this->M_jabatan->add_pegawai_jabatan($last_id);
+		
 		if ($res) {
 			redirect('jabatan');
 		} else {

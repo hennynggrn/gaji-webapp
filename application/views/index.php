@@ -477,6 +477,9 @@
 		$(document).ready(function(){
 			$('[data-tooltip="tooltip"]').tooltip();   
 		});
+
+		// Today date
+		document.getElementById('today_date').value = new Date().toISOString().slice(0, 10);
 	</script>
 
 	<!-- Styling -->
@@ -622,7 +625,7 @@
 		});
 		function GetDynamicTextBox(value) {
 			j = j + 1;
-			return '<td></td>' + '<td><input type="hidden" name="ids[' + j + ']" value= "' + j + '"><input type="date" class="form-control" name="tgl_kembali[' + j + ']" placeholder="Tanggal Kembali" value= "' + value + '">' + '</td>' + '</td>' + '<td> <div class="input-group"><span class="input-group-addon">Rp.</span><input type="text" class="form-control" name="nom_angsuran[' + j + ']" placeholder="Nilai Angsuran" value="' + value + '"><div class="input-group-addon">.00</span></div></div></td>' + '<td><div class="remove btn-group"><a href="#" class="btn btn-danger" ><i class="fa fa-close"></i></a></div></td>'; 
+			return '<td></td>' + '<td><input type="hidden" name="ids[' + j + ']" value= "' + j + '"><input type="date" class="form-control" name="tgl_kembali[' + j + ']" placeholder="Tanggal Kembali" value= "' + value + '">' + '</td>' + '</td>' + '<td> <div class="input-group"><span class="input-group-addon">Rp.</span><input type="number" class="form-control" name="nominal[' + j + ']" placeholder="150000" value="' + value + '"></div></td>' + '<td><div class="remove btn-group"><a href="#" class="btn btn-danger" ><i class="fa fa-close"></i></a></div></td>'; 
 		}
 	</script>
 
@@ -702,6 +705,7 @@
 			$('#honor').prop('disabled', true);
 		}
 	</script>
+
 	<!-- <script>
 		var honor = $('#honor').val();
 		function honorEnabled(){
