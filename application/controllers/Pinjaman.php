@@ -41,5 +41,17 @@ class Pinjaman extends CI_Controller {
 		var_dump($data['angsurans']);
 		$this->template->load('index','pinjaman/detail_pinjaman', $data);
 	}
+
+	public function update_repay()
+	{
+		$res['angsuran'] = $this->M_pinjaman->update_repay();
+		$id_pinjaman = $this->input->post('id_pinjaman');
+		
+		if ($res) {
+			redirect('pinjaman/detail/'.$id_pinjaman);
+		} else {
+			echo "<h2> Gagal Tambah Data Pinjaman </h2>";
+		}
+	}
 }
 

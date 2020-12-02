@@ -84,14 +84,16 @@
 							</thead>
 							<tbody>
 							<?php foreach ($angsurans as $key => $angsuran) : ?>
+								<form role="form" method="post" action="<?php echo site_url('pinjaman/update_repay');?>">
 								<tr>
 									<td><?php echo $angsuran['no_angsuran'];?></td>
 									<td style="text-align: left;"><?php echo 'Rp. '.number_format($angsuran['nominal'],0,',','.');?></td>
-									<td><?php echo $pinjaman['tanggal_kembali'];?></td>
-									<td><?php echo ($angsuran['status'] == 1) ? '<span class="badge bg-green">terbayar</span>' : '<span class="badge bg-red">Belum Dibayar</span>';?></td>
+									<td><?php echo $angsuran['tanggal_kembali'];?></td>
+									<td><?php echo ($angsuran['status'] == 1) ? '<span class="badge bg-green">Terbayar</span>' : '<span class="badge bg-red">Belum Dibayar</span>';?></td>
 									<td>
-										<label for=""></label>
-										<input type="checkbox" data-toggle="modal" data-target="#repayAngsuran<?php echo $angsuran['id_angsuran'];?>" value="<?php echo $angsuran['id_angsuran'];?>" class="repay" id="repay" name="repay" <?php echo ($angsuran['status'] == 1) ? 'checked' : '';?>>
+										<a href="" class="" data-toggle="modal" data-target="#repayAngsuran<?php echo $angsuran['id_angsuran'];?>" data-tooltip="tooltip" title="<?php echo ($angsuran['status'] == 1) ? 'Batalkan Pembayaran' : 'Bayar';?>" data-placement="top">
+											<i class="fa fa-fw <?php echo ($angsuran['status'] == 1) ? 'fa-check text-green' : 'fa-money text-gray';?>"></i>
+										</a>
 									</td>
 								</tr>
 								<!-- Modal Delete Honor per Pegawai-->
@@ -100,21 +102,36 @@
 										<div class="modal-content">
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-												<h4 class="modal-title" id="myModalLabel">Bayar Angsuran Pinjaman</h4>
+												<h4 class="modal-title" id="myModalLabel"><?php echo ($angsuran['status'] == 0) ? 'Bayar' : 'Batalkan Pembayaran'; ?> Angsuran Pinjaman</h4>
 											</div>
 											<div class="modal-body">
-												<p>
-													Anda akan membayar angsuran sebesar <b class="text-primary"><?php echo 'Rp. '.number_format($angsuran['nominal'],0,',','.');?></b> ?
-												</p>
-												</div>
+												<?php if ($angsuran['status'] == 0) { ?>
+													<p>
+														<input type="hidden" name="id_pinjaman" value="<?php echo $angsuran['id_pinjaman'];?>">
+														<input type="hidden" name="id_angsuran" value="<?php echo $angsuran['id_angsuran'];?>">
+														<input type="hidden" name="repay" value="1">
+														Anda akan membayar angsuran sebesar <b class="text-primary"><?php echo 'Rp. '.number_format($angsuran['nominal'],0,',','.');?></b> ?
+													</p>
+												<?php } else { ?>
+													<p>
+														<input type="hidden" name="id_pinjaman" value="<?php echo $angsuran['id_pinjaman'];?>">
+														<input type="hidden" name="id_angsuran" value="<?php echo $angsuran['id_angsuran'];?>">
+														<input type="hidden" name="repay" value="0">
+														<b class="text-red">Peringatan! </b><br><br>
+														Anda akan membatalkan pembayaran angsuran sebesar <b class="text-primary"><?php echo 'Rp. '.number_format($angsuran['nominal'],0,',','.');?></b> ?
+													</p>
+												<?php } ?>
+												
+											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-												<a href="<?php echo site_url('angsuran/update_repay/'.$angsuran['id_angsuran']);?>" class="btn btn-primary">Bayar</a>
+												<button type="submit" class="btn btn-primary"><?php echo ($angsuran['status'] == 0) ? 'Bayar' : 'Lanjutkan'; ?></button>
 											</div>
 										</div>
 									</div>
 								</div>
 								<!-- End Modal -->
+								</form>
 							<?php endforeach; ?>										
 							</tbody>
 						</table>

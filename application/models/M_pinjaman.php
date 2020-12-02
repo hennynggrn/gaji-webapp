@@ -83,4 +83,13 @@ class M_pinjaman extends CI_Model{
 		$res['pinjaman'] = $this->update_rest_pinjaman($last_id);
 		return $res;
 	}
+
+	public function update_repay()
+	{
+		$repay = $this->input->post('repay');
+		$id_angsuran = $this->input->post('id_angsuran');
+		
+		$this->db->where('id_angsuran', $id_angsuran);
+		return $this->db->update('angsuran', array('status' => $repay));
+	}
 }
