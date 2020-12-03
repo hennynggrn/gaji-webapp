@@ -42,7 +42,11 @@
 								<tr>
 									<td>Jumlah Angsuran</td>
 									<td>:</td>
-									<td><?php echo $pinjaman['jml_angsuran'];?></td>
+									<td><?php echo $pinjaman['jml_angsuran']; 
+											if (($pinjaman['status_ang'] != 0) && ($pinjaman['status_ang'] != $pinjaman['jml_angsuran'])) {
+											echo ' &nbsp;&nbsp;<small class="text-green">('.$pinjaman['status_ang'].' angsuran terbayar)</small>';
+										}?>
+									</td>
 								</tr>
 								<tr>
 									<td>Status</td>

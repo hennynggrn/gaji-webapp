@@ -132,7 +132,6 @@ class M_keluarga extends CI_Model{
 
 		foreach ($nama_anggota as $i => $value) {
 			if ((($nama_anggota[$i] == NULL) || (empty($nama_anggota[$i]))) && !empty($id_anggota_klg[$i])) {
-				echo 'delete';
 				$this->db->where('id_anggota_klg', $id_anggota_klg[$i]);
 				return $this->db->delete('keluarga');
 			}

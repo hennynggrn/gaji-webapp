@@ -12,7 +12,7 @@
 						<h3 class="box-title">
 							<div class="btn-group">
 								<select class="form-control btn btn-default" name="sort_by" id="sort_by">
-									<option value="daftar">Daftar Peminjam</option>
+									<option value="daftar">Daftar Peminjam Bulan Ini</option>
 									<option value="riwayat">Riwayat Peminjam</option>
 								</select>
 							</div>
@@ -39,8 +39,9 @@
 									<th>Menu</th>
 								</thead>
 								<?php
-									$no=1; foreach ($pinjamans as $key => $pinjaman) :
-										if($pinjaman['kode_pinjaman'] == 'KOP') {
+								$no=1; 
+								foreach ($pinjamans as $key => $pinjaman) :
+									if($pinjaman['kode_pinjaman'] == 'KOP') {
 							 	?>
 								<tr>
 									<td><?php echo $no++;?></td>
@@ -65,7 +66,28 @@
 										</a>
 									</td>
 								</tr>
-									<?php } endforeach;?>
+								<!-- Modal Delete Honor per Pegawai-->
+								<div class="modal fade" id="deletePinjaman<?php echo $pinjaman['id_pinjaman'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												<h4 class="modal-title" id="myModalLabel">Hapus Data Pegawai</h4>
+											</div>
+											<div class="modal-body">
+												<p>
+													Anda yakin akan menghapus data pinjaman <b class="text-primary"><?php echo $pinjaman['nama'];?></b> ?
+												</p>
+												</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+												<a href="<?php echo site_url('pinjaman/delete/'.$pinjaman['id_pinjaman']);?>" class="btn btn-primary">Hapus</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- End Modal -->
+								<?php } endforeach;?>
 							</table>
 						</div>
 					</div>
@@ -112,6 +134,27 @@
 										</a>
 									</td>
 								</tr>
+								<!-- Modal Delete Honor per Pegawai-->
+								<div class="modal fade" id="deletePinjaman<?php echo $pinjaman['id_pinjaman'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												<h4 class="modal-title" id="myModalLabel">Hapus Data Pegawai</h4>
+											</div>
+											<div class="modal-body">
+												<p>
+													Anda yakin akan menghapus data pinjaman <b class="text-primary"><?php echo $pinjaman['nama'];?></b> ?
+												</p>
+												</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+												<a href="<?php echo site_url('pinjaman/delete/'.$pinjaman['id_pinjaman']);?>" class="btn btn-primary">Hapus</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- End Modal -->
 								<?php } endforeach;?>
 							</table>
 						</div>

@@ -47,7 +47,7 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Jumlah Angsuran</label>
 							<div class="col-sm-10">
-								<input type="number" value="0" class="form-control" id="jumlahAng" name="jml_angsuran" disabled placeholder="">
+								<input type="number" class="form-control" id="jumlahAng" name="jml_angsuran" disabled placeholder="">
 							</div>
 						</div>
 

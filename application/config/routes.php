@@ -1,8 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-// $route['pinjaman/delete/(:any)'] = 'pinjaman/delete_pinjaman/$1';
-// $route['pinjaman/update_repay/(:any)'] = 'pinjaman/update_repay/$1';
+$route['pinjaman/delete/(:any)'] = 'pinjaman/delete_pinjaman/$1';
 $route['pinjaman/edit/(:any)'] = 'pinjaman/edit_pinjaman/$1';
 $route['pinjaman/detail/(:any)'] = 'pinjaman/detail_pinjaman/$1';
 $route['pinjaman/add'] = 'pinjaman/add_pinjaman';

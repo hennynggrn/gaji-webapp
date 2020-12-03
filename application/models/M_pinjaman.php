@@ -43,7 +43,6 @@ class M_pinjaman extends CI_Model{
 		$kode = $this->input->post('kode');
 		$tgl_pjm = $this->input->post('tgl_pjm');
 		$total_pjm = $this->input->post('total_pjm');
-		$jml_angsuran = $this->input->post('jml_angsuran');
 		$ket_pjm = $this->input->post('ket_pjm');
 		// var_dump($_POST);
 		$data = array(
@@ -51,43 +50,26 @@ class M_pinjaman extends CI_Model{
 			'kode_pinjaman' => $kode,
 			'start_date' => $tgl_pjm,
 			'total_pinjaman' => $total_pjm,
-			'jml_angsuran' => $jml_angsuran,
 			'ket_pinjaman' => $ket_pjm,
-			'status_pinjaman' => '0'
 		);
 		$this->db->insert("pinjaman", $data);
 		$insert_id = $this->db->insert_id();
 		return  $insert_id;
 	}
 
-	// private function update_rest_pinjaman($last_id){
-	// 	$this->db->select('max(tanggal_kembali) end_date');
-	// 	$end_date = $this->db->get_where('angsuran', array('id_pinjaman' => $last_id))->result_array();
-	// 	$result = $this->db->get_where('angsuran', array('id_pinjaman' => $last_id))->result_array();
-	// 	$jml_angsuran = count($result);
-	// 	$data = array(
-	// 		'end_date' => $end_date[0]['end_date'],
-	// 		'jml_angsuran' => $jml_angsuran
-	// 	);
-	// 	$this->db->where('id_pinjaman', $last_id);
-	// 	return $this->db->update('pinjaman', $data);
-	// }
-
 	public function add_angsuran($last_id)
 	{
 		$ids = $this->input->post('ids');
 		$tgl_kembali = $this->input->post('tgl_kembali');
 		$nominal = $this->input->post('nominal');
-		$no = 1;
 		foreach ($ids as $i => $value) {
 			$data = array(
 				'id_pinjaman' => $last_id,
-				'no_angsuran' => $no++,
 				'tanggal_kembali' => $tgl_kembali[$i],
 				'nominal' => $nominal[$i],
 				'status' => '0'
 			);
-			return $this->db->insert("angsuran", $data);
+			$this->db->insert("angsuran", $data);
 		}
 	}
 
@@ -118,5 +100,74 @@ class M_pinjaman extends CI_Model{
 		
 		$this->db->where('id_pinjaman', $id_pinjaman);
 		return $this->db->update('pinjaman', $data);
+	}
+
+	public function update_angsuran($id_pinjaman)
+	{
+		$res['del'] = $this->delete_old_angsuran($id_pinjaman);
+		$res['old'] = $this->update_old_angsuran();
+		$res['new'] = $this->add_new_angsuran($id_pinjaman);
+
+		return $res;
+	}
+
+	private function update_old_angsuran()
+	{
+		$id_angsuran = $this->input->post('id_angsuran');
+		$idsField = $this->input->post('idsField');
+		$tgl_kembaliField = $this->input->post('tgl_kembaliField');
+		$nominalField = $this->input->post('nominalField');
+
+		foreach ($idsField as $i => $value) {
+			$data = array(
+				'tanggal_kembali' => $tgl_kembaliField[$i],
+				'nominal' => $nominalField[$i],
+			);
+			$this->db->update('angsuran', $data, array('id_angsuran' => $id_angsuran[$i]));
+		}
+	}
+
+	private function add_new_angsuran($id_pinjaman)
+	{
+		$ids = $this->input->post('ids');
+		$tgl_kembali = $this->input->post('tgl_kembali');
+		$nominal = $this->input->post('nominal');
+		var_dump($ids);
+		if (isset($ids)) {
+			foreach ($ids as $i => $value) {
+				if (($tgl_kembali[$i] != NULL) && ($nominal[$i] != NULL)) {
+					$data = array(
+						'id_pinjaman' => $id_pinjaman,
+						'tanggal_kembali' => $tgl_kembali[$i],
+						'nominal' => $nominal[$i],
+						'status' => '0'
+					);
+					$this->db->insert('angsuran', $data);
+				}
+			}
+		}
+	}
+
+	private function delete_old_angsuran($id_pinjaman)
+	{
+		$id_angsuran = $this->input->post('id_angsuran');
+		
+		$angsuran = $this->db->get_where('angsuran', array('id_pinjaman' => $id_pinjaman))->result_array();
+		$old_angsuran = array();
+		foreach ($angsuran as $key => $value) {
+			$old_angsuran[] = $angsuran[$key]['id_angsuran'];			
+		}
+		$deff = array_diff($old_angsuran, $id_angsuran);
+		
+		foreach ($deff as $i => $value) {
+			$this->db->where('id_angsuran', $old_angsuran[$i]);
+			$this->db->delete('angsuran');
+		}
+	}
+
+	public function delete_pinjaman($id)
+	{
+		$this->db->where('id_pinjaman', $id);
+		return $this->db->delete('pinjaman');
 	}
 }

@@ -595,10 +595,34 @@
 	
 	<!-- Dynamic Insert for 'Peminjaman' -->
 	<script>
-		var rowCount = 0;
+		<?php if (isset($pinjaman)) { ?>
+			var rowCount = <?php echo $pinjaman['jml_angsuran'];?>;
+		<?php } else { ?>
+			var rowCount = 0;
+		<?php } ?>
 		var j = 0;
 		document.getElementById('jumlahAng').value = rowCount;
 		$(function () {
+			<?php if (isset($pinjaman)) { ?>
+				var arrayAngsuran = <?php echo json_encode($angsurans);?>;
+				var rowField = <?php echo $pinjaman['jml_angsuran'];?>;
+				for (let index = 0; index < arrayAngsuran.length; index++) {
+					var div = $('<tr class="num" />');
+					var value1 = arrayAngsuran[index]['id_angsuran'];
+					var value2 = arrayAngsuran[index]['tanggal_kembali'];
+					var value3 = arrayAngsuran[index]['nominal'];
+
+					div.html(GetField(value1, value2, value3));
+					$('#angsuranTable').append(div);
+				}
+				// count
+				$('.tableAngsuran tbody .num').each(function(i){
+					$($(this).find('td')[0]).html(i+1);
+				});   
+				var rowCount = $('.tableAngsuran tbody .num').length;
+				document.getElementById('jumlahAng').value = rowCount; 
+			<?php } ?>
+
 			$('body').on('click', '.remove', function () {
 				$(this).closest('tr').remove();
 
@@ -623,10 +647,15 @@
 				document.getElementById('jumlahAng').value = rowCount;     
 			});
 		});
+		function GetField(value1, value2, value3) {
+			j = j + 1;
+			return '<td></td>' + '<td><input type="hidden" name="idsField[' + j + ']" value= "' + j + '"><input type="hidden" name="id_angsuran[' + j + ']" value= "' + value1 + '"><input type="date" class="form-control" name="tgl_kembaliField[' + j + ']" placeholder="Tanggal Kembali" value= "' + value2 + '">' + '</td>' + '</td>' + '<td> <div class="input-group"><span class="input-group-addon">Rp.</span><input type="number" class="form-control" name="nominalField[' + j + ']" placeholder="150000" value="' + value3 + '"></div></td>' + '<td><div class="remove btn-group"><a href="#" class="btn btn-danger" ><i class="fa fa-close"></i></a></div></td>'; 	
+		}
 		function GetDynamicTextBox(value) {
 			j = j + 1;
-			return '<td></td>' + '<td><input type="hidden" name="ids[' + j + ']" value= "' + j + '"><input type="date" class="form-control" name="tgl_kembali[' + j + ']" placeholder="Tanggal Kembali" value= "' + value + '">' + '</td>' + '</td>' + '<td> <div class="input-group"><span class="input-group-addon">Rp.</span><input type="number" class="form-control" name="nominal[' + j + ']" placeholder="150000" value="' + value + '"></div></td>' + '<td><div class="remove btn-group"><a href="#" class="btn btn-danger" ><i class="fa fa-close"></i></a></div></td>'; 
+			return '<td></td>' + '<td><input type="hidden" name="ids[' + j + ']" value= "' + j + '"><input type="date" class="form-control" name="tgl_kembali[' + j + ']" placeholder="Tanggal Kembali" value= "' + value + '">' + '</td>' + '</td>' + '<td> <div class="input-group"><span class="input-group-addon">Rp.</span><input type="number" class="form-control" name="nominal[' + j + ']" placeholder="150000" value="' + value + '"></div></td>' + '<td><div class="remove btn-group"><a href="#" class="btn btn-danger" ><i class="fa fa-close"></i></a></div></td>'; 	
 		}
+		
 	</script>
 
 
