@@ -14,7 +14,6 @@
 					<div class="col-md-12">
 						<table class="table table-hover">
 							<tbody>
-								<?php foreach($pinjamans as $key => $pinjaman) : ?>
 								<tr>
 									<td style="width: 140px">Nama Peminjam</td>
 									<td style="width: 20px">:</td>
@@ -55,7 +54,6 @@
 									<td>:</td>
 									<td><?php echo ($pinjaman['ket_pinjaman'] == NULL) ? '(kosong)' : $pinjaman['ket_pinjaman'];?></td>
 								</tr>
-								<?php endforeach; ?>
 							</tbody>
 						</table>
 					</div>
@@ -96,7 +94,7 @@
 										</a>
 									</td>
 								</tr>
-								<!-- Modal Delete Honor per Pegawai-->
+								<!-- Modal Repay Angsuran-->
 								<div class="modal fade" id="repayAngsuran<?php echo $angsuran['id_angsuran'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 									<div class="modal-dialog" role="document">
 										<div class="modal-content">
@@ -147,7 +145,7 @@
 		</div>
 		<div class="col-md-12">
 			<a href="<?php echo site_url('pinjaman')?>" class="pull-left btn btn-default">Kembali</a>
-			<a href="<?php echo site_url('pinjaman/edit/')?>" class="pull-right btn btn-warning edit-btn">Edit</a></td>
+			<a href="<?php echo site_url('pinjaman/edit/'.$pinjaman['id_pinjaman'])?>" class="pull-right btn btn-warning edit-btn">Edit</a></td>
 		</div>
 	</div>
 </section>

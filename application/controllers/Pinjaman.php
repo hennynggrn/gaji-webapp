@@ -23,7 +23,7 @@ class Pinjaman extends CI_Controller {
 	{
 		$res['pinjaman'] = $this->M_pinjaman->add_pinjaman();
 		$last_id = $res['pinjaman'];
-		$res['angsuran'] = $this->M_pinjaman->add_angsuran_pinjaman($last_id);
+		$res['angsuran'] = $this->M_pinjaman->add_angsuran($last_id);
 
 		if ($res) {
 			redirect('pinjaman');
@@ -36,9 +36,9 @@ class Pinjaman extends CI_Controller {
 	{
 		$data['title'] = 'Detail Pinjaman';
 
-		$data['pinjamans'] = $this->M_pinjaman->get_pinjaman($id)->result_array();
+		$data['pinjaman'] = $this->M_pinjaman->get_pinjaman($id)->row_array();
 		$data['angsurans'] = $this->M_pinjaman->get_angsuran($id)->result_array();
-		var_dump($data['angsurans']);
+		
 		$this->template->load('index','pinjaman/detail_pinjaman', $data);
 	}
 
@@ -54,13 +54,29 @@ class Pinjaman extends CI_Controller {
 		}
 	}
 
-	public function edit_pinjaman($id_pegawai)
+	public function edit_pinjaman($id = TRUE)
 	{
 		$data['title']= 'Edit Pinjaman';
 
-		$data['pegawais'] = $this->M_pegawai->get_pegawai($id_pegawai)->result_array();
-
+		$data['pegawais'] = $this->M_pinjaman->get_pegawai_pinjaman($id)->result_array();
+		$data['pinjaman'] = $this->M_pinjaman->get_pinjaman($id)->row_array();
+		// $data['angsurans'] = $this->M_pinjaman->get_angsuran($id)->result_array();
+		var_dump($data['pegawais']);
+		// var_dump($data['pinjaman']);
 		$this->template->load('index','pinjaman/edit_pinjaman', $data);
+	}
+
+	public function update_pinjaman()
+	{
+		$id_pinjaman = $this->input->post('id_pinjaman');
+		$res['pinjaman'] = $this->M_pinjaman->update_pinjaman($id_pinjaman);
+		// $res['angsuran'] = $this->M_pinjaman->update_angsuran();
+		
+		if ($res) {
+			redirect('pinjaman/detail/'.$id_pinjaman);
+		} else {
+			echo "<h2> Gagal Edit Data Pinjaman </h2>";
+		}
 	}
 }
 

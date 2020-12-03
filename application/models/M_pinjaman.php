@@ -22,6 +22,13 @@ class M_pinjaman extends CI_Model{
 		}
 	}
 
+	public function get_pegawai_pinjaman($id = TRUE)
+	{
+		$this->db->select('*, p.id_pegawai, pjm.id_pegawai pegawai');
+		$this->db->join('pinjaman pjm', 'p.id_pegawai = pjm.id_pegawai AND pjm.id_pinjaman ='.$id, 'LEFT');
+		return $this->db->get('pegawai p');
+	}
+
 	public function get_angsuran($id = TRUE)
 	{
 		$this->db->select('*');
@@ -66,7 +73,7 @@ class M_pinjaman extends CI_Model{
 	// 	return $this->db->update('pinjaman', $data);
 	// }
 
-	public function add_angsuran_pinjaman($last_id)
+	public function add_angsuran($last_id)
 	{
 		$ids = $this->input->post('ids');
 		$tgl_kembali = $this->input->post('tgl_kembali');
@@ -91,5 +98,25 @@ class M_pinjaman extends CI_Model{
 		
 		$this->db->where('id_angsuran', $id_angsuran);
 		return $this->db->update('angsuran', array('status' => $repay));
+	}
+
+	public function update_pinjaman($id_pinjaman)
+	{
+		$pegawai = $this->input->post('pegawai');
+		$kode = $this->input->post('kode');
+		$tgl_pjm = $this->input->post('tgl_pjm');
+		$total_pjm = $this->input->post('total_pjm');
+		$ket_pjm = $this->input->post('ket_pjm');
+		// var_dump($_POST);
+		$data = array(
+			'id_pegawai' => $pegawai,
+			'kode_pinjaman' => $kode,
+			'start_date' => $tgl_pjm,
+			'total_pinjaman' => $total_pjm,
+			'ket_pinjaman' => $ket_pjm,
+		);
+		
+		$this->db->where('id_pinjaman', $id_pinjaman);
+		return $this->db->update('pinjaman', $data);
 	}
 }

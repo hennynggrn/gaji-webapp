@@ -24,7 +24,7 @@
 					</div>
 					<div class="active tab-pane" id="kop">
 						<div class="box-header">
-							<h4 class="text-bold"><i class="fa fa-fw fa-money"></i> Peminjaman Koperasi Murni</h4>
+							<h4 class="text-bold"><i class="fa fa-fw fa-bank"></i> Peminjaman Koperasi Murni</h4>
 						</div>
 						<div class="box-body">
 							<table class="table table-bordered text-center table-hover">
@@ -50,7 +50,7 @@
 									<td style="text-align:left;"><?php echo 'Rp. '.number_format($pinjaman['total_pinjaman'],0,',','.');?></td>
 									<td><?php echo $pinjaman['jml_angsuran'];
 											if (($pinjaman['status_ang'] != 0) && ($pinjaman['status_ang'] != $pinjaman['jml_angsuran'])) {
-												echo ' <br><small class="text-success">('.$pinjaman['status_ang'].' angsuran terbayar)</small>';
+												echo ' <br><small class="text-green">('.$pinjaman['status_ang'].' angsuran terbayar)</small>';
 											}?></td>
 									<td><?php echo ($pinjaman['jml_angsuran']-$pinjaman['status_ang'] == 0) ? '<span class="badge bg-green">Lunas</span>' : '<span class="badge bg-red">Belum Lunas</span>';?></td>
 									<td>

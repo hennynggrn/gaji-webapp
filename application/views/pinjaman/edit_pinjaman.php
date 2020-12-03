@@ -8,12 +8,13 @@
 				<form class="form-horizontal" role="form" method="post" action="<?php echo site_url('pinjaman/update_pinjaman');?>" >
 					<div class="box-body">
 						<div class="form-group">
+							<input type="hidden" value="<?php echo $pinjaman['id_pinjaman'];?>" name="id_pinjaman">
 							<label class="col-sm-2 control-label">Nama Pegawai</label>
 							<div class="col-sm-10">
 								<select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="pegawai" required>
 									<option disabled>Cari Pegawai</option>
 									<?php foreach ($pegawais as $key => $pegawai) :?>
-										<option value="<?php echo $pegawai['id_pegawai'];?>"><?php echo $pegawai['nama'];?></option>
+										<option value=<?php echo '"'.$pegawai['id_pegawai'].'"'; echo ($pegawai['pegawai'] != NULL) ? 'selected' : '';?>><?php echo $pegawai['nama'];?></option>
 									<?php endforeach;?>
 								</select>
 							</div>
@@ -23,15 +24,15 @@
 							<div class="col-sm-10">
 								<select class="form-control" name="kode" id="kode" placeholder="Pilih Jenis Pinjaman" required>
 									<option disabled>Pilih Jenis Pinjaman</option>
-									<option value="kop">Koperasi Murni</option>
-									<option value="bank">Bank Bina Drajat Warga (BDW)</option>
+									<option value="kop" <?php echo ($pinjaman['kode_pinjaman'] == 'KOP') ? 'selected' : '';?>>Koperasi Murni</option>
+									<option value="bank" <?php echo ($pinjaman['kode_pinjaman'] == 'BANK') ? 'selected' : '';?>>Bank Bina Drajat Warga (BDW)</option>
 								</select>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Tanggal Pinjam</label>
 							<div class="col-sm-10">
-								<input type="date" id="today_date" class="form-control" name="tgl_pjm" placeholder="" required>
+								<input type="date" value="<?php echo $pinjaman['start_date'];?>" class="form-control" name="tgl_pjm" placeholder="" required>
 							</div>
 						</div>
 						<div class="form-group">
@@ -39,7 +40,7 @@
 							<div class="col-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon">Rp.</span>
-									<input type="number" class="form-control" name="total_pjm" placeholder="2000000" required>
+									<input type="number" value="<?php echo $pinjaman['total_pinjaman'];?>" class="form-control" name="total_pjm" placeholder="2000000" required>
 								</div>
 							</div>
 						</div>
@@ -116,7 +117,7 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Keterangan Pinjam</label>
 							<div class="col-sm-10">
-								<textarea class="form-control" placeholder="Alasan peminjaman ..." name="ket_pjm" cols="30" rows="3"></textarea>
+								<textarea class="form-control" placeholder="Alasan peminjaman ..." name="ket_pjm" cols="30" rows="3"><?php echo $pinjaman['ket_pinjaman'];?></textarea>
 								<span class="text-red" id='info_honor'><small>* Keterangan optional</small></span>
 							</div>
 						</div>
@@ -126,7 +127,7 @@
 					</div>
 					<div class="box-footer">
 						<a href="<?php echo site_url('pinjaman');?>" class="btn btn-danger pull-left edit-btn">Batal</a>
-						<button type="submit" class="btn btn-primary pull-right edit-btn">Tambah</button>
+						<button type="submit" class="btn btn-primary pull-right edit-btn">Simpan</button>
 					</div>
 				</form>
 			</div>
