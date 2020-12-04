@@ -35,7 +35,7 @@
 						<div class="box-body">
 							<!-- <input type="text" id="this-month" value="<?php echo date('m', strtotime($today_date));?>"> -->
 							<h5 class="text-primary text-bold date"> Daftar Peminjam Bulan <span class="this-month"><?php echo date('m', strtotime($today_date));?></span></h5>
-							<h5 class="text-primary text-bold date"> Daftar Peminjam Bulan <span class="this-month">aa<script>formatDate(new Date('2020-12-02'));</script></span></h5>
+							<!-- <h5 class="text-primary text-bold date"> Daftar Peminjam Bulan <span class="this-month" onmousedown="formatDate(new Date('2020-12-02'));">aa</span></h5> -->
 							<table class="table table-bordered text-center table-hover">
 								<thead>
 									<th>No</th>                                  
