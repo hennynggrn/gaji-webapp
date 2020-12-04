@@ -11,7 +11,7 @@
 							<input type="hidden" value="<?php echo $pinjaman['id_pinjaman'];?>" name="id_pinjaman">
 							<label class="col-sm-2 control-label">Nama Pegawai</label>
 							<div class="col-sm-10">
-								<select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="pegawai" required>
+								<select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="pegawai" disabled required>
 									<option disabled>Cari Pegawai</option>
 									<?php foreach ($pegawais as $key => $pegawai) :?>
 										<option value=<?php echo '"'.$pegawai['id_pegawai'].'"'; echo ($pegawai['pegawai'] != NULL) ? 'selected' : '';?>><?php echo $pegawai['nama'];?></option>

@@ -83,7 +83,7 @@ class M_keluarga extends CI_Model{
 						's_hidup' => $s_hidup_anggota[$i],
 						'gender' => $gender_anggota[$i]
 					);
-					return $this->db->insert("keluarga", $data);
+					$this->db->insert("keluarga", $data);
 				}
 			}
 		}
@@ -116,7 +116,7 @@ class M_keluarga extends CI_Model{
 					's_hidup' => $s_hidup_anggota[$i],
 					'gender' => $gender_anggota[$i]
 				);
-				return $this->db->insert('keluarga', $data);
+				$this->db->insert('keluarga', $data);
 			}
 		}
 	}
@@ -133,7 +133,7 @@ class M_keluarga extends CI_Model{
 		foreach ($nama_anggota as $i => $value) {
 			if ((($nama_anggota[$i] == NULL) || (empty($nama_anggota[$i]))) && !empty($id_anggota_klg[$i])) {
 				$this->db->where('id_anggota_klg', $id_anggota_klg[$i]);
-				return $this->db->delete('keluarga');
+				$this->db->delete('keluarga');
 			}
 		}
 	}

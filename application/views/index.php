@@ -480,6 +480,37 @@
 
 		// Today date
 		document.getElementById('today_date').value = new Date().toISOString().slice(0, 10);
+
+	</script>
+	<script>
+		// Set Month
+		// $(document).ready(function(){
+		// 	var month = $('.this-month').text();
+		// 	switch (month) {
+		// 		case '12':
+		// 			$('.this-month').text('Desember');
+		// 			break;
+		// 		case '2':
+		// 			$('.this-month').text('Februari');
+		// 			break;
+		// 	}
+		// });
+		function formatDate(date) {
+			var monthNames = [
+				"January", "February", "March",
+				"April", "May", "June", "July",
+				"August", "September", "October",
+				"November", "December"
+			];
+
+			var day = date.getDate();
+			var monthIndex = date.getMonth();
+			var year = date.getFullYear();
+
+			return day + ' ' + monthNames[monthIndex] + ' ' + year;
+		}
+
+		// console.log(formatDate(new Date('2020-12-02'))); 
 	</script>
 
 	<!-- Styling -->
@@ -492,8 +523,41 @@
 	</script>
 
 	<script>
-		// Add new jabatan with list of pegawai
-		
+		// Set Pinjaman Category 
+		// $(function(){1
+			$('.thisMonthBorrowerKop').on('click', function(){
+				var val = $(this).text();
+    			$('.thisMonthBorrowerKop').addClass('active')
+				$('.historyBorrowerKop').removeClass('active');
+				$('#kop').addClass('active');
+				$('#kop').siblings().removeClass('active');
+				$('.category').html(val + ' &nbsp;<span class="caret"></span>');
+			});
+			$('.historyBorrowerKop').on('click', function(){
+				var val = $(this).text();
+				$('.historyBorrowerKop').addClass('active')
+				$('.thisMonthBorrowerKop').removeClass('active');
+				$('#oldkop').addClass('active');
+				$('#oldkop').siblings().removeClass('active');
+				$('.category').html(val + ' &nbsp;<span class="caret"></span>');
+			});
+			$('.thisMonthBorrowerBank').on('click', function(){
+				var val = $(this).text();
+    			$('.thisMonthBorrowerBank').addClass('active')
+				$('.historyBorrowerBank').removeClass('active');
+				$('#bank').addClass('active');
+				$('#bank').siblings().removeClass('active');
+				$('.category').html(val + ' &nbsp;<span class="caret"></span>');
+			});
+			$('.historyBorrowerBank').on('click', function(){
+				var val = $(this).text();
+				$('.historyBorrowerBank').addClass('active')
+				$('.thisMonthBorrowerBank').removeClass('active');
+				$('#oldbank').addClass('active');
+				$('#oldbank').siblings().removeClass('active');
+				$('.category').html(val + ' &nbsp;<span class="caret"></span>');
+			});
+		// });
 	</script>
 
 	<!-- Set 'Keluarga' close input when delete member-->

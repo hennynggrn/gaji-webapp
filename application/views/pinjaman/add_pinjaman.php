@@ -10,10 +10,37 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Nama Pegawai</label>
 							<div class="col-sm-10">
-								<select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="pegawai" required>
+							<!-- select2 select2-hidden-accessible pull-right -->
+								<select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="pegawai" required>
 									<option disabled>Cari Pegawai</option>
 									<?php foreach ($pegawais as $key => $pegawai) :?>
-										<option value="<?php echo $pegawai['id_pegawai'];?>"><?php echo $pegawai['nama'];?></option>
+										<option value="<?php echo $pegawai['id_pegawai'];?>"
+										<?php if ($pegawai['id_pinjaman'] != NULL) {
+											switch ($pegawai['status_pjm']) {
+												case 'BANKKOP':
+													echo 'disabled';
+													break;
+												case 'KOPBANK':
+													echo 'disabled';
+													break;
+											}
+										} else {
+											echo '';
+										}?>>
+											<?php echo $pegawai['nama'];
+											if ($pegawai['id_pinjaman'] != NULL) {
+												switch ($pegawai['status_pjm']) {
+													case 'BANK':
+														echo ' (sedang meminjam di Bank)';
+														break;
+													case 'KOP':
+														echo ' (sedang meminjam di Koperasi)';
+														break;
+												}
+											} else {
+												echo '';
+											}?>
+										</option>
 									<?php endforeach;?>
 								</select>
 							</div>

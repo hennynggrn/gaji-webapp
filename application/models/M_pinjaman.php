@@ -15,6 +15,7 @@ class M_pinjaman extends CI_Model{
 		} else {
 			$this->db->select('*, count(a.id_angsuran) jml_angsuran, max(a.tanggal_kembali) end_date, 
 							   sum(a.status) status_ang');
+			$this->db->order_by('pjm.start_date', 'ASC');
 			$this->db->join('angsuran a', 'a.id_pinjaman = pjm.id_pinjaman', 'LEFT');
 			$this->db->join('pegawai p', 'p.id_pegawai = pjm.id_pegawai', 'LEFT');
 			$this->db->group_by('pjm.id_pinjaman');
@@ -24,9 +25,16 @@ class M_pinjaman extends CI_Model{
 
 	public function get_pegawai_pinjaman($id = TRUE)
 	{
-		$this->db->select('*, p.id_pegawai, pjm.id_pegawai pegawai');
-		$this->db->join('pinjaman pjm', 'p.id_pegawai = pjm.id_pegawai AND pjm.id_pinjaman ='.$id, 'LEFT');
-		return $this->db->get('pegawai p');
+		if ($id != NULL) {
+			$this->db->select('*, p.id_pegawai, pjm.id_pegawai pegawai');
+			$this->db->join('pinjaman pjm', 'p.id_pegawai = pjm.id_pegawai AND pjm.id_pinjaman ='.$id, 'LEFT');
+			return $this->db->get('pegawai p');
+		} else {
+			$this->db->select('*, p.id_pegawai, pjm.id_pegawai pegawai, GROUP_CONCAT(DISTINCT CONCAT(kode_pinjaman) SEPARATOR "") status_pjm');
+			$this->db->join('pinjaman pjm', 'p.id_pegawai = pjm.id_pegawai', 'LEFT');
+			$this->db->group_by('pjm.id_pegawai');
+			return $this->db->get('pegawai p');
+		}
 	}
 
 	public function get_angsuran($id = TRUE)

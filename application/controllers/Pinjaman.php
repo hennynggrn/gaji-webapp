@@ -6,16 +6,18 @@ class Pinjaman extends CI_Controller {
 	public function index($id = NULL)
 	{
 		$data['title']= 'Tabel Pinjaman';
+		$data['today_date']= date('Y-m-d');
 
 		$data['pinjamans'] = $this->M_pinjaman->get_pinjaman($id)->result_array();
 		// var_dump($data['pinjamans']);
 		$this->template->load('index','pinjaman/table_pinjaman', $data);
 	}
 
-	public function add_pinjaman($id_pegawai = NULL)
+	public function add_pinjaman($id = NULL)
 	{
 		$data['title']= 'Tambah Pinjaman';
-		$data['pegawais'] = $this->M_pegawai->get_pegawai($id_pegawai)->result_array();
+		$data['pegawais'] = $this->M_pinjaman->get_pegawai_pinjaman($id)->result_array();
+		var_dump($data['pegawais']);
 		$this->template->load('index','pinjaman/add_pinjaman',$data);
 	}
 
