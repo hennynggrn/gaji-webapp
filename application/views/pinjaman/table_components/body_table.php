@@ -1,7 +1,6 @@
 <tr>
 	<td><?php echo $no++;?></td>
 	<td style="text-align:left;"><?php echo $pinjaman['nama'];?></td>
-	<td><?php echo $pinjaman['kode_pinjaman'];?></td>
 	<td><?php echo $pinjaman['start_date_IDN'];?></td>
 	<td><?php echo $pinjaman['end_date_IDN'];?></td>
 	<td style="text-align:left;"><?php echo 'Rp. '.number_format($pinjaman['total_pinjaman'],0,',','.');?></td>

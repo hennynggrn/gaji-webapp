@@ -564,12 +564,11 @@
 
 	<!-- Set keterangan table jika tidak ditemukan data di tabel pinjaman -->
 	<script>
-		// for (let i = 0; i < 8; i++) {
-		// 	// const element = array[i];
-		// 	var rowCount = $('.table'+i+' tbody tr').length;
-		// 	// alert(rowCount);
-		// 	// if rowCount = 0; 
-		// 	alert(rowCount[1]);
+		for (let i = 0; i < 8; i++) {
+			var rowCount = $('.table'+i+' tbody tr').length;
+			if (rowCount == 0){
+				$('.table'+i).html('<span class="text-center text-bold"><br>Data pinjaman tidak ditemukan.<br><br></span>');
+			}
 		}
 	</script>
 
