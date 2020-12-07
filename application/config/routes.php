@@ -1,6 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+$route['gaji/print'] = 'gaji/print_gaji';
+$route['gaji/edit'] = 'gaji/detail_gaji';
+$route['table'] = 'gaji/index';
+
 $route['pinjaman/delete/(:any)'] = 'pinjaman/delete_pinjaman/$1';
 $route['pinjaman/edit/(:any)'] = 'pinjaman/edit_pinjaman/$1';
 $route['pinjaman/detail/(:any)'] = 'pinjaman/detail_pinjaman/$1';

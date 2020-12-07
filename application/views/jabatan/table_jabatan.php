@@ -12,7 +12,7 @@
 					<div class="box-body">
 						<table class="table table-bordered text-center">
 							<tr>
-								<th style="width: 10px">No</th>
+								<th>No</th>
 								<th>Nama Jabatan</th>
 								<th>Jumlah Jam</th>
 								<th>Jumlah Pegawai</th>

@@ -14,7 +14,7 @@
 				<div class="box-body">
 					<table class="table table-bordered table-hover responsive text-center">
 						<thead>
-							<th style="width: 10px">No</th>
+							<th>No</th>
 							<th>Nama Anggota</th>
 							<th>Status Anggota</th>
 							<th>Jenis Kelamin</th>
@@ -26,7 +26,7 @@
 						<?php
 							$no=1; foreach ($keluargas as $key => $keluarga) : ?>
 							<tr>
-								<td style="width: 10px"><?php echo $no++;?></td>
+								<td><?php echo $no++;?></td>
 								<td style="text-align: left; padding-left: 15px;"><?php echo $keluarga['nama'];?></td>
 								<td class="badge-edit"><?php switch ($keluarga['id_status']) {
 									case '1':

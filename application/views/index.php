@@ -128,7 +128,7 @@
 						</a>
 					</li>
 					<li class="<?php if($this->uri->segment(1) == 'gaji'){echo 'active';}?>">
-						<a href="<?php echo site_url('gaji/table'); ?>">
+						<a href="<?php echo site_url('table'); ?>">
 							<i class="fa fa-money"></i>
 							<span>Gaji</span>
 						</a>

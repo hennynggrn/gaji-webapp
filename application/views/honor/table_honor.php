@@ -6,7 +6,7 @@
 				<div class="box-body">
 					<table class="table table-bordered table-hover responsive text-center">
 						<thead>
-							<th style="width: 10px">No</th>
+							<th>No</th>
 							<th>Honorarium</th>
 							<th>Jumlah Pegawai</th>
 							<th>Jenis Jabatan</th>
@@ -16,7 +16,7 @@
 						<?php
 							$no=1; foreach ($honors as $key => $honor) : ?>
 							<tr>
-								<td style="width: 10px"><?php echo $no++;?></td>
+								<td><?php echo $no++;?></td>
 								<td style="text-align: left; padding-left: 50px;"><?php echo 'Rp. &nbsp;&nbsp;'.number_format($honor['honor'],0,',','.');?></td>
 								<td><?php echo $honor['result'].' orang';?></td>
 								<td class="badge-edit"><span><?php echo $honor['result_list'];?></span></td>

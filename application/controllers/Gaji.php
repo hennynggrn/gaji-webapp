@@ -3,17 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Gaji extends CI_Controller {
 
-	public function index()
+	public function index() 
 	{
-		$this->template->load('index','gaji/table');
-	}
-
-	public function table()
-	{
-		$this->load->model('M_gaji');
+		$data['title']= 'Tabel Gaji';
 		$data['tampil']= $this->M_gaji->get_gaji()->result_array();
-		// $data['tahun'] = $this->M_tahun->get_tahun()->result_array();
-		$this->template->load('index','gaji/table',$data);
+		$this->template->load('index','gaji/table_gaji', $data);
 	}
 
 	public function detail_gaji()
@@ -24,7 +18,7 @@ class Gaji extends CI_Controller {
 		$this->template->load('index','gaji/detail_gaji',$data);
 	}
 
-	public function print_det_gaji()
+	public function print_gaji()
 	{
 		$this->load->model('M_gaji');
 		$data['tampil']= $this->M_gaji->get_gaji()->result_array();
