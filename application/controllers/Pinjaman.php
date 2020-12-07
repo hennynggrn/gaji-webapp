@@ -6,9 +6,28 @@ class Pinjaman extends CI_Controller {
 	public function index($id = NULL)
 	{
 		$data['title']= 'Tabel Pinjaman';
-		$data['today_date']= date('Y-m-d');
-
+		$today_date = date('Y-m-d');
+		$data['today_month'] = month(date('Y-m-d'));
+		$data['today_year'] = date('Y', strtotime($today_date));
 		$data['pinjamans'] = $this->M_pinjaman->get_pinjaman($id)->result_array();
+		foreach($data['pinjamans'] as $key => $value){
+			$start_date = $data['pinjamans'][$key]['start_date'];
+			$end_date = $data['pinjamans'][$key]['end_date'];
+
+			$data['pinjamans'][$key]['start_date_IDN'] = fullConvertIDN($start_date, $short = NULL, $day = FALSE);
+			$data['pinjamans'][$key]['s_start_date_IDN'] = fullConvertIDN($start_date, $short = TRUE,  $day = TRUE);
+			$data['pinjamans'][$key]['f_start_date_IDN'] = fullConvertIDN($start_date, $short = FALSE,  $day = TRUE);
+			$data['pinjamans'][$key]['start_month_IDN'] = month($start_date);
+			$data['pinjamans'][$key]['start_day_IDN'] = day($start_date);
+			$data['pinjamans'][$key]['start_year_IDN'] = date('Y', strtotime($start_date));
+
+			$data['pinjamans'][$key]['end_date_IDN'] = fullConvertIDN($end_date, $short = NULL, $day = FALSE);
+			$data['pinjamans'][$key]['s_end_date_IDN'] = fullConvertIDN($end_date, $short = TRUE,  $day = TRUE);
+			$data['pinjamans'][$key]['f_end_date_IDN'] = fullConvertIDN($end_date, $short = FALSE,  $day = TRUE);
+			$data['pinjamans'][$key]['end_month_IDN'] = month($end_date);
+			$data['pinjamans'][$key]['end_day_IDN'] = day($end_date);
+			$data['pinjamans'][$key]['end_year_IDN'] = date('Y', strtotime($end_date));
+		}
 		// var_dump($data['pinjamans']);
 		$this->template->load('index','pinjaman/table_pinjaman', $data);
 	}
@@ -17,7 +36,6 @@ class Pinjaman extends CI_Controller {
 	{
 		$data['title']= 'Tambah Pinjaman';
 		$data['pegawais'] = $this->M_pinjaman->get_pegawai_pinjaman($id)->result_array();
-		var_dump($data['pegawais']);
 		$this->template->load('index','pinjaman/add_pinjaman',$data);
 	}
 
@@ -64,12 +82,13 @@ class Pinjaman extends CI_Controller {
 		$data['pinjaman'] = $this->M_pinjaman->get_pinjaman($id)->row_array();
 		$data['angsurans'] = $this->M_pinjaman->get_angsuran($id)->result_array();
 		// var_dump($data['angsurans']);
-		// var_dump($data['pinjaman']);
+		// var_dump($data['pegawais']);
 		$this->template->load('index','pinjaman/edit_pinjaman', $data);
 	}
 
 	public function update_pinjaman()
 	{
+		// var_dump($_POST);
 		$id_pinjaman = $this->input->post('id_pinjaman');
 		$res['pinjaman'] = $this->M_pinjaman->update_pinjaman($id_pinjaman);
 		$res['angsuran'] = $this->M_pinjaman->update_angsuran($id_pinjaman);

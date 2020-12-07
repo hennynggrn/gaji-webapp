@@ -9,9 +9,14 @@
 					<div class="box-body">
 						<div class="form-group">
 							<input type="hidden" value="<?php echo $pinjaman['id_pinjaman'];?>" name="id_pinjaman">
+							<?php foreach ($pegawais as $key => $pegawai) :
+								if ($pegawai['id_pinjaman'] != NULL) {
+									echo '<input type="hidden" value="'.$pinjaman['id_pegawai'].'" name="pegawai">';
+								}
+							endforeach; ?>
 							<label class="col-sm-2 control-label">Nama Pegawai</label>
 							<div class="col-sm-10">
-								<select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="pegawai" disabled required>
+								<select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="pegawai_select" disabled required>
 									<option disabled>Cari Pegawai</option>
 									<?php foreach ($pegawais as $key => $pegawai) :?>
 										<option value=<?php echo '"'.$pegawai['id_pegawai'].'"'; echo ($pegawai['pegawai'] != NULL) ? 'selected' : '';?>><?php echo $pegawai['nama'];?></option>

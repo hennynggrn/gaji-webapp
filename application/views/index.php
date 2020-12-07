@@ -482,36 +482,6 @@
 		document.getElementById('today_date').value = new Date().toISOString().slice(0, 10);
 
 	</script>
-	<script>
-		// Set Month
-		// $(document).ready(function(){
-		// 	var month = $('.this-month').text();
-		// 	switch (month) {
-		// 		case '12':
-		// 			$('.this-month').text('Desember');
-		// 			break;
-		// 		case '2':
-		// 			$('.this-month').text('Februari');
-		// 			break;
-		// 	}
-		// });
-		function formatDate(date) {
-			var monthNames = [
-				"January", "February", "March",
-				"April", "May", "June", "July",
-				"August", "September", "October",
-				"November", "December"
-			];
-
-			var day = date.getDate();
-			var monthIndex = date.getMonth();
-			var year = date.getFullYear();
-
-			return day + ' ' + monthNames[monthIndex] + ' ' + year;
-		}
-
-		// console.log(formatDate(new Date('2020-12-02'))); 
-	</script>
 
 	<!-- Styling -->
 	<script>
@@ -524,40 +494,83 @@
 
 	<script>
 		// Set Pinjaman Category 
-		// $(function(){1
-			$('.thisMonthBorrowerKop').on('click', function(){
-				var val = $(this).text();
-    			$('.thisMonthBorrowerKop').addClass('active')
-				$('.historyBorrowerKop').removeClass('active');
-				$('#kop').addClass('active');
-				$('#kop').siblings().removeClass('active');
-				$('.category').html(val + ' &nbsp;<span class="caret"></span>');
-			});
-			$('.historyBorrowerKop').on('click', function(){
-				var val = $(this).text();
-				$('.historyBorrowerKop').addClass('active')
-				$('.thisMonthBorrowerKop').removeClass('active');
-				$('#oldkop').addClass('active');
-				$('#oldkop').siblings().removeClass('active');
-				$('.category').html(val + ' &nbsp;<span class="caret"></span>');
-			});
-			$('.thisMonthBorrowerBank').on('click', function(){
-				var val = $(this).text();
-    			$('.thisMonthBorrowerBank').addClass('active')
-				$('.historyBorrowerBank').removeClass('active');
-				$('#bank').addClass('active');
-				$('#bank').siblings().removeClass('active');
-				$('.category').html(val + ' &nbsp;<span class="caret"></span>');
-			});
-			$('.historyBorrowerBank').on('click', function(){
-				var val = $(this).text();
-				$('.historyBorrowerBank').addClass('active')
-				$('.thisMonthBorrowerBank').removeClass('active');
-				$('#oldbank').addClass('active');
-				$('#oldbank').siblings().removeClass('active');
-				$('.category').html(val + ' &nbsp;<span class="caret"></span>');
-			});
-		// });
+		// koperasi
+		$('.thisMonth_BorrowerKop').on('click', function(){
+			var val = $(this).text();
+			$('.thisMonth_BorrowerKop').addClass('active')
+			$('.history_BorrowerKop, .lunas_BorrowerKop, .belumLunas_BorrowerKop').removeClass('active');
+			$('#kop').addClass('active');
+			$('#kop').siblings().removeClass('active');
+			$('.category').html(val + ' &nbsp;<span class="caret"></span>');
+		});
+		$('.history_BorrowerKop').on('click', function(){
+			var val = $(this).text();
+			$('.history_BorrowerKop').addClass('active')
+			$('.thisMonth_BorrowerKop, .lunas_BorrowerKop, .belumLunas_BorrowerKop').removeClass('active');
+			$('#oldkop').addClass('active');
+			$('#oldkop').siblings().removeClass('active');
+			$('.category').html(val + ' &nbsp;<span class="caret"></span>');
+		});
+		$('.lunas_BorrowerKop').on('click', function(){
+			var val = $(this).text();
+			$('.lunas_BorrowerKop').addClass('active')
+			$('.thisMonth_BorrowerKop, .history_BorrowerKop, .belumLunas_BorrowerKop').removeClass('active');
+			$('#lunas_kop').addClass('active');
+			$('#lunas_kop').siblings().removeClass('active');
+			$('.category').html(val + ' &nbsp;<span class="caret"></span>');
+		});
+		$('.belumLunas_BorrowerKop').on('click', function(){
+			var val = $(this).text();
+			$('.belumLunas_BorrowerKop').addClass('active')
+			$('.thisMonth_BorrowerKop, .history_BorrowerKop, .lunas_BorrowerKop').removeClass('active');
+			$('#belum_lunas_kop').addClass('active');
+			$('#belum_lunas_kop').siblings().removeClass('active');
+			$('.category').html(val + ' &nbsp;<span class="caret"></span>');
+		});
+		// bank
+		$('.thisMonth_BorrowerBank').on('click', function(){
+			var val = $(this).text();
+			$('.thisMonth_BorrowerBank').addClass('active')
+			$('.history_BorrowerBank, .lunas_BorrowerBank, .belumLunas_BorrowerBank').removeClass('active');
+			$('#bank').addClass('active');
+			$('#bank').siblings().removeClass('active');
+			$('.category').html(val + ' &nbsp;<span class="caret"></span>');
+		});
+		$('.history_BorrowerBank').on('click', function(){
+			var val = $(this).text();
+			$('.history_BorrowerBank').addClass('active')
+			$('.thisMonth_BorrowerBank, .lunas_BorrowerBank, .belumLunas_BorrowerBank').removeClass('active');
+			$('#oldbank').addClass('active');
+			$('#oldbank').siblings().removeClass('active');
+			$('.category').html(val + ' &nbsp;<span class="caret"></span>');
+		});
+		$('.lunas_BorrowerBank').on('click', function(){
+			var val = $(this).text();
+			$('.lunas_BorrowerBank').addClass('active')
+			$('.thisMonth_BorrowerBank, .history_BorrowerBank, .belumLunas_BorrowerBank').removeClass('active');
+			$('#lunas_bank').addClass('active');
+			$('#lunas_bank').siblings().removeClass('active');
+			$('.category').html(val + ' &nbsp;<span class="caret"></span>');
+		});
+		$('.belumLunas_BorrowerBank').on('click', function(){
+			var val = $(this).text();
+			$('.belumLunas_BorrowerBank').addClass('active')
+			$('.thisMonth_BorrowerBank, .history_BorrowerBank, .lunas_BorrowerBank').removeClass('active');
+			$('#belum_lunas_bank').addClass('active');
+			$('#belum_lunas_bank').siblings().removeClass('active');
+			$('.category').html(val + ' &nbsp;<span class="caret"></span>');
+		});
+	</script>
+
+	<!-- Set keterangan table jika tidak ditemukan data di tabel pinjaman -->
+	<script>
+		// for (let i = 0; i < 8; i++) {
+		// 	// const element = array[i];
+		// 	var rowCount = $('.table'+i+' tbody tr').length;
+		// 	// alert(rowCount);
+		// 	// if rowCount = 0; 
+		// 	alert(rowCount[1]);
+		}
 	</script>
 
 	<!-- Set 'Keluarga' close input when delete member-->
