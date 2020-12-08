@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2020 at 04:52 AM
+-- Generation Time: Dec 08, 2020 at 10:33 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -44,11 +44,11 @@ CREATE TABLE `angsuran` (
 INSERT INTO `angsuran` (`id_angsuran`, `id_pinjaman`, `tanggal_kembali`, `nominal`, `status`, `created_at`, `created_by`) VALUES
 (4, 2, '2020-12-24', 100000, 0, '2020-12-02 04:33:47', NULL),
 (5, 3, '2020-12-17', 1000000, 1, '2020-12-02 04:35:44', NULL),
-(6, 3, '2020-12-29', 500000, 0, '2020-12-02 04:35:45', NULL),
+(6, 3, '2020-12-29', 500000, 1, '2020-12-02 04:35:45', NULL),
 (7, 4, '2020-12-03', 1500000, 0, '2020-12-02 04:37:13', NULL),
 (8, 4, '2020-12-25', 1500000, 0, '2020-12-02 04:37:13', NULL),
 (30, 1, '2020-12-30', 4000000, 0, '2020-12-03 07:44:23', NULL),
-(31, 1, '2020-12-24', 3000000, 0, '2020-12-03 07:45:04', NULL),
+(31, 1, '2020-12-24', 3000000, 1, '2020-12-03 07:45:04', NULL),
 (34, 1, '2020-12-31', 5000000, 0, '2020-12-03 07:58:54', NULL),
 (37, 7, '2020-12-17', 20000, 0, '2020-12-03 08:03:26', NULL),
 (39, 7, '2020-12-31', 60000, 0, '2020-12-03 08:04:28', NULL);
@@ -161,7 +161,10 @@ INSERT INTO `jbt_pegawai` (`id_jbt_pegawai`, `id_jabatan`, `id_pegawai`, `create
 (52, 3, 7, '2020-12-01 23:58:26', NULL),
 (53, 11, 7, '2020-12-01 23:58:26', NULL),
 (55, 3, 8, '2020-12-01 23:58:26', NULL),
-(56, 7, 8, '2020-12-01 23:58:26', NULL);
+(56, 7, 8, '2020-12-01 23:58:26', NULL),
+(64, 2, 9, '2020-12-08 08:37:52', NULL),
+(65, 3, 9, '2020-12-08 08:37:52', NULL),
+(66, 12, 9, '2020-12-08 08:37:52', NULL);
 
 -- --------------------------------------------------------
 
@@ -214,6 +217,7 @@ CREATE TABLE `masakerja` (
 --
 
 INSERT INTO `masakerja` (`id_masakerja`, `tahun`, `jml_mk`, `created_at`, `created_by`) VALUES
+(0, 0, 0, '2020-12-08 08:05:22', NULL),
 (1, 1, 2000, '2020-12-01 23:56:07', NULL),
 (2, 2, 4000, '2020-12-01 23:56:07', NULL),
 (3, 3, 6000, '2020-12-01 23:56:07', NULL),
@@ -276,6 +280,7 @@ CREATE TABLE `pegawai` (
   `agama` enum('Islam','Protestan','Katolik','Hindu','Buddha','Khonghucu') NOT NULL,
   `umur` varchar(20) NOT NULL,
   `honor` int(11) DEFAULT NULL,
+  `masa_kerja` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `created_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -284,12 +289,13 @@ CREATE TABLE `pegawai` (
 -- Dumping data for table `pegawai`
 --
 
-INSERT INTO `pegawai` (`id_pegawai`, `nbm`, `nama`, `tempat_lahir`, `tgl_lahir`, `telepon`, `jns_pegawai`, `gender`, `email`, `status_pegawai`, `status`, `agama`, `umur`, `honor`, `created_at`, `created_by`) VALUES
-(2, '124', 'Rifky', 'Baubau', '1998-02-12', 1897656, '0', 'P', 'rifky@gmail.com', 'T0', 0, 'Hindu', '21', 0, '2020-12-01 23:55:10', NULL),
-(5, '123', 'Budi', 'Taman', '1889-03-12', 2121212, '0', 'L', 'budi@gmail.com', 'T1', 1, 'Islam', '31', 56000000, '2020-12-01 23:55:10', NULL),
-(6, '212', 'Dizzy', 'Taman', '1111-11-12', 1212, '0', 'P', 'qsqs@czsd', 'T0', 1, 'Islam', '21', 0, '2020-12-01 23:55:10', NULL),
-(7, '1212', 'Henuiii', 'Taman', '1111-11-11', 90787, '0', 'P', 'wodi@gmail.com', 'T1', 1, 'Islam', '48', 90000, '2020-12-01 23:55:10', NULL),
-(8, '121', 'Widi', 'dasas', '2222-02-22', 545346, '0', 'L', 'wodi@gmail.com', 'T1', 1, 'Islam', '56', 360000, '2020-12-01 23:55:10', NULL);
+INSERT INTO `pegawai` (`id_pegawai`, `nbm`, `nama`, `tempat_lahir`, `tgl_lahir`, `telepon`, `jns_pegawai`, `gender`, `email`, `status_pegawai`, `status`, `agama`, `umur`, `honor`, `masa_kerja`, `created_at`, `created_by`) VALUES
+(2, '124', 'Rifky', 'Baubau', '1998-02-12', 1897656, '0', 'P', 'rifky@gmail.com', 'T0', 0, 'Hindu', '21', 0, 2, '2020-12-01 23:55:10', NULL),
+(5, '123', 'Budi', 'Taman', '1889-03-12', 2121212, '0', 'L', 'budi@gmail.com', 'T1', 1, 'Islam', '31', 56000000, 4, '2020-12-01 23:55:10', NULL),
+(6, '212', 'Dizzy', 'Taman', '1111-11-12', 1212, '0', 'P', 'qsqs@czsd', 'T0', 1, 'Islam', '21', 0, 3, '2020-12-01 23:55:10', NULL),
+(7, '1212', 'Henuiii', 'Taman', '1111-11-11', 90787, '0', 'P', 'wodi@gmail.com', 'T1', 1, 'Islam', '48', 90000, 0, '2020-12-01 23:55:10', NULL),
+(8, '121', 'Widi', 'dasas', '2222-02-22', 545346, '0', 'L', 'wodi@gmail.com', 'T1', 1, 'Islam', '56', 360000, 0, '2020-12-01 23:55:10', NULL),
+(9, '12121', 'Niu', 'Taman', '2020-12-15', 21212, '1', 'L', 'budi@gmail.com', 'T1', 0, 'Islam', '45', 1200000, 40, '2020-12-08 08:37:52', NULL);
 
 -- --------------------------------------------------------
 
@@ -314,10 +320,10 @@ CREATE TABLE `pinjaman` (
 
 INSERT INTO `pinjaman` (`id_pinjaman`, `kode_pinjaman`, `total_pinjaman`, `start_date`, `ket_pinjaman`, `id_pegawai`, `created_at`, `created_by`) VALUES
 (1, 'KOP', 1000000, '2020-12-03', 'last edit', 2, '2020-12-02 04:33:02', NULL),
-(2, 'BANK', 300000, '2020-12-02', '', 5, '2020-12-02 04:33:47', NULL),
+(2, 'BANK', 300000, '2020-10-13', '', 5, '2020-12-02 04:33:47', NULL),
 (3, 'KOP', 1500000, '2020-12-02', '', 6, '2020-12-02 04:35:44', NULL),
 (4, 'BANK', 5000000, '2020-12-10', 'edit here', 8, '2020-12-02 04:37:13', NULL),
-(7, 'KOP', 70000, '2020-12-03', '', 5, '2020-12-03 08:03:26', NULL);
+(7, 'KOP', 70000, '2020-11-05', '', 5, '2020-12-03 08:03:26', NULL);
 
 -- --------------------------------------------------------
 
@@ -422,7 +428,8 @@ ALTER TABLE `masakerja`
 --
 ALTER TABLE `pegawai`
   ADD PRIMARY KEY (`id_pegawai`),
-  ADD KEY `fk_status_pgw` (`status_pegawai`);
+  ADD KEY `fk_status_pgw` (`status_pegawai`),
+  ADD KEY `fk_pegawai_mk` (`masa_kerja`);
 
 --
 -- Indexes for table `pinjaman`
@@ -469,7 +476,7 @@ ALTER TABLE `jabatan`
 -- AUTO_INCREMENT for table `jbt_pegawai`
 --
 ALTER TABLE `jbt_pegawai`
-  MODIFY `id_jbt_pegawai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id_jbt_pegawai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `keluarga`
@@ -505,6 +512,12 @@ ALTER TABLE `jbt_pegawai`
 --
 ALTER TABLE `keluarga`
   ADD CONSTRAINT `fk_pegawai_keluarga` FOREIGN KEY (`id_pegawai`) REFERENCES `pegawai` (`id_pegawai`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `pegawai`
+--
+ALTER TABLE `pegawai`
+  ADD CONSTRAINT `fk_pegawai_mk` FOREIGN KEY (`masa_kerja`) REFERENCES `masakerja` (`id_masakerja`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `pinjaman`
