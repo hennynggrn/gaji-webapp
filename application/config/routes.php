@@ -25,9 +25,11 @@ $route['keluarga/delete/(:any)'] = 'keluarga/delete_keluarga/$1';
 $route['keluarga/detail/(:any)'] = 'keluarga/detail_keluarga/$1';
 $route['keluarga'] = 'keluarga/index';
 
+$route['tunjangan/pegawai'] = 'tunjangan/tunjangan_pegawai';
 $route['tunjangan/edit'] = 'tunjangan/edit_tunjangan';
-$route['tunjangan/delete/(:any)'] = 'tunjangan/delete_tunjangan/$1';
-$route['tunjangan/detail/(:any)'] = 'tunjangan/detail_tunjangan/$1';
+// $route['tunjangan/delete/(:any)'] = 'tunjangan/delete_tunjangan/$1';
+// $route['tunjangan/delete/(:any)'] = 'tunjangan/delete_tunjangan/$1';
+// $route['tunjangan/detail/(:any)'] = 'tunjangan/detail_tunjangan/$1';
 $route['tunjangan'] = 'tunjangan/index';
 
 $route['honor/delete/(:any)'] = 'honor/delete_honor/$1';

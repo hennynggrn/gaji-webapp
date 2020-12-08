@@ -13,7 +13,7 @@
 							<th>Menu</th>
 						</thead>
 						<tbody>
-						<?php
+							<?php
 							$no=1; foreach ($honors as $key => $honor) : ?>
 							<tr>
 								<td><?php echo $no++;?></td>

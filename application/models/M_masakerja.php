@@ -20,4 +20,15 @@ class M_masakerja extends CI_Model{
 			$this->db->update('masakerja', $data);
 		}
 	}
+
+	public function update_mk_pegawai()
+	{
+		$pegawai = $this->input->post('pegawai');
+		$mk = $this->input->post('masa_kerja');
+		$data = array(
+			'masa_kerja' => $mk
+		);
+		$this->db->where('id_pegawai', $pegawai);
+		return $this->db->update('pegawai', $data);
+	}
 }

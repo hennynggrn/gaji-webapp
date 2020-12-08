@@ -9,8 +9,9 @@ class M_pegawai extends CI_Model{
 			$this->db->select('p.*');
 			return $this->db->get_where('pegawai p', array('id_pegawai' => $id_pegawai));
 		} else {
-			$this->db->select('p.*');
+			$this->db->select('p.*, mk.*');
 			$this->db->order_by('p.nama', 'ASC');
+			$this->db->join('masakerja mk', 'p.masa_kerja = mk.id_masakerja', 'LEFT');
 			return $this->db->get('pegawai p');
 		}
 	}
@@ -66,7 +67,8 @@ class M_pegawai extends CI_Model{
 			'status' => $status,
 			'jns_pegawai' => $jns_pegawai,
 			'status_pegawai' => $status_pgw,
-			'honor' => $honor
+			'honor' => $honor,
+			'masa_kerja' => 0
 		);
 		return $this->db->insert("pegawai", $data);
 	}

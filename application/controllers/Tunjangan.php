@@ -25,7 +25,6 @@ class Tunjangan extends CI_Controller {
 
 	public function update_tunjangan()
 	{
-		var_dump($_POST);
 		$res['tunjangan'] = $this->M_tunjangan->update_tunjangan();
 		$res['masakerja'] = $this->M_masakerja->update_masakerja();
 		
@@ -35,4 +34,26 @@ class Tunjangan extends CI_Controller {
 			echo "<h2> Gagal Edit Data Tunjangan </h2>";
 		}
 	}	
+
+	public function tunjangan_pegawai($id_pegawai = NULL)
+	{
+		$data['title'] = 'Tunjangan Pegawai';
+
+		$data['pegawais']= $this->M_pegawai->get_pegawai($id_pegawai)->result_array();
+		$data['masakerjas']= $this->M_masakerja->get_masakerja()->result_array();
+		// var_dump($data['masakerjas']);
+
+		$this->template->load('index', 'tunjangan/table_mk_pegawai', $data);
+	}
+
+	public function update_mk_pegawai()
+	{
+		$res['pegawai'] = $this->M_masakerja->update_mk_pegawai();
+		// var_dump($_POST);
+		if ($res) {
+			redirect('tunjangan/pegawai');
+		} else {
+			echo "<h2> Gagal Edit Data Masa Kerja Pegawai </h2>";
+		}
+	}
 }

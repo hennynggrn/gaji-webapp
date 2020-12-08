@@ -38,7 +38,7 @@
 									<th>Pinjaman</th>
 									<td>:</td>
 									<td>
-										Koperasi Murni dan Bank Bina Drajat Warga (BDW) <a href="<?php echo site_url('pinjaman');?>" class="badge bg-blue">Tambah Pinjaman Pegawai <i class="fa fa-fw fa-mail-forward (alias)"></i></a>
+										Koperasi Murni dan Bank Bina Drajat Warga (BDW) <a href="<?php echo site_url('pinjaman');?>" class="badge bg-blue">Lihat Pinjaman Pegawai <i class="fa fa-fw fa-arrow-circle-right"></i></a>
 									</td>
 								</tr>
 							</tbody>
