@@ -12,7 +12,7 @@
 				</div>
 				<div class="box-body">
 					<div class="col-md-12">
-						<table class="table table-hover">
+						<table class="table table-hover text-left">
 							<tbody>
 								<tr>
 									<td style="width: 140px">Nama Peminjam</td>
@@ -42,7 +42,7 @@
 								<tr>
 									<td>Jumlah Angsuran</td>
 									<td>:</td>
-									<td><?php echo $pinjaman['jml_angsuran']; 
+									<td><?php echo $pinjaman['jml_angsuran'].' kali'; 
 											if (($pinjaman['status_ang'] != 0) && ($pinjaman['status_ang'] != $pinjaman['jml_angsuran'])) {
 											echo ' &nbsp;&nbsp;<small class="text-green">('.$pinjaman['status_ang'].' angsuran terbayar)</small>';
 										}?>
@@ -51,7 +51,7 @@
 								<tr>
 									<td>Status</td>
 									<td>:</td>
-									<td><?php echo ($pinjaman['jml_angsuran']-$pinjaman['status_ang'] == 0) ? '<span class="badge bg-green">Lunas</span>' : '<span class="badge bg-red">Belum Lunas</span>';?></td>
+									<td><?php echo ($pinjaman['status_pjm'] == 1) ? '<span class="badge bg-green">Lunas</span>' : '<span class="badge bg-red">Belum Lunas</span>';?></td>
 								</tr>
 								<tr>
 									<td>Keterangan</td>
@@ -99,7 +99,7 @@
 									</td>
 								</tr>
 								<!-- Modal Repay Angsuran-->
-								<div class="modal fade" id="repayAngsuran<?php echo $angsuran['id_angsuran'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+								<div class="modal fade <?php echo ($angsuran['status'] == 0) ? '' : 'modal-danger'; ?>" id="repayAngsuran<?php echo $angsuran['id_angsuran'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 									<div class="modal-dialog" role="document">
 										<div class="modal-content">
 											<div class="modal-header">
@@ -119,15 +119,15 @@
 														<input type="hidden" name="id_pinjaman" value="<?php echo $angsuran['id_pinjaman'];?>">
 														<input type="hidden" name="id_angsuran" value="<?php echo $angsuran['id_angsuran'];?>">
 														<input type="hidden" name="repay" value="0">
-														<b class="text-red">Peringatan! </b><br><br>
-														Anda akan membatalkan pembayaran angsuran sebesar <b class="text-primary"><?php echo 'Rp. '.number_format($angsuran['nominal'],0,',','.');?></b> ?
+														<b>Peringatan! </b><br><br>
+														Anda akan membatalkan pembayaran angsuran sebesar <b class="<?php echo ($angsuran['status'] == 0) ? 'text-primary' : ''; ?>"><?php echo 'Rp. '.number_format($angsuran['nominal'],0,',','.');?></b> ?
 													</p>
 												<?php } ?>
 												
 											</div>
 											<div class="modal-footer">
-												<button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-												<button type="submit" class="btn btn-primary"><?php echo ($angsuran['status'] == 0) ? 'Bayar' : 'Lanjutkan'; ?></button>
+												<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Batal</button>
+												<button type="submit" class="btn <?php echo ($angsuran['status'] == 0) ? 'btn-primary' : 'btn-outline'; ?> pull-right edit-btn"><?php echo ($angsuran['status'] == 0) ? 'Bayar' : 'Lanjutkan'; ?></button>
 											</div>
 										</div>
 									</div>

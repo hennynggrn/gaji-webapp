@@ -5,7 +5,7 @@ class Pegawai extends CI_Controller {
 
 	public function index($id_pegawai = NULL)
 	{
-		$data['title'] = 'Table Pegawai';
+		$data['title'] = 'Tabel Pegawai';
 
 		$data['pegawais'] = $this->M_pegawai->get_pegawai($id_pegawai)->result_array();
 
@@ -43,7 +43,7 @@ class Pegawai extends CI_Controller {
 		$data['title'] = 'Detail Pegawai';
 
 		$where = array('id_pegawai' => $id);
-		$data['pegawais'] = $this->M_pegawai->get_pegawai_detail($where,'pegawai')->result_array();
+		$data['pegawai'] = $this->M_pegawai->get_pegawai_detail($where,'pegawai')->row_array();
 		$data['keluargas'] = $this->M_keluarga->get_keluarga_pegawai($id,'keluarga')->result_array();
 		$data['jabatans'] = $this->M_jabatan->get_jabatan_pegawai($id)->result_array();
 
@@ -53,8 +53,8 @@ class Pegawai extends CI_Controller {
 	public function edit_pegawai($id  = TRUE)
 	{
 		$data['title'] = 'Edit Pegawai';
-		
 		$where = array('id_pegawai' => $id);
+
 		$data['pegawai'] = $this->M_pegawai->get_pegawai_detail($where,'pegawai')->row_array();
 		$data['keluargas'] = $this->M_keluarga->get_keluarga_pegawai($id,'keluarga')->result_array();
 		$data['jabatans'] = $this->M_jabatan->get_jabatan($id)->result_array();
@@ -63,6 +63,7 @@ class Pegawai extends CI_Controller {
 		foreach ($data['keluargas'] as $key => $value) {
 			$data['id_status'][] = $data['keluargas'][$key]['id_status'];			
 		}
+
 		$this->template->load('index','pegawai/edit_pegawai', $data);
 	}
 
@@ -77,18 +78,27 @@ class Pegawai extends CI_Controller {
 		}
 
 		$id = $this->input->post('id_pegawai');
+		$where = array('id_pegawai' => $id);
+		$pegawai = $this->M_pegawai->get_pegawai_detail($where,'pegawai')->row_array();
 		$id_anggota_keluarga = $this->input->post('id_anggota_keluarga');
+		$edit_keluarga = $this->input->post('edit_keluarga');
+		$edit_honor = $this->input->post('edit_honor');
+		
 		if ($res) {
-			if ((isset($id_anggota_keluarga)) && ($id_anggota_keluarga != NULL)) {
+			if ((isset($edit_keluarga)) && ($edit_keluarga == 1)) {
 				redirect('keluarga/detail/'.$id_anggota_keluarga);
-			} 
-			if ($id_anggota_keluarga == NULL) {
+			} else if ((isset($edit_honor)) && ($edit_honor == 1)) {
+				if ($pegawai['honor'] != NULL) {
+					redirect('honor/detail/'.$pegawai['honor']);
+				} else {
+					redirect('honor/detail/null');
+				}
+			} else {
 				redirect('pegawai/detail/'.$id);
 			}
 		} else {
 			echo "<h2> Gagal Edit Data Pegawai </h2>";
 		}
-		var_dump($_POST);
 	}
 
 	public function delete_pegawai($id = TRUE)
@@ -98,7 +108,7 @@ class Pegawai extends CI_Controller {
 		if ($res) {
 			redirect('pegawai');
 		} else {
-			echo "<h2> Gagal Hapus Data  </h2>";
+			echo "<h2> Gagal Hapus Data Pegawai </h2>";
 		}
 	}
 }

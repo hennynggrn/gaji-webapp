@@ -201,7 +201,7 @@
 						</div>
 					</div>
 					<div class="box-footer">
-						<a href="<?php echo base_url('pegawai')?>" class="btn btn-danger edit-btn">Batal</a>
+						<a href="<?php echo base_url('pegawai')?>" class="btn btn-default edit-btn">Batal</a>
 						<button type="submit" class="btn btn-primary pull-right edit-btn">Simpan</button>
 					</div>
 				</form>

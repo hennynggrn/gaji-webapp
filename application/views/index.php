@@ -21,9 +21,11 @@
   <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/skins/_all-skins.min.css');?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/plugins/select2/select2.min.css');?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/plugins/colorpicker/bootstrap-colorpicker.min.css');?>">
+  <!-- Editor -->
+  <link rel="stylesheet" href="<?php echo base_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css');?>">
 </head>
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini" onload="<?php echo (isset($onload) ? $onload : ''); ?>">
 	<!-- Site wrapper -->
 	<div class="wrapper">
 		<header class="main-header">
@@ -403,6 +405,8 @@
 	<script src="<?php echo base_url('assets/plugins/timepicker/bootstrap-timepicker.min.js');?>"></script>
 	<!-- iCheck 1.0.1 -->
 	<script src="<?php echo base_url('assets/plugins/iCheck/icheck.min.js');?>"></script>
+	<!-- Editor -->
+	<script src="<?php echo base_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js');?>"></script>
 
 	<!-- Page script -->
 	<!-- Libraries/Plugin -->
@@ -480,9 +484,55 @@
 
 		// Today date
 		document.getElementById('today_date').value = new Date().toISOString().slice(0, 10);
-
 	</script>
 
+	<!-- Editor -->
+	<script>
+		$(function () {
+			// Replace the <textarea id="editor1"> with a CKEditor
+			// instance, using default configuration.
+			// CKEDITOR.replace('editor1');
+			//bootstrap WYSIHTML5 - text editor
+			$(".textarea").wysihtml5();
+		});
+	</script>
+
+	<script>
+		function validateComma(that) {
+			if (that.klg_psg.value == '') {
+				window.alert('Harap masukkan nilai tunjangan Pasangan');
+				document.getElementById('klg_psg').focus();
+				return (false);
+			}
+			if (that.klg_anak.value == '') {
+				window.alert('Harap masukkan nilai tunjangan Anak');
+				document.getElementById('klg_anak').focus();
+				return (false);
+			}
+			
+			if (that.klg_psg.value.indexOf(',') != -1) {
+				window.alert('Gunakan titik ( . ) sebagai pemisah, bukan comma ( , )');
+				document.getElementById('klg_psg').focus();
+				return (false);
+			}
+			if (that.klg_anak.value.indexOf(',') != -1) {
+				window.alert('Gunakan titik ( . ) sebagai pemisah, bukan comma ( , )');
+				document.getElementById('klg_anak').focus();
+				return (false);
+			}
+		}
+	</script>
+
+	<!-- Focus Form edit -->
+	<script>
+		function focusKeluarga(that) {
+			document.getElementById('mate').focus();
+		}
+
+		function focusPegawai(that) {
+			document.getElementById('jns_pegawai').focus();
+		}
+	</script>
 	<!-- Styling -->
 	<script>
 		$('.badge-edit > span').attr('class', 'badge bg-grey');
@@ -668,6 +718,96 @@
 			}
 		}
 	</script>
+
+	<!-- Validasi kode pinjaman -->
+	<script>
+		var arrayPinjaman = <?php if(isset($pegawais)) {echo json_encode($pegawais);}?>;
+		var id_pegawai = '';
+		var status_pjm = '';
+		$('#pegawai').on('change', function() {
+			var val = $(this).val();
+			// alert(val);
+			for (var j = 0; j < arrayPinjaman.length; j++) {
+				id_pegawai = arrayPinjaman[j]['id_pegawai'];
+				status_pjm = arrayPinjaman[j]['status_pjm'];
+				if (val == id_pegawai) {
+					if (status_pjm == null) {
+						$('#kop').removeAttr('disabled');
+						$('#bank').removeAttr('disabled');
+					} 
+					if (status_pjm.indexOf('BANK0') != false) {
+						// alert('pinjam kop');
+						$('#bank').removeAttr('disabled');
+						$('#bank').attr('selected', true);
+						$('#kop').attr('disabled', true);
+					} else if (status_pjm.indexOf('KOP0') != false) {
+						// alert('pinjam bank');
+						
+						$('#kop').removeAttr('disabled');
+						$('#kop').attr('selected', true);
+						$('#bank').attr('disabled', true);
+					}
+				}
+				// alert(status_pjm);
+			}
+		});
+		$(document).ready(function() {
+			var val_load = $('#pegawai').val();
+			var arrayPinjaman = <?php if(isset($pegawais)) {echo json_encode($pegawais);}?>;
+			var id_pegawai = '';
+			var status_pjm = '';
+			
+			// for (var i = 0; i < arrayPinjaman.length; i++) {
+			// 	id_pegawai = arrayPinjaman[index]['id_pegawai'];
+			// 	status_pjm = arrayPinjaman[index]['status_pjm'];
+				
+			// 	if (val_load == id_pegawai) {
+			// 		if (status_pjm == null) {
+			// 			$('#kop').removeAttr('disabled');
+			// 			$('#bank').removeAttr('disabled');
+			// 		} 
+			// 		if (status_pjm.indexOf('BANK0') != false) {
+			// 			// alert('pinjam kop');
+			// 			$('#bank').removeAttr('disabled');
+			// 			$('#kop').attr('disabled', true);
+			// 		} else if (status_pjm.indexOf('KOP0') != false) {
+			// 			// alert('pinjam bank');
+						
+			// 			$('#kop').removeAttr('disabled');
+			// 			$('#bank').attr('disabled', true);
+			// 		}
+			// 	}
+			// }
+			
+			// $('#pegawai').on('change', function() {
+			// 	var val = $(this).val();
+			// 	// alert(val);
+			// 	for (var j = 0; j < arrayPinjaman.length; j++) {
+			// 		id_pegawai = arrayPinjaman[j]['id_pegawai'];
+			// 		status_pjm = arrayPinjaman[j]['status_pjm'];
+			// 		if (val == id_pegawai) {
+			// 			if (status_pjm == null) {
+			// 				$('#kop').removeAttr('disabled');
+			// 				$('#bank').removeAttr('disabled');
+			// 			} 
+			// 			if (status_pjm.indexOf('BANK0') != false) {
+			// 				// alert('pinjam kop');
+			// 				$('#bank').removeAttr('disabled');
+			// 				$('#bank').attr('selected', true);
+			// 				$('#kop').attr('disabled', true);
+			// 			} else if (status_pjm.indexOf('KOP0') != false) {
+			// 				// alert('pinjam bank');
+							
+			// 				$('#kop').removeAttr('disabled');
+			// 				$('#kop').attr('selected', true);
+			// 				$('#bank').attr('disabled', true);
+			// 			}
+			// 		}
+			// 		// alert(status_pjm);
+			// 	}
+			// });
+		});
+	</script>
 	
 	<!-- Dynamic Insert for 'Peminjaman' -->
 	<script>
@@ -744,28 +884,31 @@
 			$g_tidak_tetap = '';
 			$k_tetap = '';
 			$k_tidak_tetap = '';
-			if(isset($pegawai['jns_pegawai'])) {
-				if (isset($pegawai['status_pegawai'])) {
-					if (($pegawai['status_pegawai'] == 'P') && ($pegawai['jns_pegawai'] == 0)) {
-						$pns = 'selected';
-					} else if (($pegawai['status_pegawai'] == 'T1') && ($pegawai['jns_pegawai'] == 0)) {
-						$g_tetap = 'selected';
-					} else if (($pegawai['status_pegawai'] == 'T0') && ($pegawai['jns_pegawai'] == 0)) {
-						$g_tidak_tetap = 'selected';
-					} else if (($pegawai['status_pegawai'] == 'T1') && ($pegawai['jns_pegawai'] == 1)) {
-						$k_tetap = 'selected';
-					} else if (($pegawai['status_pegawai'] == 'T0') && ($pegawai['jns_pegawai'] == 1)) {
-						$k_tidak_tetap = 'selected';
-					} else {
-						$pns = '';
-						$g_tetap = '';
-						$g_tidak_tetap = '';
-						$k_tetap = '';
-						$k_tidak_tetap = '';
-					}
-				}
-			}?>
 
+			if (isset($pegawai['jns_pegawai'])) {
+				if($pegawai['jns_pegawai'] == 0) {
+					if ($pegawai['status_pegawai'] == 'P') {
+						$pns = 'selected';
+					} else if ($pegawai['status_pegawai'] == 'T1') {
+						$g_tetap = 'selected';
+					} else {
+						$g_tidak_tetap = 'selected';
+					}
+				} else if ($pegawai['jns_pegawai'] == 1) {
+					if ($pegawai['status_pegawai'] == 'T1') {
+						$k_tetap = 'selected';
+					} else {
+						$k_tidak_tetap = 'selected';
+					}
+				} else {
+					$pns = '';
+					$g_tetap = '';
+					$g_tidak_tetap = '';
+					$k_tetap = '';																	
+					$k_tidak_tetap = '';
+				}
+			}
+			?>
 			var options = [
 				'<option value="" disabled>Pilih Status Pegawai</option><option value="P" <?php echo $pns;?>>PNS</option><option value="T1" <?php echo $g_tetap;?>>Tetap</option><option value="T0" <?php echo $g_tidak_tetap;?>>Tidak Tetap</option>', 
 				'<option value="" disabled>Pilih Status Pegawai</option><option value="T1" <?php echo $k_tetap;?>>Tetap</option><option value="T0" <?php echo $k_tidak_tetap;?>>Tidak Tetap</option>'

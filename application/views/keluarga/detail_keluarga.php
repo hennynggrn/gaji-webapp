@@ -16,7 +16,7 @@
 						<thead>
 							<th style="width: 10px">No</th>
 							<th>Nama</th>
-							<th>Status</th>
+							<th>Status Anggota</th>
 							<th>Jenis Kelamin</th>
 							<th>Status Hidup</th>
 						</thead>
@@ -24,7 +24,7 @@
 							<tr>
 								<td style="width: 10px">1</td>
 								<td style="text-align: left; padding-left: 15px;"><?php echo $pegawai['nama'];?> &nbsp;
-									<span class="badge bg-blue">pegawai</span>
+									<span class="badge bg-gray"><i class="fa fa-fw fa-user"></i> Pegawai</span>
 								</td>
 								<td><?php echo ($pegawai['gender'] == 'L') ? 'Suami' : 'Istri';?></td>
 								<td><?php echo ($pegawai['gender'] == 'L') ? 'Laki-laki' : 'Perempuan';?></td>
@@ -64,7 +64,7 @@
 		</div>
 		<div class="col-md-12">
 			<a href="<?php echo base_url('keluarga')?>" class="pull-left btn btn-default">Kembali</a>
-			<a href="<?php echo base_url('keluarga/edit/'.$id_keluarga)?>" class="edit-keluarga pull-right btn btn-warning edit-btn">Edit</a></td>
+			<a href="<?php echo base_url('keluarga/edit/'.$pegawai['id_pegawai'])?>" class="edit-keluarga pull-right btn btn-warning edit-btn">Edit</a></td>
 		</div>
 	</div>
 </section>

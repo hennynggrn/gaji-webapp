@@ -15,6 +15,7 @@ class M_potongan extends CI_Model{
 		$aisiyah = $this->input->post('aisiyah');
 		$jsr = $this->input->post('jsr');
 		$jamsostek = $this->input->post('jamsostek');
+		$ket = $this->input->post('ket');
 
 		$data = array(
 			'infaq' => $infaq,
@@ -22,6 +23,7 @@ class M_potongan extends CI_Model{
 			'aisiyah' => $aisiyah,
 			'jsr' => $jsr,
 			'jamsostek' => $jamsostek,
+			'ket' => $ket
 		);
 
 		$this->db->where('id_potongan', 1);

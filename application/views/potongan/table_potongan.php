@@ -41,6 +41,11 @@
 										Koperasi Murni dan Bank Bina Drajat Warga (BDW) <a href="<?php echo site_url('pinjaman');?>" class="badge bg-blue">Lihat Pinjaman Pegawai <i class="fa fa-fw fa-arrow-circle-right"></i></a>
 									</td>
 								</tr>
+								<tr>
+									<th>Catatan</th>
+									<td>:</td>
+									<td><?php echo ($potongan['ket'] != NULL) ?  $potongan['ket'] : '-';?></td>
+								</tr>
 							</tbody>
 						</table>
 					</div>

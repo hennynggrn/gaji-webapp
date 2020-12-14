@@ -122,7 +122,7 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Keterangan Pinjam</label>
 							<div class="col-sm-10">
-								<textarea class="form-control" placeholder="Alasan peminjaman ..." name="ket_pjm" cols="30" rows="3"><?php echo $pinjaman['ket_pinjaman'];?></textarea>
+								<textarea class="textarea" placeholder="Alasan/catatan peminjaman ..." name="ket_pjm" style="width: 100%; height: 250px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"><?php echo $pinjaman['ket_pinjaman'];?></textarea>
 								<span class="text-red" id='info_honor'><small>* Keterangan optional</small></span>
 							</div>
 						</div>
@@ -131,7 +131,7 @@
 						</div> -->
 					</div>
 					<div class="box-footer">
-						<a href="<?php echo site_url('pinjaman');?>" class="btn btn-danger pull-left edit-btn">Batal</a>
+						<a href="<?php echo site_url('pinjaman');?>" class="btn btn-default pull-left edit-btn">Batal</a>
 						<button type="submit" class="btn btn-primary pull-right edit-btn">Simpan</button>
 					</div>
 				</form>

@@ -3,13 +3,15 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="box box-primary">
-				<div class="box-header with-border">
+				<?php if ($honor_val != 'null') { ?>
+					<div class="box-header with-border">
 					<h3 class="box-title"> 
 						<a href="" data-toggle="modal" data-target="#editHonor<?php echo $honor_val;?>" class='btn btn-warning'>
 							<i class="fa fa-pencil-square-o"></i> Edit Honorium 
 						</a>
 					</h3>
 				</div>
+				<?php } ?>
 				<!-- /.box-header -->
 				<div class="box-body">
 					<table class="table table-bordered table-hover responsive text-center">
@@ -41,44 +43,78 @@
 								}?></td>
 								<td class="badge-edit"><span><?php echo $honor['result_list'];?></span></td>
 								<td>
-									<a href="" data-toggle="modal" data-target="#editHonorPegawai<?php echo $honor['id_pegawai'];?>" title="Edit" data-tooltip="tooltip" data-placement="left">
+									<a href="" data-toggle="modal" data-target="#editHonorPegawai<?php echo $honor['id_pegawai'];?>" title="Edit" data-tooltip="tooltip" data-placement="top">
 										<span class="badge bg-orange"><i class="fa fa-fw fa-pencil-square-o"></i></span>
 									</a>
 									<?php if($honor['honor'] != 0) { ?>
-										<a href="" data-toggle="modal" data-target="#deleteHonorPegawai<?php echo $honor['id_pegawai'];?>" title="Hapus" data-tooltip="tooltip" data-placement="right">
+										<a href="" data-toggle="modal" data-target="#deleteHonorPegawai<?php echo $honor['id_pegawai'];?>" title="Hapus" data-tooltip="tooltip" data-placement="top">
 											<span class="badge bg-red"><i class="fa fa-fw fa-trash-o"></i></span>
 										</a>
 									<?php } ?>
 								</td>
 							</tr>
-							<!-- Modal Edit Honor per Pegawai-->
-							<div class="modal fade" id="editHonorPegawai<?php echo $honor['id_pegawai'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-								<div class="modal-dialog" role="document">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-											<h4 class="modal-title" id="myModalLabel">Edit Data Honor Pegawai <b class="text-primary"><?php echo $honor['nama'];?></b></h4>
-										</div>
-										<form class="form-horizontal" role="form" method="post" action="<?php echo site_url('honor/update_honor');?>">
-											<div class="modal-body">
-												<div class="input-group">
-													<span class="input-group-addon">Rp.</span>
-													<input type="hidden" class="form-control" name="id_pegawai" value="<?php echo $honor['id_pegawai'];?>">
-													<input type="number" class="form-control" name="honor" placeholder="0" value="<?php echo $honor['honor'];?>">
-													<span class="input-group-addon">.00</span>
+							<?php if ($honor['honor'] != NULL) : ?>
+								<!-- Modal Edit Honor per Pegawai-->
+								<div class="modal fade" id="editHonorPegawai<?php echo $honor['id_pegawai'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												<h4 class="modal-title" id="myModalLabel">Edit Data Honor Pegawai <b class="text-primary"><?php echo $honor['nama'];?></b></h4>
+											</div>
+											<form class="form-horizontal" role="form" method="post" action="<?php echo site_url('honor/update_honor');?>">
+												<div class="modal-body">
+													<div class="input-group">
+														<span class="input-group-addon">Rp.</span>
+														<input type="hidden" class="form-control" name="id_pegawai" value="<?php echo $honor['id_pegawai'];?>">
+														<input type="number" class="form-control" name="honor" placeholder="0" value="<?php echo $honor['honor'];?>">
+														<span class="input-group-addon">.00</span>
+													</div><br>
+													<p class="text-info">Info : <br>
+														<ul class="text-info">
+															<li>untuk mengubah <b>Jenis</b> atau <b>Status Pegawai</b>&nbsp;&nbsp;
+																<a class="badge bg-orange" href="<?php echo site_url('honor/edit/'.$honor['id_pegawai']);?>">
+																	Edit data pegawai<i class="fa fa-fw fa-arrow-circle-right"></i>
+																</a>
+															</li>
+														</ul>
+													</p>
 												</div>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-												<button type="submit" class="btn btn-primary">Simpan</button>
-											</div>
-										</form>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Tutup</button>
+													<button type="submit" class="btn btn-primary pull-right edit-btn">Simpan</button>
+												</div>
+											</form>
+										</div>
 									</div>
 								</div>
-							</div>
 							<!-- End Modal -->
+							<?php else:?>
+								<!-- Modal Edit Honor per Pegawai-->
+								<div class="modal fade modal-info" id="editHonorPegawai<?php echo $honor['id_pegawai'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												<h4 class="modal-title" id="myModalLabel">Edit Data Honor Pegawai <b><?php echo $honor['nama'];?></b></h4>
+											</div>
+											<div class="modal-body">
+												<p>Untuk menambah honor perlu mengubah <b>Jenis</b> atau <b>Status Pegawai</b>&nbsp;&nbsp;
+													<a class="badge bg-orange" href="<?php echo site_url('honor/edit/'.$honor['id_pegawai']);?>">
+														Edit data pegawai<i class="fa fa-fw fa-arrow-circle-right"></i>
+													</a>
+												</p>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default pull-right edit-btn" data-dismiss="modal">Tutup</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- End Modal -->
+							<?php endif;?>
 							<!-- Modal Delete Honor per Pegawai-->
-							<div class="modal fade" id="deleteHonorPegawai<?php echo $honor['id_pegawai'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							<div class="modal fade modal-danger" id="deleteHonorPegawai<?php echo $honor['id_pegawai'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 								<div class="modal-dialog" role="document">
 									<div class="modal-content">
 										<div class="modal-header">
@@ -88,14 +124,14 @@
 										<div class="modal-body">
 											<p>
 												<?php if ($honor['status_pegawai'] == "T1") {
-													echo '<b class="text-red">Peringatan! </b>'.$honor['nama'].' adalah pegawai <b class="text-red">tetap</b>.<br><br>';
+													echo '<b>Peringatan! </b><br>'.$honor['nama'].' adalah pegawai <b>tetap</b>.<br><br>';
 												}?>
-												Menghapus akan mengatur honor <b class="text-primary"><?php echo $honor['nama'];?></b> menjadi <b class="text-primary">Rp. 0</b>. Lanjutkan ?
+												Menghapus akan mengatur honor <b><?php echo $honor['nama'];?></b> menjadi <b>Rp. 0</b>. Lanjutkan ?
 											</p>
 											</div>
 										<div class="modal-footer">
-											<button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-											<a href="<?php echo site_url('honor/delete/'.$honor['id_pegawai']);?>" class="btn btn-primary">Hapus</a>
+											<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Batal</button>
+											<a href="<?php echo site_url('honor/delete/'.$honor['id_pegawai']);?>" class="btn btn-outline pull-right edit-btn">Hapus</a>
 										</div>
 									</div>
 								</div>
@@ -117,14 +153,15 @@
 								<div class="modal-body">
 									<div class="input-group">
 										<span class="input-group-addon">Rp.</span>
+										<input type="hidden" class="form-control" name="detail_honor" value="<?php echo 1;?>">
 										<input type="hidden" class="form-control" name="id_honor" value="<?php echo $honor_val;?>">
 										<input type="number" class="form-control" name="honor" placeholder="0" value="<?php echo $honor_val;?>">
 										<span class="input-group-addon">.00</span>
 									</div>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-									<button type="submit" class="btn btn-primary">Simpan</button>
+									<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Tutup</button>
+									<button type="submit" class="btn btn-primary pull-right edit-btn">Simpan</button>
 								</div>
 							</form>
 						</div>

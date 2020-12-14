@@ -23,7 +23,7 @@
 							<th>Menu</th>
 						</thead>
 						<tbody>
-						<?php
+							<?php
 							$no=1; foreach ($keluargas as $key => $keluarga) : ?>
 							<tr>
 								<td><?php echo $no++;?></td>
@@ -50,10 +50,10 @@
 								}?></td>
 								<td style="text-align: left; padding-left: 15px;"><?php echo $keluarga['nama_pegawai'];?></td>
 								<td>
-									<a href="<?php echo site_url('keluarga/detail/'.$keluarga['id_anggota_klg']);?>" title="Detail" data-toggle="tooltip" data-placement="left">
+									<a href="<?php echo site_url('keluarga/detail/'.$keluarga['id_pegawai']);?>" title="Detail" data-toggle="tooltip" data-placement="top">
 										<span class="badge bg-green"><i class="fa fa-fw fa-info-circle"></i></span>
 									</a>
-									<a href="" title="Edit" data-tooltip="tooltip" data-toggle="modal" data-target="#editkeluarga<?php echo $keluarga['id_anggota_klg'];?>" data-placement="right">
+									<a href="" title="Edit" data-tooltip="tooltip" data-toggle="modal" data-target="#editkeluarga<?php echo $keluarga['id_anggota_klg'];?>" data-placement="top">
 										<span class="badge bg-orange"><i class="fa fa-fw fa-pencil-square-o"></i></span>
 									</a>
 								</td>
@@ -84,8 +84,8 @@
 												</div>
 											</div>
 											<div class="modal-footer">
-												<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-												<button type="submit" class="btn btn-primary">Simpan</button>
+												<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Tutup</button>
+												<button type="submit" class="btn btn-primary pull-right edit-btn">Simpan</button>
 											</div>
 										</form>
 									</div>

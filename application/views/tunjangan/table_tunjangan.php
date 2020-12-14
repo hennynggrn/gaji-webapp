@@ -47,18 +47,19 @@
 						<div class="col-md-12">
 							<h5 class="text-bold text-center" style="background-color: rgb(255, 252, 172); padding: 10px">Tabel Masa Kerja</h5><br>
 						</div>
-						<div class="pull-left col-md-3">
+						<div class="pull-left col-md-3"> 
 							<table class="table text-center table-bordered table-hover">
 								<thead>
 									<th>Tahun</th>
 									<th>Jumlah</th>
 								</thead>
-								<?php $tahun = 1; foreach ($masakerjas as $key => $masakerja) : ?>
+								<?php $tahun = 1; foreach ($masakerjas as $key => $masakerja) : 
+									if ($key<1) continue;?>
 								<tr>
 									<td><?php echo $tahun++; ?></td>
 									<td style="text-align: left; padding-left: 35px;"><?php echo 'Rp. &nbsp;&nbsp;'.number_format($masakerja['jml_mk'],0,',','.');?></td>
 								</tr>
-								<?php if ($key === 9) break; endforeach; ?>
+								<?php if ($key === 10) break; endforeach; ?>
 							</table>
 						</div>
 						<div class="pull-left col-md-3">
@@ -68,12 +69,12 @@
 									<th>Jumlah</th>
 								</thead>
 								<?php $tahun = 11; foreach ($masakerjas as $key => $masakerja) : 
-								if ($key<10) continue;?>
+								if ($key<11) continue;?>
 								<tr>
 									<td><?php echo $tahun++; ?></td>
 									<td style="text-align: left; padding-left: 35px;"><?php echo 'Rp. &nbsp;&nbsp;'.number_format($masakerja['jml_mk'],0,',','.');?></td>
 								</tr>
-								<?php if ($key === 19) break; endforeach; ?>
+								<?php if ($key === 20) break; endforeach; ?>
 							</table>
 						</div>
 						<div class="pull-left col-md-3">
@@ -83,12 +84,12 @@
 									<th>Jumlah</th>
 								</thead>
 								<?php $tahun = 21; foreach ($masakerjas as $key => $masakerja) :
-								if ($key<20) continue; ?>
+								if ($key<21) continue; ?>
 								<tr>
 									<td><?php echo $tahun++; ?></td>
 									<td style="text-align: left; padding-left: 35px;"><?php echo 'Rp. &nbsp;&nbsp;'.number_format($masakerja['jml_mk'],0,',','.');?></td>
 								</tr>
-								<?php  if ($key === 29) break; endforeach;  ?>
+								<?php  if ($key === 30) break; endforeach;  ?>
 							</table>
 						</div>
 						<div class="pull-left col-md-3">
@@ -98,7 +99,7 @@
 									<th>Jumlah</th>
 								</thead>
 								<?php $tahun = 31; foreach ($masakerjas as $key => $masakerja) :
-								if ($key<30) continue; ?>
+								if ($key<31) continue; ?>
 								<tr>
 									<td><?php echo $tahun++; ?></td>
 									<td style="text-align: left; padding-left: 35px;"><?php echo 'Rp. &nbsp;&nbsp;'.number_format($masakerja['jml_mk'],0,',','.');?></td>

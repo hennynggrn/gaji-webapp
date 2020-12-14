@@ -15,6 +15,8 @@
 							</div>
 						</div>
 						<div class="form-group">
+							<input type="hidden" name="edit_honor" value="<?php if(isset($edit_honor)) {echo $edit_honor;} ?>">
+							<input type="hidden" name="edit_keluarga" value="<?php if(isset($edit_keluarga)) {echo $edit_keluarga;} ?>">
 							<input type="hidden" name="id_anggota_keluarga" value="<?php if(isset($id_anggota_keluarga)) {echo $id_anggota_keluarga;} ?>">
 							<input type="hidden" name="id_pegawai" value="<?php echo $pegawai['id_pegawai']; ?>">
 							<label class="col-sm-2 control-label">Nama</label>
@@ -262,7 +264,7 @@
 						</div>
 					</div>
 					<div class="box-footer">
-						<a href="<?php echo base_url('pegawai')?>" class="btn btn-danger edit-btn">Batal</a>
+						<a onclick="history.go(-1);" class="btn btn-default edit-btn">Batal</a>
 						<button type="submit" class="btn btn-primary pull-right edit-btn">Simpan</button>
 					</div>
 				</form>

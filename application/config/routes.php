@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$route['gaji/print'] = 'gaji/print_gaji';
-$route['gaji/edit'] = 'gaji/detail_gaji';
+$route['gaji/print/(:any)'] = 'gaji/print_gaji/$1';
+$route['gaji/detail/(:any)'] = 'gaji/detail_gaji/$1';
 $route['table'] = 'gaji/index';
 
 $route['pinjaman/delete/(:any)'] = 'pinjaman/delete_pinjaman/$1';
@@ -32,6 +32,7 @@ $route['tunjangan/edit'] = 'tunjangan/edit_tunjangan';
 // $route['tunjangan/detail/(:any)'] = 'tunjangan/detail_tunjangan/$1';
 $route['tunjangan'] = 'tunjangan/index';
 
+$route['honor/edit/(:any)'] = 'honor/edit_pegawai/$1';
 $route['honor/delete/(:any)'] = 'honor/delete_honor/$1';
 $route['honor/detail/(:any)'] = 'honor/detail_honor/$1';
 $route['honor'] = 'honor/index';

@@ -50,7 +50,17 @@ class M_pegawai extends CI_Model{
 		}		
 		$honor = $this->input->post('honor');
 		if (empty($honor)) {
-			$honor = 0;
+			switch ($status_pegawai) {
+				case 'P':
+					$honor = NULL;
+					break;
+				case 'T1':
+					$honor = 0;
+					break;
+				case 'T0':
+					$honor = NULL;
+					break;
+			}	
 		}
 
 		$data = array(
@@ -107,7 +117,17 @@ class M_pegawai extends CI_Model{
 		}		
 		$honor = $this->input->post('honor');
 		if (empty($honor)) {
-			$honor = 0;
+			switch ($status_pegawai) {
+				case 'P':
+					$honor = NULL;
+					break;
+				case 'T1':
+					$honor = 0;
+					break;
+				case 'T0':
+					$honor = NULL;
+					break;
+			}	
 		}
 
 		$data = array(

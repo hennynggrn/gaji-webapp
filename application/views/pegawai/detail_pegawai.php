@@ -14,9 +14,9 @@
 					<div class="col-md-12">
 						<table class="table table-hover">
 							<tbody>
-								<?php foreach ($pegawais as $key => $pegawai) :
-								$id = $pegawai['id_pegawai'];
-								$gender = $pegawai['gender'];
+								<?php
+									$id = $pegawai['id_pegawai'];
+									$gender = $pegawai['gender'];
 								?>
 								<tr>
 									<td colspan="3">
@@ -73,7 +73,6 @@
 									<td>:</td>
 									<td><?php echo $pegawai['status'] == 0 ? 'Belum Menikah':'Menikah'; ?></td>
 								</tr>
-								<?php endforeach; ?>
 							</tbody>
 						</table>
 					</div>
@@ -94,7 +93,6 @@
 					<div class="col-md-12">
 						<table class="table table-hover">
 							<tbody>
-							<?php foreach ($pegawais as $key => $pegawai) :?>
 								<tr>
 									<td style="width: 150px">Jabatan Pegawai</td>
 									<td style="width: 20px">:</td>
@@ -137,7 +135,6 @@
 									echo '<small class="text-bold">'; if($pegawai['honor'] == 0) echo ' (belum ditetapkan) </small>';?></td>
 								</tr>
 								<?php endif;?>
-							<?php endforeach; ?>
 							</tbody>
 						</table>
 					</div>
@@ -158,9 +155,9 @@
 					<div class="col-md-12">
 						<table class="table text-center table-bordered table-hover">
 							<thead>
-								<th>Anggota</th>
+								<th>Status Anggota</th>
 								<th>Nama</th>
-								<th>Status</th>
+								<th>Status Hidup</th>
 								<th>Gender</th>
 							</thead>
 							<tbody>
@@ -188,8 +185,8 @@
 						</table>
 					</div>
 				</div>
-				<div class="box-footer">
-					<h5>Catatan :</h5>
+				<div class="box-footer text-info">
+					<h5 class="text-bold">Info :</h5>
 					<ul>
 						<li>Edit untuk menambahkan/mengubah anggota keluarga</li>
 					</ul>

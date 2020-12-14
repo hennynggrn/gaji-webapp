@@ -97,10 +97,10 @@
 								<td></td>
 								<td></td>
 								<td>
-									<a href="<?php echo site_url('pegawai/detail/');?>" title="Detail" data-tooltip="tooltip" data-placement="top">
+									<a href="<?php echo site_url('gaji/detail/1');?>" title="Detail" data-tooltip="tooltip" data-placement="top">
 										<span class="badge bg-green"><i class="fa fa-fw fa-info-circle"></i></span>
 									</a>
-									<a href="<?php echo site_url('pegawai/edit/');?>" title="Print" data-tooltip="tooltip" data-placement="top">
+									<a href="<?php echo site_url('gaji/cetak/1');?>" title="Cetak" data-tooltip="tooltip" data-placement="top">
 										<span class="badge bg-blue"><i class="fa fa-fw fa-print"></i></span>
 									</a>
 								</td>

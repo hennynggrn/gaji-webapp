@@ -7,14 +7,14 @@ class M_pinjaman extends CI_Model{
 	{
 		if ($id != NULL) {
 			$this->db->select('*, count(a.id_angsuran) jml_angsuran, max(a.tanggal_kembali) end_date, 
-							   sum(a.status) status_ang');
+							   sum(a.status) status_ang, pjm.status status_pjm');
 			$this->db->join('angsuran a', 'a.id_pinjaman = pjm.id_pinjaman', 'LEFT');
 			$this->db->join('pegawai p', 'p.id_pegawai = pjm.id_pegawai', 'LEFT');
 			$this->db->group_by('pjm.id_pinjaman');
 			return $this->db->get_where('pinjaman pjm', array('pjm.id_pinjaman' => $id));
 		} else {
 			$this->db->select('*, count(a.id_angsuran) jml_angsuran, max(a.tanggal_kembali) end_date, 
-							   sum(a.status) status_ang');
+							   sum(a.status) status_ang, pjm.status status_pjm');
 			$this->db->order_by('pjm.start_date', 'DESC');
 			$this->db->join('angsuran a', 'a.id_pinjaman = pjm.id_pinjaman', 'LEFT');
 			$this->db->join('pegawai p', 'p.id_pegawai = pjm.id_pegawai', 'LEFT');
@@ -30,8 +30,10 @@ class M_pinjaman extends CI_Model{
 			$this->db->join('pinjaman pjm', 'p.id_pegawai = pjm.id_pegawai AND pjm.id_pinjaman ='.$id, 'LEFT');
 			return $this->db->get('pegawai p');
 		} else {
-			$this->db->select('*, p.id_pegawai, pjm.id_pegawai pegawai, GROUP_CONCAT(DISTINCT CONCAT(kode_pinjaman) SEPARATOR "") status_pjm');
+			$this->db->select('*, p.id_pegawai, pjm.id_pegawai pegawai, 
+							   GROUP_CONCAT(DISTINCT CONCAT(pjm.kode_pinjaman, pjm.status) ORDER BY pjm.status ASC SEPARATOR "") status_pjm');
 			$this->db->join('pinjaman pjm', 'p.id_pegawai = pjm.id_pegawai', 'LEFT');
+			$this->db->join('angsuran a', 'a.id_pinjaman = pjm.id_pinjaman', 'LEFT');
 			$this->db->group_by('pjm.id_pegawai');
 			return $this->db->get('pegawai p');
 		}
@@ -108,6 +110,14 @@ class M_pinjaman extends CI_Model{
 		
 		$this->db->where('id_pinjaman', $id_pinjaman);
 		return $this->db->update('pinjaman', $data);
+	}
+
+	public function update_status_pinjaman($id, $status)
+	{
+		var_dump($id);
+		var_dump($status);
+		$this->db->where('id_pinjaman', $id);
+		return $this->db->update('pinjaman', array('status' => $status));
 	}
 
 	public function update_angsuran($id_pinjaman)

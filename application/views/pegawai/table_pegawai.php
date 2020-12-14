@@ -26,9 +26,10 @@
 							<th>Menu</th>
 						</thead>
 						<tbody>
-						<?php
-							$no=1; foreach ($pegawais as $pegawai) {
-						?>
+							<?php
+							$no=1; 
+							foreach ($pegawais as $pegawai) {
+							?>
 							<tr>
 								<td><?php echo $no++; ?></td>
 								<td><?php echo $pegawai['nbm'] ?></td>
@@ -50,21 +51,21 @@
 											break;
 									}?>
 								</td>
-								<td style="text-align: left; padding-left: 5px;"><?php echo 'Rp. '.number_format($pegawai['honor'],0,',','.');?></td>
+								<td style="text-align: left; padding-left: 5px;"><?php echo ($pegawai['honor'] == NULL) ? '-' : 'Rp. '.number_format($pegawai['honor'],0,',','.');?></td>
 								<td>
-									<a href="<?php echo site_url('pegawai/detail/'.$pegawai['id_pegawai']);?>" title="Detail" data-tooltip="tooltip" data-placement="left">
+									<a href="<?php echo site_url('pegawai/detail/'.$pegawai['id_pegawai']);?>" title="Detail" data-tooltip="tooltip" data-placement="top">
 										<span class="badge bg-green"><i class="fa fa-fw fa-info-circle"></i></span>
 									</a>
 									<a href="<?php echo site_url('pegawai/edit/'.$pegawai['id_pegawai']);?>" title="Edit" data-tooltip="tooltip" data-placement="top">
 										<span class="badge bg-orange"><i class="fa fa-fw fa-pencil-square-o"></i></span>
 									</a>
-									<a href="" data-toggle="modal" data-target="#deletePegawai<?php echo $pegawai['id_pegawai'];?>" title="Hapus" data-tooltip="tooltip" data-placement="right">
+									<a href="" data-toggle="modal" data-target="#deletePegawai<?php echo $pegawai['id_pegawai'];?>" title="Hapus" data-tooltip="tooltip" data-placement="top">
 										<span class="badge bg-red"><i class="fa fa-fw fa-trash-o"></i></span>
 									</a>
 								</td>
 							</tr>
 							<!-- Modal Delete Honor per Pegawai-->
-							<div class="modal fade" id="deletePegawai<?php echo $pegawai['id_pegawai'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							<div class="modal fade modal-danger" id="deletePegawai<?php echo $pegawai['id_pegawai'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 								<div class="modal-dialog" role="document">
 									<div class="modal-content">
 										<div class="modal-header">
@@ -73,18 +74,18 @@
 										</div>
 										<div class="modal-body">
 											<p>
-												Anda yakin menghapus data pegawai <b class="text-primary"><?php echo $pegawai['nama'];?></b> ?
+												Anda yakin menghapus data pegawai <b><?php echo $pegawai['nama'];?></b> ?
 											</p>
 											</div>
 										<div class="modal-footer">
-											<button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-											<a href="<?php echo site_url('pegawai/delete/'.$pegawai['id_pegawai']);?>" class="btn btn-primary">Hapus</a>
+											<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Batal</button>
+											<a href="<?php echo site_url('pegawai/delete/'.$pegawai['id_pegawai']);?>" class="btn btn-outline pull-right edit-btn">Hapus</a>
 										</div>
 									</div>
 								</div>
 							</div>
 							<!-- End Modal -->
-						<?php } ?> 
+							<?php } ?> 
 						</tbody>
 					</table>
 				</div>

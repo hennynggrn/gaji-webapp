@@ -34,25 +34,56 @@ class Honor extends CI_Controller {
 	public function detail_honor($honor = TRUE)
 	{
 		$data['title'] = 'Tabel Honorium Pegawai';
-		$data['desc' ] = 'Rp. '.number_format($honor,0,',','.');
-
+		if ($this->uri->segment(3) == 'null'){
+			$honor = 'null';
+		} else {
+			$honor;
+			$data['desc' ] = 'Rp. '.number_format($honor,0,',','.');
+		}
+		
 		$data['honors'] = $this->M_honor->get_honor($honor)->result_array();
-		$data['honor_val'] = $data['honors'][0]['honor'];
-		// var_dump($data['honors']);
+		$data['honor_val'] = $honor;
 
 		$this->template->load('index','honor/detail_honor', $data);
 		
 	}
 
+	public function edit_pegawai($id = TRUE)
+	{
+		$data['title'] = 'Edit Data Pegawai';
+		// $data['anggota'] = $this->M_keluarga->get_keluarga($id)->row_array();
+		// $id_pegawai = $data['anggota']['id_pegawai'];
+		$where = array('id_pegawai' => $id);
+		$data['pegawai'] = $this->M_pegawai->get_pegawai_detail($where,'pegawai')->row_array();
+		$data['keluargas'] = $this->M_keluarga->get_keluarga_pegawai($id,'keluarga')->result_array();
+		$data['jabatans'] = $this->M_jabatan->get_jabatan($id)->result_array();
+		$data['edit_honor'] = TRUE;
+
+		$data['id_status'] = array();
+		foreach ($data['keluargas'] as $key => $value) {
+			$data['id_status'][] = $data['keluargas'][$key]['id_status'];			
+		}
+		$data['onload'] = 'focusPegawai(this);';
+		echo '<script type="text/javascript">focusPegawai(this);</script>';
+		$this->template->load('index','pegawai/edit_pegawai', $data);
+		
+	}
+
 	public function update_honor()
 	{	
+		// var_dump($_POST);
 		$id = $this->input->post('id_pegawai');	
 		$id_honor = $this->input->post('id_honor');	
 		$honor = $this->input->post('honor');
+		$detail_honor = $this->input->post('detail_honor');
 		$res['honor'] = $this->M_honor->update_honor($id, $id_honor);
 		
 		if ($res) {
-			redirect('honor');
+			if ((isset($detail_honor)) && ($detail_honor == 1)) {
+				redirect('honor/detail/'.$honor);
+			} else {
+				redirect('honor');
+			}
 		} else {
 			echo "<h2> Gagal Edit Data Honor </h2>";
 		}

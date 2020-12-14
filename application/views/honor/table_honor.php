@@ -8,35 +8,51 @@
 						<thead>
 							<th>No</th>
 							<th>Honorarium</th>
+							<th>Status Pegawai</th>
 							<th>Jumlah Pegawai</th>
 							<th>Jenis Jabatan</th>
 							<th>Menu</th>
 						</thead>
 						<tbody>
 							<?php
-							$no=1; foreach ($honors as $key => $honor) : ?>
+							$no=1; foreach ($honors as $key => $honor) : 
+							if ($honor['honor'] != null) {
+								$id_honor = $honor['honor'];
+							} else {
+								$id_honor = 'null';
+							}?>
 							<tr>
 								<td><?php echo $no++;?></td>
-								<td style="text-align: left; padding-left: 50px;"><?php echo 'Rp. &nbsp;&nbsp;'.number_format($honor['honor'],0,',','.');?></td>
+								<td style="text-align: left; padding-left: 50px;">
+								<?php if ($honor['honor'] == null) {
+									echo '-';
+								} else if ($honor['honor'] == 0) {
+									echo 'Rp. &nbsp;&nbsp;0 &nbsp;&nbsp;<small>(belum ditentukan)</small>';
+								} else {
+									echo 'Rp. &nbsp;&nbsp;'.number_format($honor['honor'],0,',','.');
+								} ?>
+								</td>
+								<td><?php echo ($honor['status_pegawai'] == 'T1') ? 'Tetap' : 'PNS/Tidak Tetap';?></td>
 								<td><?php echo $honor['result'].' orang';?></td>
 								<td class="badge-edit"><span><?php echo $honor['result_list'];?></span></td>
 								<td>
-									<a href="<?php echo site_url('honor/detail/'.$honor['honor']);?>" title="Detail" data-toggle="tooltip" data-placement="left">
+									<a href="<?php echo site_url('honor/detail/'.$id_honor);?>" title="Detail" data-toggle="tooltip" data-placement="top">
 										<span class="badge bg-green"><i class="fa fa-fw fa-info-circle"></i></span>
 									</a>
-									<a href="" title="Edit" data-tooltip="tooltip" data-toggle="modal" data-target="#editHonor<?php echo $honor['honor'];?>" data-placement="right">
-										<span class="badge bg-orange"><i class="fa fa-fw fa-pencil-square-o"></i></span>
-									</a>
+									<?php if ($id_honor != 'null') { ?>
+										<a href="" title="Edit" data-tooltip="tooltip" data-toggle="modal" data-target="#editHonor<?php echo $id_honor;?>" data-placement="top">
+											<span class="badge bg-orange"><i class="fa fa-fw fa-pencil-square-o"></i></span>
+										</a>
+									<?php } ?>
 								</td>
 							</tr>
-
 							<!-- Modal Edit Honor-->
-							<div class="modal fade" id="editHonor<?php echo $honor['honor'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							<div class="modal fade" id="editHonor<?php echo $id_honor;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 								<div class="modal-dialog" role="document">
 									<div class="modal-content">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-											<h4 class="modal-title" id="myModalLabel">Edit Data Honor Rp. <?php echo number_format($honor['honor'],0,',','.');?></h4>
+											<h4 class="modal-title" id="myModalLabel">Edit Data Honor <b class="text-primary">Rp. <?php echo number_format($honor['honor'],0,',','.');?></b></h4>
 										</div>
 										<form class="form-horizontal" role="form" method="post" action="<?php echo site_url('honor/update_honor');?>">
 											<div class="modal-body">
@@ -50,8 +66,8 @@
 												</div>
 											</div>
 											<div class="modal-footer">
-												<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-												<button type="submit" class="btn btn-primary">Simpan</button>
+												<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Tutup</button>
+												<button type="submit" class="btn btn-primary pull-right edit-btn">Simpan</button>
 											</div>
 										</form>
 									</div>

@@ -5,7 +5,7 @@
 			<div class="box box-primary">
 				<div class="box-header"></div>
 				<!-- /.box-header -->
-				<form role="form" method="post" action="<?php echo site_url('tunjangan/update_tunjangan')?>">
+				<form role="form" method="post" onsubmit="return validateComma(this);" action="<?php echo site_url('tunjangan/update_tunjangan')?>">
 					<div class="box-body">
 						<div class="row">
 							<div class="col-md-6">
@@ -31,7 +31,7 @@
 											<label>Keluarga</label>
 											<div class="input-group">
 												<span class="input-group-addon">Pasangan</span>
-												<input class="form-control"  name="klg_psg" value="<?php echo $tunjangan['klg_psg']*(100);?>" style="width: 100%;">
+												<input class="form-control" step="any" id="klg_psg" name="klg_psg" value="<?php echo $tunjangan['klg_psg']*(100);?>" style="width: 100%;">
 												<span class="input-group-addon">%</span>
 											</div>
 										</div>
@@ -39,7 +39,7 @@
 											<label>&nbsp;</label>
 											<div class="input-group">
 												<span class="input-group-addon">Anak</span>
-												<input class="form-control"  name="klg_anak" value="<?php echo $tunjangan['klg_anak']*(100);?>" style="width: 100%;">
+												<input class="form-control" step="any" id="klg_anak" name="klg_anak" value="<?php echo $tunjangan['klg_anak']*(100);?>" style="width: 100%;">
 												<span class="input-group-addon">%</span>
 											</div>
 										</div>
@@ -67,7 +67,8 @@
 											<th>Tahun</th>
 											<th>Jumlah</th>
 										</tr>
-										<?php $tahun = 1; foreach ($masakerjas as $key => $masakerja) : ?>
+										<?php $tahun = 1; foreach ($masakerjas as $key => $masakerja) : 
+										if ($key<1) continue;?>
 										<tr>
 											<td><?php echo $tahun++; ?></td>
 											<td style="text-align: left;">
@@ -80,7 +81,7 @@
 												</div>
 											</td>
 										</tr>
-										<?php if ($key === 9) break; endforeach; ?>
+										<?php if ($key === 10) break; endforeach; ?>
 									</table>
 								</div>
 								<div class="pull-left col-md-3">
@@ -90,7 +91,7 @@
 											<th>Jumlah</th>
 										</tr>
 										<?php $tahun = 11; foreach ($masakerjas as $key => $masakerja) : 
-										if ($key<10) continue;?>
+										if ($key<11) continue;?>
 										<tr>
 											<td><?php echo $tahun++; ?></td>
 											<td style="text-align: left;">
@@ -103,7 +104,7 @@
 												</div>
 											</td>
 										</tr>
-										<?php if ($key === 19) break; endforeach; ?>
+										<?php if ($key === 20) break; endforeach; ?>
 									</table>
 								</div>
 								<div class="pull-left col-md-3">
@@ -113,7 +114,7 @@
 											<th>Jumlah</th>
 										</tr>
 										<?php $tahun = 21; foreach ($masakerjas as $key => $masakerja) :
-										if ($key<20) continue; ?>
+										if ($key<21) continue; ?>
 										<tr>
 											<td><?php echo $tahun++; ?></td>
 											<td style="text-align: left;">
@@ -126,7 +127,7 @@
 												</div>
 											</td>
 										</tr>
-										<?php  if ($key === 29) break; endforeach;  ?>
+										<?php  if ($key === 30) break; endforeach;  ?>
 									</table>
 								</div>
 								<div class="pull-left col-md-3">
@@ -136,7 +137,7 @@
 											<th>Jumlah</th>
 										</tr>
 										<?php $tahun = 31; foreach ($masakerjas as $key => $masakerja) :
-										if ($key<30) continue; ?>
+										if ($key<31) continue; ?>
 										<tr>
 											<td><?php echo $tahun++; ?></td>
 											<td style="text-align: left;">
@@ -157,7 +158,7 @@
 					</div>
 					<!-- /.box-body -->
 					<div class="box-footer">
-						<a href="<?php echo site_url('tunjangan')?>" class="pull-left btn btn-danger edit-btn">Batal</a>
+						<a href="<?php echo site_url('tunjangan')?>" class="pull-left btn btn-default edit-btn">Batal</a>
 						<button type="submit" class="pull-right btn btn-primary edit-btn">Simpan</button>
 					</div>
 				</form>

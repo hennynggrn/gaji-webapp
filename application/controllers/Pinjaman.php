@@ -28,7 +28,7 @@ class Pinjaman extends CI_Controller {
 			$data['pinjamans'][$key]['end_day_IDN'] = day($end_date);
 			$data['pinjamans'][$key]['end_year_IDN'] = date('Y', strtotime($end_date));
 		}
-		// var_dump($data['pinjamans']);
+
 		$this->template->load('index','pinjaman/table_pinjaman', $data);
 	}
 
@@ -36,6 +36,8 @@ class Pinjaman extends CI_Controller {
 	{
 		$data['title']= 'Tambah Pinjaman';
 		$data['pegawais'] = $this->M_pinjaman->get_pegawai_pinjaman($id)->result_array();
+		// var_dump($data['pegawais']);
+
 		$this->template->load('index','pinjaman/add_pinjaman',$data);
 	}
 
@@ -65,10 +67,17 @@ class Pinjaman extends CI_Controller {
 	public function update_repay()
 	{
 		$res['angsuran'] = $this->M_pinjaman->update_repay();
-		$id_pinjaman = $this->input->post('id_pinjaman');
-		
+		$id = $this->input->post('id_pinjaman');
+		$pinjaman = $this->M_pinjaman->get_pinjaman($id)->row_array();
+		if ($pinjaman['jml_angsuran']-$pinjaman['status_ang'] == 0) {
+			$status = 1;
+		} else {
+			$status = 0;
+		}
+		$res['pinjaman'] = $this->M_pinjaman->update_status_pinjaman($id, $status);
+
 		if ($res) {
-			redirect('pinjaman/detail/'.$id_pinjaman);
+			redirect('pinjaman/detail/'.$id);
 		} else {
 			echo "<h2> Gagal Tambah Data Pinjaman </h2>";
 		}

@@ -12,6 +12,10 @@ class Gaji extends CI_Controller {
 
 	public function detail_gaji()
 	{
+		$date_today = date('Y-m-d');
+		$data['title']= 'Detail Gaji';
+		$data['desc']= month($date_today).' '.date('Y', strtotime($date_today));
+
 		$this->load->model('M_gaji');
 		$where = array('id_gaji');
 		$data['lihat']= $this->M_gaji->get_gaji_detail($where,'gaji')->result();

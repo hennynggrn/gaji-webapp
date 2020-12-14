@@ -5,7 +5,7 @@ class Potongan extends CI_Controller {
 	
 	public function index()
 	{
-		$data['title'] = 'Table Potongan';
+		$data['title'] = 'Tabel Potongan';
 
 		$data['potongan']= $this->M_potongan->get_potongan()->row_array();
 		// $data['masakerjas']= $this->M_masakerja->get_masakerja()->result_array();

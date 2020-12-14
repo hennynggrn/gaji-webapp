@@ -11,31 +11,29 @@
 							<label class="col-sm-2 control-label">Nama Pegawai</label>
 							<div class="col-sm-10">
 							<!-- select2 select2-hidden-accessible pull-right -->
-								<select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="pegawai" required>
+								<select class="form-control select2" style="width: 100%;" id="pegawai" name="pegawai" required>
 									<option disabled>Cari Pegawai</option>
 									<?php foreach ($pegawais as $key => $pegawai) :?>
 										<option value="<?php echo $pegawai['id_pegawai'];?>"
 										<?php if ($pegawai['id_pinjaman'] != NULL) {
-											switch ($pegawai['status_pjm']) {
-												case 'BANKKOP':
-													echo 'disabled';
-													break;
-												case 'KOPBANK':
-													echo 'disabled';
-													break;
+											if (strpos($pegawai['status_pjm'], 'BANK0KOP0') !== FALSE) {
+												echo 'disabled';
+											} else if (strpos($pegawai['status_pjm'], 'KOP0BANK0') !== FALSE) {
+												echo 'disabled';
 											}
 										} else {
 											echo '';
 										}?>>
 											<?php echo $pegawai['nama'];
 											if ($pegawai['id_pinjaman'] != NULL) {
-												switch ($pegawai['status_pjm']) {
-													case 'BANK':
-														echo ' (sedang meminjam di Bank)';
-														break;
-													case 'KOP':
-														echo ' (sedang meminjam di Koperasi)';
-														break;
+												if (strpos($pegawai['status_pjm'], 'BANK0KOP0') !== FALSE) {
+													echo ' (sedang meminjam di Bank & Koperasi)';
+												} else if (strpos($pegawai['status_pjm'], 'KOP0BANK0') !== FALSE) {
+													echo ' (sedang meminjam di Bank & Koperasi)';
+												} else if (strpos($pegawai['status_pjm'], 'BANK0') !== FALSE) {
+													echo ' (sedang meminjam di Bank)';
+												} else if (strpos($pegawai['status_pjm'], 'KOP0') !== FALSE) {
+													echo ' (sedang meminjam di Koperasi)';
 												}
 											} else {
 												echo '';
@@ -50,8 +48,8 @@
 							<div class="col-sm-10">
 								<select class="form-control" name="kode" id="kode" placeholder="Pilih Jenis Pinjaman" required>
 									<option disabled>Pilih Jenis Pinjaman</option>
-									<option value="kop">Koperasi Murni</option>
-									<option value="bank">Bank Bina Drajat Warga (BDW)</option>
+									<option value="kop" id="kop">Koperasi Murni</option>
+									<option value="bank" id="bank">Bank Bina Drajat Warga (BDW)</option>
 								</select>
 							</div>
 						</div>
@@ -143,7 +141,7 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Keterangan Pinjam</label>
 							<div class="col-sm-10">
-								<textarea class="form-control" placeholder="Alasan peminjaman ..." name="ket_pjm" cols="30" rows="3"></textarea>
+								<textarea class="textarea" placeholder="Alasan/catatan peminjaman ..." name="ket_pjm" style="width: 100%; height: 250px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
 								<span class="text-red" id='info_honor'><small>* Keterangan optional</small></span>
 							</div>
 						</div>
@@ -152,8 +150,8 @@
 						</div> -->
 					</div>
 					<div class="box-footer">
-						<a href="<?php echo site_url('pinjaman');?>" class="btn btn-danger pull-left edit-btn">Batal</a>
-						<button type="submit" class="btn btn-primary pull-right edit-btn">Tambah</button>
+						<a href="<?php echo site_url('pinjaman');?>" class="btn btn-default pull-left edit-btn">Batal</a>
+						<button type="submit" class="btn btn-primary pull-right edit-btn">Simpan</button>
 					</div>
 				</form>
 			</div>

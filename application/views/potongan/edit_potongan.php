@@ -30,8 +30,6 @@
 										<input class="form-control"  name="aisiyah" value="<?php echo $potongan['aisiyah'];?>" style="width: 100%;">
 									</div>
 								</div>
-							</div>
-							<div class="col-md-6">
 								<div class="form-group">
 									<label>Jasa Raharja</label>
 									<div class="input-group">
@@ -47,11 +45,19 @@
 									</div>
 								</div>
 							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Catatan</label>
+									<div class="input-group">
+										<textarea class="textarea" name="ket" placeholder="Keterangan tambahan potongan.." style="width: 100%; height: 250px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"><?php echo $potongan['ket'];?></textarea>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 					<!-- /.box-body -->
 					<div class="box-footer">
-						<a href="<?php echo site_url('potongan')?>" class="pull-left btn btn-danger edit-btn">Batal</a>
+						<a href="<?php echo site_url('potongan')?>" class="pull-left btn btn-default edit-btn">Batal</a>
 						<button type="submit" class="pull-right btn btn-primary edit-btn">Simpan</button>
 					</div>
 				</form>

@@ -5,7 +5,7 @@ class Tunjangan extends CI_Controller {
 	
 	public function index()
 	{
-		$data['title'] = 'Table Tunjangan';
+		$data['title'] = 'Tabel Tunjangan';
 
 		$data['tunjangan']= $this->M_tunjangan->get_tunjangan()->row_array();
 		$data['masakerjas']= $this->M_masakerja->get_masakerja()->result_array();
