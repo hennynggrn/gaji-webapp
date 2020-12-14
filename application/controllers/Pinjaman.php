@@ -37,6 +37,18 @@ class Pinjaman extends CI_Controller {
 		$data['title']= 'Tambah Pinjaman';
 		$data['pegawais'] = $this->M_pinjaman->get_pegawai_pinjaman($id)->result_array();
 		// var_dump($data['pegawais']);
+		foreach ($data['pegawais'] as $key => $value) {
+			if ($data['pegawais'][$key]['status_pjm'] == NULL) {
+				$data['pegawais'][$key]['status_pjm'] = 'OpenLoan';
+			} else if ((strpos($data['pegawais'][$key]['status_pjm'], 'BANK0') !== FALSE) && (strpos($data['pegawais'][$key]['status_pjm'], 'KOP0') !== FALSE)) {
+				$data['pegawais'][$key]['status_pjm'] = 'OnBankKop';
+			} else if (strpos($data['pegawais'][$key]['status_pjm'], 'BANK0') !== FALSE) {
+				$data['pegawais'][$key]['status_pjm'] = 'OnBank';
+			} else if (strpos($data['pegawais'][$key]['status_pjm'], 'KOP0') !== FALSE) {
+				$data['pegawais'][$key]['status_pjm'] = 'OnKop';
+			} 
+		}
+		// var_dump($data['pegawais']);
 
 		$this->template->load('index','pinjaman/add_pinjaman',$data);
 	}

@@ -27,12 +27,12 @@
 								<tr>
 									<td>Tanggal Pinjam</td>
 									<td>:</td>
-									<td><?php echo $pinjaman['start_date'];?></td>
+									<td><?php echo fullConvertIDN($pinjaman['start_date']);?></td>
 								</tr>
 								<tr>
-									<td>Tanggal Kembali</td>
+									<td>Batas Pengembalian</td>
 									<td>:</td>
-									<td><?php echo $pinjaman['end_date'];?></td>
+									<td><?php echo fullConvertIDN($pinjaman['end_date']);?></td>
 								</tr>
 								<tr>
 									<td>Total Pinjaman</td>
@@ -90,7 +90,7 @@
 								<tr>
 									<td><?php echo $no++;?></td>
 									<td style="text-align: left;"><?php echo 'Rp. '.number_format($angsuran['nominal'],0,',','.');?></td>
-									<td><?php echo $angsuran['tanggal_kembali'];?></td>
+									<td><?php echo fullConvertIDN($angsuran['tanggal_kembali'], $short = TRUE,  $day = TRUE);?></td>
 									<td><?php echo ($angsuran['status'] == 1) ? '<span class="badge bg-green">Terbayar</span>' : '<span class="badge bg-red">Belum Dibayar</span>';?></td>
 									<td>
 										<a href="" class="" data-toggle="modal" data-target="#repayAngsuran<?php echo $angsuran['id_angsuran'];?>" data-tooltip="tooltip" title="<?php echo ($angsuran['status'] == 1) ? 'Batalkan Pembayaran' : 'Bayar';?>" data-placement="top">

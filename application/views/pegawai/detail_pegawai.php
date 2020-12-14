@@ -41,7 +41,7 @@
 								<tr>
 									<td>Tanggal Lahir</td>
 									<td>:</td>
-									<td><?php echo $pegawai['tgl_lahir']; ?></td>
+									<td><?php echo fullConvertIDN($pegawai['tgl_lahir'], $short = FALSE, $day = FALSE); ?></td>
 								</tr>
 								<tr>
 									<td>Agama</td>
@@ -51,7 +51,7 @@
 								<tr>
 									<td>Umur</td>
 									<td>:</td>
-									<td><?php echo $pegawai['umur']; ?></td>
+									<td><?php echo $pegawai['umur']; ?>&nbsp; tahun</td>
 								</tr>
 								<tr>
 									<td>Jenis Kelamin</td>

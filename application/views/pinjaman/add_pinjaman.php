@@ -10,36 +10,8 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Nama Pegawai</label>
 							<div class="col-sm-10">
-							<!-- select2 select2-hidden-accessible pull-right -->
 								<select class="form-control select2" style="width: 100%;" id="pegawai" name="pegawai" required>
-									<option disabled>Cari Pegawai</option>
-									<?php foreach ($pegawais as $key => $pegawai) :?>
-										<option value="<?php echo $pegawai['id_pegawai'];?>"
-										<?php if ($pegawai['id_pinjaman'] != NULL) {
-											if (strpos($pegawai['status_pjm'], 'BANK0KOP0') !== FALSE) {
-												echo 'disabled';
-											} else if (strpos($pegawai['status_pjm'], 'KOP0BANK0') !== FALSE) {
-												echo 'disabled';
-											}
-										} else {
-											echo '';
-										}?>>
-											<?php echo $pegawai['nama'];
-											if ($pegawai['id_pinjaman'] != NULL) {
-												if (strpos($pegawai['status_pjm'], 'BANK0KOP0') !== FALSE) {
-													echo ' (sedang meminjam di Bank & Koperasi)';
-												} else if (strpos($pegawai['status_pjm'], 'KOP0BANK0') !== FALSE) {
-													echo ' (sedang meminjam di Bank & Koperasi)';
-												} else if (strpos($pegawai['status_pjm'], 'BANK0') !== FALSE) {
-													echo ' (sedang meminjam di Bank)';
-												} else if (strpos($pegawai['status_pjm'], 'KOP0') !== FALSE) {
-													echo ' (sedang meminjam di Koperasi)';
-												}
-											} else {
-												echo '';
-											}?>
-										</option>
-									<?php endforeach;?>
+									<option disabled id="optPegawai">Cari Pegawai</option>
 								</select>
 							</div>
 						</div>

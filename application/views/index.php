@@ -484,10 +484,9 @@
 
 		// Today date
 		document.getElementById('today_date').value = new Date().toISOString().slice(0, 10);
-	</script>
 
-	<!-- Editor -->
-	<script>
+		// Editor for Textarea
+
 		$(function () {
 			// Replace the <textarea id="editor1"> with a CKEditor
 			// instance, using default configuration.
@@ -497,6 +496,12 @@
 		});
 	</script>
 
+	<!-- Styling on JS -->
+	<script>
+		$('.badge-edit > span').attr('class', 'badge bg-grey');
+	</script>
+
+	<!-- Validasi Koma ketika edit Tunjangan Keluarga -->
 	<script>
 		function validateComma(that) {
 			if (that.klg_psg.value == '') {
@@ -523,7 +528,7 @@
 		}
 	</script>
 
-	<!-- Focus Form edit -->
+	<!-- Set Focus Form ketika edit keluarga pada halaman pegawai -->
 	<script>
 		function focusKeluarga(that) {
 			document.getElementById('mate').focus();
@@ -533,17 +538,9 @@
 			document.getElementById('jns_pegawai').focus();
 		}
 	</script>
-	<!-- Styling -->
-	<script>
-		$('.badge-edit > span').attr('class', 'badge bg-grey');
 
-		$('.edit-keluarga').on('click', function(){
-			$('#tambah_keluarga > #mate').focus();
-		})
-	</script>
-
+	<!-- Set Pinjaman Category tab panel untuk 4 kategori 'current month, history, lunas, belum lunas' -->
 	<script>
-		// Set Pinjaman Category 
 		// koperasi
 		$('.thisMonth_BorrowerKop').on('click', function(){
 			var val = $(this).text();
@@ -622,7 +619,7 @@
 		}
 	</script>
 
-	<!-- Set 'Keluarga' close input when delete member-->
+	<!-- Set Keluarga jika nama anggota dihapus dari form input family member maka akan menghapus ybs dari DB -->
 	<script>
 		$(document).ready(function(){
 			$('.first-child').attr('disabled', true);
@@ -654,7 +651,7 @@
 		});
 	</script>
 	
-	<!-- Show form input family member when 'Menikah' on checked -->
+	<!-- Tampilkan form input Keluarga jika Menikah on checked -->
 	<script>
 		$(document).ready(function(){
 			if ($('#married').prop('checked') === true) {
@@ -686,130 +683,8 @@
 			}
 		}
 	</script>
-
-	<script>
-		function kirimContactForm(){
-			var reg = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
-			var jumlah = $('#masukkanMK').val();
-			if(nama.trim() == '' ){
-				alert('Masukkan nama masa kerja.');
-							$('#masukkanMK').focus();
-				return false;
-			}else{
-				$.ajax({
-						type:'POST',
-						url:'<?php echo site_url('masakerja/kirim_form');?>',
-						data:'formMKSubmit=1&jumlah='+jumlah,
-						beforeSend: function () {
-								$('.submitBtn').attr("disabled","disabled");
-								$('.modal-body').css('opacity', '.5');
-						},
-						success:function(msg){
-								if(msg == 'ok'){
-										$('#masukkanMK').val('');
-										$('.statusMsg').html('<span style="color:green;">Terima kasih telah menghubungi kami.</p>');
-								}else{
-										$('.statusMsg').html('<span style="color:red;">Ada sedikit masalah, silakan coba lagi.</span>');
-								}
-								$('.submitBtn').removeAttr("disabled");
-								$('.modal-body').css('opacity', '');
-						}
-				});
-			}
-		}
-	</script>
-
-	<!-- Validasi kode pinjaman -->
-	<script>
-		var arrayPinjaman = <?php if(isset($pegawais)) {echo json_encode($pegawais);}?>;
-		var id_pegawai = '';
-		var status_pjm = '';
-		$('#pegawai').on('change', function() {
-			var val = $(this).val();
-			// alert(val);
-			for (var j = 0; j < arrayPinjaman.length; j++) {
-				id_pegawai = arrayPinjaman[j]['id_pegawai'];
-				status_pjm = arrayPinjaman[j]['status_pjm'];
-				if (val == id_pegawai) {
-					if (status_pjm == null) {
-						$('#kop').removeAttr('disabled');
-						$('#bank').removeAttr('disabled');
-					} 
-					if (status_pjm.indexOf('BANK0') != false) {
-						// alert('pinjam kop');
-						$('#bank').removeAttr('disabled');
-						$('#bank').attr('selected', true);
-						$('#kop').attr('disabled', true);
-					} else if (status_pjm.indexOf('KOP0') != false) {
-						// alert('pinjam bank');
-						
-						$('#kop').removeAttr('disabled');
-						$('#kop').attr('selected', true);
-						$('#bank').attr('disabled', true);
-					}
-				}
-				// alert(status_pjm);
-			}
-		});
-		$(document).ready(function() {
-			var val_load = $('#pegawai').val();
-			var arrayPinjaman = <?php if(isset($pegawais)) {echo json_encode($pegawais);}?>;
-			var id_pegawai = '';
-			var status_pjm = '';
-			
-			// for (var i = 0; i < arrayPinjaman.length; i++) {
-			// 	id_pegawai = arrayPinjaman[index]['id_pegawai'];
-			// 	status_pjm = arrayPinjaman[index]['status_pjm'];
-				
-			// 	if (val_load == id_pegawai) {
-			// 		if (status_pjm == null) {
-			// 			$('#kop').removeAttr('disabled');
-			// 			$('#bank').removeAttr('disabled');
-			// 		} 
-			// 		if (status_pjm.indexOf('BANK0') != false) {
-			// 			// alert('pinjam kop');
-			// 			$('#bank').removeAttr('disabled');
-			// 			$('#kop').attr('disabled', true);
-			// 		} else if (status_pjm.indexOf('KOP0') != false) {
-			// 			// alert('pinjam bank');
-						
-			// 			$('#kop').removeAttr('disabled');
-			// 			$('#bank').attr('disabled', true);
-			// 		}
-			// 	}
-			// }
-			
-			// $('#pegawai').on('change', function() {
-			// 	var val = $(this).val();
-			// 	// alert(val);
-			// 	for (var j = 0; j < arrayPinjaman.length; j++) {
-			// 		id_pegawai = arrayPinjaman[j]['id_pegawai'];
-			// 		status_pjm = arrayPinjaman[j]['status_pjm'];
-			// 		if (val == id_pegawai) {
-			// 			if (status_pjm == null) {
-			// 				$('#kop').removeAttr('disabled');
-			// 				$('#bank').removeAttr('disabled');
-			// 			} 
-			// 			if (status_pjm.indexOf('BANK0') != false) {
-			// 				// alert('pinjam kop');
-			// 				$('#bank').removeAttr('disabled');
-			// 				$('#bank').attr('selected', true);
-			// 				$('#kop').attr('disabled', true);
-			// 			} else if (status_pjm.indexOf('KOP0') != false) {
-			// 				// alert('pinjam bank');
-							
-			// 				$('#kop').removeAttr('disabled');
-			// 				$('#kop').attr('selected', true);
-			// 				$('#bank').attr('disabled', true);
-			// 			}
-			// 		}
-			// 		// alert(status_pjm);
-			// 	}
-			// });
-		});
-	</script>
 	
-	<!-- Dynamic Insert for 'Peminjaman' -->
+	<!-- Dynamic Insert untuk Angsuran Pinjaman -->
 	<script>
 		<?php if (isset($pinjaman)) { ?>
 			var rowCount = <?php echo $pinjaman['jml_angsuran'];?>;
@@ -874,8 +749,7 @@
 		
 	</script>
 
-
-	<!-- 'Jenis Pegawai' select onchanged will turn 'Status Pegawai' options & 'Honor' -->
+	<!-- Jenis Pegawai jika onchange maka Status Pegawai dan Honor akan menyesuaikan validasi 'honor untuk pegawai tetap' -->
 	<script>
 		$(document).ready(function(){
 			<?php 
@@ -954,104 +828,119 @@
 		}
 	</script>
 
-	<!-- <script>
-		var honor = $('#honor').val();
-		function honorEnabled(){
-			$('#info_honor').hide();
-			$('#honor').val(honor);
-			$('#honor').prop('disabled', false);
-		}
-		function honorDisabled(){
-			$('#info_honor').show();
-			$('#honor').val('');
-			$('#honor').prop('disabled', true);
-		}
-
-		if (($('#status_pgw').prop('value') == 'guru_T1') || ($('#status_pgw').prop('value') == 'karyawan_T1')) {
-			honorEnabled();
-			var status_load = 'tetap';
-		} else {
-			honorDisabled();
-			var status_load = 'pns_tdktetap';
-		}
-
-		switch ($("#jns_pegawai").val()) {
-			case 'guru':
-				var jenis_load = 'guru';
-				break;
-			case 'karyawan':
-				var jenis_load = 'karyawan';
-				break;
-		}
-
-		$(document).ready(function() {
-			var optarray = $('#status_pgw').children('option').map(function() {
-				var disabled = '';
-				var selected = '';
-				if ($(this).prop('disabled') === true) {
-					disabled = 'disabled';
+	<!-- Set Kode Pinjaman sesuai dengan status peminjaman -->
+	<script>
+		$(document).ready(function(){
+			var arrPinjaman = <?php echo json_encode($pegawais);?>;
+			$('#pegawai').html('');
+			$.each(arrPinjaman, function(key, value) {   
+				var disabled = false;
+				var desc = '';
+				switch (value.status_pjm) {
+					case 'OpenLoad':
+						break;
+					case 'OnBankKop':
+						disabled = true;
+						desc = ' (sedang meminjam di Bank & Koperasi)';
+						break;
+					case 'OnBank':
+						desc = ' (sedang meminjam di Bank)';
+						break;
+					case 'OnKop':
+						desc = ' (sedang meminjam di Koperasi)';
+						break;
 				}
-				if ($(this).prop('selected') === true) {
-					selected = 'selected';
-				}
-				return {
-					'value': this.value,
-					'option': '<option value="' + this.value + '"'+ disabled + selected +'>' + this.text + '</option>'
-				}
+				$('#pegawai')
+					.append($("<option></option>")
+						.attr("value", value.id_pegawai)
+						.attr("disabled", disabled)
+						.text(value.nama + desc));
 			});
 
-			$("#jns_pegawai").change(function() {
-				$("#status_pgw").children('option').remove();
-				var addoptarr = [];
-				for (i = 0; i < optarray.length; i++) {
-					if (optarray[i].value.indexOf($(this).val()) > -1) {
-						addoptarr.push(optarray[i].option);
-					}
-				}
+			var val = $('#pegawai option:nth-child(1)').val();
+			var status_load = '';
+			$.each(arrPinjaman, function(key, value) {   
+				if (val == value.id_pegawai) {
+					status_load = value.status_pjm;
+				}					
+			});
+			
+			if (status_load === 'OpenLoan') {
+				openLoan();
+			} else if (status_load === 'OnBank') {
+				disableBank();
+			} else if (status_load === 'OnKop') {
+				disableKop();
+			}
 
-				$('#status_pgw').on('change', function(){
-					
-					if (($('#status_pgw').prop('value') == 'guru_T1') || ($('#status_pgw').prop('value') == 'karyawan_T1')) {
-						honorEnabled();
-					} else {
-						honorDisabled();
-					}
-				}); 	
-							
-				$("#jns_pegawai").on('change', function() {
-					if (status_load == 'pns_tdktetap') {
-						if ($("#jns_pegawai").val() == 'karyawan') {
-							switch (jenis_load) {
-								case 'guru':
-									honorEnabled();
-									break;
-								case 'karyawan':
-									honorDisabled();
-									break;
-							}
-						} else {
-							honorDisabled();
-						}
-					} else if (status_load == 'tetap') {
-						if ($("#jns_pegawai").val() == 'guru') {
-							switch (jenis_load) {
-								case 'karyawan':
-									honorDisabled();
-									break;
-								case 'guru':
-									honorEnabled();
-									break;
-							}
-						} else {
-							honorEnabled();
-						}
-					}
+			$('#pegawai').change(function(){
+				var val_change = $(this).val();
+				$.each(arrPinjaman, function(key, value) {   
+					if (val_change == value.id_pegawai) {
+						status = value.status_pjm;
+					}					
 				});
-				$("#status_pgw").html(addoptarr.join(''))
-			}).change();
-		});		
-  	</script> -->
-	<!-- End Page script -->
+				if (status === 'OpenLoan') {
+					openLoan();
+				} else if (status === 'OnBank') {
+					disableBank();
+				} else if (status === 'OnKop') {
+					disableKop();
+				}
+			});
+		});
+
+		function openLoan(){
+			$('#kop').prop("disabled", false);
+			$('#bank').prop("disabled", false);
+		}
+
+		function disableKop(){
+			$('#kop').prop("disabled", true);
+			$('#bank').prop("disabled", false);
+			$('#bank').prop("selected", true);
+		}
+
+		function disableBank(){
+			$('#bank').prop("disabled", true);
+			$('#kop').prop("disabled", false);
+			$('#kop').prop("selected", true);
+		}
+	</script>
+
+	<!-- Unknown function -->
+	<script>
+		function kirimContactForm(){
+			var reg = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
+			var jumlah = $('#masukkanMK').val();
+			if(nama.trim() == '' ){
+				alert('Masukkan nama masa kerja.');
+							$('#masukkanMK').focus();
+				return false;
+			}else{
+				$.ajax({
+						type:'POST',
+						url:'<?php echo site_url('masakerja/kirim_form');?>',
+						data:'formMKSubmit=1&jumlah='+jumlah,
+						beforeSend: function () {
+								$('.submitBtn').attr("disabled","disabled");
+								$('.modal-body').css('opacity', '.5');
+						},
+						success:function(msg){
+								if(msg == 'ok'){
+										$('#masukkanMK').val('');
+										$('.statusMsg').html('<span style="color:green;">Terima kasih telah menghubungi kami.</p>');
+								}else{
+										$('.statusMsg').html('<span style="color:red;">Ada sedikit masalah, silakan coba lagi.</span>');
+								}
+								$('.submitBtn').removeAttr("disabled");
+								$('.modal-body').css('opacity', '');
+						}
+				});
+			}
+		}
+	</script>
+
 </body>
 
 </html>

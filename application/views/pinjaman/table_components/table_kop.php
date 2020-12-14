@@ -1,7 +1,7 @@
 <div class="active tab-pane" id="kop">
 	<?php include 'header_kop.php'; ?>
 	<div class="box-body">
-		<h5 class="text-primary text-bold"> Daftar Peminjam Bulan <?php echo $today_month.' '.$today_year;?></h5>
+		<h5 class="text-primary text-bold"> Daftar Pinjaman Bulan <?php echo $today_month.' '.$today_year;?></h5>
 		<table class="table table-bordered text-center table-hover <?php echo 'table'.$t++;?>">
 			<?php
 				echo $thead;
@@ -20,7 +20,7 @@
 <div class="tab-pane" id="oldkop">
 	<?php include 'header_kop.php'; ?>
 	<div class="box-body">
-		<h5 class="text-primary text-bold"> Daftar Riwayat Peminjam</h5>
+		<h5 class="text-primary text-bold"> Daftar Riwayat Pinjaman</h5>
 		<table class="table table-bordered text-center table-hover <?php echo 'table'.$t++;?>">
 			<?php
 				echo $thead;
@@ -37,7 +37,7 @@
 <div class="tab-pane" id="lunas_kop">
 	<?php include 'header_kop.php'; ?>
 	<div class="box-body">
-		<h5 class="text-primary text-bold"> Daftar Peminjaman Sudah Lunas</h5>
+		<h5 class="text-primary text-bold"> Daftar Pinjaman Sudah Lunas</h5>
 		<table class="table table-bordered text-center table-hover <?php echo 'table'.$t++;?>">
 			<?php
 				echo $thead;
@@ -56,7 +56,7 @@
 <div class="tab-pane" id="belum_lunas_kop">
 	<?php include 'header_kop.php'; ?>
 	<div class="box-body">
-		<h5 class="text-primary text-bold"> Daftar Peminjaman Belum Lunas</h5>
+		<h5 class="text-primary text-bold"> Daftar Pinjaman Belum Lunas</h5>
 		<table class="table table-bordered text-center table-hover <?php echo 'table'.$t++;?>">
 			<?php
 				echo $thead;
