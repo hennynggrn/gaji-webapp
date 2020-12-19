@@ -6,7 +6,7 @@
 				<div class="box-header with-border">
 					<h3 class="box-title">Pencarian Cepat</h3>
 					<div class="box-tools pull-right">
-						<button type="button" class="btn btn-box-tool" data-widget="collapse" data-tooltip="tooltip" title="Pencarian">
+						<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Pencarian">
 							<i class="fa fa-minus"></i>
 						</button>
 					</div>
@@ -85,37 +85,28 @@
 							<th>Gaji Bersih</th>
 							<th>Menu</th>
 						</thead>
-						<tbody>
 						<?php
-							$no=1; foreach ($pegawais as $pegawai) :
+							// $no=1; foreach ($tampil as $key) {
 						?>
+						<tbody>
 							<tr>
-								<td><?php echo $no++;?></td>
-								<td style="text-align: left; padding-left: 15px;"><?php echo $pegawai['nama'];?></td>
+								<td></td>
+								<td style="text-align: left; padding-left: 15px;"></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
 								<td>
-									<?php if (($pegawai['honor'] != NULL) && ($pegawai['honor'] == 0)) {
-										echo 'Rp. &nbsp;&nbsp; 0';
-									} else if (($pegawai['honor'] != NULL) && ($pegawai['honor'] != 0)) {
-										echo 'Rp. &nbsp;&nbsp;'.$pegawai['honor'];
-									} else {
-										echo '-';
-									}
-									?>
-								</td>
-								<td><?php echo $pegawai['nama'];?></td>
-								<td><?php echo $pegawai['nama'];?></td>
-								<td><?php echo $pegawai['nama'];?></td>
-								<td>
-									<a href="<?php echo site_url('gaji/detail/'.$pegawai['id_pegawai']);?>" title="Detail" data-tooltip="tooltip" data-placement="top">
+									<a href="<?php echo site_url('gaji/detail/1');?>" title="Detail" data-tooltip="tooltip" data-placement="top">
 										<span class="badge bg-green"><i class="fa fa-fw fa-info-circle"></i></span>
 									</a>
-									<a href="<?php echo site_url('gaji/cetak/'.$pegawai['id_pegawai']);?>" title="Cetak" data-tooltip="tooltip" data-placement="top">
+									<a href="<?php echo site_url('gaji/cetak/1');?>" title="Cetak" data-tooltip="tooltip" data-placement="top">
 										<span class="badge bg-blue"><i class="fa fa-fw fa-print"></i></span>
 									</a>
 								</td>
 							</tr>
-						<?php endforeach; ?>
 						</tbody>
+						<?php ?>
 					</table>
 				</div>
 				<!-- /.box-body -->

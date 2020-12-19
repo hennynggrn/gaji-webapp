@@ -8,13 +8,13 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/styles.css');?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css');?>">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/styles.css');?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/AdminLTE.min.css');?>">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
@@ -760,7 +760,7 @@
 			$k_tidak_tetap = '';
 
 			if (isset($pegawai['jns_pegawai'])) {
-				if($pegawai['jns_pegawai'] == 0) {
+				if($pegawai['jns_pegawai'] == 'G') {
 					if ($pegawai['status_pegawai'] == 'P') {
 						$pns = 'selected';
 					} else if ($pegawai['status_pegawai'] == 'T1') {
@@ -768,7 +768,7 @@
 					} else {
 						$g_tidak_tetap = 'selected';
 					}
-				} else if ($pegawai['jns_pegawai'] == 1) {
+				} else if ($pegawai['jns_pegawai'] == 'K') {
 					if ($pegawai['status_pegawai'] == 'T1') {
 						$k_tetap = 'selected';
 					} else {
@@ -788,7 +788,14 @@
 				'<option value="" disabled>Pilih Status Pegawai</option><option value="T1" <?php echo $k_tetap;?>>Tetap</option><option value="T0" <?php echo $k_tidak_tetap;?>>Tidak Tetap</option>'
 			];
 
-			var val_load = $('#jns_pegawai').val();
+			var val_jns_pegawai = $('#jns_pegawai').val();
+			var val_load = '';
+			if (val_jns_pegawai == 'G') {
+				val_load = 0;
+			} else {
+				val_load = 1;
+			}
+
 			$('#status_pgw').html(options[val_load]);
 			if ($('#status_pgw').val() == 'T1') {
 				honorEnabled();
@@ -797,7 +804,11 @@
 			}
 
 			$('#jns_pegawai').change(function(){
-				var val = $(this).val();
+				if ($(this).val() == 'G') {
+					val = 0;
+				} else {
+					val = 1;
+				}
 				$('#status_pgw').html(options[val]);
 				if ($('#status_pgw').val() == 'T1') {
 					honorEnabled();

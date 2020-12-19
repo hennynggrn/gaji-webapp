@@ -39,7 +39,7 @@
 									<th>Masa Kerja</th>
 									<td>:</td>
 									<td>
-										<a href="<?php echo site_url('tunjangan/pegawai');?>" class="badge bg-blue">Lihat Masa Kerja Pegawai <i class="fa fa-fw fa-arrow-circle-right"></i></a>
+										<a href="<?php echo site_url('tunjangan/masakerja/pegawai');?>" class="badge bg-blue">Lihat Masa Kerja Pegawai <i class="fa fa-fw fa-arrow-circle-right"></i></a>
 									</td>
 								</tr>
 							</tbody>
@@ -57,7 +57,7 @@
 									if ($key<1) continue;?>
 								<tr>
 									<td><?php echo $tahun++; ?></td>
-									<td style="text-align: left; padding-left: 35px;"><?php echo 'Rp. &nbsp;&nbsp;'.number_format($masakerja['jml_mk'],0,',','.');?></td>
+									<td style="text-align: left; padding-left: 35px;"><?php echo 'Rp. &nbsp;&nbsp;'.number_format($masakerja['nominal_mk'],0,',','.');?></td>
 								</tr>
 								<?php if ($key === 10) break; endforeach; ?>
 							</table>
@@ -72,7 +72,7 @@
 								if ($key<11) continue;?>
 								<tr>
 									<td><?php echo $tahun++; ?></td>
-									<td style="text-align: left; padding-left: 35px;"><?php echo 'Rp. &nbsp;&nbsp;'.number_format($masakerja['jml_mk'],0,',','.');?></td>
+									<td style="text-align: left; padding-left: 35px;"><?php echo 'Rp. &nbsp;&nbsp;'.number_format($masakerja['nominal_mk'],0,',','.');?></td>
 								</tr>
 								<?php if ($key === 20) break; endforeach; ?>
 							</table>
@@ -87,7 +87,7 @@
 								if ($key<21) continue; ?>
 								<tr>
 									<td><?php echo $tahun++; ?></td>
-									<td style="text-align: left; padding-left: 35px;"><?php echo 'Rp. &nbsp;&nbsp;'.number_format($masakerja['jml_mk'],0,',','.');?></td>
+									<td style="text-align: left; padding-left: 35px;"><?php echo 'Rp. &nbsp;&nbsp;'.number_format($masakerja['nominal_mk'],0,',','.');?></td>
 								</tr>
 								<?php  if ($key === 30) break; endforeach;  ?>
 							</table>
@@ -102,7 +102,7 @@
 								if ($key<31) continue; ?>
 								<tr>
 									<td><?php echo $tahun++; ?></td>
-									<td style="text-align: left; padding-left: 35px;"><?php echo 'Rp. &nbsp;&nbsp;'.number_format($masakerja['jml_mk'],0,',','.');?></td>
+									<td style="text-align: left; padding-left: 35px;"><?php echo 'Rp. &nbsp;&nbsp;'.number_format($masakerja['nominal_mk'],0,',','.');?></td>
 								</tr>
 								<?php endforeach;  ?>
 							</table>

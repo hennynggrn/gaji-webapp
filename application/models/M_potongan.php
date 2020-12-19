@@ -8,7 +8,7 @@ class M_potongan extends CI_Model{
 		return $this->db->get_where('potongan', array('id_potongan' => 1));
 	}
 
-	public function update_potongan()
+	public function update_potongan() 
 	{
 		$infaq = $this->input->post('infaq');
 		$sosial = $this->input->post('sosial');

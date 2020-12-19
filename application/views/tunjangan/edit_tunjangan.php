@@ -76,7 +76,7 @@
 													<div class="input-group">
 														<span class="input-group-addon">Rp.</span>
 														<input type="hidden" class="form-control" name="id_masakerja[<?php echo $key;?>]" value="<?php echo $masakerja['id_masakerja'];?>">
-														<input type="number" class="form-control" name="jml_mk[<?php echo $key;?>]" placeholder="0" value="<?php echo $masakerja['jml_mk'];?>">
+														<input type="number" class="form-control" name="nominal_mk[<?php echo $key;?>]" placeholder="0" value="<?php echo $masakerja['nominal_mk'];?>">
 													</div>
 												</div>
 											</td>
@@ -99,7 +99,7 @@
 													<div class="input-group">
 														<span class="input-group-addon">Rp.</span>
 														<input type="hidden" class="form-control" name="id_masakerja[<?php echo $key;?>]" value="<?php echo $masakerja['id_masakerja'];?>">
-														<input type="number" class="form-control" name="jml_mk[<?php echo $key;?>]" placeholder="0" value="<?php echo $masakerja['jml_mk'];?>">
+														<input type="number" class="form-control" name="nominal_mk[<?php echo $key;?>]" placeholder="0" value="<?php echo $masakerja['nominal_mk'];?>">
 													</div>
 												</div>
 											</td>
@@ -122,7 +122,7 @@
 													<div class="input-group">
 														<span class="input-group-addon">Rp.</span>
 														<input type="hidden" class="form-control" name="id_masakerja[<?php echo $key;?>]" value="<?php echo $masakerja['id_masakerja'];?>">
-														<input type="number" class="form-control" name="jml_mk[<?php echo $key;?>]" placeholder="0" value="<?php echo $masakerja['jml_mk'];?>">
+														<input type="number" class="form-control" name="nominal_mk[<?php echo $key;?>]" placeholder="0" value="<?php echo $masakerja['nominal_mk'];?>">
 													</div>
 												</div>
 											</td>
@@ -145,7 +145,7 @@
 													<div class="input-group">
 														<span class="input-group-addon">Rp.</span>
 														<input type="hidden" class="form-control" name="id_masakerja[<?php echo $key;?>]" value="<?php echo $masakerja['id_masakerja'];?>">
-														<input type="number" class="form-control" name="jml_mk[<?php echo $key;?>]" placeholder="0" value="<?php echo $masakerja['jml_mk'];?>">
+														<input type="number" class="form-control" name="nominal_mk[<?php echo $key;?>]" placeholder="0" value="<?php echo $masakerja['nominal_mk'];?>">
 													</div>
 												</div>
 											</td>

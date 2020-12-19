@@ -34,7 +34,7 @@ class M_pinjaman extends CI_Model{
 							   GROUP_CONCAT(DISTINCT CONCAT(pjm.kode_pinjaman, pjm.status) ORDER BY pjm.status ASC SEPARATOR "") status_pjm');
 			$this->db->join('pinjaman pjm', 'p.id_pegawai = pjm.id_pegawai', 'LEFT');
 			$this->db->join('angsuran a', 'a.id_pinjaman = pjm.id_pinjaman', 'LEFT');
-			$this->db->group_by('pjm.id_pegawai');
+			$this->db->group_by('p.id_pegawai');
 			return $this->db->get('pegawai p');
 		}
 	}

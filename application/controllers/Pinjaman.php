@@ -32,11 +32,11 @@ class Pinjaman extends CI_Controller {
 		$this->template->load('index','pinjaman/table_pinjaman', $data);
 	}
 
-	public function add_pinjaman($id = NULL)
+	public function add_pinjaman($id = NULL) 
 	{
 		$data['title']= 'Tambah Pinjaman';
 		$data['pegawais'] = $this->M_pinjaman->get_pegawai_pinjaman($id)->result_array();
-		// var_dump($data['pegawais']);
+		var_dump($data['pegawais']);
 		foreach ($data['pegawais'] as $key => $value) {
 			if ($data['pegawais'][$key]['status_pjm'] == NULL) {
 				$data['pegawais'][$key]['status_pjm'] = 'OpenLoan';
@@ -76,6 +76,17 @@ class Pinjaman extends CI_Controller {
 		$this->template->load('index','pinjaman/detail_pinjaman', $data);
 	}
 
+	public function pay_pinjaman($id = TRUE)
+	{
+		$data['title'] = 'Bayar Angsuran Pinjaman';
+		$data['pay'] = TRUE;
+
+		$data['pinjaman'] = $this->M_pinjaman->get_pinjaman($id)->row_array();
+		$data['angsurans'] = $this->M_pinjaman->get_angsuran($id)->result_array();
+		
+		$this->template->load('index','pinjaman/detail_pinjaman', $data);
+	}
+
 	public function update_repay()
 	{
 		$res['angsuran'] = $this->M_pinjaman->update_repay();
@@ -94,6 +105,7 @@ class Pinjaman extends CI_Controller {
 			echo "<h2> Gagal Tambah Data Pinjaman </h2>";
 		}
 	}
+	
 
 	public function edit_pinjaman($id = TRUE)
 	{

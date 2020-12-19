@@ -13,7 +13,7 @@
 								<th>No</th>                                  
 								<th>Nama Peminjam</th>
 								<th>Tanggal Pinjam</th>
-								<th>Tanggal Kembali</th>
+								<th>Batas Pengembalian</th>
 								<th>Total Pinjaman</th>
 								<th>Jumlah Angsuran</th>
 								<th>Status</th>

@@ -11,10 +11,10 @@ class M_masakerja extends CI_Model{
 	public function update_masakerja()
 	{
 		$id_masakerja = $this->input->post('id_masakerja');
-		$jml_mk = $this->input->post('jml_mk');
+		$nominal_mk = $this->input->post('nominal_mk');
 		foreach ($id_masakerja as $i => $value) {
 			$data = array(
-				'jml_mk' => $jml_mk[$i]
+				'nominal_mk' => $nominal_mk[$i]
 			);
 			$this->db->where('id_masakerja', $id_masakerja[$i]);
 			$this->db->update('masakerja', $data);

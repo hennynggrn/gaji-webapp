@@ -5,6 +5,7 @@ $route['gaji/print/(:any)'] = 'gaji/print_gaji/$1';
 $route['gaji/detail/(:any)'] = 'gaji/detail_gaji/$1';
 $route['table'] = 'gaji/index';
 
+$route['pinjaman/pay/(:any)'] = 'pinjaman/pay_pinjaman/$1';
 $route['pinjaman/delete/(:any)'] = 'pinjaman/delete_pinjaman/$1';
 $route['pinjaman/edit/(:any)'] = 'pinjaman/edit_pinjaman/$1';
 $route['pinjaman/detail/(:any)'] = 'pinjaman/detail_pinjaman/$1';
@@ -25,7 +26,7 @@ $route['keluarga/delete/(:any)'] = 'keluarga/delete_keluarga/$1';
 $route['keluarga/detail/(:any)'] = 'keluarga/detail_keluarga/$1';
 $route['keluarga'] = 'keluarga/index';
 
-$route['tunjangan/pegawai'] = 'tunjangan/tunjangan_pegawai';
+$route['tunjangan/masakerja/pegawai'] = 'tunjangan/masakerja_pegawai';
 $route['tunjangan/edit'] = 'tunjangan/edit_tunjangan';
 // $route['tunjangan/delete/(:any)'] = 'tunjangan/delete_tunjangan/$1';
 // $route['tunjangan/delete/(:any)'] = 'tunjangan/delete_tunjangan/$1';

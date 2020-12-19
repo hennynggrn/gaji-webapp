@@ -14,3 +14,7 @@ input[type=number] {
 	padding-left: 30px;
 	padding-right: 30px;
 }
+
+.edit-bg-gray {
+	background-color: rgb(216, 253, 229);
+}

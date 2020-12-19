@@ -35,9 +35,9 @@ class Tunjangan extends CI_Controller {
 		}
 	}	
 
-	public function tunjangan_pegawai($id_pegawai = NULL)
+	public function masakerja_pegawai($id_pegawai = NULL)
 	{
-		$data['title'] = 'Tunjangan Pegawai';
+		$data['title'] = 'Tunjangan Masa Kerja Pegawai';
 
 		$data['pegawais']= $this->M_pegawai->get_pegawai($id_pegawai)->result_array();
 		$data['masakerjas']= $this->M_masakerja->get_masakerja()->result_array();
@@ -51,7 +51,7 @@ class Tunjangan extends CI_Controller {
 		$res['pegawai'] = $this->M_masakerja->update_mk_pegawai();
 		// var_dump($_POST);
 		if ($res) {
-			redirect('tunjangan/pegawai');
+			redirect('tunjangan/masakerja/pegawai');
 		} else {
 			echo "<h2> Gagal Edit Data Masa Kerja Pegawai </h2>";
 		}

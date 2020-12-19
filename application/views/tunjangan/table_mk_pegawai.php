@@ -27,7 +27,7 @@
 								<td><?php echo $no++; ?></td>
 								<td style="text-align: left; padding-left: 10px;"><?php echo $pegawai['nama']; ?></td>
 								<td><?php echo ($pegawai['masa_kerja'] != 0) ? $pegawai['tahun'] : '<small>(belum genap 1 tahun)</small>';?></td>
-								<td style="text-align: left; padding-left: 100px;"><?php echo ($pegawai['masa_kerja'] != 0) ? 'Rp. &nbsp;&nbsp;'.number_format($pegawai['jml_mk'],0,',','.') : 'Rp. &nbsp;&nbsp;0';?></td>
+								<td style="text-align: left; padding-left: 100px;"><?php echo ($pegawai['masa_kerja'] != 0) ? 'Rp. &nbsp;&nbsp;'.number_format($pegawai['nominal_mk'],0,',','.') : 'Rp. &nbsp;&nbsp;0';?></td>
 								<td>
 									<a href="" data-toggle="modal" data-target="#editPegawai<?php echo $pegawai['id_pegawai'];?>" title="Edit" data-tooltip="tooltip" data-placement="top">
 										<span class="badge bg-orange"><i class="fa fa-fw fa-pencil-square-o"></i></span>

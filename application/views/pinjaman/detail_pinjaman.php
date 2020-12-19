@@ -1,7 +1,7 @@
 <!-- Main content -->
 <section class="content">
 	<div class="row">
-		<div class="col-md-5">
+		<div class="col-md-5 <?php if(isset($pay)) {echo ($pay == TRUE) ? 'pull-right' : '';}?>">
 			<div class="box box-primary">
 				<div class="box-header with-border">
 					<h3 class="box-title">Informasi Pinjaman</h3>
@@ -64,7 +64,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-7">
+		<div class="col-md-7 <?php if(isset($pay)) {echo ($pay == TRUE) ? 'pull-left' : '';}?>">
 			<div class="box box-danger">
 				<div class="box-header with-border">
 					<h3 class="box-title">Angsuran Pinjaman</h3>
@@ -82,7 +82,7 @@
 								<th>Nominal</th>
 								<th>Tanggal Kembali</th>
 								<th>Status</th>
-								<th>Bayar</th>
+								<th class="text-green" style="background-color: rgb(216, 253, 229);">Bayar</th>
 							</thead>
 							<tbody>
 							<?php $no = 1; foreach ($angsurans as $key => $angsuran) : ?>
@@ -92,9 +92,9 @@
 									<td style="text-align: left;"><?php echo 'Rp. '.number_format($angsuran['nominal'],0,',','.');?></td>
 									<td><?php echo fullConvertIDN($angsuran['tanggal_kembali'], $short = TRUE,  $day = TRUE);?></td>
 									<td><?php echo ($angsuran['status'] == 1) ? '<span class="badge bg-green">Terbayar</span>' : '<span class="badge bg-red">Belum Dibayar</span>';?></td>
-									<td>
+									<td style="background-color: rgb(234, 255, 241);">
 										<a href="" class="" data-toggle="modal" data-target="#repayAngsuran<?php echo $angsuran['id_angsuran'];?>" data-tooltip="tooltip" title="<?php echo ($angsuran['status'] == 1) ? 'Batalkan Pembayaran' : 'Bayar';?>" data-placement="top">
-											<i class="fa fa-fw <?php echo ($angsuran['status'] == 1) ? 'fa-check text-green' : 'fa-money text-gray';?>"></i>
+											<i class="fa fa-fw <?php echo ($angsuran['status'] == 1) ? 'fa-check text-green' : 'fa-money text-default';?>"></i>
 										</a>
 									</td>
 								</tr>
@@ -139,8 +139,8 @@
 						</table>
 					</div>
 				</div>
-				<div class="box-footer">
-					<h5>Catatan :</h5>
+				<div class="box-footer text-info">
+					<h5 class="text-bold">Catatan :</h5>
 					<ul>
 						<li>Edit untuk menambah/mengubah/menghapus angsuran</li>
 					</ul>

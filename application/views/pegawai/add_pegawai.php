@@ -175,8 +175,8 @@
 								</select> -->
 								<select class="form-control" name="jns_pegawai" id="jns_pegawai">
 									<option value="" disabled>Pilih Jenis Pegawai</option>
-									<option value="0">Guru</option>
-									<option value="1">Karyawan</option>
+									<option value="G">Guru</option>
+									<option value="K">Karyawan</option>
 								</select>
 							</div>
 						</div>
