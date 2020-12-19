@@ -20,7 +20,8 @@
 								?>
 								<tr>
 									<td colspan="3">
-										<img class="profile-user-img img-responsive img-circle" src="<?php echo base_url('assets/dist/img/upload/user1-128x128.jpg'); ?>" alt="">
+										<img class="profile-user-img img-responsive img-circle" src="<?php echo base_url('assets/dist/img/upload/user1-128x128.jpg'); ?>" 
+										alt="<?php echo 'Foto '.$pegawai['nama'];?>">
 									</td>
 								</tr>
 								<tr>

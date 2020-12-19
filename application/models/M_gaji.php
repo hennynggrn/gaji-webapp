@@ -10,7 +10,9 @@ class M_gaji extends CI_Model{
 			$this->db->join('jbt_pegawai jp', 'jp.id_jabatan = jb.id_jabatan', 'LEFT');
 			return $this->db->get_where('jabatan jb', array('jp.id_pegawai' => $id_pegawai));
 		} else {
-			$this->db->select('jb.id_jabatan, jabatan, jml_jam, id_pegawai, COUNT(jp.id_jabatan) jml_jabatan, SUM(CONCAT(jml_jam*'.$jabatan_val.')) total_nom_jbt');
+			$this->db->select('jb.id_jabatan, jabatan, jml_jam, id_pegawai, COUNT(jp.id_jabatan) jml_jabatan, 
+							   SUM(CONCAT(jml_jam*'.$jabatan_val.')) total_nom_jbt,
+						       GROUP_CONCAT(DISTINCT CONCAT(jabatan) SEPARATOR ",") jabatan');
 			$this->db->join('jbt_pegawai jp', 'jp.id_jabatan = jb.id_jabatan', 'LEFT');
 			return $this->db->get_where('jabatan jb', array('jp.id_pegawai' => $id_pegawai));
 		}
