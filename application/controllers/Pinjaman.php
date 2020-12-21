@@ -30,13 +30,14 @@ class Pinjaman extends CI_Controller {
 		}
 
 		$this->template->load('index','pinjaman/table_pinjaman', $data);
+		// var_dump($data['pinjamans']);
 	}
 
 	public function add_pinjaman($id = NULL) 
 	{
 		$data['title']= 'Tambah Pinjaman';
 		$data['pegawais'] = $this->M_pinjaman->get_pegawai_pinjaman($id)->result_array();
-		var_dump($data['pegawais']);
+		// var_dump($data['pegawais']);
 		foreach ($data['pegawais'] as $key => $value) {
 			if ($data['pegawais'][$key]['status_pjm'] == NULL) {
 				$data['pegawais'][$key]['status_pjm'] = 'OpenLoan';
@@ -127,15 +128,15 @@ class Pinjaman extends CI_Controller {
 		$res['angsuran'] = $this->M_pinjaman->update_angsuran($id_pinjaman);
 		
 		if ($res) {
-			redirect('pinjaman/detail/'.$id_pinjaman);
+			redirect('pinjaman/pay/'.$id_pinjaman);
 		} else {
 			echo "<h2> Gagal Edit Data Pinjaman </h2>";
 		}
 	}
 
-	public function delete_pinjaman($id)
+	public function delete_pinjaman($id_pinjaman)
 	{
-		$res['pinjaman'] = $this->M_pinjaman->delete_pinjaman($id);
+		$res['pinjaman'] = $this->M_pinjaman->delete_pinjaman($id_pinjaman);
 		
 		if ($res) {
 			redirect('pinjaman');

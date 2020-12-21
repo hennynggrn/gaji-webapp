@@ -484,9 +484,10 @@
 
 		// Today date
 		document.getElementById('today_date').value = new Date().toISOString().slice(0, 10);
+	</script>
 
-		// Editor for Textarea
-
+	// Editor for Textarea
+	<script>
 		$(function () {
 			// Replace the <textarea id="editor1"> with a CKEditor
 			// instance, using default configuration.
@@ -689,7 +690,7 @@
 		<?php if (isset($pinjaman)) { ?>
 			var rowCount = <?php echo $pinjaman['jml_angsuran'];?>;
 		<?php } else { ?>
-			var rowCount = 0;
+			var rowCount = 1;
 		<?php } ?>
 		var j = 0;
 		document.getElementById('jumlahAng').value = rowCount;
@@ -744,7 +745,7 @@
 		}
 		function GetDynamicTextBox(value) {
 			j = j + 1;
-			return '<td></td>' + '<td><input type="hidden" name="ids[' + j + ']" value= "' + j + '"><input type="date" class="form-control" name="tgl_kembali[' + j + ']" placeholder="Tanggal Kembali" value= "' + value + '">' + '</td>' + '</td>' + '<td> <div class="input-group"><span class="input-group-addon">Rp.</span><input type="number" class="form-control" name="nominal[' + j + ']" placeholder="150000" value="' + value + '"></div></td>' + '<td><div class="remove btn-group"><a href="#" class="btn btn-danger" ><i class="fa fa-close"></i></a></div></td>'; 	
+			return '<td></td>' + '<td><input type="hidden" name="ids[' + j + ']" value= "' + j + '"><input type="date" class="form-control" name="tgl_kembali[' + j + ']" placeholder="Tanggal Kembali" value= "' + value + '" required>' + '</td>' + '<td> <div class="input-group"><span class="input-group-addon">Rp.</span><input type="number" class="form-control" name="nominal[' + j + ']" placeholder="150000" value="' + value + '" required></div></td>' + '<td><div class="remove btn-group"><a href="#" class="btn btn-danger" ><i class="fa fa-close"></i></a></div></td>'; 	
 		}
 		
 	</script>
@@ -842,7 +843,8 @@
 	<!-- Set Kode Pinjaman sesuai dengan status peminjaman -->
 	<script>
 		$(document).ready(function(){
-			var arrPinjaman = <?php echo json_encode($pegawais);?>;
+			<?php if (isset($pegawais)) { ?>
+				var arrPinjaman = <?php echo json_encode($pegawais);?>;
 			$('#pegawai').html('');
 			$.each(arrPinjaman, function(key, value) {   
 				var disabled = false;
@@ -899,6 +901,7 @@
 					disableKop();
 				}
 			});
+			<?php };?>
 		});
 
 		function openLoan(){
@@ -919,35 +922,13 @@
 		}
 	</script>
 
-	<!-- Unknown function -->
+	<!-- Validasi Pinjaman minimal 1 angsuran -->
 	<script>
-		function kirimContactForm(){
-			var reg = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
-			var jumlah = $('#masukkanMK').val();
-			if(nama.trim() == '' ){
-				alert('Masukkan nama masa kerja.');
-							$('#masukkanMK').focus();
-				return false;
-			}else{
-				$.ajax({
-						type:'POST',
-						url:'<?php echo site_url('masakerja/kirim_form');?>',
-						data:'formMKSubmit=1&jumlah='+jumlah,
-						beforeSend: function () {
-								$('.submitBtn').attr("disabled","disabled");
-								$('.modal-body').css('opacity', '.5');
-						},
-						success:function(msg){
-								if(msg == 'ok'){
-										$('#masukkanMK').val('');
-										$('.statusMsg').html('<span style="color:green;">Terima kasih telah menghubungi kami.</p>');
-								}else{
-										$('.statusMsg').html('<span style="color:red;">Ada sedikit masalah, silakan coba lagi.</span>');
-								}
-								$('.submitBtn').removeAttr("disabled");
-								$('.modal-body').css('opacity', '');
-						}
-				});
+		function validasiAngsuran(that) {
+			if (that.jumlahAng.value == 0) {
+				window.alert('Pinjaman wajib minimal 1 angsuran, untuk mengisi data tanggal pengembalian. Silahkan tambah angsuran!');
+				$('html, body').animate({ scrollTop: $('#jumlahAng').offset().top }, 'slow');
+				return (false);
 			}
 		}
 	</script>
@@ -955,17 +936,21 @@
 	<!-- Output Gaji -->
 	<script>
 		$(document).ready(function(){
-			let beras = $('#beras').val();
-			let t_jamsostek = $('#t_jamsostek').val();
-			let keluarga = $('#keluarga').val();
-			let jabatan = $('#jabatan').val();
-			let masakerja = $('#masakerja').val();
-			var tunjangan = parseInt(beras) + parseInt(t_jamsostek) + parseInt(keluarga) + parseInt(jabatan) + parseInt(masakerja);
+			let honor = $('#gaji_honor').val();		
+			// Hitung semua class tunjangan 
+			let tunjangan = 0;
+			$('.tunjangan').each(function() {
+				tunjangan += Number($(this).val());
+			});
 			$('#tunjangan').text(number_format(tunjangan, 0, ',', '.'));
-
-			let honor = $('#gaji_honor').val();
-			let gaji = parseInt(honor) + parseInt(tunjangan);
-			// alert(gaji);
+			// Hitung semua class potongan
+			let potongan = 0;
+			$('.potongan').each(function() {
+				potongan += Number($(this).val());
+			});
+			$('#potongan').text(number_format(potongan, 0, ',', '.'));
+			// Hitung gaji bersih
+			let gaji = (parseInt(honor) + parseInt(tunjangan)) - (parseInt(potongan));
 			$('#gaji').text(number_format(gaji, 0, ',', '.'));
 		});
 

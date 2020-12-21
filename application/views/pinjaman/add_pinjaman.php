@@ -5,7 +5,7 @@
 			<div class="box box-primary">
 				<div class="box-header">
 				</div>
-				<form class="form-horizontal" role="form" method="post" action="<?php echo site_url('pinjaman/insert_pinjaman');?>" >
+				<form class="form-horizontal" onsubmit="return validasiAngsuran(this);" role="form" method="post" action="<?php echo site_url('pinjaman/insert_pinjaman');?>" >
 					<div class="box-body">
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Nama Pegawai</label>
@@ -79,24 +79,26 @@
 										</td>
 									</tr> -->
 									<tbody id="angsuranTable">
-										<tr></tr>
-										<!-- <tr> 
+										<tr class="num">
 											<td>1</td>
-											<td><input type="date" class="form-control" name="tgl_kembali" placeholder="Tanggal Kembali"></td>
 											<td>
+												<input type="hidden" name="ids[0]" value= "0">
+												<input type="date" class="form-control" name="tgl_kembali[0]" placeholder="Tanggal Kembali" required>
+											</td>
+											<td> 
 												<div class="input-group">
 													<span class="input-group-addon">Rp.</span>
-													<input type="text" class="form-control" name="nom_angsuran" placeholder="Nilai Angsuran">
-													<span class="input-group-addon">.00</span>
+													<input type="number" class="form-control" name="nominal[0]" placeholder="150000" required>
 												</div>
 											</td>
 											<td>
 												<div class="remove btn-group">
-													<a href="#" class='btn btn-danger' >
-														<i class="fa fa-close"></i></a>
+													<a href="#" class="btn btn-danger">
+														<i class="fa fa-close"></i>
+													</a>
 												</div>
 											</td>
-										</tr> -->
+										</tr>
 									</tbody>
 									<tfoot>
 										<tr>

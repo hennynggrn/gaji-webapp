@@ -6,14 +6,14 @@ class M_pinjaman extends CI_Model{
 	public function get_pinjaman($id = TRUE)
 	{
 		if ($id != NULL) {
-			$this->db->select('*, count(a.id_angsuran) jml_angsuran, max(a.tanggal_kembali) end_date, 
+			$this->db->select('*, pjm.id_pinjaman, count(a.id_angsuran) jml_angsuran, max(a.tanggal_kembali) end_date, 
 							   sum(a.status) status_ang, pjm.status status_pjm');
 			$this->db->join('angsuran a', 'a.id_pinjaman = pjm.id_pinjaman', 'LEFT');
 			$this->db->join('pegawai p', 'p.id_pegawai = pjm.id_pegawai', 'LEFT');
 			$this->db->group_by('pjm.id_pinjaman');
 			return $this->db->get_where('pinjaman pjm', array('pjm.id_pinjaman' => $id));
 		} else {
-			$this->db->select('*, count(a.id_angsuran) jml_angsuran, max(a.tanggal_kembali) end_date, 
+			$this->db->select('*, pjm.id_pinjaman, count(a.id_angsuran) jml_angsuran, max(a.tanggal_kembali) end_date, 
 							   sum(a.status) status_ang, pjm.status status_pjm');
 			$this->db->order_by('pjm.start_date', 'DESC');
 			$this->db->join('angsuran a', 'a.id_pinjaman = pjm.id_pinjaman', 'LEFT');
@@ -183,9 +183,9 @@ class M_pinjaman extends CI_Model{
 		}
 	}
 
-	public function delete_pinjaman($id)
+	public function delete_pinjaman($id_pinjaman)
 	{
-		$this->db->where('id_pinjaman', $id);
+		$this->db->where('id_pinjaman', $id_pinjaman);
 		return $this->db->delete('pinjaman');
 	}
 }

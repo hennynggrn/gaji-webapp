@@ -94,7 +94,7 @@
 								<td style="text-align: left; padding-left: 15px;"><?php echo $pegawai['nama'];?></td>
 								<td>
 									<?php if (($pegawai['honor'] != NULL) && ($pegawai['honor'] == 0)) {
-										echo 'Rp. &nbsp;&nbsp; 0';
+										echo 'Rp. &nbsp;&nbsp; 0 &nbsp;&nbsp;<small>(belum ditentukan)</small>';
 									} else if (($pegawai['honor'] != NULL) && ($pegawai['honor'] != 0)) {
 										echo 'Rp. &nbsp;&nbsp;'.$pegawai['honor'];
 									} else {
@@ -102,9 +102,9 @@
 									}
 									?>
 								</td>
-								<td><?php echo $pegawai['nama'];?></td>
-								<td><?php echo $pegawai['nama'];?></td>
-								<td><?php echo $pegawai['nama'];?></td>
+								<td  id="tunjangan"><?php echo $pegawai['nama'];?></td>
+								<td  id="potongan"><?php echo $pegawai['nama'];?></td>
+								<td id="gaji"></td>
 								<td>
 									<a href="<?php echo site_url('gaji/detail/'.$pegawai['id_pegawai']);?>" title="Detail" data-tooltip="tooltip" data-placement="top">
 										<span class="badge bg-green"><i class="fa fa-fw fa-info-circle"></i></span>

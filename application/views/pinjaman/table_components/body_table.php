@@ -24,7 +24,7 @@
 		</a>
 	</td>
 </tr>
-<!-- Modal Delete Honor per Pegawai-->
+<!-- Modal Delete Pinjaman -->
 <div class="modal fade modal-danger" id="deletePinjaman<?php echo $j++;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">

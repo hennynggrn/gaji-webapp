@@ -65,19 +65,19 @@
 							<tbody>
 								<tr>
 									<td>Rp. &nbsp;<?php echo number_format($tunjangan['beras'],0,',','.');?>
-										<input type="hidden" value="<?php echo $tunjangan['beras'];?>" id="beras">
+										<input class="tunjangan" type="hidden" value="<?php echo $tunjangan['beras'];?>">
 									</td>
 									<td>Rp. &nbsp;<?php echo number_format($tunjangan['jamsostek'],0,',','.');?>
-										<input type="hidden" value="<?php echo $tunjangan['jamsostek'];?>" id="t_jamsostek">
+										<input class="tunjangan" type="hidden" value="<?php echo $tunjangan['jamsostek'];?>">
 									</td>
-									<td>Rp. &nbsp;<?php echo ($tunjangan_keluarga != 0) ? number_format($tunjangan_keluarga,0,',','.') : 0; ?>
-										<input type="hidden" value="<?php echo $tunjangan_keluarga;?>" id="keluarga">
+									<td>Rp. &nbsp;<?php echo ($tunjangan_keluarga != 0) ? number_format($tunjangan_keluarga,0,',','.') : 0; ?> 
+										<input class="tunjangan" type="hidden" value="<?php echo $tunjangan_keluarga;?>">
 									</td>
 									<td>Rp. &nbsp;<?php echo number_format($jabatan['total_nom_jbt'],0,',','.');?>
-										<input type="hidden" value="<?php echo $jabatan['total_nom_jbt'];?>" id="jabatan">
+										<input class="tunjangan" type="hidden" value="<?php echo $jabatan['total_nom_jbt'];?>">
 									</td>
 									<td>Rp. &nbsp;<?php echo number_format($pegawai['nominal_mk'],0,',','.');?>
-										<input type="hidden" value="<?php echo $pegawai['nominal_mk'];?>" id="masakerja">
+										<input class="tunjangan" type="hidden" value="<?php echo $pegawai['nominal_mk'];?>">
 									</td>
 								</tr>
 							</tbody>
@@ -187,13 +187,59 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td>Rp. &nbsp;<?php echo number_format(1000,0,',','.');?></td>
-									<td>Rp. &nbsp;<?php echo number_format(1000,0,',','.');?></td>
-									<td>Rp. &nbsp;<?php echo number_format(1000,0,',','.');?></td>
-									<td>Rp. &nbsp;<?php echo number_format(1000,0,',','.');?></td>
-									<td>Rp. &nbsp;<?php echo number_format(1000,0,',','.');?></td>
-									<td>Rp. &nbsp;<?php echo number_format(1000,0,',','.');?></td>
-									<td>Rp. &nbsp;<?php echo number_format(1000,0,',','.');?></td>
+									<td>
+										Rp. &nbsp;<?php echo number_format($potongan['infaq'],0,',','.');?>
+										<input class="potongan" type="hidden" value="<?php echo $potongan['infaq'];?>">
+									</td>
+									<td>
+										Rp. &nbsp;<?php echo number_format($potongan['sosial'],0,',','.');?>
+										<input class="potongan" type="hidden" value="<?php echo $potongan['sosial'];?>">
+									</td>
+									<td>
+										Rp. &nbsp;<?php echo number_format($potongan['jsr'],0,',','.');?>
+										<input class="potongan" type="hidden" value="<?php echo $potongan['jsr'];?>">
+									</td>
+									<td>
+										Rp. &nbsp;<?php echo number_format($potongan['jamsostek'],0,',','.');?>
+										<input class="potongan" type="hidden" value="<?php echo $potongan['jamsostek'];?>">
+									</td>
+									<td>
+										Rp. &nbsp;<?php echo number_format($potongan['aisiyah'],0,',','.');?>
+										<input class="potongan" type="hidden" value="<?php echo $potongan['aisiyah'];?>">
+									</td>
+									<td>
+										Rp. &nbsp;
+										<?php
+											if ($angsuran_kop != NULL) {
+												foreach ($angsuran_kop as $key => $kop) {
+													if (!empty($kop['repay']) && ($kop['repay'] == 1)) {
+														echo number_format($kop['nominal'],0,',','.');
+														$kop_val = $kop['nominal'];
+													}
+												}
+											} else {
+												echo 0;
+												$kop_val = 0;
+											}
+										?>
+										<input class="potongan" type="hidden" value="<?php echo $kop_val;?>">
+									</td>
+									<td>Rp. &nbsp;
+										<?php
+											if ($angsuran_bank != NULL) {
+												foreach ($angsuran_bank as $key => $bank) {
+													if (!empty($bank['repay']) && ($bank['repay'] == 1)) {
+														echo number_format($bank['nominal'],0,',','.');
+														$bank_val = $bank['nominal'];
+													}
+												}
+											} else {
+												echo 0;
+												$bank_val = 0;
+											}
+										?>
+										<input class="potongan" type="hidden" value="<?php echo $bank_val;?>">
+									</td>
 								</tr>
 							</tbody>
 						</table>

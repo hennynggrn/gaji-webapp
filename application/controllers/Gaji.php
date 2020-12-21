@@ -19,6 +19,7 @@ class Gaji extends CI_Controller {
 		$month_today = date('Y-m'); // bulan & tahun ini
 		$data['title'] = 'Detail Gaji';
 		$data['desc'] = month($date_today).' '.date('Y', strtotime($date_today));
+		$data['month'] = $month_today;
 		// Tunjangan
 		$data['pegawai'] = $this->M_pegawai->get_pegawai($id_pegawai)->row_array();
 		$data['keluargas_fetch'] = $this->M_gaji->get_keluarga($id_pegawai)->result_array();
@@ -89,24 +90,27 @@ class Gaji extends CI_Controller {
 		$data['potongan']= $this->M_potongan->get_potongan()->row_array();
 		$data['pinjaman_kop'] = $this->M_gaji->get_pinjaman($id_pegawai, $kode = 'KOP')->row_array();
 		$data['pinjaman_bank'] = $this->M_gaji->get_pinjaman($id_pegawai, $kode = 'BANK')->row_array();
-		// cek pinjaman ada atau tidak
-		if (($data['pinjaman_kop'] !== NULL) && ($data['pinjaman_bank'] !== NULL)) {
-			// jika pinjaman ada
+		// cek pinjaman kop ada atau tidak
+		if ($data['pinjaman_kop'] != NULL) {
 			$id_pinjaman_kop = $data['pinjaman_kop']['id_pinjaman'];
-			$id_pinjaman_bank = $data['pinjaman_bank']['id_pinjaman'];
-
 			$data['angsuran_kop'] = $this->M_gaji->get_angsuran($id_pinjaman = $id_pinjaman_kop, $kode = 'KOP')->result_array();
-			$data['angsuran_bank'] = $this->M_gaji->get_angsuran($id_pinjaman = $id_pinjaman_bank, $kode = 'BANK')->result_array();
 			// ambil angsuran kop bulan ini
-			foreach ($data['angsuran_kop'] as $key => $value) {
+			foreach ($data['angsuran_kop'] as $key => $kop) {
 				if (date('Y-m', strtotime($data['angsuran_kop'][$key]['tanggal_kembali'])) == $month_today) {
 					$data['angsuran_kop'][$key]['repay'] = '1';
 				} else {
 					$data['angsuran_kop'][$key]['repay'] = '0';
 				}
 			}
+		} else {
+			$data['angsuran_kop'] = NULL;
+		}
+		// cek pinjaman bank ada atau tidak
+		if ($data['pinjaman_bank'] != NULL) {
+			$id_pinjaman_bank = $data['pinjaman_bank']['id_pinjaman'];
+			$data['angsuran_bank'] = $this->M_gaji->get_angsuran($id_pinjaman = $id_pinjaman_bank, $kode = 'BANK')->result_array();
 			// ambil angsuran bank bulan ini
-			foreach ($data['angsuran_bank'] as $key => $value) {
+			foreach ($data['angsuran_bank'] as $key => $bank) {
 				if (date('Y-m', strtotime($data['angsuran_bank'][$key]['tanggal_kembali'])) == $month_today) {
 					$data['angsuran_bank'][$key]['repay'] = '1';
 				} else {
@@ -114,14 +118,9 @@ class Gaji extends CI_Controller {
 				}
 			}
 		} else {
-			// jika pinjaman tidak ada
-			$data['angsuran_kop'] = NULL;
 			$data['angsuran_bank'] = NULL;
 		}
 		
-
-
-
 		var_dump($month_today);
 		// var_dump($data['anggotas']);
 		// var_dump($data['count_klg_hidup']);
@@ -134,16 +133,16 @@ class Gaji extends CI_Controller {
 		// var_dump('anak1: '.$data['anak1']);
 		// var_dump('anak2: '.$data['anak2']);
 		// var_dump('tunjangan jbt: '.$data['tunjangan_keluarga']);
-		var_dump($data['pegawai']);
+		// var_dump($data['pegawai']);
 		// var_dump($data['keluargas_fetch']);
 		// var_dump($data['tunjangan']);
 		// var_dump($data['jabatans']);
 		// var_dump($data['jabatan']);
 		// var_dump($data['potongan']);
-		// var_dump($data['pinjaman_kop']);
-		// var_dump($data['pinjaman_bank']);
-		// var_dump($data['angsuran_kop']);
-		// var_dump($data['angsuran_bank']);
+		var_dump($data['pinjaman_kop']);
+		var_dump($data['pinjaman_bank']);
+		var_dump($data['angsuran_kop']);
+		var_dump($data['angsuran_bank']);
 		$this->template->load('index','gaji/detail_gaji',$data);
 	}
 
