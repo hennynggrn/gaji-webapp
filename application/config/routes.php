@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$route['gaji/print/(:any)'] = 'gaji/print_gaji/$1';
-$route['gaji/detail/(:any)'] = 'gaji/detail_gaji/$1';
+$route['print/(:any)'] = 'gaji/print_gaji/$1';
+$route['detail/(:any)'] = 'gaji/detail_gaji/$1';
 $route['table'] = 'gaji/index';
 
 $route['pinjaman/pay/(:any)'] = 'pinjaman/pay_pinjaman/$1';

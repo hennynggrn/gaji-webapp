@@ -106,10 +106,10 @@
 								<td  id="potongan"><?php echo $pegawai['nama'];?></td>
 								<td id="gaji"></td>
 								<td>
-									<a href="<?php echo site_url('gaji/detail/'.$pegawai['id_pegawai']);?>" title="Detail" data-tooltip="tooltip" data-placement="top">
+									<a href="<?php echo site_url('detail/'.$pegawai['id_pegawai']);?>" title="Detail" data-tooltip="tooltip" data-placement="top">
 										<span class="badge bg-green"><i class="fa fa-fw fa-info-circle"></i></span>
 									</a>
-									<a href="<?php echo site_url('gaji/cetak/'.$pegawai['id_pegawai']);?>" title="Cetak" data-tooltip="tooltip" data-placement="top">
+									<a href="<?php echo site_url('cetak/'.$pegawai['id_pegawai']);?>" title="Cetak" data-tooltip="tooltip" data-placement="top">
 										<span class="badge bg-blue"><i class="fa fa-fw fa-print"></i></span>
 									</a>
 								</td>

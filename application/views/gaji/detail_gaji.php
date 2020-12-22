@@ -248,15 +248,19 @@
 					<?php 
 						if (($angsuran_kop != NULL) || ($angsuran_bank != NULL)) { 
 							if ($angsuran_kop == NULL) {
-								$angsuran_kop['id_angsuran'] = 0;
+								$id_angsuran = '0-'.$angsuran_bank['id_angsuran'];
 							}
 							if ($angsuran_bank == NULL) {
-								$angsuran_bank['id_angsuran'] = 0;
+								$id_angsuran = $angsuran_kop['id_angsuran'].'-0';
+							}
+
+							if (($angsuran_kop != NULL) && ($angsuran_bank != NULL)) {
+								$id_angsuran = $angsuran_kop['id_angsuran'].'-'.$angsuran_bank['id_angsuran'];
 							}
 					?>
-						<a href="<?php echo base_url('gaji/pay_print/'.$angsuran_kop['id_angsuran'].'-'.$angsuran_bank['id_angsuran'])?>" class="btn bg-orange">Bayar Pinjaman & Cetak</a></td>
+						<a href="<?php echo base_url('gaji/pay_print/'.$pegawai['id_pegawai'].'/'.$id_angsuran)?>" class="btn bg-orange">Bayar Pinjaman & Cetak</a></td>
 					<?php } ?>
-					<a href="<?php echo base_url('gaji/print/'.$pegawai['id_pegawai'])?>" class="btn bg-blue edit-btn">Cetak</a></td>
+					<a href="<?php echo base_url('print/'.$pegawai['id_pegawai'])?>" class="btn bg-blue edit-btn">Cetak</a></td>
 				</span>
 			</div>
 	</div>

@@ -104,6 +104,7 @@ class Gaji extends CI_Controller {
 			}
 			
 		} else {
+			// $data['angsuran_bank'] = $this->M_gaji->get_angsuran_payOff_byGaji($id_pegawai, $kode = 'BANK')->result_array();
 			$data['angsuran_kop'] = NULL;
 
 		}
@@ -114,30 +115,13 @@ class Gaji extends CI_Controller {
 			// ambil angsuran bank bulan ini
 			foreach ($data['angsuran_bank'] as $key => $bank) {
 				if (date('Y-m', strtotime($bank['tanggal_kembali'])) == $month_today) {
-					if ($bank['payOff_byGaji'] == 1) { // payOff_byGaji bisa berstatus sudah dibayar (TRUE)
-						$data['angsuran_bank'][$key]['repay'] = '1';
-						foreach ($data['angsuran_bank'] as $key => $bank_val) {
-							if ($bank_val['repay'] == 1) {
-								$data['angsuran_bank'] = $data['angsuran_bank'][$key];
-							}
-						}
-					} else {
-						if ($bank['status'] == 0) {
-							$data['angsuran_bank'][$key]['repay'] = '1';
-							foreach ($data['angsuran_bank'] as $key => $bank_val) {
-								if ($bank_val['repay'] == 1) {
-									$data['angsuran_bank'] = $data['angsuran_bank'][$key];
-								}
-							}
-						} else {
-							$data['angsuran_bank'] = NULL;
-						}
-					}
-				} else {
-					$data['angsuran_bank'] = NULL;
+					// if ($kop['payOff_byGaji'] == 1) {
+						$data['angsuran_bank'] = $data['angsuran_bank'][$key];
+					// }
 				}
 			}
 		} else {
+			// $data['angsuran_bank'] = $this->M_gaji->get_angsuran_payOff_byGaji($id_pegawai, $kode = 'BANK')->result_array();
 			$data['angsuran_bank'] = NULL;
 		}
 		
@@ -166,17 +150,30 @@ class Gaji extends CI_Controller {
 		$this->template->load('index','gaji/detail_gaji',$data);
 	}
 
-	public function pay_print($id_angsuran)
+	public function pay_print($id_pegawai, $id_angsuran)
 	{
 		$explode = explode('-', $id_angsuran);
-		$angsuran['id_kop'] = $explode[0];
-		$angsuran['id_bank'] = $explode[1];
+		$id_kop = $explode[0];
+		$id_bank = $explode[1];
 
+		var_dump($id_pegawai);
 		var_dump($id_kop);
 		var_dump($id_bank);
+
+		$res['repay'] = $this->M_gaji->repay($id_kop, $id_bank);
+		if ($res) {
+			redirect('detail/'.$id_pegawai);
+		} else {
+			echo "<h2> Gagal Memproses Data </h2>";
+		}
+		 
 		// $this->load->model('M_gaji');
 		// $data['tampil']= $this->M_gaji->get_gaji()->result_array();
 
 		// $this->template->load('index','gaji/print_det_gaji',$data);
+	}
+
+	public function print($id_pegawai){
+
 	}
 }
