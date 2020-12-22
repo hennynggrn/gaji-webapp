@@ -3,14 +3,6 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="box box-primary">
-				<!-- <div class="box-header with-border">
-					<h3 class="box-title"> 
-						<a href="<?php echo site_url('keluarga/add');?>" class='btn btn-primary' >
-							<i class="fa fa-plus-square-o"></i> Tambah Data 
-						</a>
-					</h3>
-				</div> -->
-				<!-- /.box-header -->
 				<div class="box-body">
 					<table class="table table-bordered table-hover responsive text-center">
 						<thead>
@@ -53,9 +45,11 @@
 									<a href="<?php echo site_url('keluarga/detail/'.$keluarga['id_pegawai']);?>" title="Detail" data-toggle="tooltip" data-placement="top">
 										<span class="badge bg-green"><i class="fa fa-fw fa-info-circle"></i></span>
 									</a>
-									<a href="" title="Edit" data-tooltip="tooltip" data-toggle="modal" data-target="#editkeluarga<?php echo $keluarga['id_anggota_klg'];?>" data-placement="top">
-										<span class="badge bg-orange"><i class="fa fa-fw fa-pencil-square-o"></i></span>
-									</a>
+									<?php if ($hide == FALSE) { ?>
+										<a href="" title="Edit" data-tooltip="tooltip" data-toggle="modal" data-target="#editkeluarga<?php echo $keluarga['id_anggota_klg'];?>" data-placement="top">
+											<span class="badge bg-orange"><i class="fa fa-fw fa-pencil-square-o"></i></span>
+										</a>
+									<?php } ?>
 								</td>
 							</tr>
 

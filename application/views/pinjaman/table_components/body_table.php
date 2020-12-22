@@ -10,18 +10,22 @@
 			}?></td>
 	<td><?php echo ($pinjaman['status_pjm'] == 1) ? '<span class="badge bg-green">Lunas</span>' : '<span class="badge bg-red">Belum Lunas</span>';?></td>
 	<td>
-	<a href="<?php echo site_url('pinjaman/pay/'.$pinjaman['id_pinjaman']);?>" title="Bayar" data-tooltip="tooltip" data-placement="top">
-			<span class="badge bg-blue"><i class="fa fa-fw fa-money"></i></span>
-		</a> 
+		<?php if ($hide == FALSE) { ?>
+			<a href="<?php echo site_url('pinjaman/pay/'.$pinjaman['id_pinjaman']);?>" title="Bayar" data-tooltip="tooltip" data-placement="top">
+				<span class="badge bg-blue"><i class="fa fa-fw fa-money"></i></span>
+			</a> 
+		<?php } ?>
 		<a href="<?php echo site_url('pinjaman/detail/'.$pinjaman['id_pinjaman']);?>" title="Detail" data-tooltip="tooltip" data-placement="top">
 			<span class="badge bg-green"><i class="fa fa-fw fa-info-circle"></i></i></span>
 		</a> 
-		<a href="<?php echo site_url('pinjaman/edit/'.$pinjaman['id_pinjaman']);?>" title="Edit" data-tooltip="tooltip" data-placement="top">
-			<span class="badge bg-orange"><i class="fa fa-fw fa-pencil-square-o"></i></span>
-		</a>
-		<a href="" data-toggle="modal" data-target="#deletePinjaman<?php echo $i++;?>" title="Hapus" data-tooltip="tooltip" data-placement="top">
-			<span class="badge bg-red"><i class="fa fa-fw fa-trash-o"></i></span>
-		</a>
+		<?php if ($hide == FALSE) { ?>
+			<a href="<?php echo site_url('pinjaman/edit/'.$pinjaman['id_pinjaman']);?>" title="Edit" data-tooltip="tooltip" data-placement="top">
+				<span class="badge bg-orange"><i class="fa fa-fw fa-pencil-square-o"></i></span>
+			</a>
+			<a href="" data-toggle="modal" data-target="#deletePinjaman<?php echo $i++;?>" title="Hapus" data-tooltip="tooltip" data-placement="top">
+				<span class="badge bg-red"><i class="fa fa-fw fa-trash-o"></i></span>
+			</a>
+		<?php } ?>
 	</td>
 </tr>
 <!-- Modal Delete Pinjaman -->

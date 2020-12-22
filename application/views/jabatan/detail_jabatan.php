@@ -3,13 +3,15 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="box box-primary">
-				<div class="box-header with-border">
-					<h3 class="box-title"> 
-						<a href="<?php echo site_url('jabatan/edit/'.$id['id_jabatan']);?>" class='btn btn-warning'>
-							<i class="fa fa-pencil-square-o"></i> Edit Jabatan 
-						</a>
-					</h3>
-				</div>
+				<?php if ($hide == FALSE) { ?>
+					<div class="box-header with-border">
+						<h3 class="box-title"> 
+							<a href="<?php echo site_url('jabatan/edit/'.$id['id_jabatan']);?>" class='btn btn-warning'>
+								<i class="fa fa-pencil-square-o"></i> Edit Jabatan 
+							</a>
+						</h3>
+					</div>
+				<?php } ?>
 				<!-- /.box-header -->
 				<div class="box-body">
 					<?php if(!empty($pegawais)) {?>
@@ -20,7 +22,9 @@
 							<th>Jenis Pegawai</th>
 							<th>Status Pegawai</th>
 							<th>Rangkap Jabatan</th>
-							<th>Menu</th>
+							<?php if ($hide == FALSE) { ?>
+								<th>Menu</th>
+							<?php } ?>
 						</thead>
 						<tbody>
 						<?php
@@ -41,14 +45,16 @@
 										break;
 								}?></td>
 								<td class="badge-edit"><span><?php echo $pegawai['result_list'];?></span></td>
-								<td>
-									<a href="" data-toggle="modal" data-target="#deleteJabatanPegawai<?php echo $pegawai['id_pegawai'];?>" title="Hapus" data-tooltip="tooltip" data-placement="right">
-										<span class="badge bg-red"><i class="fa fa-fw fa-trash-o"></i></span>
-									</a>
-								</td>
+								<?php if ($hide == FALSE) { ?>
+									<td>
+										<a href="" data-toggle="modal" data-target="#deleteJabatanPegawai<?php echo $pegawai['id_pegawai'];?>" title="Hapus" data-tooltip="tooltip" data-placement="top">
+											<span class="badge bg-red"><i class="fa fa-fw fa-trash-o"></i></span>
+										</a>
+									</td>
+								<?php } ?>
 							</tr>
 							<!-- Modal Delete Honor per Pegawai-->
-							<div class="modal fade" id="deleteJabatanPegawai<?php echo $pegawai['id_pegawai'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							<div class="modal fade modal-danger" id="deleteJabatanPegawai<?php echo $pegawai['id_pegawai'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 								<div class="modal-dialog" role="document">
 									<div class="modal-content">
 										<div class="modal-header">
@@ -57,12 +63,12 @@
 										</div>
 										<div class="modal-body">
 											<p>
-												Anda akan menghapus <b class="text-primary"><?php echo $pegawai['nama'];?></b> dari jabatan <b class="text-primary"><?php echo $pegawai['jabatan'];?></b>. Lanjutkan ?
+												Anda akan menghapus <b><?php echo $pegawai['nama'];?></b> dari jabatan <b><?php echo $pegawai['jabatan'];?></b>. Lanjutkan ?
 											</p>
 											</div>
 										<div class="modal-footer">
-											<button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-											<a href="<?php echo site_url('jabatan/delete_pegawai/'.$id['id_jabatan'].'/'.$pegawai['id_pegawai']);?>" class="btn btn-primary">Hapus</a>
+											<button type="button" class="btn btn-default edit-btn pull-left" data-dismiss="modal">Batal</button>
+											<a href="<?php echo site_url('jabatan/delete_pegawai/'.$id['id_jabatan'].'/'.$pegawai['id_pegawai']);?>" class="btn btn-outline pull-right edit-btn">Hapus</a>
 										</div>
 									</div>
 								</div>

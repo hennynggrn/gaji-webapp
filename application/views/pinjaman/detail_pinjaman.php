@@ -82,57 +82,61 @@
 								<th>Nominal</th>
 								<th>Tanggal Kembali</th>
 								<th>Status</th>
-								<th class="text-green" style="background-color: rgb(216, 253, 229);">Bayar</th>
+								<?php if ($hide == FALSE) { ?>
+									<th class="text-green" style="background-color: rgb(216, 253, 229);">Bayar</th>
+								<?php } ?>
 							</thead>
 							<tbody>
 							<?php $no = 1; foreach ($angsurans as $key => $angsuran) : ?>
 								<form role="form" method="post" action="<?php echo site_url('pinjaman/update_repay');?>">
-								<tr>
-									<td><?php echo $no++;?></td>
-									<td style="text-align: left;"><?php echo 'Rp. '.number_format($angsuran['nominal'],0,',','.');?></td>
-									<td><?php echo fullConvertIDN($angsuran['tanggal_kembali'], $short = TRUE,  $day = TRUE);?></td>
-									<td><?php echo ($angsuran['status'] == 1) ? '<span class="badge bg-green">Terbayar</span>' : '<span class="badge bg-red">Belum Dibayar</span>';?></td>
-									<td style="background-color: rgb(234, 255, 241);">
-										<a href="" class="" data-toggle="modal" data-target="#repayAngsuran<?php echo $angsuran['id_angsuran'];?>" data-tooltip="tooltip" title="<?php echo ($angsuran['status'] == 1) ? 'Batalkan Pembayaran' : 'Bayar';?>" data-placement="top">
-											<i class="fa fa-fw <?php echo ($angsuran['status'] == 1) ? 'fa-check text-green' : 'fa-money text-default';?>"></i>
-										</a>
-									</td>
-								</tr>
-								<!-- Modal Repay Angsuran-->
-								<div class="modal fade <?php echo ($angsuran['status'] == 0) ? '' : 'modal-danger'; ?>" id="repayAngsuran<?php echo $angsuran['id_angsuran'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-									<div class="modal-dialog" role="document">
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-												<h4 class="modal-title" id="myModalLabel"><?php echo ($angsuran['status'] == 0) ? 'Bayar' : 'Batalkan Pembayaran'; ?> Angsuran Pinjaman</h4>
-											</div>
-											<div class="modal-body">
-												<?php if ($angsuran['status'] == 0) { ?>
-													<p>
-														<input type="hidden" name="id_pinjaman" value="<?php echo $angsuran['id_pinjaman'];?>">
-														<input type="hidden" name="id_angsuran" value="<?php echo $angsuran['id_angsuran'];?>">
-														<input type="hidden" name="repay" value="1">
-														Anda akan membayar angsuran sebesar <b class="text-primary"><?php echo 'Rp. '.number_format($angsuran['nominal'],0,',','.');?></b> ?
-													</p>
-												<?php } else { ?>
-													<p>
-														<input type="hidden" name="id_pinjaman" value="<?php echo $angsuran['id_pinjaman'];?>">
-														<input type="hidden" name="id_angsuran" value="<?php echo $angsuran['id_angsuran'];?>">
-														<input type="hidden" name="repay" value="0">
-														<b>Peringatan! </b><br><br>
-														Anda akan membatalkan pembayaran angsuran sebesar <b class="<?php echo ($angsuran['status'] == 0) ? 'text-primary' : ''; ?>"><?php echo 'Rp. '.number_format($angsuran['nominal'],0,',','.');?></b> ?
-													</p>
-												<?php } ?>
-												
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Batal</button>
-												<button type="submit" class="btn <?php echo ($angsuran['status'] == 0) ? 'btn-primary' : 'btn-outline'; ?> pull-right edit-btn"><?php echo ($angsuran['status'] == 0) ? 'Bayar' : 'Lanjutkan'; ?></button>
+									<tr>
+										<td><?php echo $no++;?></td>
+										<td style="text-align: left;"><?php echo 'Rp. '.number_format($angsuran['nominal'],0,',','.');?></td>
+										<td><?php echo fullConvertIDN($angsuran['tanggal_kembali'], $short = TRUE,  $day = TRUE);?></td>
+										<td><?php echo ($angsuran['status'] == 1) ? '<span class="badge bg-green">Terbayar</span>' : '<span class="badge bg-red">Belum Dibayar</span>';?></td>
+										<?php if ($hide == FALSE) { ?>
+											<td style="background-color: rgb(234, 255, 241);">
+												<a href="" class="" data-toggle="modal" data-target="#repayAngsuran<?php echo $angsuran['id_angsuran'];?>" data-tooltip="tooltip" title="<?php echo ($angsuran['status'] == 1) ? 'Batalkan Pembayaran' : 'Bayar';?>" data-placement="top">
+													<i class="fa fa-fw <?php echo ($angsuran['status'] == 1) ? 'fa-check text-green' : 'fa-money text-default';?>"></i>
+												</a>
+											</td>
+										<?php } ?>
+									</tr>
+									<!-- Modal Repay Angsuran-->
+									<div class="modal fade <?php echo ($angsuran['status'] == 0) ? '' : 'modal-danger'; ?>" id="repayAngsuran<?php echo $angsuran['id_angsuran'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+													<h4 class="modal-title" id="myModalLabel"><?php echo ($angsuran['status'] == 0) ? 'Bayar' : 'Batalkan Pembayaran'; ?> Angsuran Pinjaman</h4>
+												</div>
+												<div class="modal-body">
+													<?php if ($angsuran['status'] == 0) { ?>
+														<p>
+															<input type="hidden" name="id_pinjaman" value="<?php echo $angsuran['id_pinjaman'];?>">
+															<input type="hidden" name="id_angsuran" value="<?php echo $angsuran['id_angsuran'];?>">
+															<input type="hidden" name="repay" value="1">
+															Anda akan membayar angsuran sebesar <b class="text-primary"><?php echo 'Rp. '.number_format($angsuran['nominal'],0,',','.');?></b> ?
+														</p>
+													<?php } else { ?>
+														<p>
+															<input type="hidden" name="id_pinjaman" value="<?php echo $angsuran['id_pinjaman'];?>">
+															<input type="hidden" name="id_angsuran" value="<?php echo $angsuran['id_angsuran'];?>">
+															<input type="hidden" name="repay" value="0">
+															<b>Peringatan! </b><br><br>
+															Anda akan membatalkan pembayaran angsuran sebesar <b class="<?php echo ($angsuran['status'] == 0) ? 'text-primary' : ''; ?>"><?php echo 'Rp. '.number_format($angsuran['nominal'],0,',','.');?></b> ?
+														</p>
+													<?php } ?>
+													
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Batal</button>
+													<button type="submit" class="btn <?php echo ($angsuran['status'] == 0) ? 'btn-primary' : 'btn-outline'; ?> pull-right edit-btn"><?php echo ($angsuran['status'] == 0) ? 'Bayar' : 'Lanjutkan'; ?></button>
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-								<!-- End Modal -->
+									<!-- End Modal -->
 								</form>
 							<?php endforeach; ?>										
 							</tbody>
@@ -149,7 +153,9 @@
 		</div>
 		<div class="col-md-12">
 			<a href="<?php echo site_url('pinjaman')?>" class="pull-left btn btn-default">Kembali</a>
-			<a href="<?php echo site_url('pinjaman/edit/'.$pinjaman['id_pinjaman'])?>" class="pull-right btn btn-warning edit-btn">Edit</a></td>
+			<?php if ($hide == FALSE) { ?>
+				<a href="<?php echo site_url('pinjaman/edit/'.$pinjaman['id_pinjaman'])?>" class="pull-right btn btn-warning edit-btn">Edit</a></td>
+			<?php } ?>
 		</div>
 	</div>
 </section>

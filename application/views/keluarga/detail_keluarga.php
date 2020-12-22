@@ -64,7 +64,9 @@
 		</div>
 		<div class="col-md-12">
 			<a href="<?php echo base_url('keluarga')?>" class="pull-left btn btn-default">Kembali</a>
-			<a href="<?php echo base_url('keluarga/edit/'.$pegawai['id_pegawai'])?>" class="edit-keluarga pull-right btn btn-warning edit-btn">Edit</a></td>
+			<?php if ($hide == FALSE) { ?>
+				<a href="<?php echo base_url('keluarga/edit/'.$pegawai['id_pegawai'])?>" class="edit-keluarga pull-right btn btn-warning edit-btn">Edit</a>
+			<?php } ?>
 		</div>
 	</div>
 </section>

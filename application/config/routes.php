@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+$route['laporan'] = 'laporan/index';
+
 $route['print/(:any)'] = 'gaji/print_gaji/$1';
 $route['detail/(:any)'] = 'gaji/detail_gaji/$1';
 $route['table'] = 'gaji/index';
@@ -34,7 +36,6 @@ $route['tunjangan/edit'] = 'tunjangan/edit_tunjangan';
 $route['tunjangan'] = 'tunjangan/index';
 
 $route['honor/edit/(:any)'] = 'honor/edit_pegawai/$1';
-$route['honor/delete/(:any)'] = 'honor/delete_honor/$1';
 $route['honor/detail/(:any)'] = 'honor/detail_honor/$1';
 $route['honor'] = 'honor/index';
 
@@ -43,10 +44,12 @@ $route['pegawai/edit/(:any)'] = 'pegawai/edit_pegawai/$1';
 $route['pegawai/detail/(:any)'] = 'pegawai/detail_pegawai/$1';
 $route['pegawai/add'] = 'pegawai/add_pegawai';
 $route['pegawai'] = 'pegawai/index';
-$route['login'] = 'users/index';
-$route['default_controller'] = 'home/index';
+$route['logout'] = 'user/logout';
+$route['register'] = 'user/register';
+$route['login'] = 'user/index';
+$route['default_controller'] = 'pages/index';
 
-$route['(:any)'] = 'home/index/$1';
+$route['(:any)'] = 'pages/index/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 /*

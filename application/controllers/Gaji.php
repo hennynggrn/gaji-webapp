@@ -5,16 +5,20 @@ class Gaji extends CI_Controller {
 
 	public function index($id_pegawai = NULL) 
 	{
+		if(!$this->session->userdata('logged_in')){
+            redirect('login');
+        }
 		$data['title'] = 'Tabel Gaji';
 		$data['pegawais'] = $this->M_pegawai->get_pegawai($id_pegawai)->result_array();
-		
-		
 
 		$this->template->load('index','gaji/table_gaji', $data);
 	}
 
 	public function detail_gaji($id_pegawai = TRUE)
 	{
+		if(!$this->session->userdata('logged_in')){
+            redirect('login');
+        }
 		$date_today = date('Y-m-d'); // tanggal sekarang
 		$month_today = date('Y-m'); // bulan & tahun ini
 		$data['title'] = 'Detail Gaji';
@@ -152,20 +156,30 @@ class Gaji extends CI_Controller {
 
 	public function pay_print($id_pegawai, $id_angsuran)
 	{
-		$explode = explode('-', $id_angsuran);
-		$id_kop = $explode[0];
-		$id_bank = $explode[1];
-
-		var_dump($id_pegawai);
-		var_dump($id_kop);
-		var_dump($id_bank);
-
-		$res['repay'] = $this->M_gaji->repay($id_kop, $id_bank);
-		if ($res) {
-			redirect('detail/'.$id_pegawai);
+		if(!$this->session->userdata('logged_in')){
+            redirect('login');
 		} else {
-			echo "<h2> Gagal Memproses Data </h2>";
+			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+				$explode = explode('-', $id_angsuran);
+				$id_kop = $explode[0];
+				$id_bank = $explode[1];
+
+				var_dump($id_pegawai);
+				var_dump($id_kop);
+				var_dump($id_bank);
+
+				$res['repay'] = $this->M_gaji->repay($id_kop, $id_bank);
+				if ($res) {
+					redirect('detail/'.$id_pegawai);
+				} else {
+					echo "<h2> Gagal Memproses Data </h2>";
+				}
+			} else {
+				redirect('detail/'.$id_pegawai);
+			}
 		}
+		
+		
 		 
 		// $this->load->model('M_gaji');
 		// $data['tampil']= $this->M_gaji->get_gaji()->result_array();

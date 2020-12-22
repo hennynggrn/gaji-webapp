@@ -5,31 +5,50 @@ class Potongan extends CI_Controller {
 	
 	public function index()
 	{
-		$data['title'] = 'Tabel Potongan';
-
-		$data['potongan']= $this->M_potongan->get_potongan()->row_array();
-		// $data['masakerjas']= $this->M_masakerja->get_masakerja()->result_array();
-		
-		$this->template->load('index', 'potongan/table_potongan', $data);
+		if(!$this->session->userdata('logged_in')){
+            redirect('login');
+		} else {
+			$data['title'] = 'Tabel Potongan';
+			$data['potongan']= $this->M_potongan->get_potongan()->row_array();
+			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){	
+				$data['hide'] = FALSE;
+			} else {
+				$data['hide'] = TRUE;
+			}
+			$this->template->load('index', 'potongan/table_potongan', $data);
+		}
 	}
 
 	public function edit_potongan()
 	{
-		$data['title'] = 'Edit Potongan';
-
-		$data['potongan']= $this->M_potongan->get_potongan()->row_array();
-
-		$this->template->load('index', 'potongan/edit_potongan', $data);
+		if(!$this->session->userdata('logged_in')){
+            redirect('login');
+		} else {
+			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){	
+				$data['title'] = 'Edit Potongan';
+				$data['potongan']= $this->M_potongan->get_potongan()->row_array();
+				$this->template->load('index', 'potongan/edit_potongan', $data);
+			} else {
+				redirect('potongan');
+			}
+		}
 	}
 
 	public function update_potongan()
 	{
-		$res['potongan'] = $this->M_potongan->update_potongan();
-		
-		if ($res) {
-			redirect('potongan');
+		if(!$this->session->userdata('logged_in')){
+            redirect('login');
 		} else {
-			echo "<h2> Gagal Edit Data Potongan </h2>";
+			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){	
+				$res['potongan'] = $this->M_potongan->update_potongan();
+				if ($res) {
+					redirect('potongan');
+				} else {
+					echo "<h2> Gagal Edit Data Potongan </h2>";
+				}
+			} else {
+				redirect('potongan');
+			}
 		}
 	}	
 }

@@ -5,16 +5,17 @@ class Laporan extends CI_Controller {
 
 	public function index()
 	{
-		$this->template->load('index');
+		$data['title'] = 'Tabel Laporan';
+		$this->template->load('index','laporan/table_laporan', $data);
 	}
 
-	public function form_laporan()
+	public function detail_laporan()
 	{
-		$this->template->load('index','laporan/form_laporan');
+		
 	}
 	
-	public function cetak_gaji()
+	public function print_laporan()
 	{
-		$this->template->load('index','laporan/cetak_gaji');
+
 	}
 }

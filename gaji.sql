@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2020 at 10:33 AM
+-- Generation Time: Dec 22, 2020 at 11:50 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -33,6 +33,8 @@ CREATE TABLE `angsuran` (
   `tanggal_kembali` date DEFAULT NULL,
   `nominal` int(11) DEFAULT NULL,
   `status` int(1) NOT NULL,
+  `payOff_byGaji` int(1) DEFAULT NULL,
+  `id_gaji` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `created_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -41,17 +43,20 @@ CREATE TABLE `angsuran` (
 -- Dumping data for table `angsuran`
 --
 
-INSERT INTO `angsuran` (`id_angsuran`, `id_pinjaman`, `tanggal_kembali`, `nominal`, `status`, `created_at`, `created_by`) VALUES
-(4, 2, '2020-12-24', 100000, 0, '2020-12-02 04:33:47', NULL),
-(5, 3, '2020-12-17', 1000000, 1, '2020-12-02 04:35:44', NULL),
-(6, 3, '2020-12-29', 500000, 1, '2020-12-02 04:35:45', NULL),
-(7, 4, '2020-12-03', 1500000, 0, '2020-12-02 04:37:13', NULL),
-(8, 4, '2020-12-25', 1500000, 0, '2020-12-02 04:37:13', NULL),
-(30, 1, '2020-12-30', 4000000, 0, '2020-12-03 07:44:23', NULL),
-(31, 1, '2020-12-24', 3000000, 1, '2020-12-03 07:45:04', NULL),
-(34, 1, '2020-12-31', 5000000, 0, '2020-12-03 07:58:54', NULL),
-(37, 7, '2020-12-17', 20000, 0, '2020-12-03 08:03:26', NULL),
-(39, 7, '2020-12-31', 60000, 0, '2020-12-03 08:04:28', NULL);
+INSERT INTO `angsuran` (`id_angsuran`, `id_pinjaman`, `tanggal_kembali`, `nominal`, `status`, `payOff_byGaji`, `id_gaji`, `created_at`, `created_by`) VALUES
+(4, 2, '2020-12-24', 100000, 1, 1, NULL, '2020-12-02 04:33:47', NULL),
+(5, 3, '2020-11-10', 1000000, 1, 1, NULL, '2020-12-02 04:35:44', NULL),
+(6, 3, '2020-12-29', 500000, 0, 0, NULL, '2020-12-02 04:35:45', NULL),
+(7, 4, '2020-11-03', 1500000, 1, 0, NULL, '2020-12-02 04:37:13', NULL),
+(8, 4, '2020-12-25', 1500000, 0, 0, NULL, '2020-12-02 04:37:13', NULL),
+(30, 1, '2020-11-16', 4000000, 1, 0, NULL, '2020-12-03 07:44:23', NULL),
+(31, 1, '2021-01-01', 3000000, 0, 0, NULL, '2020-12-03 07:45:04', NULL),
+(37, 7, '2020-12-17', 20000, 1, 0, NULL, '2020-12-03 08:03:26', NULL),
+(39, 7, '2020-12-31', 60000, 1, 0, NULL, '2020-12-03 08:04:28', NULL),
+(40, 3, '2021-01-01', 899995, 0, 0, NULL, '2020-12-13 23:08:31', NULL),
+(41, 1, '2020-12-09', 800000, 0, 0, NULL, '2020-12-14 00:41:59', NULL),
+(42, 8, '2020-11-09', 166666, 1, 0, NULL, '2020-12-14 01:09:38', NULL),
+(43, 8, '2020-12-22', 90000, 1, 1, NULL, '2020-12-14 01:09:38', NULL);
 
 -- --------------------------------------------------------
 
@@ -158,13 +163,14 @@ INSERT INTO `jbt_pegawai` (`id_jbt_pegawai`, `id_jabatan`, `id_pegawai`, `create
 (45, 2, 5, '2020-12-01 23:58:26', NULL),
 (46, 5, 5, '2020-12-01 23:58:26', NULL),
 (47, 2, 6, '2020-12-01 23:58:26', NULL),
-(52, 3, 7, '2020-12-01 23:58:26', NULL),
 (53, 11, 7, '2020-12-01 23:58:26', NULL),
 (55, 3, 8, '2020-12-01 23:58:26', NULL),
 (56, 7, 8, '2020-12-01 23:58:26', NULL),
 (64, 2, 9, '2020-12-08 08:37:52', NULL),
 (65, 3, 9, '2020-12-08 08:37:52', NULL),
-(66, 12, 9, '2020-12-08 08:37:52', NULL);
+(66, 12, 9, '2020-12-08 08:37:52', NULL),
+(67, 8, 7, '2020-12-18 23:13:52', NULL),
+(70, 13, 7, '2020-12-18 23:13:52', NULL);
 
 -- --------------------------------------------------------
 
@@ -189,14 +195,16 @@ CREATE TABLE `keluarga` (
 
 INSERT INTO `keluarga` (`id_anggota_klg`, `nama`, `id_status`, `s_hidup`, `gender`, `id_pegawai`, `created_at`, `created_by`) VALUES
 (74, 'Bumi', 1, '1', 'L', 6, '2020-12-01 23:57:22', NULL),
-(75, 'Nirwana', 2, '0', 'L', 6, '2020-12-01 23:57:22', NULL),
-(76, 'Waff', 1, '1', 'L', 7, '2020-12-01 23:57:22', NULL),
-(77, 'Martin', 2, '1', 'L', 7, '2020-12-01 23:57:22', NULL),
-(79, 'Aznas', 3, '0', 'P', 7, '2020-12-01 23:57:22', NULL),
+(75, 'Nirwana M', 2, '1', 'L', 6, '2020-12-01 23:57:22', NULL),
+(76, 'Waff', 1, '0', 'L', 7, '2020-12-01 23:57:22', NULL),
+(77, 'wawan', 2, '1', 'L', 7, '2020-12-01 23:57:22', NULL),
 (80, 'Santi', 1, '0', 'P', 5, '2020-12-01 23:57:22', NULL),
-(81, 'Aprilo', 2, '0', 'L', 5, '2020-12-01 23:57:22', NULL),
 (82, 'Santi', 1, '1', 'P', 8, '2020-12-01 23:57:22', NULL),
-(83, 'Mumut', 2, '1', 'L', 8, '2020-12-01 23:57:22', NULL);
+(83, 'Mumut', 2, '1', 'L', 8, '2020-12-01 23:57:22', NULL),
+(87, 'Aasas', 1, '1', 'P', 9, '2020-12-19 16:56:18', NULL),
+(88, 'Namm', 2, '1', 'P', 9, '2020-12-19 16:56:18', NULL),
+(89, 'sas', 3, '1', 'P', 9, '2020-12-19 16:56:18', NULL),
+(90, 'yun', 2, '1', 'P', 5, '2020-12-19 19:14:17', NULL);
 
 -- --------------------------------------------------------
 
@@ -207,7 +215,7 @@ INSERT INTO `keluarga` (`id_anggota_klg`, `nama`, `id_status`, `s_hidup`, `gende
 CREATE TABLE `masakerja` (
   `id_masakerja` int(11) NOT NULL,
   `tahun` int(11) NOT NULL,
-  `jml_mk` int(50) NOT NULL,
+  `nominal_mk` int(50) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `created_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -216,7 +224,7 @@ CREATE TABLE `masakerja` (
 -- Dumping data for table `masakerja`
 --
 
-INSERT INTO `masakerja` (`id_masakerja`, `tahun`, `jml_mk`, `created_at`, `created_by`) VALUES
+INSERT INTO `masakerja` (`id_masakerja`, `tahun`, `nominal_mk`, `created_at`, `created_by`) VALUES
 (0, 0, 0, '2020-12-08 08:05:22', NULL),
 (1, 1, 2000, '2020-12-01 23:56:07', NULL),
 (2, 2, 4000, '2020-12-01 23:56:07', NULL),
@@ -269,33 +277,36 @@ CREATE TABLE `pegawai` (
   `id_pegawai` int(11) NOT NULL,
   `nbm` varchar(100) DEFAULT NULL,
   `nama` varchar(100) NOT NULL,
+  `foto` varchar(300) DEFAULT NULL,
   `tempat_lahir` varchar(100) NOT NULL,
   `tgl_lahir` date NOT NULL,
   `telepon` int(20) NOT NULL,
-  `jns_pegawai` enum('0','1') NOT NULL,
+  `jns_pegawai` enum('G','K') NOT NULL,
   `gender` enum('P','L') NOT NULL,
   `email` varchar(100) NOT NULL,
   `status_pegawai` enum('P','T0','T1') DEFAULT NULL,
   `status` int(1) NOT NULL,
   `agama` enum('Islam','Protestan','Katolik','Hindu','Buddha','Khonghucu') NOT NULL,
   `umur` varchar(20) NOT NULL,
-  `honor` int(11) DEFAULT NULL,
+  `honor` varchar(11) DEFAULT NULL,
   `masa_kerja` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `created_by` int(11) DEFAULT NULL
+  `created_at` date DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_by` int(11) DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pegawai`
 --
 
-INSERT INTO `pegawai` (`id_pegawai`, `nbm`, `nama`, `tempat_lahir`, `tgl_lahir`, `telepon`, `jns_pegawai`, `gender`, `email`, `status_pegawai`, `status`, `agama`, `umur`, `honor`, `masa_kerja`, `created_at`, `created_by`) VALUES
-(2, '124', 'Rifky', 'Baubau', '1998-02-12', 1897656, '0', 'P', 'rifky@gmail.com', 'T0', 0, 'Hindu', '21', 0, 2, '2020-12-01 23:55:10', NULL),
-(5, '123', 'Budi', 'Taman', '1889-03-12', 2121212, '0', 'L', 'budi@gmail.com', 'T1', 1, 'Islam', '31', 56000000, 4, '2020-12-01 23:55:10', NULL),
-(6, '212', 'Dizzy', 'Taman', '1111-11-12', 1212, '0', 'P', 'qsqs@czsd', 'T0', 1, 'Islam', '21', 0, 3, '2020-12-01 23:55:10', NULL),
-(7, '1212', 'Henuiii', 'Taman', '1111-11-11', 90787, '0', 'P', 'wodi@gmail.com', 'T1', 1, 'Islam', '48', 90000, 0, '2020-12-01 23:55:10', NULL),
-(8, '121', 'Widi', 'dasas', '2222-02-22', 545346, '0', 'L', 'wodi@gmail.com', 'T1', 1, 'Islam', '56', 360000, 0, '2020-12-01 23:55:10', NULL),
-(9, '12121', 'Niu', 'Taman', '2020-12-15', 21212, '1', 'L', 'budi@gmail.com', 'T1', 0, 'Islam', '45', 1200000, 40, '2020-12-08 08:37:52', NULL);
+INSERT INTO `pegawai` (`id_pegawai`, `nbm`, `nama`, `foto`, `tempat_lahir`, `tgl_lahir`, `telepon`, `jns_pegawai`, `gender`, `email`, `status_pegawai`, `status`, `agama`, `umur`, `honor`, `masa_kerja`, `created_at`, `updated_at`, `created_by`, `updated_by`) VALUES
+(2, '124', 'Rifky', NULL, 'Baubau', '1998-02-12', 1897656, 'G', 'P', 'rifky@gmail.com', 'P', 0, 'Hindu', '21', NULL, 2, NULL, '2020-12-01 23:55:10', NULL, NULL),
+(5, '123', 'Budi', NULL, 'Taman', '1889-03-12', 2121212, '', 'L', 'budi@gmail.com', 'T1', 1, 'Islam', '31', '100000', 9, NULL, '2020-12-01 23:55:10', NULL, NULL),
+(6, '212', 'Dizzy', NULL, 'Taman', '1111-11-12', 1212, 'G', 'P', 'qsqs@czsd', 'T0', 1, 'Islam', '21', NULL, 3, NULL, '2020-12-01 23:55:10', NULL, NULL),
+(7, '1212', 'Henuiii', NULL, 'Taman', '1111-11-11', 90787, '', 'P', 'wodi@gmail.com', 'T1', 1, 'Islam', '48', '200000', 0, NULL, '2020-12-01 23:55:10', NULL, NULL),
+(8, '121', 'Wawan', NULL, 'dasas', '2222-02-22', 545346, 'K', 'L', 'wodi@gmail.com', 'T0', 1, 'Islam', '56', NULL, 0, NULL, '2020-12-01 23:55:10', NULL, NULL),
+(9, '12121', 'Niu', NULL, 'Taman', '2020-12-15', 21212, '', 'L', 'budi@gmail.com', 'T1', 1, 'Islam', '45', '0', 40, NULL, '2020-12-08 08:37:52', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -307,6 +318,7 @@ CREATE TABLE `pinjaman` (
   `id_pinjaman` int(11) NOT NULL,
   `kode_pinjaman` enum('KOP','BANK') DEFAULT NULL,
   `total_pinjaman` int(11) DEFAULT NULL,
+  `status` tinyint(1) NOT NULL,
   `start_date` date DEFAULT NULL,
   `ket_pinjaman` varchar(300) DEFAULT NULL,
   `id_pegawai` int(11) NOT NULL,
@@ -318,12 +330,13 @@ CREATE TABLE `pinjaman` (
 -- Dumping data for table `pinjaman`
 --
 
-INSERT INTO `pinjaman` (`id_pinjaman`, `kode_pinjaman`, `total_pinjaman`, `start_date`, `ket_pinjaman`, `id_pegawai`, `created_at`, `created_by`) VALUES
-(1, 'KOP', 1000000, '2020-12-03', 'last edit', 2, '2020-12-02 04:33:02', NULL),
-(2, 'BANK', 300000, '2020-10-13', '', 5, '2020-12-02 04:33:47', NULL),
-(3, 'KOP', 1500000, '2020-12-02', '', 6, '2020-12-02 04:35:44', NULL),
-(4, 'BANK', 5000000, '2020-12-10', 'edit here', 8, '2020-12-02 04:37:13', NULL),
-(7, 'KOP', 70000, '2020-11-05', '', 5, '2020-12-03 08:03:26', NULL);
+INSERT INTO `pinjaman` (`id_pinjaman`, `kode_pinjaman`, `total_pinjaman`, `status`, `start_date`, `ket_pinjaman`, `id_pegawai`, `created_at`, `created_by`) VALUES
+(1, 'KOP', 1000000, 0, '2020-12-03', '<p>\r\n\r\n</p><ul><li>angsuran kedua dibayar telat</li></ul><p></p>', 2, '2020-12-02 04:33:02', NULL),
+(2, 'BANK', 300000, 0, '2020-10-13', '', 5, '2020-12-02 04:33:47', NULL),
+(3, 'KOP', 1500000, 0, '2020-12-02', '', 6, '2020-12-02 04:35:44', NULL),
+(4, 'BANK', 5000000, 0, '2020-12-10', 'edit here', 8, '2020-12-02 04:37:13', NULL),
+(7, 'KOP', 70000, 1, '2020-11-05', '', 5, '2020-12-03 08:03:26', NULL),
+(8, 'KOP', 50000, 1, '2020-12-14', '', 5, '2020-12-14 01:09:38', NULL);
 
 -- --------------------------------------------------------
 
@@ -338,6 +351,7 @@ CREATE TABLE `potongan` (
   `jsr` int(11) NOT NULL,
   `aisiyah` int(11) DEFAULT NULL,
   `jamsostek` int(11) DEFAULT NULL,
+  `ket` varchar(300) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `created_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -346,8 +360,8 @@ CREATE TABLE `potongan` (
 -- Dumping data for table `potongan`
 --
 
-INSERT INTO `potongan` (`id_potongan`, `sosial`, `infaq`, `jsr`, `aisiyah`, `jamsostek`, `created_at`, `created_by`) VALUES
-('1', 5000, 5000, 10000, 11000, 66500, '2020-12-01 23:51:52', NULL);
+INSERT INTO `potongan` (`id_potongan`, `sosial`, `infaq`, `jsr`, `aisiyah`, `jamsostek`, `ket`, `created_at`, `created_by`) VALUES
+('1', 10000, 5000, 10000, 11000, 66500, '<p></p><ul><li>Bu Santi sakit (dana sosial jadi 10 rb)</li></ul><p></p>', '2020-12-01 23:51:52', NULL);
 
 -- --------------------------------------------------------
 
@@ -372,6 +386,57 @@ CREATE TABLE `tunjangan` (
 
 INSERT INTO `tunjangan` (`id_tunjangan`, `beras`, `jamsostek`, `klg_psg`, `klg_anak`, `jabatan`, `created_at`, `created_by`) VALUES
 ('1', 80000, 400000, 0.05, 0.025, 25000, '2020-12-01 23:51:20', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(16) UNSIGNED NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `fullname` varchar(150) NOT NULL,
+  `address` text DEFAULT NULL,
+  `id_pegawai` int(11) DEFAULT NULL,
+  `phone` varchar(16) DEFAULT NULL,
+  `online_status` tinyint(1) NOT NULL,
+  `last_online` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `modified_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `level_id` int(16) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `fullname`, `address`, `id_pegawai`, `phone`, `online_status`, `last_online`, `created_at`, `modified_at`, `level_id`) VALUES
+(9, 'sady', 'sady@gmail.com', 'd111144832a1b8a9f5639512c9c6746d', 'Sady', NULL, NULL, '12345', 1, '2020-12-22 22:25:18', '2020-12-22 18:55:53', '2020-12-22 22:25:18', 4),
+(10, 'weird_dev', 'weird@gmail.com', 'df6896d40c28d507fab5a8f3d8f4118b', 'Weird Developer', NULL, NULL, '000111222', 0, '2020-12-22 21:22:09', '2020-12-22 21:21:24', '2020-12-22 21:22:09', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_level`
+--
+
+CREATE TABLE `user_level` (
+  `id` int(16) UNSIGNED NOT NULL,
+  `level` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_level`
+--
+
+INSERT INTO `user_level` (`id`, `level`) VALUES
+(1, 'Administrator'),
+(2, 'Bendahara'),
+(3, 'Kepala Sekolah'),
+(4, 'Operator');
 
 --
 -- Indexes for dumped tables
@@ -451,6 +516,24 @@ ALTER TABLE `tunjangan`
   ADD PRIMARY KEY (`id_tunjangan`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `username` (`username`),
+  ADD UNIQUE KEY `password` (`password`),
+  ADD KEY `fk_position_user` (`id_pegawai`),
+  ADD KEY `fk_level` (`level_id`);
+
+--
+-- Indexes for table `user_level`
+--
+ALTER TABLE `user_level`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -458,7 +541,7 @@ ALTER TABLE `tunjangan`
 -- AUTO_INCREMENT for table `angsuran`
 --
 ALTER TABLE `angsuran`
-  MODIFY `id_angsuran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id_angsuran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `gaji`
@@ -476,19 +559,25 @@ ALTER TABLE `jabatan`
 -- AUTO_INCREMENT for table `jbt_pegawai`
 --
 ALTER TABLE `jbt_pegawai`
-  MODIFY `id_jbt_pegawai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id_jbt_pegawai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `keluarga`
 --
 ALTER TABLE `keluarga`
-  MODIFY `id_anggota_klg` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `id_anggota_klg` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT for table `pinjaman`
 --
 ALTER TABLE `pinjaman`
-  MODIFY `id_pinjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_pinjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(16) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables

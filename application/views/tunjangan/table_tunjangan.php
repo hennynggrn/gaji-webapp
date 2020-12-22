@@ -110,9 +110,11 @@
 					</div>
 				</div>
 				<!-- /.box-body -->
-				<div class="box-footer">
-					<a href="<?php echo site_url('tunjangan/edit')?>" class="pull-right btn btn-warning edit-btn btn-block">Edit</a>
-				</div>
+				<?php if ($hide == FALSE) { ?>
+					<div class="box-footer">
+						<a href="<?php echo site_url('tunjangan/edit')?>" class="pull-right btn btn-warning edit-btn btn-block">Edit</a>
+					</div>
+				<?php } ?>
 			</div>
 		</div>
 		<div class="col-md-1"></div>

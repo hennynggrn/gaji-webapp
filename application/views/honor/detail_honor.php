@@ -3,15 +3,17 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="box box-primary">
-				<?php if ($honor_val != 'null') { ?>
-					<div class="box-header with-border">
-					<h3 class="box-title"> 
-						<a href="" data-toggle="modal" data-target="#editHonor<?php echo $honor_val;?>" class='btn btn-warning'>
-							<i class="fa fa-pencil-square-o"></i> Edit Honorium 
-						</a>
-					</h3>
-				</div>
-				<?php } ?>
+				<?php 
+				if ($hide == FALSE) {
+					if ($honor_val != 'null') { ?>
+						<div class="box-header with-border">
+						<h3 class="box-title"> 
+							<a href="" data-toggle="modal" data-target="#editHonor<?php echo $honor_val;?>" class='btn btn-warning'>
+								<i class="fa fa-pencil-square-o"></i> Edit Honorium 
+							</a>
+						</h3>
+					</div>
+				<?php } } ?>
 				<!-- /.box-header -->
 				<div class="box-body">
 					<table class="table table-bordered table-hover responsive text-center">
@@ -21,7 +23,7 @@
 							<th>Jenis Pegawai</th>
 							<th>Status Pegawai</th>
 							<th>Jabatan</th>
-							<th>Menu</th>
+							<?php echo ($hide == FALSE) ? '<th>Menu</th>': '';?>
 						</thead>
 						<tbody>
 						<?php
@@ -42,16 +44,18 @@
 										break;
 								}?></td>
 								<td class="badge-edit"><span><?php echo $honor['result_list'];?></span></td>
-								<td>
-									<a href="" data-toggle="modal" data-target="#editHonorPegawai<?php echo $honor['id_pegawai'];?>" title="Edit" data-tooltip="tooltip" data-placement="top">
-										<span class="badge bg-orange"><i class="fa fa-fw fa-pencil-square-o"></i></span>
-									</a>
-									<?php if($honor['honor'] != 0) { ?>
-										<a href="" data-toggle="modal" data-target="#deleteHonorPegawai<?php echo $honor['id_pegawai'];?>" title="Hapus" data-tooltip="tooltip" data-placement="top">
-											<span class="badge bg-red"><i class="fa fa-fw fa-trash-o"></i></span>
+								<?php if ($hide == FALSE) { ?>
+									<td>
+										<a href="" data-toggle="modal" data-target="#editHonorPegawai<?php echo $honor['id_pegawai'];?>" title="Edit" data-tooltip="tooltip" data-placement="top">
+											<span class="badge bg-orange"><i class="fa fa-fw fa-pencil-square-o"></i></span>
 										</a>
-									<?php } ?>
-								</td>
+										<?php if($honor['honor'] != 0) { ?>
+											<a href="" data-toggle="modal" data-target="#deleteHonorPegawai<?php echo $honor['id_pegawai'];?>" title="Hapus" data-tooltip="tooltip" data-placement="top">
+												<span class="badge bg-red"><i class="fa fa-fw fa-trash-o"></i></span>
+											</a>
+										<?php } ?>
+									</td>
+								<?php } ?>
 							</tr>
 							<?php if ($honor['honor'] != NULL) : ?>
 								<!-- Modal Edit Honor per Pegawai-->
@@ -67,6 +71,7 @@
 													<div class="input-group">
 														<span class="input-group-addon">Rp.</span>
 														<input type="hidden" class="form-control" name="id_pegawai" value="<?php echo $honor['id_pegawai'];?>">
+														<input type="hidden" class="form-control" name="id_honor" placeholder="0" value="<?php echo $honor['honor'];?>">
 														<input type="number" class="form-control" name="honor" placeholder="0" value="<?php echo $honor['honor'];?>">
 														<span class="input-group-addon">.00</span>
 													</div><br>
@@ -131,7 +136,7 @@
 											</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Batal</button>
-											<a href="<?php echo site_url('honor/delete/'.$honor['id_pegawai']);?>" class="btn btn-outline pull-right edit-btn">Hapus</a>
+											<a href="<?php echo site_url('honor/delete_honor/'.$honor['id_pegawai'].'/'.$honor['honor']);?>" class="btn btn-outline pull-right edit-btn">Hapus</a>
 										</div>
 									</div>
 								</div>
@@ -153,7 +158,7 @@
 								<div class="modal-body">
 									<div class="input-group">
 										<span class="input-group-addon">Rp.</span>
-										<input type="hidden" class="form-control" name="detail_honor" value="<?php echo 1;?>">
+										<input type="hidden" class="form-control" name="detail_honor" value="1">
 										<input type="hidden" class="form-control" name="id_honor" value="<?php echo $honor_val;?>">
 										<input type="number" class="form-control" name="honor" placeholder="0" value="<?php echo $honor_val;?>">
 										<span class="input-group-addon">.00</span>

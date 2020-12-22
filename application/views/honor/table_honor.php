@@ -39,11 +39,13 @@
 									<a href="<?php echo site_url('honor/detail/'.$id_honor);?>" title="Detail" data-toggle="tooltip" data-placement="top">
 										<span class="badge bg-green"><i class="fa fa-fw fa-info-circle"></i></span>
 									</a>
-									<?php if ($id_honor != 'null') { ?>
-										<a href="" title="Edit" data-tooltip="tooltip" data-toggle="modal" data-target="#editHonor<?php echo $id_honor;?>" data-placement="top">
-											<span class="badge bg-orange"><i class="fa fa-fw fa-pencil-square-o"></i></span>
-										</a>
-									<?php } ?>
+									<?php 
+									if ($hide == FALSE) {
+										if ($id_honor != 'null') { ?>
+											<a href="" title="Edit" data-tooltip="tooltip" data-toggle="modal" data-target="#editHonor<?php echo $id_honor;?>" data-placement="top">
+												<span class="badge bg-orange"><i class="fa fa-fw fa-pencil-square-o"></i></span>
+											</a>
+									<?php } } ?>
 								</td>
 							</tr>
 							<!-- Modal Edit Honor-->

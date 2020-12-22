@@ -197,7 +197,9 @@
 		<?php endif;?>
 		<div class="col-md-12">
 			<a href="<?php echo site_url('pegawai')?>" class="pull-left btn btn-default">Kembali</a>
-			<a href="<?php echo site_url('pegawai/edit/'.$id)?>" class="pull-right btn btn-warning edit-btn">Edit</a></td>
+			<?php if ($hide == FALSE) { ?>
+				<a href="<?php echo site_url('pegawai/edit/'.$id)?>" class="pull-right btn btn-warning edit-btn">Edit</a></td>
+			<?php } ?>
 		</div>
 	</div>
 </section>

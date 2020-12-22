@@ -17,7 +17,9 @@
 							<th>Nama pegawai</th>
 							<th>Masa Kerja (Tahun)</th>
 							<th>Jumlah Tunjangan</th>
-							<th>Menu</th>
+							<?php if ($hide == FALSE) { ?>
+								<th>Menu</th>
+							<?php } ?>
 						</thead>
 						<tbody>
 							<?php
@@ -28,10 +30,13 @@
 								<td style="text-align: left; padding-left: 10px;"><?php echo $pegawai['nama']; ?></td>
 								<td><?php echo ($pegawai['masa_kerja'] != 0) ? $pegawai['tahun'] : '<small>(belum genap 1 tahun)</small>';?></td>
 								<td style="text-align: left; padding-left: 100px;"><?php echo ($pegawai['masa_kerja'] != 0) ? 'Rp. &nbsp;&nbsp;'.number_format($pegawai['nominal_mk'],0,',','.') : 'Rp. &nbsp;&nbsp;0';?></td>
-								<td>
-									<a href="" data-toggle="modal" data-target="#editPegawai<?php echo $pegawai['id_pegawai'];?>" title="Edit" data-tooltip="tooltip" data-placement="top">
-										<span class="badge bg-orange"><i class="fa fa-fw fa-pencil-square-o"></i></span>
-									</a>
+								<?php if ($hide == FALSE) { ?>
+									<td>
+										<a href="" data-toggle="modal" data-target="#editPegawai<?php echo $pegawai['id_pegawai'];?>" title="Edit" data-tooltip="tooltip" data-placement="top">
+											<span class="badge bg-orange"><i class="fa fa-fw fa-pencil-square-o"></i></span>
+										</a>
+									</td>
+								<?php } ?>
 							</tr>
 							<!-- Modal Delete Honor per Pegawai-->
 							<div class="modal fade" id="editPegawai<?php echo $pegawai['id_pegawai'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

@@ -30,9 +30,9 @@
 	<div class="wrapper">
 		<header class="main-header">
 			<!-- Logo -->
-			<a href="<?php echo base_url('assets/index2.html');?>" class="logo">
+			<a href="<?php echo base_url();?>" class="logo" style="display: flex; justify-content: center; align-items: center;">
 				<!-- mini logo for sidebar mini 50x50 pixels -->
-				<span class="logo-mini"><b>A</b>LT</span>
+				<img class="logo-mini user-image img-circle" src="<?php echo base_url('assets/dist/img/smpmuh9.jpeg');?>" width="36px" height="36px" alt="Logo SMP Muhammadiyah 9">
 				<!-- logo for regular state and mobile devices -->
 				<span class="logo-lg"><b>SIP</b>GuKar</span>
 			</a>
@@ -50,15 +50,21 @@
 						<!-- User Account: style can be found in dropdown.less -->
 						<li class="dropdown user user-menu">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								<img class="user-image" src="<?php echo base_url('assets/dist/img/smpmuh9.jpeg');?>" alt="User Image">
-								<span class="hidden-xs">Alexander Pierce</span>
+								<img class="user-image" src="<?php echo base_url('assets/dist/img/upload/user1-128x128.jpg'); ?>" 
+									 alt="<?php if($this->session->userdata('logged_in')){echo $this->session->userdata('fullname');} ?>">
+								<?php if($this->session->userdata('logged_in')){
+									echo '<span class="hidden-xs">'.$this->session->userdata('fullname').'</span>';
+								} ?>
 							</a>
 							<ul class="dropdown-menu">
 								<!-- User image -->
 								<li class="user-header">
-									<img src="<?php echo base_url('assets/dist/img/smpmuh9.jpeg');?>" class="img-circle" alt="User Image">
+									<img src="<?php echo base_url('assets/dist/img/upload/user1-128x128.jpg'); ?>" class="img-circle" alt="User Image">
 									<p>
-										<small>SMP Muhammadiyah 9</small>
+										<?php if($this->session->userdata('logged_in')){
+											echo '<p>'.$this->session->userdata('fullname');
+											echo '<small>'.$this->session->userdata('user_level').'</small></p>';
+										} ?>
 									</p>
 								</li>
 								<!-- Menu Footer-->
@@ -67,7 +73,7 @@
 										<a href="#" class="btn btn-default btn-flat">Profile</a>
 									</div>
 									<div class="pull-right">
-										<a href="#" class="btn btn-default btn-flat">Sign out</a>
+										<a href="<?php echo site_url('logout');?>" class="btn btn-default btn-flat">Log out</a>
 									</div>
 								</li>
 							</ul>
@@ -102,15 +108,17 @@
 				<!-- Sidebar user panel -->
 				<div class="user-panel">
 					<div class="pull-left image">
-						<img class="img-circle" src="<?php echo base_url('assets/dist/img/smpmuh9.jpeg');?>" alt="User Image">
+						<img class="img-circle" src="<?php echo base_url('assets/dist/img/upload/user1-128x128.jpg'); ?>" alt="User Image">
 					</div>
 					<div class="pull-left info">
-						<p>SMP Muhammadiyah 9</p>
+						<?php if($this->session->userdata('logged_in')){
+							echo '<p>'.$this->session->userdata('fullname').'</p>';
+						} ?>
 						<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 					</div>
 				</div>
 				<!-- search form -->
-				<form action="#" method="get" class="sidebar-form">
+				<!-- <form action="#" method="get" class="sidebar-form">
 					<div class="input-group">
 						<input type="text" name="q" class="form-control" placeholder="Search...">
 						<span class="input-group-btn">
@@ -118,13 +126,13 @@
 							</button>
 						</span>
 					</div>
-				</form>
+				</form> -->
 				<!-- /.search form -->
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu">
 					<li class="header">MAIN NAVIGATION</li>
 					<li class="">
-						<a href="<?php echo site_url('home'); ?>">
+						<a href="<?php echo base_url(); ?>">
 							<i class="fa fa-folder"></i>
 							<span>Home</span>
 						</a>
@@ -155,17 +163,19 @@
 						</ul>
 					</li>
 					<li>
-						<a href="<?php echo site_url('laporan/form_laporan'); ?>">
+						<a href="<?php echo site_url('laporan'); ?>">
 							<i class="fa fa-book"></i>
 							<span>Laporan</span>
 						</a>
 					</li>
-					<li>
-						<a href="<?php echo site_url('pengguna/table_pengguna'); ?>">
-							<i class="fa fa-book"></i>
-							<span>Daftar Pengguna</span>
-						</a>
-					</li>
+					<?php if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){?>
+						<li>
+							<a href="<?php echo site_url('pengguna'); ?>">
+								<i class="fa fa-book"></i>
+								<span>Daftar Pengguna</span>
+							</a>
+						</li>
+					<?php } ?>
 				</ul>
 			</section>
 			<!-- /.sidebar -->

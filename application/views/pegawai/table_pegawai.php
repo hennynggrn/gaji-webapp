@@ -3,14 +3,15 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="box box-primary">
-				<div class="box-header with-border">
-					<h3 class="box-title"> 
-						<a href="<?php echo site_url('pegawai/add');?>" class='btn btn-primary' >
-							<i class="fa fa-plus-square-o"></i> Tambah Data 
-						</a>
-					</h3>
-				</div>
-				<!-- /.box-header -->
+				<?php if ($hide == FALSE) { ?>
+					<div class="box-header with-border">
+						<h3 class="box-title"> 
+							<a href="<?php echo site_url('pegawai/add');?>" class='btn btn-primary' >
+								<i class="fa fa-plus-square-o"></i> Tambah Data 
+							</a>
+						</h3>
+					</div>
+				<?php } ?>
 				<div class="box-body">
 					<table class="table table-bordered table-hover responsive text-center">
 						<thead>
@@ -56,12 +57,14 @@
 									<a href="<?php echo site_url('pegawai/detail/'.$pegawai['id_pegawai']);?>" title="Detail" data-tooltip="tooltip" data-placement="top">
 										<span class="badge bg-green"><i class="fa fa-fw fa-info-circle"></i></span>
 									</a>
-									<a href="<?php echo site_url('pegawai/edit/'.$pegawai['id_pegawai']);?>" title="Edit" data-tooltip="tooltip" data-placement="top">
-										<span class="badge bg-orange"><i class="fa fa-fw fa-pencil-square-o"></i></span>
-									</a>
-									<a href="" data-toggle="modal" data-target="#deletePegawai<?php echo $pegawai['id_pegawai'];?>" title="Hapus" data-tooltip="tooltip" data-placement="top">
-										<span class="badge bg-red"><i class="fa fa-fw fa-trash-o"></i></span>
-									</a>
+									<?php if ($hide == FALSE) { ?>
+										<a href="<?php echo site_url('pegawai/edit/'.$pegawai['id_pegawai']);?>" title="Edit" data-tooltip="tooltip" data-placement="top">
+											<span class="badge bg-orange"><i class="fa fa-fw fa-pencil-square-o"></i></span>
+										</a>
+										<a href="" data-toggle="modal" data-target="#deletePegawai<?php echo $pegawai['id_pegawai'];?>" title="Hapus" data-tooltip="tooltip" data-placement="top">
+											<span class="badge bg-red"><i class="fa fa-fw fa-trash-o"></i></span>
+										</a>
+									<?php } ?>
 								</td>
 							</tr>
 							<!-- Modal Delete Honor per Pegawai-->
