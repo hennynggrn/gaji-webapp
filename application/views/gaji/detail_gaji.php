@@ -211,12 +211,8 @@
 										Rp. &nbsp;
 										<?php
 											if ($angsuran_kop != NULL) {
-												foreach ($angsuran_kop as $key => $kop) {
-													if (!empty($kop['repay']) && ($kop['repay'] == 1)) {
-														echo number_format($kop['nominal'],0,',','.');
-														$kop_val = $kop['nominal'];
-													}
-												}
+												echo number_format($angsuran_kop['nominal'],0,',','.');
+												$kop_val = $angsuran_kop['nominal'];
 											} else {
 												echo 0;
 												$kop_val = 0;
@@ -227,12 +223,8 @@
 									<td>Rp. &nbsp;
 										<?php
 											if ($angsuran_bank != NULL) {
-												foreach ($angsuran_bank as $key => $bank) {
-													if (!empty($bank['repay']) && ($bank['repay'] == 1)) {
-														echo number_format($bank['nominal'],0,',','.');
-														$bank_val = $bank['nominal'];
-													}
-												}
+												echo number_format($angsuran_bank['nominal'],0,',','.');
+												$bank_val = $angsuran_bank['nominal'];
 											} else {
 												echo 0;
 												$bank_val = 0;
@@ -252,7 +244,20 @@
 			</div>
 			<div class="col-md-12">
 				<a href="<?php echo base_url('table')?>" class="pull-left btn btn-default">Kembali</a>
-				<a href="<?php echo base_url('gaji/print/1')?>" class="edit-keluarga pull-right btn bg-blue edit-btn">Cetak</a></td>
+				<span class="pull-right">
+					<?php 
+						if (($angsuran_kop != NULL) || ($angsuran_bank != NULL)) { 
+							if ($angsuran_kop == NULL) {
+								$angsuran_kop['id_angsuran'] = 0;
+							}
+							if ($angsuran_bank == NULL) {
+								$angsuran_bank['id_angsuran'] = 0;
+							}
+					?>
+						<a href="<?php echo base_url('gaji/pay_print/'.$angsuran_kop['id_angsuran'].'-'.$angsuran_bank['id_angsuran'])?>" class="btn bg-orange">Bayar Pinjaman & Cetak</a></td>
+					<?php } ?>
+					<a href="<?php echo base_url('gaji/print/'.$pegawai['id_pegawai'])?>" class="btn bg-blue edit-btn">Cetak</a></td>
+				</span>
 			</div>
 	</div>
 				<!-- /.box -->

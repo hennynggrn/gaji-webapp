@@ -49,9 +49,27 @@ class M_gaji extends CI_Model{
 			case 'KOP':
 				$this->db->select('*');
 				$this->db->order_by('tanggal_kembali');
+				return $this->db->get_where('angsuran a', array('a.id_pinjaman' => $id_pinjaman));
+				break;
+
+			case 'BANK':
+				$this->db->select('*');
+				$this->db->order_by('tanggal_kembali');
+				return $this->db->get_where('angsuran a', array('a.id_pinjaman' => $id_pinjaman));
+				break;
+		}
+	}
+
+	public function get_angsuran_payOff_byGaji($id_pinjaman, $kode)
+	{
+		switch ($kode) {
+			case 'KOP':
+				$this->db->select('*');
+				$this->db->order_by('tanggal_kembali');
 				return $this->db->get_where('angsuran a', array(
-					'a.id_pinjaman' => $id_pinjaman,
-					'a.status' => 0));
+						'a.id_pinjaman' => $id_pinjaman,
+						'payOff_byGaji' => 1
+					));
 				break;
 
 			case 'BANK':
@@ -59,7 +77,8 @@ class M_gaji extends CI_Model{
 				$this->db->order_by('tanggal_kembali');
 				return $this->db->get_where('angsuran a', array(
 					'a.id_pinjaman' => $id_pinjaman,
-					'a.status' => 0));
+					'payOff_byGaji' => 1
+				));
 				break;
 		}
 	}

@@ -77,7 +77,8 @@ class M_pinjaman extends CI_Model{
 				'id_pinjaman' => $last_id,
 				'tanggal_kembali' => $tgl_kembali[$i],
 				'nominal' => $nominal[$i],
-				'status' => '0'
+				'status' => 0,
+				'payOff_byGaji' => 0
 			);
 			$this->db->insert("angsuran", $data);
 		}
@@ -114,8 +115,8 @@ class M_pinjaman extends CI_Model{
 
 	public function update_status_pinjaman($id, $status)
 	{
-		var_dump($id);
-		var_dump($status);
+		// var_dump($id);
+		// var_dump($status);
 		$this->db->where('id_pinjaman', $id);
 		return $this->db->update('pinjaman', array('status' => $status));
 	}
@@ -158,7 +159,8 @@ class M_pinjaman extends CI_Model{
 						'id_pinjaman' => $id_pinjaman,
 						'tanggal_kembali' => $tgl_kembali[$i],
 						'nominal' => $nominal[$i],
-						'status' => '0'
+						'status' => 0,
+						'payOff_byGaji' => 0
 					);
 					$this->db->insert('angsuran', $data);
 				}

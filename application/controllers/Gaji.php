@@ -29,11 +29,11 @@ class Gaji extends CI_Controller {
 		$data['keluargas'] = array();
 		$list_klg = array();
 		foreach ($data['keluargas_fetch'] as $key => $keluarga) {
-			if (($data['keluargas_fetch'] != NULL) && ($data['keluargas_fetch'][$key]['s_hidup'] == 1)) {
-				$data['keluargas'][$key]['id_anggota_klg'] = $data['keluargas_fetch'][$key]['id_anggota_klg'];														
-				$data['keluargas'][$key]['id_status'] = $data['keluargas_fetch'][$key]['id_status'];														
-				$data['keluargas'][$key]['nama'] = $data['keluargas_fetch'][$key]['nama'];	
-				$list_klg[] = $data['keluargas_fetch'][$key]['id_status'];	
+			if (($data['keluargas_fetch'] != NULL) && ($keluarga['s_hidup'] == 1)) {
+				$data['keluargas'][$key]['id_anggota_klg'] = $keluarga['id_anggota_klg'];														
+				$data['keluargas'][$key]['id_status'] = $keluarga['id_status'];														
+				$data['keluargas'][$key]['nama'] = $keluarga['nama'];	
+				$list_klg[] = $keluarga['id_status'];	
 			} 
 		} 
 		$data['count_klg_hidup'] = count($data['keluargas']); // anggota yang hidup
@@ -96,14 +96,16 @@ class Gaji extends CI_Controller {
 			$data['angsuran_kop'] = $this->M_gaji->get_angsuran($id_pinjaman = $id_pinjaman_kop, $kode = 'KOP')->result_array();
 			// ambil angsuran kop bulan ini
 			foreach ($data['angsuran_kop'] as $key => $kop) {
-				if (date('Y-m', strtotime($data['angsuran_kop'][$key]['tanggal_kembali'])) == $month_today) {
-					$data['angsuran_kop'][$key]['repay'] = '1';
-				} else {
-					$data['angsuran_kop'][$key]['repay'] = '0';
+				if (date('Y-m', strtotime($kop['tanggal_kembali'])) == $month_today) {
+					// if ($kop['payOff_byGaji'] == 1) {
+						$data['angsuran_kop'] = $data['angsuran_kop'][$key];
+					// }
 				}
 			}
+			
 		} else {
 			$data['angsuran_kop'] = NULL;
+
 		}
 		// cek pinjaman bank ada atau tidak
 		if ($data['pinjaman_bank'] != NULL) {
@@ -111,10 +113,28 @@ class Gaji extends CI_Controller {
 			$data['angsuran_bank'] = $this->M_gaji->get_angsuran($id_pinjaman = $id_pinjaman_bank, $kode = 'BANK')->result_array();
 			// ambil angsuran bank bulan ini
 			foreach ($data['angsuran_bank'] as $key => $bank) {
-				if (date('Y-m', strtotime($data['angsuran_bank'][$key]['tanggal_kembali'])) == $month_today) {
-					$data['angsuran_bank'][$key]['repay'] = '1';
+				if (date('Y-m', strtotime($bank['tanggal_kembali'])) == $month_today) {
+					if ($bank['payOff_byGaji'] == 1) { // payOff_byGaji bisa berstatus sudah dibayar (TRUE)
+						$data['angsuran_bank'][$key]['repay'] = '1';
+						foreach ($data['angsuran_bank'] as $key => $bank_val) {
+							if ($bank_val['repay'] == 1) {
+								$data['angsuran_bank'] = $data['angsuran_bank'][$key];
+							}
+						}
+					} else {
+						if ($bank['status'] == 0) {
+							$data['angsuran_bank'][$key]['repay'] = '1';
+							foreach ($data['angsuran_bank'] as $key => $bank_val) {
+								if ($bank_val['repay'] == 1) {
+									$data['angsuran_bank'] = $data['angsuran_bank'][$key];
+								}
+							}
+						} else {
+							$data['angsuran_bank'] = NULL;
+						}
+					}
 				} else {
-					$data['angsuran_bank'][$key]['repay'] = '0';
+					$data['angsuran_bank'] = NULL;
 				}
 			}
 		} else {
@@ -146,11 +166,17 @@ class Gaji extends CI_Controller {
 		$this->template->load('index','gaji/detail_gaji',$data);
 	}
 
-	// public function print_gaji()
-	// {
-	// 	$this->load->model('M_gaji');
-	// 	$data['tampil']= $this->M_gaji->get_gaji()->result_array();
+	public function pay_print($id_angsuran)
+	{
+		$explode = explode('-', $id_angsuran);
+		$angsuran['id_kop'] = $explode[0];
+		$angsuran['id_bank'] = $explode[1];
 
-	// 	$this->template->load('index','gaji/print_det_gaji',$data);
-	// }
+		var_dump($id_kop);
+		var_dump($id_bank);
+		// $this->load->model('M_gaji');
+		// $data['tampil']= $this->M_gaji->get_gaji()->result_array();
+
+		// $this->template->load('index','gaji/print_det_gaji',$data);
+	}
 }

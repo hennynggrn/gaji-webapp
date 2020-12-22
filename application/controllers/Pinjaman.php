@@ -41,11 +41,11 @@ class Pinjaman extends CI_Controller {
 		foreach ($data['pegawais'] as $key => $value) {
 			if ($data['pegawais'][$key]['status_pjm'] == NULL) {
 				$data['pegawais'][$key]['status_pjm'] = 'OpenLoan';
-			} else if ((strpos($data['pegawais'][$key]['status_pjm'], 'BANK0') !== FALSE) && (strpos($data['pegawais'][$key]['status_pjm'], 'KOP0') !== FALSE)) {
+			} else if ((strpos($value['status_pjm'], 'BANK0') !== FALSE) && (strpos($value['status_pjm'], 'KOP0') !== FALSE)) {
 				$data['pegawais'][$key]['status_pjm'] = 'OnBankKop';
-			} else if (strpos($data['pegawais'][$key]['status_pjm'], 'BANK0') !== FALSE) {
+			} else if (strpos($value['status_pjm'], 'BANK0') !== FALSE) {
 				$data['pegawais'][$key]['status_pjm'] = 'OnBank';
-			} else if (strpos($data['pegawais'][$key]['status_pjm'], 'KOP0') !== FALSE) {
+			} else if (strpos($value['status_pjm'], 'KOP0') !== FALSE) {
 				$data['pegawais'][$key]['status_pjm'] = 'OnKop';
 			} 
 		}
@@ -101,7 +101,7 @@ class Pinjaman extends CI_Controller {
 		$res['pinjaman'] = $this->M_pinjaman->update_status_pinjaman($id, $status);
 
 		if ($res) {
-			redirect('pinjaman/detail/'.$id);
+			redirect('pinjaman/pay/'.$id);
 		} else {
 			echo "<h2> Gagal Tambah Data Pinjaman </h2>";
 		}
