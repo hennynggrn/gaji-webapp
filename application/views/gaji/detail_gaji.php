@@ -257,9 +257,9 @@
 							if (($angsuran_kop != NULL) && ($angsuran_bank != NULL)) {
 								$id_angsuran = $angsuran_kop['id_angsuran'].'-'.$angsuran_bank['id_angsuran'];
 							}
-					?>
+					if ($hide == FALSE) { ?>
 						<a href="<?php echo base_url('gaji/pay_print/'.$pegawai['id_pegawai'].'/'.$id_angsuran)?>" class="btn bg-orange">Bayar Pinjaman & Cetak</a></td>
-					<?php } ?>
+					<?php } } ?>
 					<a href="<?php echo base_url('print/'.$pegawai['id_pegawai'])?>" class="btn bg-blue edit-btn">Cetak</a></td>
 				</span>
 			</div>

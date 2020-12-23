@@ -73,7 +73,7 @@ class Keluarga extends CI_Controller {
 				$data['id_status'][] = $data['keluargas'][$key]['id_status'];			
 			}
 			$data['onload'] = 'focusKeluarga(this);';
-			echo '<script type="text/javascript">focusKeluarga(this);</script>';
+			// echo '<script type="text/javascript">focusKeluarga(this);</script>';
 			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
 				$data['hide'] = FALSE;
 			} else {

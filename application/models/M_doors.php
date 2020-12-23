@@ -1,5 +1,5 @@
 <?php
-    class M_user extends CI_Model
+    class M_doors extends CI_Model
     {
 
         public function login($email, $password)

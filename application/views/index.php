@@ -23,10 +23,22 @@
   <link rel="stylesheet" href="<?php echo base_url('assets/plugins/colorpicker/bootstrap-colorpicker.min.css');?>">
   <!-- Editor -->
   <link rel="stylesheet" href="<?php echo base_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css');?>">
+  <!-- Toast -->
+  <link rel="stylesheet" href="<?php echo base_url('assets/plugins/jquery-toast-plugin/dist/jquery.toast.min.css');?>">
+  <style>
+	.alert-fixed {
+		position:fixed; 
+		/* top: 0px;  */
+		/* left: 0px;  */
+		/* width: 100%; */
+		/* z-index:9999;  */
+		/* border-radius:0px */
+	}
+  </style>
 </head>
 
-<body class="hold-transition skin-blue sidebar-mini" onload="<?php echo (isset($onload) ? $onload : ''); ?>">
-	<!-- Site wrapper -->
+<body class="hold-transition skin-blue sidebar-mini flex" onload="<?php echo (isset($onload) ? $onload : ''); ?>">
+	<div id="snackbar">dadadadad</div>
 	<div class="wrapper">
 		<header class="main-header">
 			<!-- Logo -->
@@ -34,7 +46,10 @@
 				<!-- mini logo for sidebar mini 50x50 pixels -->
 				<img class="logo-mini user-image img-circle" src="<?php echo base_url('assets/dist/img/smpmuh9.jpeg');?>" width="36px" height="36px" alt="Logo SMP Muhammadiyah 9">
 				<!-- logo for regular state and mobile devices -->
-				<span class="logo-lg"><b>SIP</b>GuKar</span>
+				<span class="logo-lg">
+					<img class="user-image img-circle" src="<?php echo base_url('assets/dist/img/smpmuh9.jpeg');?>" width="36px" height="36px" alt="Logo SMP Muhammadiyah 9">
+					&nbsp;&nbsp;<b>SIP</b>GuKar
+				</span>
 			</a>
 			<!-- Header Navbar: style can be found in header.less -->
 			<nav class="navbar navbar-static-top">
@@ -56,6 +71,14 @@
 									echo '<span class="hidden-xs">'.$this->session->userdata('fullname').'</span>';
 								} ?>
 							</a>
+							<!-- <?php if ($this->session->flashdata('user_loggedin')):
+								echo '
+									<div class="alert-success alert-dismissible">
+										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+										<h4><i class="icon fa fa-check"></i> Login Berhasil!</h4>
+										'.$this->session->flashdata('user_loggedin').'
+									</div>';
+							endif; ?> -->
 							<ul class="dropdown-menu">
 								<!-- User image -->
 								<li class="user-header">
@@ -131,13 +154,13 @@
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu">
 					<li class="header">MAIN NAVIGATION</li>
-					<li class="">
+					<li class="<?php if($this->uri->segment(1) == ''){echo 'active';}?>">
 						<a href="<?php echo base_url(); ?>">
 							<i class="fa fa-folder"></i>
 							<span>Home</span>
 						</a>
 					</li>
-					<li class="<?php if($this->uri->segment(1) == 'gaji'){echo 'active';}?>">
+					<li class="<?php if($this->uri->segment(1) == 'table'){echo 'active';}?>">
 						<a href="<?php echo site_url('table'); ?>">
 							<i class="fa fa-money"></i>
 							<span>Gaji</span>
@@ -162,15 +185,15 @@
 							<li class="<?php if($this->uri->segment(1) == 'pinjaman'){echo 'active';}?>"><a href="<?php echo site_url('pinjaman'); ?>"><i class="fa fa-circle-o"></i>Data Pinjaman</a></li>
 						</ul>
 					</li>
-					<li>
+					<li class="<?php if($this->uri->segment(1) == 'laporan'){echo 'active';}?>">
 						<a href="<?php echo site_url('laporan'); ?>">
 							<i class="fa fa-book"></i>
 							<span>Laporan</span>
 						</a>
 					</li>
 					<?php if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){?>
-						<li>
-							<a href="<?php echo site_url('pengguna'); ?>">
+						<li class="<?php if($this->uri->segment(1) == 'user'){echo 'active';}?>">
+							<a href="<?php echo site_url('user'); ?>">
 								<i class="fa fa-book"></i>
 								<span>Daftar Pengguna</span>
 							</a>
@@ -386,8 +409,8 @@
 	<!-- ./wrapper -->
 
 	<!-- jQuery 2.2.3 -->
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script> -->
-	<script src="<?php echo base_url('assets/plugins/jQuery/jquery-2.2.3.min.js');?>"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<!-- <script src="<?php echo base_url('assets/plugins/jQuery/jquery-2.2.3.min.js');?>"></script> -->
 	<!-- Bootstrap 3.3.6 -->
 	<script src="<?php echo base_url('assets/bootstrap/js/bootstrap.min.js');?>"></script>
 	<!-- SlimScroll -->
@@ -417,6 +440,8 @@
 	<script src="<?php echo base_url('assets/plugins/iCheck/icheck.min.js');?>"></script>
 	<!-- Editor -->
 	<script src="<?php echo base_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js');?>"></script>
+	 <!-- Toast -->
+	<script src="<?php echo base_url('assets/plugins/jquery-toast-plugin/dist/jquery.toast.min.js');?>"></script>
 
 	<!-- Page script -->
 	<!-- Libraries/Plugin -->
@@ -496,6 +521,25 @@
 		document.getElementById('today_date').value = new Date().toISOString().slice(0, 10);
 	</script>
 
+	<!-- Toast  -->
+	<script>
+		$(document).ready(function() {
+			<?php if($this->session->userdata('user_loggedin')){ ?>
+				$.toast({
+					heading: 'Log In Berhasil',
+					text: '<?php echo $this->session->userdata('user_loggedin');?>',
+					icon: 'success',
+					loader: true,        // Change it to false to disable loader
+					position: 'top-right',   
+					hideAfter: 6000,
+					loaderBg: 'rgb(54, 158, 91)',  // To change the background
+					bgColor: ' rgb(89, 186, 123)',
+					textColor: 'white'
+				})
+			<?php } ?>
+		});
+	</script>
+	
 	<!-- Editor for Textarea -->
 	<script>
 		$(function () {

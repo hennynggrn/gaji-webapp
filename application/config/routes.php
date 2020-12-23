@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+$route['user'] = 'user/index';
+
 $route['laporan'] = 'laporan/index';
 
 $route['print/(:any)'] = 'gaji/print_gaji/$1';
@@ -30,9 +32,6 @@ $route['keluarga'] = 'keluarga/index';
 
 $route['tunjangan/masakerja/pegawai'] = 'tunjangan/masakerja_pegawai';
 $route['tunjangan/edit'] = 'tunjangan/edit_tunjangan';
-// $route['tunjangan/delete/(:any)'] = 'tunjangan/delete_tunjangan/$1';
-// $route['tunjangan/delete/(:any)'] = 'tunjangan/delete_tunjangan/$1';
-// $route['tunjangan/detail/(:any)'] = 'tunjangan/detail_tunjangan/$1';
 $route['tunjangan'] = 'tunjangan/index';
 
 $route['honor/edit/(:any)'] = 'honor/edit_pegawai/$1';
@@ -44,12 +43,13 @@ $route['pegawai/edit/(:any)'] = 'pegawai/edit_pegawai/$1';
 $route['pegawai/detail/(:any)'] = 'pegawai/detail_pegawai/$1';
 $route['pegawai/add'] = 'pegawai/add_pegawai';
 $route['pegawai'] = 'pegawai/index';
-$route['logout'] = 'user/logout';
-$route['register'] = 'user/register';
-$route['login'] = 'user/index';
-$route['default_controller'] = 'pages/index';
 
-$route['(:any)'] = 'pages/index/$1';
+$route['logout'] = 'doors/logout';
+$route['register'] = 'doors/register';
+$route['login'] = 'doors/index';
+
+$route['default_controller'] = 'home/index';
+$route['(:any)'] = 'home/index/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 /*
