@@ -31,103 +31,207 @@
 			}
 
 			body {
-					/* height: 60vh; */
+					height: 100% !important;
 					display: flex;
 					justify-content: space-around;
 					align-items: center;
-					flex-direction: column;
+					flex-direction: row;
 					font-family: sans-serif;
+					margin: 0;
+					padding: 0;
+			}
+
+			.register-box {
+				margin: 0;
+				padding: 0;
+			}
+
+			.box-edit {
+				display: flex;
+				justify-content: center;
+				height: 100%;
+				top: 0;
+			}
+
+			.box-edit-left {
+				width: 60%;
+				align-items: center;
+			}
+
+			.box-edit-right {
+				width: 40%;
+				display: flex;
+				justify-content: center;
+				background-color: white;
+				align-items: flex-start;
+				flex-direction: column;
+				top: 0;
+			}
+
+			.header-edit {
+				width: 100%;				
+				height: 15%;
+				top: 0;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.footer-edit {
+				width: 100%;				
+				height: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.title-edit {
+				font-weight: bold;
+				font-size: 25px;
+				height: 100%;
+			}
+
+			.caption-logo {
+				margin-top: 50px;
 			}
 		</style>
 	</head>
-  <body class="hold-transition register-page">
-    <div class="register-box">
-      <div class="register-logo">
-        <a href="<?php echo base_url('register'); ?>"><b>SI</b>GUKAR</a>
-      </div>
-			<div class="register-box-body">
-				<p class="login-box-msg" style="font-size: 25px">Register</p>
-				<?php if ($this->session->flashdata('check_username_exists')):
-					echo '
-						<div class="alert alert-danger alert-dismissible">
-							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-							<h4><i class="icon fa fa-ban"></i> Login Gagal!</h4>
-							'.$this->session->flashdata('check_username_exists').'
-						</div>';
-				endif; if ($this->session->flashdata('check_email_exists')):
-					echo '
-						<div class="alert alert-danger alert-dismissible">
-							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-							<h4><i class="icon fa fa-ban"></i> Login Gagal!</h4>
-							'.$this->session->flashdata('check_email_exists').'
-						</div>';
-				endif;?>
-				<form action="<?php echo site_url('register'); ?>" method="post">
-					<small class="text-danger"><?php echo form_error('fullname', '<div class="error"><i class="fa fa-fw fa-warning"></i>', '</div>'); ?></small>
-					<div class="form-group has-feedback">
-						<input type="text" name="fullname" class="form-control" placeholder="Nama lengkap">
-						<span class="glyphicon glyphicon-user form-control-feedback"></span>
+	<body class="hold-transition register-page">
+		<div class="box-edit box-edit-left">
+			<div class="register-box">
+				<div class="register-logo">
+					<div class="header-edit">
+						<img class="user-image img-circle" src="<?php echo base_url('assets/dist/img/smpmuh9.jpeg');?>" width="200px" height="200px" alt="Logo SMP Muhammadiyah 9">
 					</div>
-
-					<small class="text-danger"><?php echo form_error('username', '<div class="error"><i class="fa fa-fw fa-warning"></i>', '</div>'); ?></small>
-					<div class="form-group has-feedback">
-						<input type="text" name="username" class="form-control" placeholder="Username">
-						<span class="glyphicon glyphicon-user form-control-feedback"></span>
+					<div class="footer-edit caption-logo">
+						<a href="<?php echo base_url('login'); ?>"><b>SI</b>GUKAR</a>
 					</div>
-
-					<small class="text-danger"><?php echo form_error('email', '<div class="error"><i class="fa fa-fw fa-warning"></i>', '</div>'); ?></small>
-					<div class="form-group has-feedback">
-						<input type="email" name="email" class="form-control" placeholder="Email">
-						<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-					</div>
-
-					<small class="text-danger"><?php echo form_error('phone', '<div class="error"><i class="fa fa-fw fa-warning"></i>', '</div>'); ?></small>
-					<div class="form-group has-feedback">
-						<input type="number" name="phone" class="form-control" placeholder="Nomor telfon/hp">
-						<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-					</div>
-
-					<small class="text-danger"><?php echo form_error('password', '<div class="error"><i class="fa fa-fw fa-warning"></i>', '</div>'); ?></small>
-					<div class="form-group has-feedback">
-						<input type="password" name="password" class="form-control" placeholder="Password">
-						<span class="glyphicon glyphicon-lock form-control-feedback"></span>
-					</div>
-
-					<small class="text-danger"><?php echo form_error('confirm_password', '<div class="error"><i class="fa fa-fw fa-warning"></i>', '</div>'); ?></small>
-					<div class="form-group has-feedback">
-						<input type="password" name="confirm_password" class="form-control" placeholder="Konfirmasi password">
-						<span class="glyphicon glyphicon-log-in form-control-feedback"></span>
-					</div>
-					<div class="row">
-						<div class="col-xs-12">
-							<button type="submit" class="btn btn-primary btn-block">Register</button>
-						</div>
-					</div><br>
-					<div class="row">
-						<div class="col-xs-12 text-center">
-							Sudah punya akun ?
-							<a href="<?php echo site_url('login'); ?>" class="text-bold"> Login</a>
-						</div>
-					</div>
-				</form>
+					<h4 class="text-bold">SMP Muhammadiyah 9 Yogyakarta</h4>
+				</div>
 			</div>
-    </div>
-    <!-- /.login-box -->
+		</div>
+		<div class="box-edit box-edit-right">
+				<div class="header-edit">
+					<div class="register-box">
+						<div class="register-box-body">
+							<h6 class="title-edit">Register</h6>
+						</div>
+					</div>
+				</div>
+				<div class="footer-edit">
+					<div class="register-box">
+						<div class="register-box-body">
+							<?php if ($this->session->flashdata('check_username_exists')):
+								echo '
+									<div class="alert alert-danger alert-dismissible">
+										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+										<h4><i class="icon fa fa-ban"></i> Login Gagal!</h4>
+										'.$this->session->flashdata('check_username_exists').'
+									</div>';
+							endif; if ($this->session->flashdata('check_email_exists')):
+								echo '
+									<div class="alert alert-danger alert-dismissible">
+										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+										<h4><i class="icon fa fa-ban"></i> Login Gagal!</h4>
+										'.$this->session->flashdata('check_email_exists').'
+									</div>';
+							endif;?>
+							<form id="form_register" action="<?php echo site_url('register'); ?>" method="post">
+								<?php echo form_error('fullname', '<span class="error text-red"><small><i class="fa fa-fw fa-warning"></i>', '</small></span>'); ?>
+								<div class="form-group has-feedback">
+									<input type="text" name="fullname" class="register_val form-control" placeholder="Nama lengkap" value="<?php if(isset($_POST['fullname'])) {echo $_POST['fullname'];}?>">
+									<span class="glyphicon glyphicon-user form-control-feedback"></span>
+								</div>
 
-    <!-- jQuery 2.2.3 -->
-    <script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
-    <!-- Bootstrap 3.3.6 -->
-    <script src="../../bootstrap/js/bootstrap.min.js"></script>
-    <!-- iCheck -->
-    <script src="../../plugins/iCheck/icheck.min.js"></script>
-    <script>
-      $(function () {
-        $('input').iCheck({
-          checkboxClass: 'icheckbox_square-blue',
-          radioClass: 'iradio_square-blue',
-          increaseArea: '20%' // optional
-        });
-      });
-    </script>
-  </body>
+								<?php echo form_error('username', '<span class="error text-red"><small><i class="fa fa-fw fa-warning"></i>', '</small></span>'); ?>
+								<div class="form-group has-feedback">
+									<input type="text" name="username" class="register_val form-control" placeholder="Username" value="<?php if(isset($_POST['username'])) {echo $_POST['username'];}?>">
+									<span class="glyphicon glyphicon-user form-control-feedback"></span>
+								</div>
+
+								<?php echo form_error('email', '<span class="error text-red"><small><i class="fa fa-fw fa-warning"></i>', '</small></span>'); ?>
+								<div class="form-group has-feedback">
+									<input type="email" name="email" class="register_val form-control" placeholder="Email" value="<?php if(isset($_POST['email'])) {echo $_POST['email'];}?>">
+									<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+								</div>
+
+								<?php echo form_error('phone', '<span class="error text-red"><small><i class="fa fa-fw fa-warning"></i>', '</small></span>'); ?>
+								<div class="form-group has-feedback">
+									<input type="number" name="phone" class="register_val form-control" placeholder="Nomor telfon/hp" value="<?php if(isset($_POST['phone'])) {echo $_POST['phone'];}?>">
+									<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+								</div>
+
+								<?php echo form_error('password', '<span class="error text-red"><small><i class="fa fa-fw fa-warning"></i>', '</small></span>'); ?>
+								<div class="form-group has-feedback">
+									<input type="password" name="password" class="register_val form-control" placeholder="Password" value="<?php if(isset($_POST['password'])) {echo $_POST['password'];}?>">
+									<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+								</div>
+
+								<?php echo form_error('confirm_password', '<div class="error text-red"><small><i class="fa fa-fw fa-warning"></i>', '</small></div>'); ?>
+								<div class="form-group has-feedback">
+									<input type="password" name="confirm_password" class="form-control" placeholder="Konfirmasi password">
+									<span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+								</div>
+								<div class="row">
+									<div class="col-xs-6">
+										<button type="button" id="reset" class="btn btn-default btn-block">Reset</button>
+									</div>
+									<div class="col-xs-6">
+										<button type="submit" class="btn btn-primary btn-block">Register</button>
+									</div>
+								</div><br><br>
+								<div class="row">
+									<div class="col-xs-12 text-center">
+										Sudah punya akun ?
+										<a href="<?php echo site_url('login'); ?>" class="text-bold"> Login</a>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    	<!-- /.login-box -->
+
+		<!-- jQuery 2.2.3 -->
+		<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script> -->
+		<script src="<?php echo base_url('assets/plugins/jQuery/jquery-2.2.3.min.js');?>"></script>
+		<!-- Bootstrap 3.3.6 -->
+		<script src="<?php echo base_url('assets/bootstrap/js/bootstrap.min.js');?>"></script>
+		<!-- SlimScroll -->
+		<script src="<?php echo base_url('assets/plugins/slimScroll/jquery.slimscroll.min.js');?>"></script>
+		<!-- FastClick -->
+		<script src="<?php echo base_url('assets/plugins/fastclick/fastclick.js');?>"></script>
+		<!-- Select2 -->
+		<script src="<?php echo base_url('assets/plugins/select2/select2.full.min.js');?>"></script>
+		<!-- InputMask -->
+		<script src="<?php echo base_url('assets/plugins/input-mask/jquery.inputmask.js');?>"></script>
+		<script src="<?php echo base_url('assets/plugins/input-mask/jquery.inputmask.date.extensions.js');?>"></script>
+		<script src="<?php echo base_url('assets/plugins/input-mask/jquery.inputmask.extensions.js');?>"></script>
+		<!-- date-range-picker -->
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script> -->
+		<script src="<?php echo base_url('assets/plugins/daterangepicker/daterangepicker.js');?>"></script>
+		<!-- bootstrap datepicker -->
+		<script src="<?php echo base_url('assets/plugins/datepicker/bootstrap-datepicker.js');?>"></script>
+		<!-- bootstrap color picker -->
+		<script src="<?php echo base_url('assets/plugins/colorpicker/bootstrap-colorpicker.min.js');?>"></script>
+		<!-- bootstrap time picker -->
+		<script src="<?php echo base_url('assets/plugins/timepicker/bootstrap-timepicker.min.js');?>"></script>
+		<!-- iCheck 1.0.1 -->
+		<script src="<?php echo base_url('assets/plugins/iCheck/icheck.min.js');?>"></script>
+		<!-- Editor -->
+		<script src="<?php echo base_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js');?>"></script>
+		
+		<!-- Reset Form -->
+		<script>
+			$(document).ready(function(){
+				$( "#reset" ).click(function() {
+					$('.register_val').each(function() {
+						$(this).val('');
+					});
+				});
+			});
+		</script>	
+  	</body>
 </html>

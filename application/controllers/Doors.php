@@ -55,15 +55,15 @@
         {
             $data['title'] = 'Register';
             // set rules if validation error
-           	$this->form_validation->set_rules('fullname', 'Fullname', 'required');
+           	$this->form_validation->set_rules('fullname', 'Fullname', 'required', array('required' => ' Nama lengkap harus diisi'));
             // set paramater callback for function check_username_exists and check_email_exists
-            $this->form_validation->set_rules('username', 'Username', 'required|callback_check_username_exists');
-            $this->form_validation->set_rules('email', 'Email', 'required|callback_check_email_exists');
+            $this->form_validation->set_rules('username', 'Username', 'required|callback_check_username_exists', array('required' => ' Username harus diisi'));
+            $this->form_validation->set_rules('email', 'Email', 'required|callback_check_email_exists', array('required' => ' Email harus diisi'));
             // set paramater required only numeric type
-            $this->form_validation->set_rules('phone', 'Phone Number', 'required|numeric');
-            $this->form_validation->set_rules('password', 'Password', 'required');
+            $this->form_validation->set_rules('phone', 'Phone Number', 'required|numeric', array('required' => ' No Hp harus diisi'));
+            $this->form_validation->set_rules('password', 'Password', 'required', array('required' => ' Password harus diisi'));
             // set parameter should be match with password
-            $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'matches[password]');
+            $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'matches[password]', array('matches' => ' Konfirmasi password tidak sesuai dengan password'));
             
             if($this->form_validation->run() === FALSE){
                 $this->load->view('pages/register', $data);

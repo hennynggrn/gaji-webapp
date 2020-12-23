@@ -35,68 +35,134 @@
 					display: flex;
 					justify-content: space-around;
 					align-items: center;
-					flex-direction: column;
+					flex-direction: row;
 					font-family: sans-serif;
+			}
+
+			.register-box {
+				margin: 0;
+				padding: 0;
+			}
+
+			.box-edit {
+				display: flex;
+				justify-content: center;
+				height: 100%;
+			}
+
+			.box-edit-left {
+				width: 60%;
+				align-items: center;
+			}
+
+			.box-edit-right {
+				width: 40%;
+				display: flex;
+				justify-content: center;
+				background-color: white;
+				align-items: flex-start;
+				flex-direction: column;
+			}
+
+			.header-edit {
+				width: 100%;				
+				height: 15%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			
+			.footer-edit {
+				width: 100%;				
+				height: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.title-edit {
+				font-weight: bold;
+				font-size: 25px;
+				height: 100%;
+			}
+
+			.caption-logo {
+				margin-top: 50px;
 			}
 		</style>
 	</head>
-  <body class="hold-transition login-page">
-    <div class="login-box">
-      <div class="login-logo">
-		<a href="<?php echo base_url('login'); ?>"><b>SI</b>GUKAR</a>
-      </div>
-      <!-- /.login-logo -->
-      <div class="login-box-body">
-		<p class="login-box-msg" style="font-size: 25px">Log In</p>
-		<!-- <p class="login-box-msg">Silahkan sign in untuk menggunakan aplikasi</p> -->
-		<!-- call flashdata session -->
-		<?php if ($this->session->flashdata('login_failed')):
-			echo '
-				<div class="alert alert-danger alert-dismissible">
-					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-					<h4><i class="icon fa fa-ban"></i> Login Gagal!</h4>
-					'.$this->session->flashdata('login_failed').'
-				</div>';
-		endif; if ($this->session->flashdata('user_loggedout')):
-			echo '
-				<div class="alert alert-success alert-dismissible">
-					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-					<h4><i class="icon fa fa-check"></i> Log Out Berhasil!</h4>
-					'.$this->session->flashdata('user_loggedout').'
-				</div>';
-		endif; if ($this->session->flashdata('user_registered')):
-			echo '
-				<div class="alert alert-success alert-dismissible">
-					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-					<h4><i class="icon fa fa-check"></i> Registrasi Berhasil!</h4>
-					'.$this->session->flashdata('user_registered').'
-				</div>';
-		endif;?>
-		<!-- end script flashdata session -->
-        <form action="<?php echo site_url('login'); ?>" method="post">
-          <div class="form-group has-feedback">
-            <input type="email" name="email" class="form-control" placeholder="Email" required>
-            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-          </div>
-          <div class="form-group has-feedback">
-            <input type="password" name="password" class="form-control" placeholder="Password" required>
-            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-          </div>
-          <div class="row">
-            <div class="col-xs-12">
-              <button type="submit" class="btn btn-primary btn-block">Log In</button>
-						</div>
-					</div><br>
-					<div class="row">
-            <div class="col-xs-12 text-center">
-				Belum punya akun ?<a href="<?php echo site_url('register'); ?>" class="text-bold"> Register</a>
-            </div>
-          </div>
-        </form>
-      </div>
-      <!-- /.login-box-body -->
-    </div>
-    <!-- /.login-box -->
+  	<body class="hold-transition login-page">
+	  	<div class="box-edit box-edit-left">
+		   <div class="login-box">
+				<div class="login-logo">
+					<div class="header-edit">
+						<img class="user-image img-circle" src="<?php echo base_url('assets/dist/img/smpmuh9.jpeg');?>" width="200px" height="200px" alt="Logo SMP Muhammadiyah 9">
+					</div>
+					<div class="footer-edit caption-logo">
+						<a href="<?php echo base_url('login'); ?>"><b>SI</b>GUKAR</a><br>
+					</div>
+					<!-- <h4 class="">SMP Muhammadiyah 9 Yogyakarta</h4> -->
+					<h4 class="text-bold">SMP Muhammadiyah 9 Yogyakarta</h4>
+				</div>
+			</div>
+	  	</div>
+	  	<div class="box-edit box-edit-right">
+			<div class="header-edit">
+				<div class="login-box">
+					<div class="login-box-body">
+						<h6 class="title-edit">Log In</h6>
+					</div>
+				</div>
+			</div>
+			<div class="footer-edit">
+				<div class="login-box">
+					<div class="login-box-body">
+						<?php if ($this->session->flashdata('login_failed')):
+							echo '
+								<div class="alert alert-danger alert-dismissible">
+									<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+									<h4><i class="icon fa fa-ban"></i> Login Gagal!</h4>
+									'.$this->session->flashdata('login_failed').'
+								</div>';
+						endif; if ($this->session->flashdata('user_loggedout')):
+							echo '
+								<div class="alert alert-success alert-dismissible">
+									<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+									<h4><i class="icon fa fa-check"></i> Log Out Berhasil!</h4>
+									'.$this->session->flashdata('user_loggedout').'
+								</div>';
+						endif; if ($this->session->flashdata('user_registered')):
+							echo '
+								<div class="alert alert-success alert-dismissible">
+									<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+									<h4><i class="icon fa fa-check"></i> Registrasi Berhasil!</h4>
+									'.$this->session->flashdata('user_registered').'
+								</div>';
+						endif;?>
+						<form action="<?php echo site_url('login'); ?>" method="post">
+							<div class="form-group has-feedback">
+								<input type="email" name="email" class="form-control" placeholder="Email" required>
+								<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+							</div>
+							<div class="form-group has-feedback">
+								<input type="password" name="password" class="form-control" placeholder="Password" required>
+								<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+							</div>
+							<div class="row">
+								<div class="col-xs-12">
+									<button type="submit" class="btn btn-primary btn-block">Log In</button>
+								</div>
+							</div><br><br>
+							<div class="row">
+								<div class="col-xs-12 text-center">
+									Belum punya akun ?<a href="<?php echo site_url('register'); ?>" class="text-bold"> Register</a>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	 	</div>
 
     <!-- jQuery 2.2.3 -->
 		<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script> -->
@@ -107,10 +173,6 @@
 		<script src="<?php echo base_url('assets/plugins/slimScroll/jquery.slimscroll.min.js');?>"></script>
 		<!-- FastClick -->
 		<script src="<?php echo base_url('assets/plugins/fastclick/fastclick.js');?>"></script>
-		<!-- AdminLTE App -->
-		<script src="<?php echo base_url('assets/dist/js/app.min.js');?>"></script>
-		<!-- AdminLTE for demo purposes -->
-		<script src="<?php echo base_url('assets/dist/js/demo.js');?>"></script>
 		<!-- Select2 -->
 		<script src="<?php echo base_url('assets/plugins/select2/select2.full.min.js');?>"></script>
 		<!-- InputMask -->
