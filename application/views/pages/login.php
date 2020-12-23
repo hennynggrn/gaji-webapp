@@ -128,7 +128,6 @@
 	</head>
   	<body class="hold-transition login-page">
 	  	<div class="box-edit box-edit-left">
-			
 			<div class="login-box">
 				<div class="login-logo">
 					<img class="img-edit" src="https://www.vicnews.com/wp-content/uploads/2020/06/21877409_web1_classroom_medium.jpg" alt="">
