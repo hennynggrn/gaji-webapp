@@ -101,7 +101,6 @@
 					<div class="footer-edit caption-logo">
 						<a href="<?php echo base_url('login'); ?>"><b>SI</b>GUKAR</a><br>
 					</div>
-					<!-- <h4 class="">SMP Muhammadiyah 9 Yogyakarta</h4> -->
 					<h4 class="text-bold">SMP Muhammadiyah 9 Yogyakarta</h4>
 				</div>
 			</div>
