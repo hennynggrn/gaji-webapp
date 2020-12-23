@@ -31,7 +31,7 @@ class Pinjaman extends CI_Controller {
 				$data['pinjamans'][$key]['end_day_IDN'] = day($end_date);
 				$data['pinjamans'][$key]['end_year_IDN'] = date('Y', strtotime($end_date));
 			}
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$data['hide'] = FALSE;
 			} else {
 				$data['hide'] = TRUE;
@@ -46,7 +46,7 @@ class Pinjaman extends CI_Controller {
 		if(!$this->session->userdata('logged_in')){
             redirect('login');
 		} else {
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$data['title']= 'Tambah Pinjaman';
 				$data['pegawais'] = $this->M_pinjaman->get_pegawai_pinjaman($id)->result_array();
 				foreach ($data['pegawais'] as $key => $value) {
@@ -72,7 +72,7 @@ class Pinjaman extends CI_Controller {
 		if(!$this->session->userdata('logged_in')){
             redirect('login');
 		} else {
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$res['pinjaman'] = $this->M_pinjaman->add_pinjaman();
 				$last_id = $res['pinjaman'];
 				$res['angsuran'] = $this->M_pinjaman->add_angsuran($last_id);
@@ -96,7 +96,7 @@ class Pinjaman extends CI_Controller {
 			$data['title'] = 'Detail Pinjaman';
 			$data['pinjaman'] = $this->M_pinjaman->get_pinjaman($id)->row_array();
 			$data['angsurans'] = $this->M_pinjaman->get_angsuran($id)->result_array();
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$data['hide'] = FALSE;
 			} else {
 				$data['hide'] = TRUE;
@@ -110,7 +110,7 @@ class Pinjaman extends CI_Controller {
 		if(!$this->session->userdata('logged_in')){
             redirect('login');
 		} else {
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$data['title'] = 'Bayar Angsuran Pinjaman';
 				$data['pay'] = TRUE;
 				$data['pinjaman'] = $this->M_pinjaman->get_pinjaman($id)->row_array();
@@ -127,7 +127,7 @@ class Pinjaman extends CI_Controller {
 		if(!$this->session->userdata('logged_in')){
             redirect('login');
 		} else {
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$res['angsuran'] = $this->M_pinjaman->update_repay();
 				$id = $this->input->post('id_pinjaman');
 				$pinjaman = $this->M_pinjaman->get_pinjaman($id)->row_array();
@@ -155,7 +155,7 @@ class Pinjaman extends CI_Controller {
 		if(!$this->session->userdata('logged_in')){
 			redirect('login');
 		} else {
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$data['title']= 'Edit Pinjaman';
 				$data['pegawais'] = $this->M_pinjaman->get_pegawai_pinjaman($id)->result_array();
 				$data['pinjaman'] = $this->M_pinjaman->get_pinjaman($id)->row_array();
@@ -172,7 +172,7 @@ class Pinjaman extends CI_Controller {
 		if(!$this->session->userdata('logged_in')){
 			redirect('login');
 		} else {
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$id_pinjaman = $this->input->post('id_pinjaman');
 				$res['pinjaman'] = $this->M_pinjaman->update_pinjaman($id_pinjaman);
 				$res['angsuran'] = $this->M_pinjaman->update_angsuran($id_pinjaman);
@@ -193,7 +193,7 @@ class Pinjaman extends CI_Controller {
 		if(!$this->session->userdata('logged_in')){
 			redirect('login');
 		} else {
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$res['pinjaman'] = $this->M_pinjaman->delete_pinjaman($id_pinjaman);
 				if ($res) {
 					redirect('pinjaman');

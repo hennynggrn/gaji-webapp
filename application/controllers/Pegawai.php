@@ -10,7 +10,7 @@ class Pegawai extends CI_Controller {
 		} else {
 			$data['title'] = 'Tabel Pegawai';
 			$data['pegawais'] = $this->M_pegawai->get_pegawai($id_pegawai)->result_array();
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$data['hide'] = FALSE;
 			} else {
 				$data['hide'] = TRUE;
@@ -24,7 +24,7 @@ class Pegawai extends CI_Controller {
 		if(!$this->session->userdata('logged_in')){
             redirect('login');
 		} else {
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$data['title'] = 'Tambah Pegawai';
 				$data['id_pgw'] = $this->M_pegawai->get_id_pegawai()->row_array();
 				$data['id_pegawai'] = $data['id_pgw']['id_pegawai'];
@@ -41,7 +41,7 @@ class Pegawai extends CI_Controller {
 		if(!$this->session->userdata('logged_in')){
             redirect('login');
 		} else {
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$res['pegawai'] = $this->M_pegawai->add_pegawai();
 				$res['jabatan'] = $this->M_jabatan->add_jabatan_pegawai();
 				if ($this->input->post('status') == 1) {
@@ -69,7 +69,7 @@ class Pegawai extends CI_Controller {
 			$data['pegawai'] = $this->M_pegawai->get_pegawai_detail($where,'pegawai')->row_array();
 			$data['keluargas'] = $this->M_keluarga->get_keluarga_pegawai($id,'keluarga')->result_array();
 			$data['jabatans'] = $this->M_jabatan->get_jabatan_pegawai($id)->result_array();
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$data['hide'] = FALSE;
 			} else {
 				$data['hide'] = TRUE;
@@ -83,7 +83,7 @@ class Pegawai extends CI_Controller {
 		if(!$this->session->userdata('logged_in')){
             redirect('login');
 		} else {
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$data['title'] = 'Edit Pegawai';
 				$where = array('id_pegawai' => $id);
 				$data['pegawai'] = $this->M_pegawai->get_pegawai_detail($where,'pegawai')->row_array();
@@ -108,7 +108,7 @@ class Pegawai extends CI_Controller {
 		if(!$this->session->userdata('logged_in')){
             redirect('login');
 		} else {
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$res['pegawai'] = $this->M_pegawai->update_pegawai();
 				$res['jabatan'] = $this->M_jabatan->update_jabatan_pegawai();
 				if ($this->input->post('status') == 1) {
@@ -150,7 +150,7 @@ class Pegawai extends CI_Controller {
 		if(!$this->session->userdata('logged_in')){
             redirect('login');
 		} else {
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				
 				$res['pegawai'] = $this->M_pegawai->delete_pegawai($id);
 

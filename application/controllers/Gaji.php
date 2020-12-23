@@ -151,7 +151,7 @@ class Gaji extends CI_Controller {
 			var_dump($data['pinjaman_bank']);
 			var_dump($data['angsuran_kop']);
 			var_dump($data['angsuran_bank']);
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$data['hide'] = FALSE;
 			} else {
 				$data['hide'] = TRUE;
@@ -165,7 +165,7 @@ class Gaji extends CI_Controller {
 		if(!$this->session->userdata('logged_in')){
             redirect('login');
 		} else {
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$explode = explode('-', $id_angsuran);
 				$id_kop = $explode[0];
 				$id_bank = $explode[1];

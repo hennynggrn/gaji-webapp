@@ -10,7 +10,7 @@ class Potongan extends CI_Controller {
 		} else {
 			$data['title'] = 'Tabel Potongan';
 			$data['potongan']= $this->M_potongan->get_potongan()->row_array();
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){	
+			if (authUserLevel() == TRUE){	
 				$data['hide'] = FALSE;
 			} else {
 				$data['hide'] = TRUE;
@@ -24,7 +24,7 @@ class Potongan extends CI_Controller {
 		if(!$this->session->userdata('logged_in')){
             redirect('login');
 		} else {
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){	
+			if (authUserLevel() == TRUE){	
 				$data['title'] = 'Edit Potongan';
 				$data['potongan']= $this->M_potongan->get_potongan()->row_array();
 				$this->template->load('index', 'potongan/edit_potongan', $data);
@@ -39,7 +39,7 @@ class Potongan extends CI_Controller {
 		if(!$this->session->userdata('logged_in')){
             redirect('login');
 		} else {
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){	
+			if (authUserLevel() == TRUE){	
 				$res['potongan'] = $this->M_potongan->update_potongan();
 				if ($res) {
 					redirect('potongan');

@@ -30,7 +30,7 @@ class Jabatan extends CI_Controller {
 				$data['jabatans'][$key]['result'] = $data['result'][$key];
 			}
 
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$data['hide'] = FALSE;
 			} else {
 				$data['hide'] = TRUE;
@@ -45,7 +45,7 @@ class Jabatan extends CI_Controller {
 		if(!$this->session->userdata('logged_in')){
             redirect('login');
 		} else {
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$data['title'] = 'Tambah Jabatan';
 				$data['pegawais'] = $this->M_pegawai->get_pegawai($id_pegawai)->result_array();
 				$this->template->load('index','jabatan/add_jabatan', $data);
@@ -60,7 +60,7 @@ class Jabatan extends CI_Controller {
 		if(!$this->session->userdata('logged_in')){
             redirect('login');
 		} else {
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$res['jabatan'] = $this->M_jabatan->add_jabatan();
 				$last_id = $res['jabatan'];
 				$res['pegawai'] = $this->M_jabatan->add_pegawai_jabatan($last_id);
@@ -93,7 +93,7 @@ class Jabatan extends CI_Controller {
 					$data['pegawais'][] = $result[$key];
 				}
 			}
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$data['hide'] = FALSE;
 			} else {
 				$data['hide'] = TRUE;
@@ -107,7 +107,7 @@ class Jabatan extends CI_Controller {
 		if(!$this->session->userdata('logged_in')){
             redirect('login');
 		} else {
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$data['title'] = 'Edit Jabatan';
 				$data['pegawais'] = $this->M_jabatan->get_jabatan_pegawai_selected($id)->result_array();
 				$data['id'] = $this->M_jabatan->get_jabatan_detail($id)->row_array();
@@ -124,7 +124,7 @@ class Jabatan extends CI_Controller {
 		if(!$this->session->userdata('logged_in')){
             redirect('login');
 		}else {
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$res['jabatan'] = $this->M_jabatan->update_jabatan();
 				$res['pegawai'] = $this->M_jabatan->update_pegawai_jabatan();
 				if ($res) {
@@ -143,7 +143,7 @@ class Jabatan extends CI_Controller {
 		if(!$this->session->userdata('logged_in')){
             redirect('login');
 		} else {
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$res['jabatan'] = $this->M_jabatan->delete_jabatan($id);
 
 				if ($res) {
@@ -164,7 +164,7 @@ class Jabatan extends CI_Controller {
 		} else {
 			$id_jabatan = $this->uri->segment(3);
 			$id_pegawai = $this->uri->segment(4);
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$res['pegawai'] = $this->M_jabatan->delete_pegawai($id_jabatan, $id_pegawai);
 
 				if ($res) {

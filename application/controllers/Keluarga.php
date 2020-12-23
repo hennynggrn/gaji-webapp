@@ -10,7 +10,7 @@ class Keluarga extends CI_Controller {
 		} else {
 			$data['title']= 'Tabel Keluarga Pegawai';
 			$data['keluargas']= $this->M_keluarga->get_keluarga($id)->result_array();
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$data['hide'] = FALSE;
 			} else {
 				$data['hide'] = TRUE;
@@ -24,7 +24,7 @@ class Keluarga extends CI_Controller {
 		if(!$this->session->userdata('logged_in')){
             redirect('login');
 		} else {
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$id = $this->input->post('id_anggota_klg');
 				$res['keluarga']= $this->M_keluarga->update_keluarga();
 				if ($res) {
@@ -46,7 +46,7 @@ class Keluarga extends CI_Controller {
 			$data['pegawai'] = $this->M_pegawai->get_pegawai($id_pegawai)->row_array();
 			$data['keluargas'] = $this->M_keluarga->get_anggota_keluarga($id_pegawai)->result_array();
 			$data['title'] = 'Detail Anggota Keluarga';
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$data['hide'] = FALSE;
 			} else {
 				$data['hide'] = TRUE;
@@ -74,7 +74,7 @@ class Keluarga extends CI_Controller {
 			}
 			$data['onload'] = 'focusKeluarga(this);';
 			// echo '<script type="text/javascript">focusKeluarga(this);</script>';
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$data['hide'] = FALSE;
 			} else {
 				$data['hide'] = TRUE;

@@ -38,7 +38,6 @@
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini flex" onload="<?php echo (isset($onload) ? $onload : ''); ?>">
-	<div id="snackbar">dadadadad</div>
 	<div class="wrapper">
 		<header class="main-header">
 			<!-- Logo -->
@@ -191,7 +190,7 @@
 							<span>Laporan</span>
 						</a>
 					</li>
-					<?php if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){?>
+					<?php if($this->session->userdata('logged_in') && (authUserAdmin() == TRUE)){?>
 						<li class="<?php if($this->uri->segment(1) == 'user'){echo 'active';}?>">
 							<a href="<?php echo site_url('user'); ?>">
 								<i class="fa fa-book"></i>

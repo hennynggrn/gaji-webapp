@@ -29,7 +29,7 @@ class Honor extends CI_Controller {
 			foreach ($data['honors'] as $key => $value) {
 				$data['honors'][$key]['result'] = $data['result'][$key];
 			}
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$data['hide'] = FALSE;
 			} else {
 				$data['hide'] = TRUE;
@@ -55,7 +55,7 @@ class Honor extends CI_Controller {
 			$data['honors'] = $this->M_honor->get_honor($honor)->result_array();
 			$data['honor_val'] = $honor;
 			
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$data['hide'] = FALSE;
 			} else {
 				$data['hide'] = TRUE;
@@ -72,7 +72,7 @@ class Honor extends CI_Controller {
 			$data['title'] = 'Edit Data Pegawai';
 			$where = array('id_pegawai' => $id);
 			$data['pegawai'] = $this->M_pegawai->get_pegawai_detail($where,'pegawai')->row_array();
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$data['keluargas'] = $this->M_keluarga->get_keluarga_pegawai($id,'keluarga')->result_array();
 				$data['jabatans'] = $this->M_jabatan->get_jabatan($id)->result_array();
 				$data['edit_honor'] = TRUE;
@@ -106,7 +106,7 @@ class Honor extends CI_Controller {
 			$id_honor = $this->input->post('id_honor');	
 			$honor = $this->input->post('honor');
 			$detail_honor = $this->input->post('detail_honor');
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$res['honor'] = $this->M_honor->update_honor($id, $id_honor);
 				if ($res) {
 					if ((isset($detail_honor)) && ($detail_honor == 1)) {
@@ -130,7 +130,7 @@ class Honor extends CI_Controller {
 		} else {
 			$id = $this->uri->segment(3);
 			$honor = $this->uri->segment(4);
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){
+			if (authUserLevel() == TRUE){
 				$res['honor'] = $this->M_honor->delete_honor($id);
 				if ($res) {
 					redirect('honor');

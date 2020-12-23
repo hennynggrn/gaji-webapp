@@ -11,7 +11,7 @@ class Tunjangan extends CI_Controller {
 			$data['title'] = 'Tabel Tunjangan';
 			$data['tunjangan']= $this->M_tunjangan->get_tunjangan()->row_array();
 			$data['masakerjas']= $this->M_masakerja->get_masakerja()->result_array();
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){	
+			if (authUserLevel() == TRUE){	
 				$data['hide'] = FALSE;
 			} else {
 				$data['hide'] = TRUE;
@@ -26,7 +26,7 @@ class Tunjangan extends CI_Controller {
 		if(!$this->session->userdata('logged_in')){
             redirect('login');
 		} else {
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){	
+			if (authUserLevel() == TRUE){	
 				$data['title'] = 'Edit Tunjangan';
 				$data['tunjangan']= $this->M_tunjangan->get_tunjangan()->row_array();
 				$data['masakerjas']= $this->M_masakerja->get_masakerja()->result_array();
@@ -42,7 +42,7 @@ class Tunjangan extends CI_Controller {
 		if(!$this->session->userdata('logged_in')){
             redirect('login');
 		} else {
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){	
+			if (authUserLevel() == TRUE){	
 				$res['tunjangan'] = $this->M_tunjangan->update_tunjangan();
 				$res['masakerja'] = $this->M_masakerja->update_masakerja();
 				if ($res) {
@@ -64,7 +64,7 @@ class Tunjangan extends CI_Controller {
 			$data['title'] = 'Tunjangan Masa Kerja Pegawai';
 			$data['pegawais']= $this->M_pegawai->get_pegawai($id_pegawai)->result_array();
 			$data['masakerjas']= $this->M_masakerja->get_masakerja()->result_array();
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){	
+			if (authUserLevel() == TRUE){	
 				$data['hide'] = FALSE;
 			} else {
 				$data['hide'] = TRUE;
@@ -78,7 +78,7 @@ class Tunjangan extends CI_Controller {
 		if(!$this->session->userdata('logged_in')){
             redirect('login');
 		} else {
-			if($this->session->userdata('logged_in') && (($this->session->userdata('user_level_id') == 1) || ($this->session->userdata('user_level_id') == 2))){	
+			if (authUserLevel() == TRUE){	
 				$res['pegawai'] = $this->M_masakerja->update_mk_pegawai();
 				if ($res) {
 					redirect('tunjangan/masakerja/pegawai');
