@@ -53,6 +53,7 @@
 			.box-edit-left {
 				width: 60%;
 				align-items: center;
+				position: relative;
 			}
 
 			.box-edit-right {
@@ -89,19 +90,58 @@
 			.caption-logo {
 				margin-top: 50px;
 			}
+
+			.caption-logo a {
+				color: white;
+			}
+
+			.logo-edit {
+				position: relative;
+				height: 100%;
+				width: 100%;
+				color: white;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+			}
+
+			.blank-separator {
+				position: absolute;
+				height: 100%;
+				width: 100%;
+				opacity: 0.73;
+				left: 0;
+				top: 0;
+				background-color: rgb(26, 24, 21);
+			}
+
+			.img-edit {
+				position: absolute;
+				height: 100%;
+				width: 100%;
+				/* opacity: 0.5; */
+				left: 0;
+				top: 0;
+			}
 		</style>
 	</head>
   	<body class="hold-transition login-page">
 	  	<div class="box-edit box-edit-left">
-		   <div class="login-box">
+			
+			<div class="login-box">
 				<div class="login-logo">
-					<div class="header-edit">
-						<img class="user-image img-circle" src="<?php echo base_url('assets/dist/img/smpmuh9.jpeg');?>" width="200px" height="200px" alt="Logo SMP Muhammadiyah 9">
+					<img class="img-edit" src="https://www.vicnews.com/wp-content/uploads/2020/06/21877409_web1_classroom_medium.jpg" alt="">
+					<div class="blank-separator"></div>
+					<div class="logo-edit">
+						<div class="header-edit">
+							<img class="user-image img-circle" src="<?php echo base_url('assets/dist/img/smpmuh9.jpeg');?>" width="200px" height="200px" alt="Logo SMP Muhammadiyah 9">
+						</div>
+						<div class="footer-edit caption-logo">
+							<a class="text-white" href="<?php echo base_url('login'); ?>"><b>SI</b>GUKAR</a>
+						</div>
+						<h4 class="text-bold text-white">SMP Muhammadiyah 9 Yogyakarta</h4>
 					</div>
-					<div class="footer-edit caption-logo">
-						<a href="<?php echo base_url('login'); ?>"><b>SI</b>GUKAR</a><br>
-					</div>
-					<h4 class="text-bold">SMP Muhammadiyah 9 Yogyakarta</h4>
 				</div>
 			</div>
 	  	</div>

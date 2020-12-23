@@ -31,14 +31,12 @@
 			}
 
 			body {
-					height: 100% !important;
+					/* height: 60vh; */
 					display: flex;
 					justify-content: space-around;
 					align-items: center;
 					flex-direction: row;
 					font-family: sans-serif;
-					margin: 0;
-					padding: 0;
 			}
 
 			.register-box {
@@ -50,12 +48,12 @@
 				display: flex;
 				justify-content: center;
 				height: 100%;
-				top: 0;
 			}
 
 			.box-edit-left {
 				width: 60%;
 				align-items: center;
+				position: relative;
 			}
 
 			.box-edit-right {
@@ -65,18 +63,16 @@
 				background-color: white;
 				align-items: flex-start;
 				flex-direction: column;
-				top: 0;
 			}
 
 			.header-edit {
 				width: 100%;				
 				height: 15%;
-				top: 0;
 				display: flex;
 				justify-content: center;
 				align-items: center;
 			}
-
+			
 			.footer-edit {
 				width: 100%;				
 				height: 100%;
@@ -94,19 +90,57 @@
 			.caption-logo {
 				margin-top: 50px;
 			}
+
+			.caption-logo a {
+				color: white;
+			}
+
+			.logo-edit {
+				position: relative;
+				height: 100%;
+				width: 100%;
+				color: white;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+			}
+
+			.blank-separator {
+				position: absolute;
+				height: 100%;
+				width: 100%;
+				opacity: 0.73;
+				left: 0;
+				top: 0;
+				background-color: rgb(26, 24, 21);
+			}
+
+			.img-edit {
+				position: absolute;
+				height: 100%;
+				width: 100%;
+				/* opacity: 0.5; */
+				left: 0;
+				top: 0;
+			}
 		</style>
 	</head>
 	<body class="hold-transition register-page">
 		<div class="box-edit box-edit-left">
 			<div class="register-box">
 				<div class="register-logo">
-					<div class="header-edit">
-						<img class="user-image img-circle" src="<?php echo base_url('assets/dist/img/smpmuh9.jpeg');?>" width="200px" height="200px" alt="Logo SMP Muhammadiyah 9">
+					<img class="img-edit" src="https://www.vicnews.com/wp-content/uploads/2020/06/21877409_web1_classroom_medium.jpg" alt="">
+					<div class="blank-separator"></div>
+					<div class="logo-edit">
+						<div class="header-edit">
+							<img class="user-image img-circle" src="<?php echo base_url('assets/dist/img/smpmuh9.jpeg');?>" width="200px" height="200px" alt="Logo SMP Muhammadiyah 9">
+						</div>
+						<div class="footer-edit caption-logo">
+							<a class="text-white" href="<?php echo base_url('login'); ?>"><b>SI</b>GUKAR</a>
+						</div>
+						<h4 class="text-bold text-white">SMP Muhammadiyah 9 Yogyakarta</h4>
 					</div>
-					<div class="footer-edit caption-logo">
-						<a href="<?php echo base_url('login'); ?>"><b>SI</b>GUKAR</a>
-					</div>
-					<h4 class="text-bold">SMP Muhammadiyah 9 Yogyakarta</h4>
 				</div>
 			</div>
 		</div>
