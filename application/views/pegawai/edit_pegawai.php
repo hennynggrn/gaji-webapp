@@ -222,7 +222,7 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Jabatan</label>
 							<div class="col-sm-10">
-								<select class="form-control select2" multiple="multiple" name="jabatan[]" data-placeholder="Pilih jabatan" style="width: 100%; background-color: white;" required>
+								<select class="form-control select2" multiple="multiple" name="jabatan[]" data-placeholder="Pilih jabatan" style="width: 100%; background-color: white;">
 									<option disabled>Pilih Jabatan</option>
 									<?php foreach ($jabatans as $key => $jabatan) : ?>
 									<option value=<?php echo '"'.$jabatan['id_jabatan'].'"'; echo ($jabatan['id_pegawai'] != NULL) ? 'selected' : '';?>>

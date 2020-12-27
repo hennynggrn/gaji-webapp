@@ -98,9 +98,11 @@
 									<td style="width: 150px">Jabatan Pegawai</td>
 									<td style="width: 20px">:</td>
 									<td>
-									<?php foreach ($jabatans as $key => $jabatan) { ?>
-										<span class="badge bg-grey"><?php echo $jabatan['jabatan'];?></span>
-									<?php } ?>
+									<?php 
+										if (!empty($jabatans)) {
+											foreach ($jabatans as $key => $jabatan) { ?>
+												<span class="badge bg-grey"><?php echo $jabatan['jabatan'];?></span>
+									<?php }} else { echo '-';} ?>
 									</td>
 								</tr>
 								<tr>

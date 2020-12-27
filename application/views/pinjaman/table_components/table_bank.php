@@ -8,7 +8,8 @@
 				$no=1; 
 				foreach ($pinjamans as $key => $pinjaman) :
 					if($pinjaman['kode_pinjaman'] == 'BANK') {
-						if (($pinjaman['start_month_IDN'] === $today_month) && ($pinjaman['start_year_IDN'] === $today_year)) {
+						if ((($pinjaman['start_month_IDN'] === $today_month) && ($pinjaman['start_year_IDN'] === $today_year)) ||
+						(($pinjaman['end_month_IDN'] === $today_month) && ($pinjaman['end_year_IDN'] === $today_year))) {
 							include 'body_table.php';
 						} 
 					} 

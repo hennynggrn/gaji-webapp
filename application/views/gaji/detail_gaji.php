@@ -1,4 +1,3 @@
-	<!-- Main content -->
 	<section class="content">
 		<div class="row">
 			<div class="col-md-8">
@@ -70,11 +69,45 @@
 									<td>Rp. &nbsp;<?php echo number_format($tunjangan['jamsostek'],0,',','.');?>
 										<input class="tunjangan" type="hidden" value="<?php echo $tunjangan['jamsostek'];?>">
 									</td>
-									<td>Rp. &nbsp;<?php echo ($tunjangan_keluarga != 0) ? number_format($tunjangan_keluarga,0,',','.') : 0; ?> 
-										<input class="tunjangan" type="hidden" value="<?php echo $tunjangan_keluarga;?>">
+									<td>
+									<?php 
+										if (empty($pegawai['klg_hidup'])) {
+											$keluarga_val = 0;
+										} else {
+											if ($pegawai['klg_hidup'] != NULL) {
+												$pasangan = 0;
+												$anak_pertama = 0;
+												$anak_kedua = 0;
+												for ($i=0; $i < $pegawai['klg_hidup']; $i++) { 
+													if (in_array('1', $pegawai['status_klg'])) {
+														$pasangan = 1;
+													} else if (in_array('2', $pegawai['status_klg'])) {
+														$anak_pertama = 1;
+													} else {
+														$anak_kedua = 1;
+													}
+												}
+											} else {
+												$pasangan = 0;
+												$anak_pertama = 0;
+												$anak_kedua = 0;
+											}
+											$keluarga_val = ($pegawai['honor']*$pasangan*$tunjangan['klg_psg'])+($pegawai['honor']*$anak_pertama*$tunjangan['klg_anak'])+($pegawai['honor']*$anak_kedua*$tunjangan['klg_anak']);
+										}
+										// $tunjangan_val = $tunjangan['beras']+$tunjangan['jamsostek']+$keluarga_val+$pegawai['jabatan']+$pegawai['nominal_mk'];
+										echo 'Rp. &nbsp;&nbsp;'.number_format($keluarga_val,0,',','.');
+									?>
+										<input class="tunjangan" type="hidden" value="<?php echo $keluarga_val;?>">
 									</td>
-									<td>Rp. &nbsp;<?php echo number_format($jabatan['total_nom_jbt'],0,',','.');?>
-										<input class="tunjangan" type="hidden" value="<?php echo $jabatan['total_nom_jbt'];?>">
+									<td>Rp. &nbsp;<?php 
+										if (!empty($pegawai['jabatan'])) {
+											$jabatan_val =  $pegawai['jabatan']; 
+										} else {
+											$jabatan_val = 0;
+										}
+										echo number_format($jabatan_val,0,',','.');
+									?>
+										<input class="tunjangan" type="hidden" value="<?php echo $jabatan_val;?>">
 									</td>
 									<td>Rp. &nbsp;<?php echo number_format($pegawai['nominal_mk'],0,',','.');?>
 										<input class="tunjangan" type="hidden" value="<?php echo $pegawai['nominal_mk'];?>">
@@ -85,9 +118,7 @@
 					</div>
 				</div>
 			</div>
-
 			<div class="col-md-4">
-				<!-- Profile Image -->
 				<div class="box box-warning">
 					<div class="box-body box-profile">
 						<img class="profile-user-img img-responsive img-circle" src="<?php echo base_url('assets/dist/img/upload/user1-128x128.jpg'); ?>" alt="<?php echo 'Foto '.$pegawai['nama'];?>">
@@ -119,11 +150,13 @@
 								<tr>
 									<td class="text-left text-bold">Jabatan</td>
 									<td class="text-right text-muted">
-										<?php foreach ($jabatans as $key => $jabatan) { ?>
+										<?php 
+										if (!empty($jabatans)) {
+										foreach ($jabatans as $key => $jabatan) { ?>
 											<span role="button" class="badge bg-gray" title="<?php echo $jabatan['jml_jam'].' jam';?>" data-tooltip="tooltip" data-placement="top">
 												<?php echo $jabatan['jabatan'];?>
 											</span>
-										<?php } ?>
+										<?php }} else { echo '-';} ?>
 									</td>
 								</tr>
 								<tr>
@@ -138,27 +171,27 @@
 									</td>
 									<td class="text-right text-muted">
 										<?php 
-											if (empty($keluargas_fetch)) {
+											if ((empty($pegawai['klg_hidup'])) && ($pegawai['status'] == 1)) {
+												echo '-';
+											} else if ((empty($pegawai['klg_hidup'])) && ($pegawai['status'] == 0)) {
 												echo '- &nbsp;&nbsp;<small class="text-info">(belum menikah)</small>';
 											} else {
-												if (($count_klg_hidup != 0) && (count($keluargas_fetch) != $count_klg_hidup)) {
-													echo $count_klg_hidup.' (dari '.count($keluargas_fetch).') anggota';
-													if (isset($anggotas)) {
-														foreach ($anggotas as $key => $anggota) {
-															echo '<br><small class="text-info"><i class="fa fa-fw fa-caret-right"></i> '.$anggota.'</small>';
-														}
-													}
-												} else if (($count_klg_hidup != 0) && (count($keluargas_fetch) == $count_klg_hidup)) {
-													echo $count_klg_hidup.' anggota';
-													if ($count_klg_hidup != 3) {
-														if (isset($anggotas)) {
-															foreach ($anggotas as $key => $anggota) {
-																echo '<br><small class="text-info"><i class="fa fa-fw fa-caret-right"></i> '.$anggota.'</small>';
-															}
-														}
-													}
+												if ($pegawai['klg_hidup'] != count($pegawai['status_klg'])) {
+													echo $pegawai['klg_hidup'].' (dari '.count($pegawai['status_klg']).') anggota';
 												} else {
-													echo '-';
+													echo $pegawai['klg_hidup'].' anggota';
+												}
+												foreach ($pegawai['status_klg'] as $key => $value) {
+													if ($value != "") {
+														if ($value == 1) {
+															$anggota = 'Pasangan';
+														} else if ($value == 2) {
+															$anggota = 'Anak Pertama';
+														} else {
+															$anggota = 'Anak Kedua';
+														}
+														echo '<br><small class="text-info"><i class="fa fa-fw fa-caret-right"></i> '.$anggota.'</small>';
+													}
 												}
 											}
 										?>
@@ -210,27 +243,17 @@
 									<td>
 										Rp. &nbsp;
 										<?php
-											if ($angsuran_kop != NULL) {
-												echo number_format($angsuran_kop['nominal'],0,',','.');
-												$kop_val = $angsuran_kop['nominal'];
-											} else {
-												echo 0;
-												$kop_val = 0;
-											}
+											(!empty($pegawai['nominal_kop'])) ? $pjm_kop = $pegawai['nominal_kop'] : $pjm_kop = 0;
+											echo number_format($pjm_kop,0,',','.');
 										?>
-										<input class="potongan" type="hidden" value="<?php echo $kop_val;?>">
+										<input class="potongan" type="hidden" value="<?php echo $pjm_kop;?>">
 									</td>
 									<td>Rp. &nbsp;
 										<?php
-											if ($angsuran_bank != NULL) {
-												echo number_format($angsuran_bank['nominal'],0,',','.');
-												$bank_val = $angsuran_bank['nominal'];
-											} else {
-												echo 0;
-												$bank_val = 0;
-											}
+											(!empty($pegawai['nominal_bank'])) ? $pjm_bank = $pegawai['nominal_bank'] : $pjm_bank = 0;
+											echo number_format($pjm_bank,0,',','.');
 										?>
-										<input class="potongan" type="hidden" value="<?php echo $bank_val;?>">
+										<input class="potongan" type="hidden" value="<?php echo $pjm_bank;?>">
 									</td>
 								</tr>
 							</tbody>
@@ -246,25 +269,31 @@
 				<a href="<?php echo base_url('table')?>" class="pull-left btn btn-default">Kembali</a>
 				<span class="pull-right">
 					<?php 
-						if (($angsuran_kop != NULL) || ($angsuran_bank != NULL)) { 
-							if ($angsuran_kop == NULL) {
-								$id_angsuran = '0-'.$angsuran_bank['id_angsuran'];
+						$id_kop = 0;
+						$id_bank = 0;
+						if (($pjm_kop != 0) && ($pjm_bank != 0)) {
+							$id_angsuran = $pegawai['id_kop'].'-'.$pegawai['id_bank'];
+							if ($hide == FALSE) {
+								echo '<a href="'.site_url('gaji/pay_print/'.$pegawai['id_pegawai'].'/'.$id_angsuran).'" class="btn bg-orange">Bayar Pinjaman & Cetak</a></td>';
 							}
-							if ($angsuran_bank == NULL) {
-								$id_angsuran = $angsuran_kop['id_angsuran'].'-0';
+						} else if (($pjm_kop != 0) || ($pjm_bank != 0)) { 
+							if ($pjm_kop == 0) {
+								$id_bank = $pegawai['id_bank'];
 							}
-
-							if (($angsuran_kop != NULL) && ($angsuran_bank != NULL)) {
-								$id_angsuran = $angsuran_kop['id_angsuran'].'-'.$angsuran_bank['id_angsuran'];
+							if ($pjm_bank == 0) {
+								$id_kop = $pegawai['id_kop'];
 							}
-					if ($hide == FALSE) { ?>
-						<a href="<?php echo base_url('gaji/pay_print/'.$pegawai['id_pegawai'].'/'.$id_angsuran)?>" class="btn bg-orange">Bayar Pinjaman & Cetak</a></td>
-					<?php } } ?>
-					<a href="<?php echo base_url('print/'.$pegawai['id_pegawai'])?>" class="btn bg-blue edit-btn">Cetak</a></td>
+							$id_angsuran = $id_kop.'-'.$id_bank;
+							if ($hide == FALSE) {
+								echo '<a href="'.site_url('gaji/pay_print/'.$pegawai['id_pegawai'].'/'.$id_angsuran).'" class="btn bg-orange">Bayar Pinjaman & Cetak</a></td>';
+							}
+						} else {
+							$id_angsuran = $id_kop.'-'.$id_bank;
+						}
+					?>
+					<a href="<?php echo site_url('print/'.$pegawai['id_pegawai'])?>" target="_BLANK" class="btn bg-blue edit-btn">Cetak</a></td>
 				</span>
 			</div>
-	</div>
-				<!-- /.box -->
+		</div>
 	</section>
-	<!-- /.content -->
 </div>

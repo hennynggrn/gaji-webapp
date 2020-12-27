@@ -43,7 +43,8 @@
 										echo 'Tidak Tetap';
 										break;
 								}?></td>
-								<td class="badge-edit"><span><?php echo $honor['result_list'];?></span></td>
+								<td class="badge-edit"><span><?php echo $honor['result_list'];?></span>
+								<?php if (empty($honor['result_list'])) echo '-';?></td>
 								<?php if ($hide == FALSE) { ?>
 									<td>
 										<a href="" data-toggle="modal" data-target="#editHonorPegawai<?php echo $honor['id_pegawai'];?>" title="Edit" data-tooltip="tooltip" data-placement="top">

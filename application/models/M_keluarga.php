@@ -8,9 +8,9 @@ class M_keluarga extends CI_Model{
 		if ($id == TRUE) {
 			return $this->db->get_where('keluarga', array('id_anggota_klg' => $id));
 		} else {
-			$this->db->SELECT('k.*, p.nama nama_pegawai, p.gender gender_pegawai');
-			$this->db->ORDER_BY('k.nama');
-			$this->db->JOIN('pegawai p','p.id_pegawai = k.id_pegawai', 'LEFT');
+			$this->db->select('k.*, p.nama nama_pegawai, p.gender gender_pegawai');
+			$this->db->order_by('k.nama');
+			$this->db->join('pegawai p','p.id_pegawai = k.id_pegawai', 'LEFT');
 			return $this->db->get('keluarga k');
 		}
 	}
@@ -23,10 +23,23 @@ class M_keluarga extends CI_Model{
 
 	public function get_anggota_keluarga($id_pegawai)
 	{
-		$this->db->SELECT('k.*, p.nama nama_pegawai, p.gender gender_pegawai');
-		$this->db->ORDER_BY('k.id_status');
-		$this->db->JOIN('pegawai p','p.id_pegawai = k.id_pegawai', 'LEFT');
-		return $this->db->get_where('keluarga k', array('k.id_pegawai' => $id_pegawai));
+		if ($id_pegawai != NULL) {
+			$this->db->select('k.*, p.nama nama_pegawai, p.gender gender_pegawai, p.id_pegawai,
+							   GROUP_CONCAT(DISTINCT CONCAT(if(k.s_hidup=1, "", k.id_status)) SEPARATOR "-") keluarga,
+							   sum(if(k.s_hidup=1, 0, k.s_hidup)) klg_hidup');
+			$this->db->order_by('p.nama');
+			$this->db->join('keluarga k','p.id_pegawai = k.id_pegawai', 'LEFT OUTER');
+			$this->db->group_by('p.id_pegawai');
+			return $this->db->get_where('pegawai p', array('k.id_pegawai' => $id_pegawai));
+		} else {
+			$this->db->select('k.*, p.nama nama_pegawai, p.gender gender_pegawai, p.id_pegawai,
+							   GROUP_CONCAT(DISTINCT CONCAT(if(k.s_hidup=1, "", k.id_status)) SEPARATOR "-") keluarga,
+							   sum(if(k.s_hidup=1, 0, k.s_hidup)) klg_hidup');
+			$this->db->order_by('p.nama');
+			$this->db->join('keluarga k','p.id_pegawai = k.id_pegawai', 'LEFT OUTER');
+			$this->db->group_by('p.id_pegawai');
+			return $this->db->get('pegawai p');
+		}
 	}
 
 	public function add_keluarga()

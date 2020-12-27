@@ -16,6 +16,6 @@ input[type=number] {
 }
 
 .edit-bg-gray {
-	background-color: rgb(89, 186, 123);
-	align-items: ;
+	background-color: rgb(26, 24, 21);
+	font-weight: bold;
 }

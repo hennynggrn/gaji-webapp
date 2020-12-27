@@ -43,7 +43,9 @@ class Pegawai extends CI_Controller {
 		} else {
 			if (authUserLevel() == TRUE){
 				$res['pegawai'] = $this->M_pegawai->add_pegawai();
-				$res['jabatan'] = $this->M_jabatan->add_jabatan_pegawai();
+				if (!empty($this->input->post('jabatan'))) {
+					$res['jabatan'] = $this->M_jabatan->add_jabatan_pegawai();
+				};
 				if ($this->input->post('status') == 1) {
 					$res['keluarga']=$this->M_keluarga->add_keluarga(); 
 				};
@@ -110,7 +112,11 @@ class Pegawai extends CI_Controller {
 		} else {
 			if (authUserLevel() == TRUE){
 				$res['pegawai'] = $this->M_pegawai->update_pegawai();
-				$res['jabatan'] = $this->M_jabatan->update_jabatan_pegawai();
+				if (!empty($this->input->post('jabatan'))) {
+					$res['jabatan'] = $this->M_jabatan->update_jabatan_pegawai();
+				} else {
+					$res['jabatan'] = $this->M_jabatan->delete_all_jabatan_pegawai();
+				}
 				if ($this->input->post('status') == 1) {
 					$res['keluarga'] = $this->M_keluarga->update_keluarga_pegawai(); 
 				} else {

@@ -3,13 +3,12 @@
     {
         public function index()
         {
-            $data['title'] = 'Login';
             // set rules of validation error
             $this->form_validation->set_rules('email', 'Email', 'required');
             $this->form_validation->set_rules('password', 'Password', 'required');
             if ($this->form_validation->run() === FALSE) {
                 // if not field then keep on login view
-				$this->load->view('pages/login', $data);
+				$this->load->view('pages/login');
             }else {
                 // get username and encrypt password
                 $email = $this->input->post('email');
@@ -53,7 +52,6 @@
         
         public function register()
         {
-            $data['title'] = 'Register';
             // set rules if validation error
            	$this->form_validation->set_rules('fullname', 'Fullname', 'required', array('required' => ' Nama lengkap harus diisi'));
             // set paramater callback for function check_username_exists and check_email_exists
@@ -66,7 +64,7 @@
             $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'matches[password]', array('matches' => ' Konfirmasi password tidak sesuai dengan password'));
             
             if($this->form_validation->run() === FALSE){
-                $this->load->view('pages/register', $data);
+                $this->load->view('pages/register');
             }else {
                 // die('Continue');
                 // encrypt password

@@ -192,7 +192,7 @@
 								<?php echo form_error('phone', '<span class="error text-red"><small><i class="fa fa-fw fa-warning"></i>', '</small></span>'); ?>
 								<div class="form-group has-feedback">
 									<input type="number" name="phone" class="register_val form-control" placeholder="Nomor telfon/hp" value="<?php if(isset($_POST['phone'])) {echo $_POST['phone'];}?>">
-									<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+									<span class="glyphicon glyphicon-phone form-control-feedback"></span>
 								</div>
 
 								<?php echo form_error('password', '<span class="error text-red"><small><i class="fa fa-fw fa-warning"></i>', '</small></span>'); ?>
@@ -204,7 +204,7 @@
 								<?php echo form_error('confirm_password', '<div class="error text-red"><small><i class="fa fa-fw fa-warning"></i>', '</small></div>'); ?>
 								<div class="form-group has-feedback">
 									<input type="password" name="confirm_password" class="form-control" placeholder="Konfirmasi password">
-									<span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+									<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 								</div>
 								<div class="row">
 									<div class="col-xs-6">

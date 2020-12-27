@@ -19,6 +19,21 @@ class M_jabatan extends CI_Model{
 		}
 	}
 
+	public function get_bendahara($id_jabatan, $jabatan)
+	{
+		if ($id_jabatan != '2') {
+			$this->db->select(' p.*, jbt.id_jabatan, jabatan, jml_jam');
+			$this->db->join('jbt_pegawai jp', 'jp.id_pegawai = p.id_pegawai', 'LEFT');
+			$this->db->join('jabatan jbt', 'jbt.id_jabatan = jp.id_jabatan', 'LEFT');
+			return $this->db->get_where('pegawai p', array('jabatan' => $jabatan));
+		} else {
+			$this->db->select(' p.*, jbt.id_jabatan, jabatan, jml_jam');
+			$this->db->join('jbt_pegawai jp', 'jp.id_pegawai = p.id_pegawai', 'LEFT');
+			$this->db->join('jabatan jbt', 'jbt.id_jabatan = jp.id_jabatan', 'LEFT');
+			return $this->db->get_where('pegawai p', array('jbt.id_jabatan' => $id_jabatan));
+		}
+	}
+
 	public function get_jabatan_pegawai($id = TRUE)
 	{
 		$this->db->select('jbt.id_jabatan, jabatan, jml_jam, id_pegawai');
@@ -179,6 +194,13 @@ class M_jabatan extends CI_Model{
 	public function delete_pegawai($id_jabatan, $id_pegawai)
 	{
 		$this->db->where('id_jabatan', $id_jabatan);
+		$this->db->where('id_pegawai', $id_pegawai);
+		return $this->db->delete('jbt_pegawai');
+	}
+
+	public function delete_all_jabatan_pegawai()
+	{
+		$id_pegawai = $this->input->post('id_pegawai');
 		$this->db->where('id_pegawai', $id_pegawai);
 		return $this->db->delete('jbt_pegawai');
 	}

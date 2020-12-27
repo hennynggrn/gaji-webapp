@@ -34,7 +34,8 @@
 								</td>
 								<td><?php echo ($honor['status_pegawai'] == 'T1') ? 'Tetap' : 'PNS/Tidak Tetap';?></td>
 								<td><?php echo $honor['result'].' orang';?></td>
-								<td class="badge-edit"><span><?php echo $honor['result_list'];?></span></td>
+								<td class="badge-edit"><span><?php echo $honor['result_list'];?></span>
+								<?php if (empty($honor['result_list'])) echo '-';?></td>
 								<td>
 									<a href="<?php echo site_url('honor/detail/'.$id_honor);?>" title="Detail" data-toggle="tooltip" data-placement="top">
 										<span class="badge bg-green"><i class="fa fa-fw fa-info-circle"></i></span>

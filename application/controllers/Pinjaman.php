@@ -36,9 +36,9 @@ class Pinjaman extends CI_Controller {
 			} else {
 				$data['hide'] = TRUE;
 			}
+			// var_dump($data['pinjamans']);
 			$this->template->load('index','pinjaman/table_pinjaman', $data);
 		}
-		// var_dump($data['pinjamans']);
 	}
 
 	public function add_pinjaman($id = NULL) 
@@ -101,6 +101,7 @@ class Pinjaman extends CI_Controller {
 			} else {
 				$data['hide'] = TRUE;
 			}
+			// var_dump($data['pinjaman']);
 			$this->template->load('index','pinjaman/detail_pinjaman', $data);
 		}
 	}
@@ -111,6 +112,7 @@ class Pinjaman extends CI_Controller {
             redirect('login');
 		} else {
 			if (authUserLevel() == TRUE){
+				$data['hide'] = FALSE;
 				$data['title'] = 'Bayar Angsuran Pinjaman';
 				$data['pay'] = TRUE;
 				$data['pinjaman'] = $this->M_pinjaman->get_pinjaman($id)->row_array();
