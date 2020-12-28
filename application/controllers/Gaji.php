@@ -29,7 +29,7 @@ class Gaji extends CI_Controller {
 			$date_today = date('Y-m-d'); // tanggal sekarang
 			$data['desc'] = month($date_today).' '.date('Y', strtotime($date_today));
 			$data['month'] = $month_today;
-			var_dump($data);
+			// var_dump($data);
 			$this->template->load('index','gaji/detail_gaji',$data);
 		}
 	}
