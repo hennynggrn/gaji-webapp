@@ -13,7 +13,7 @@
 					<div class="box-body">
 						<form action="" method="get">
 							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Cari nama atau npm ...">
+								<input type="text" class="form-control" id="search" placeholder="Cari nama atau npm ...">
 								<span class="input-group-btn">
 									<button type="submit" name="search" id="search-btn" class="btn btn-flat">
 										<i class="fa fa-search"></i>
@@ -81,7 +81,7 @@
 								<th>Gaji Bersih</th>
 								<th>Menu</th>
 							</thead>
-							<tbody>
+							<tbody id="result">
 							<?php
 								$no=1; foreach ($pegawais as $pegawai) :
 							?>

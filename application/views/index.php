@@ -43,10 +43,10 @@
 			<!-- Logo -->
 			<a href="<?php echo base_url();?>" class="logo" style="display: flex; justify-content: center; align-items: center;">
 				<!-- mini logo for sidebar mini 50x50 pixels -->
-				<img class="logo-mini user-image img-circle" src="<?php echo base_url('assets/dist/img/smpmuh9.jpeg');?>" width="36px" height="36px" alt="Logo SMP Muhammadiyah 9">
+				<img class="logo-mini user-image img-circle" src="<?php echo base_url('assets/dist/img/upload/smpmuh9.jpeg');?>" width="36px" height="36px" alt="Logo SMP Muhammadiyah 9">
 				<!-- logo for regular state and mobile devices -->
 				<span class="logo-lg">
-					<img class="user-image img-circle" src="<?php echo base_url('assets/dist/img/smpmuh9.jpeg');?>" width="36px" height="36px" alt="Logo SMP Muhammadiyah 9">
+					<img class="user-image img-circle" src="<?php echo base_url('assets/dist/img/upload/smpmuh9.jpeg');?>" width="36px" height="36px" alt="Logo SMP Muhammadiyah 9">
 					&nbsp;&nbsp;<b>SIP</b>GuKar
 				</span>
 			</a>
@@ -92,7 +92,7 @@
 								<!-- Menu Footer-->
 								<li class="user-footer">
 									<div class="pull-left">
-										<a href="#" class="btn btn-default btn-flat">Profile</a>
+										<a href="<?php echo site_url('profile/'.$this->session->userdata('user_id'));?>" class="btn btn-default btn-flat">Profile</a>
 									</div>
 									<div class="pull-right">
 										<a href="<?php echo site_url('logout');?>" class="btn btn-default btn-flat">Log out</a>
@@ -582,7 +582,7 @@
 		}
 	</script>
 
-	<!-- Set Focus Form ketika edit keluarga pada halaman pegawai -->
+	<!-- Set Focus Form  -->
 	<script>
 		function focusKeluarga(that) {
 			document.getElementById('mate').focus();
@@ -590,6 +590,10 @@
 
 		function focusPegawai(that) {
 			document.getElementById('jns_pegawai').focus();
+		}
+
+		function focusLinkPegawai() {
+			document.getElementById('id_pegawai').focus();
 		}
 	</script>
 
@@ -1031,6 +1035,31 @@
 			}
 			return s.join(dec);
 		}
+	</script>
+
+	<script>
+		$(document).ready(function() {
+			$('#search').keyup(function() {
+				var search = $(this).val();
+				if (search != '') {
+					load_data(search);
+				} else {
+					search = '';
+					$('#result').html(search);
+				}
+			});
+
+			function load_data(query) {
+				$.ajax({
+					url: '<?php echo site_url("gaji/search_gaji");?>',
+					method: 'POST',
+					data: {query:query},
+					success: function(data) {
+						$('#result').html(data);
+					}
+				});
+			}
+		});
 	</script>
 
 </body>

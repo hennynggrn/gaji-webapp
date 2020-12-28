@@ -12,7 +12,7 @@ class M_gaji extends CI_Model{
 
 	public function get_jabatan($id_pegawai, $jabatan_val)
 	{
-		if ($id_pegawai != NULL) {
+		if ($id_pegawai != NULL) { 
 			$this->db->select('jbt.id_jabatan, jabatan, jml_jam, p.id_pegawai,
 							GROUP_CONCAT(DISTINCT CONCAT(jabatan, jml_jam) SEPARATOR "|") jabatan,
 							sum('.$jabatan_val.'*jml_jam) nominal_jbt');

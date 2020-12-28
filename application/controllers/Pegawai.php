@@ -76,6 +76,7 @@ class Pegawai extends CI_Controller {
 			} else {
 				$data['hide'] = TRUE;
 			}
+			// var_dump($data['pegawai']);
 			$this->template->load('index', 'pegawai/detail_pegawai', $data);
 		}
 	}

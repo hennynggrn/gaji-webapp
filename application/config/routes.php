@@ -1,6 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+$route['profile/unlink/(:any)'] = 'user/unlink_pegawai/$1';
+$route['profile/(:any)'] = 'user/profile_user/$1';
+$route['delete/(:any)'] = 'user/delete_user/$1';
+$route['unlink/(:any)'] = 'user/unlink_pegawai/$1';
 $route['user'] = 'user/index';
 
 $route['laporan'] = 'laporan/index';

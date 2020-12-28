@@ -237,8 +237,8 @@
 							<div class="col-sm-10">
 								<select class="form-control" name="jns_pegawai" id="jns_pegawai">
 									<option value="" disabled>Pilih Jenis Pegawai</option>
-									<option value="0" <?php if($pegawai['jns_pegawai'] == 0) {echo 'selected';}?>>Guru</option>
-									<option value="1" <?php if($pegawai['jns_pegawai'] == 1) {echo 'selected';}?>>Karyawan</option>
+									<option value="G" <?php if($pegawai['jns_pegawai'] == 'G') {echo 'selected';}?>>Guru</option>
+									<option value="K" <?php if($pegawai['jns_pegawai'] == 'K') {echo 'selected';}?>>Karyawan</option>
 								</select>
 							</div>
 						</div>

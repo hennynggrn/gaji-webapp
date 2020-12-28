@@ -148,7 +148,7 @@
 										<tr>
 											<td colspan="3">Honorium Bulan</td>
 											<td>:</td>
-											<td><?php echo $month;?></td>
+											<td><?php echo $desc;?></td>
 										</tr>
 										<!-- Tunjangan -->
 										<tr>

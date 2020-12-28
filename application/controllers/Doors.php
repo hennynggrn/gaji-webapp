@@ -15,7 +15,7 @@
                 $password = md5($this->input->post('password'));
 
                 // passing username and password
-                $user = $this->M_doors->login($email, $password);
+				$user = $this->M_doors->login($email, $password);
 
                 // create new variables
                 $user_id = $user['id'];
@@ -40,7 +40,7 @@
                     $this->session->set_userdata($user_data);
                     
                     // set message if login is succed
-                    $this->session->set_flashdata('user_loggedin', 'Selamat datang kembali '.$user['fullname'].'! Silahkan menggunakan layanan SIPGUKAR.');
+                    $this->session->set_flashdata('user_loggedin', 'Selamat datang kembali '.$user['fullname'].'! Silahkan menggunakan layanan SIGUKAR.');
                     redirect(base_url());
                 }else {
                     // set message if log in invalid
@@ -73,7 +73,7 @@
                 $this->M_doors->register($enc_password);
 
 				// set session 
-                $this->session->set_flashdata('user_registered', 'Hi <b>'.$this->input->post('username').'</b>! Anda telah terdaftar. Silahkan masuk kembali');
+                $this->session->set_flashdata('user_registered', 'Hi <b>'.$this->input->post('username').'</b>! Anda telah terdaftar dengan email <b>'.$this->input->post('email').'</b>. Silahkan Log In kembali');
                 
                 redirect('login');
             }

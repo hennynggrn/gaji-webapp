@@ -134,7 +134,7 @@
 					<div class="blank-separator"></div>
 					<div class="logo-edit">
 						<div class="header-edit">
-							<img class="user-image img-circle" src="<?php echo base_url('assets/dist/img/smpmuh9.jpeg');?>" width="200px" height="200px" alt="Logo SMP Muhammadiyah 9">
+							<img class="user-image img-circle" src="<?php echo base_url('assets/dist/img/upload/smpmuh9.jpeg');?>" width="200px" height="200px" alt="Logo SMP Muhammadiyah 9">
 						</div>
 						<div class="footer-edit caption-logo">
 							<a class="text-white" href="<?php echo base_url('login'); ?>"><b>SI</b>GUKAR</a>
