@@ -15,16 +15,16 @@
 							<div class="input-group">
 								<input type="text" class="form-control" id="search" placeholder="Cari nama atau npm ...">
 								<span class="input-group-btn">
-									<button type="submit" name="search" id="search-btn" class="btn btn-flat">
+									<button type="button" name="search" id="search-btn" class="btn btn-flat">
 										<i class="fa fa-search"></i>
 									</button>
 								</span>
-								<div class="input-group-btn">
+								<!-- <div class="input-group-btn">
 									<button	button type="button" class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">More Filter</button>
-								</div>
+								</div> -->
 							</div>
 						</form>
-						<div class="collapse" id="collapseExample" style="margin-left: 10px; margin-right: 10px;">
+						<!-- <div class="collapse" id="collapseExample" style="margin-left: 10px; margin-right: 10px;">
 							<br>
 							<div class="row">
 								<div class="col-md-5">
@@ -64,11 +64,11 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>
-			<div class="col-md-12">
+			<div class="col-md-12" id="result">
 				<div class="box box-primary">
 					<div class="box-body">
 						<table class="table table-bordered table-hover text-center">
@@ -93,7 +93,7 @@
 											echo 'Rp. &nbsp;&nbsp; 0 &nbsp;&nbsp;<small>(belum ditentukan)</small>';
 											$honor_val = 0;
 										} else if (($pegawai['honor'] != NULL) && ($pegawai['honor'] != 0)) {
-											echo 'Rp. &nbsp;&nbsp;'.$pegawai['honor'];
+											echo 'Rp. &nbsp;&nbsp;'.number_format($pegawai['honor'],0,',','.');
 											$honor_val = $pegawai['honor'];
 										} else {
 											echo '-';

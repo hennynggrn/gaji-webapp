@@ -9,6 +9,11 @@ class Gaji extends CI_Controller {
             redirect('login');
         } else {
 			$data = $this->gaji_pegawai_all($id_pegawai);
+			$data['title'] = 'Tabel Gaji';
+			$month_today = date('Y-m'); // bulan & tahun ini
+			$date_today = date('Y-m-d'); // tanggal sekarang
+			$data['desc'] = month($date_today).' '.date('Y', strtotime($date_today));
+			$data['month'] = $month_today;
 			$this->template->load('index','gaji/table_gaji', $data);
 		}
 	}
@@ -19,6 +24,11 @@ class Gaji extends CI_Controller {
             redirect('login');
         } else {
 			$data = $this->gaji_pegawai($id_pegawai);
+			$data['title'] = 'Detail Gaji';
+			$month_today = date('Y-m'); // bulan & tahun ini
+			$date_today = date('Y-m-d'); // tanggal sekarang
+			$data['desc'] = month($date_today).' '.date('Y', strtotime($date_today));
+			$data['month'] = $month_today;
 			$this->template->load('index','gaji/detail_gaji',$data);
 		}
 	}
@@ -71,73 +81,143 @@ class Gaji extends CI_Controller {
 		if(!$this->session->userdata('logged_in')){
             redirect('login');
         } else {
+			// $data_output = array();
+			$data = $this->gaji_pegawai_all($id_pegawai);
 			$output = '';
 			$query = '';
-			$data = $this->gaji_pegawai_all($id_pegawai);
 			$no = 1;
-			
+			$data_output = array();
 			if($this->input->post('query'))
 			{
 				$query = $this->input->post('query'); 
 			}
+			// $input = preg_quote($query, '~');
+			if (!empty($data)) {
+				$output .= '
+					<div class="box box-primary">
+						<div class="box-body">
+							<table class="table table-bordered table-hover text-center">
+								<thead>
+									<th>No</th>
+									<th>Nama</th>
+									<th>Honorarium</th>
+									<th>Jumlah Tunjangan</th>
+									<th>Jumlah Potongan</th>
+									<th>Gaji Bersih</th>
+									<th>Menu</th>
+								</thead>
+								<tbody>
+					';
 
-			// if (($pegawai['honor'] != NULL) && ($pegawai['honor'] == 0)) {
-			// 	$honor = 'Rp. &nbsp;&nbsp; 0 &nbsp;&nbsp;<small>(belum ditentukan)</small>';
-			// 	$honor_val = 0;
-			// } else if (($pegawai['honor'] != NULL) && ($pegawai['honor'] != 0)) {
-			// 	$honor = 'Rp. &nbsp;&nbsp;'.$pegawai['honor'];
-			// 	$honor_val = $pegawai['honor'];
-			// } else {
-			// 	$honor = '-';
-			// 	$honor_val = 0;
-			// }
+					foreach ($data['pegawais'] as $key => $pegawai) {
+					if (($pegawai['honor'] != NULL) && ($pegawai['honor'] == 0)) {
+						$honor = 'Rp. &nbsp;&nbsp; 0 &nbsp;&nbsp;<small>(belum ditentukan)</small>';
+						$honor_val = 0;
+					} else if (($pegawai['honor'] != NULL) && ($pegawai['honor'] != 0)) {
+						$honor = 'Rp. &nbsp;&nbsp;'.number_format($pegawai['honor'],0,',','.');
+						$honor_val = $pegawai['honor'];
+					} else {
+						$honor = '-';
+						$honor_val = 0;
+					}
 
-			// if ($pegawai['klg_hidup'] != NULL) {
-			// 	$pasangan = 0;
-			// 	$anak_pertama = 0;
-			// 	$anak_kedua = 0;
-			// 	for ($i=0; $i < $pegawai['klg_hidup']; $i++) { 
-			// 		if (in_array('1', $pegawai['status_klg'])) {
-			// 			$pasangan = 1;
-			// 		} else if (in_array('2', $pegawai['status_klg'])) {
-			// 			$anak_pertama = 1;
-			// 		} else {
-			// 			$anak_kedua = 1;
-			// 		}
-			// 	}
-			// } else {
-			// 	$pasangan = 0;
-			// 	$anak_pertama = 0;
-			// 	$anak_kedua = 0;
-			// }
-			// $keluarga_val = ($pegawai['honor']*$pasangan*$tunjangan['klg_psg'])+($pegawai['honor']*$anak_pertama*$tunjangan['klg_anak'])+($pegawai['honor']*$anak_kedua*$tunjangan['klg_anak']);
-			// $tunjangan_val = $tunjangan['beras']+$tunjangan['jamsostek']+$keluarga_val+$pegawai['jabatan']+$pegawai['nominal_mk'];
+					if ($pegawai['klg_hidup'] != NULL) {
+						$pasangan = 0;
+						$anak_pertama = 0;
+						$anak_kedua = 0;
+						for ($i=0; $i < $pegawai['klg_hidup']; $i++) { 
+							if (in_array('1', $pegawai['status_klg'])) {
+								$pasangan = 1;
+							} else if (in_array('2', $pegawai['status_klg'])) {
+								$anak_pertama = 1;
+							} else {
+								$anak_kedua = 1;
+							}
+						}
+					} else {
+						$pasangan = 0;
+						$anak_pertama = 0;
+						$anak_kedua = 0;
+					}
+					$keluarga_val = ($pegawai['honor']*$pasangan*$data['tunjangan']['klg_psg'])+($pegawai['honor']*$anak_pertama*$data['tunjangan']['klg_anak'])+($pegawai['honor']*$anak_kedua*$data['tunjangan']['klg_anak']);
+					$tunjangan_val = $data['tunjangan']['beras']+$data['tunjangan']['jamsostek']+$keluarga_val+$pegawai['jabatan']+$pegawai['nominal_mk'];
 
-			// (!empty($pegawai['nominal_kop'])) ? $pjm_kop = $pegawai['nominal_kop'] : $pjm_kop = 0;
-			// (!empty($pegawai['nominal_bank'])) ? $pjm_bank = $pegawai['nominal_bank'] : $pjm_bank = 0;
-			// $pinjaman = $pjm_kop+$pjm_bank;
-			// $potongan_val = $potongan['sosial']+$potongan['infaq']+$potongan['jsr']+$potongan['aisiyah']+$potongan['jamsostek']+$pinjaman;
-			// $gaji = $honor_val+$tunjangan_val-$potongan_val;
+					(!empty($pegawai['nominal_kop'])) ? $pjm_kop = $pegawai['nominal_kop'] : $pjm_kop = 0;
+					(!empty($pegawai['nominal_bank'])) ? $pjm_bank = $pegawai['nominal_bank'] : $pjm_bank = 0;
+					$pinjaman = $pjm_kop+$pjm_bank;
+					$potongan_val = $data['potongan']['sosial']+$data['potongan']['infaq']+$data['potongan']['jsr']+$data['potongan']['aisiyah']+$data['potongan']['jamsostek']+$pinjaman;
+					$gaji = $honor_val+$tunjangan_val-$potongan_val;
 
-			// $output .= '
-			// 	<tr>
-			// 		<td>'.$no++.'</td>
-			// 		<td style="text-align: left; padding-left: 15px;">'.$pegawai['nama'].'</td>
-			// 		<td style="text-align: left; padding-left: 15px;">'.number_format($honor,0,',','.').'</td>
-			// 		<td style="text-align: left; padding-left: 15px;">'.number_format($tunjangan_val,0,',','.').'</td>
-			// 		<td style="text-align: left; padding-left: 15px;">'.number_format($tunjangan_val,0,',','.').'</td>
-			// 		<td style="text-align: left; padding-left: 15px;">'.number_format($gaji,0,',','.').'</td>
-			// 		<td>
-			// 			<a href="'.site_url('detail/'.$pegawai['id_pegawai']).'" title="Detail" data-tooltip="tooltip" data-placement="top">
-			// 				<span class="badge bg-green"><i class="fa fa-fw fa-info-circle"></i></span>
-			// 			</a>
-			// 			<a href="'.site_url('print/'.$pegawai['id_pegawai']).'" target="_BLANK" title="Cetak" data-tooltip="tooltip" data-placement="top">
-			// 				<span class="badge bg-blue"><i class="fa fa-fw fa-print"></i></span>
-			// 			</a>
-			// 		</td>
-			// 	</tr>
-			// 	';
-			var_dump($data);
+					if ((stripos($pegawai['nama'], $query) !== FALSE) || stripos($pegawai['nbm'], $query) !== FALSE) {
+						$data_output[$key] = $data['pegawais'][$key];
+						$data_output[$key]['honor_val'] = $honor;
+						$data_output[$key]['tunjangan_val'] = $tunjangan_val;
+						$data_output[$key]['potongan_val'] = $potongan_val;
+						$data_output[$key]['gaji'] = $gaji;
+					} 
+
+					if ($query == '') {
+						$output .= '
+							<tr>
+								<td>'.$no++.'</td>
+								<td style="text-align: left; padding-left: 15px;">'.$pegawai['nama'].'</td>
+								<td style="text-align: left; padding-left: 15px;">'.$honor.'</td>
+								<td style="text-align: left; padding-left: 15px;">Rp. &nbsp;&nbsp;'.number_format($tunjangan_val,0,',','.').'</td>
+								<td style="text-align: left; padding-left: 15px;">Rp. &nbsp;&nbsp;'.number_format($potongan_val,0,',','.').'</td>
+								<td style="text-align: left; padding-left: 15px;">Rp. &nbsp;&nbsp;'.number_format($gaji,0,',','.').'</td>
+								<td>
+									<a href="'.site_url('detail/'.$pegawai['id_pegawai']).'" title="Detail" data-tooltip="tooltip" data-placement="top">
+										<span class="badge bg-green"><i class="fa fa-fw fa-info-circle"></i></span>
+									</a>
+									<a href="'.site_url('print/'.$pegawai['id_pegawai']).'" target="_BLANK" title="Cetak" data-tooltip="tooltip" data-placement="top">
+										<span class="badge bg-blue"><i class="fa fa-fw fa-print"></i></span>
+									</a>
+								</td>
+							</tr>
+						';
+					}
+				}
+
+				if ((empty($data_output)) && ($query != '')) {
+					$output .= '
+						<tr>
+							<td colspan="7" class="text-danger">Tidak ada data ditemukan.</td>
+						</tr>
+					';
+				}
+				
+				foreach ($data_output as $key => $output_val) {
+					if ($query != '') {
+						$output .= '
+							<tr>
+								<td>'.$no++.'</td>
+								<td style="text-align: left; padding-left: 15px;">'.$output_val['nama'].'</td>
+								<td style="text-align: left; padding-left: 15px;">'.$output_val['honor_val'].'</td>
+								<td style="text-align: left; padding-left: 15px;">Rp. &nbsp;&nbsp;'.number_format($output_val['tunjangan_val'],0,',','.').'</td>
+								<td style="text-align: left; padding-left: 15px;">Rp. &nbsp;&nbsp;'.number_format($output_val['potongan_val'],0,',','.').'</td>
+								<td style="text-align: left; padding-left: 15px;">Rp. &nbsp;&nbsp;'.number_format($output_val['gaji'],0,',','.').'</td>
+								<td>
+									<a href="'.site_url('detail/'.$output_val['id_pegawai']).'" title="Detail" data-tooltip="tooltip" data-placement="top">
+										<span class="badge bg-green"><i class="fa fa-fw fa-info-circle"></i></span>
+									</a>
+									<a href="'.site_url('print/'.$output_val['id_pegawai']).'" target="_BLANK" title="Cetak" data-tooltip="tooltip" data-placement="top">
+										<span class="badge bg-blue"><i class="fa fa-fw fa-print"></i></span>
+									</a>
+								</td>
+							</tr>
+						';
+					}
+				}
+				
+				$output .= '
+								</tbody>
+							</table">
+						</div>
+					</div">
+					';
+			}
+			
+			// var_dump($output);
 			
 			echo $output;
 		}
@@ -145,9 +225,9 @@ class Gaji extends CI_Controller {
 
 	private function gaji_pegawai_all($id_pegawai)
 	{
-		$date_today = date('Y-m-d'); // tanggal sekarang
+			date_default_timezone_set('Asia/Jakarta');
 			$month_today = date('Y-m'); // bulan & tahun ini
-			$data['title'] = 'Detail Gaji';
+			$date_today = date('Y-m-d'); // tanggal sekarang
 			$data['desc'] = month($date_today).' '.date('Y', strtotime($date_today));
 			$data['month'] = $month_today;
 
@@ -196,10 +276,11 @@ class Gaji extends CI_Controller {
 		if(!$this->session->userdata('logged_in')){
             redirect('login');
         } else {
+			date_default_timezone_set('Asia/Jakarta');
 			$date_today = date('Y-m-d'); // tanggal sekarang
 			$month_today = date('Y-m'); // bulan & tahun ini
-			$data['title'] = 'Print Gaji';
 			$data['desc'] = month($date_today).' '.date('Y', strtotime($date_today));
+			$data['today_date'] = fullConvertIDN(date('Y-m-d'), $short = NULL, $day = FALSE);
 
 			// Tunjangan
 			$data['tunjangan'] = $this->M_tunjangan->get_tunjangan()->row_array();
@@ -253,6 +334,4 @@ class Gaji extends CI_Controller {
 			return $data;
 		}
 	}
-
-	
 }

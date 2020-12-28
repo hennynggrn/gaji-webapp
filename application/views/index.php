@@ -1041,12 +1041,20 @@
 		$(document).ready(function() {
 			$('#search').keyup(function() {
 				var search = $(this).val();
+				var view = $('#view').val();
 				if (search != '') {
+					var btn = '<i class="fa fa-spinner fa-pulse"></i> <small>Processing . . .</small>';
 					load_data(search);
 				} else {
 					search = '';
-					$('#result').html(search);
+					var btn = '<i class="fa fa-search"></i>';
+					if (view == 'home') {
+						$('#result').html(search);
+					} else {
+						load_data(search);
+					}
 				}
+				$('#search-btn').html(btn);
 			});
 
 			function load_data(query) {

@@ -66,11 +66,12 @@
 					<h2 class="box-title">Pencarian Cepat Gaji Pegawai</h2>
 				</div>
 				<div class="box-body">
-					<form action="" method="get">
+					<!-- <form action="" method="get"> -->
 						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Cari nama atau npm ...">
+							<input type="hidden" id="view" value="home">
+							<input type="text" class="form-control" id="search" placeholder="Cari nama atau npm ...">
 							<span class="input-group-btn">
-								<button type="submit" name="search" id="search-btn" class="btn btn-flat">
+								<button type="button" name="search" id="search-btn" class="btn btn-flat">
 									<i class="fa fa-search"></i>
 								</button>
 							</span>
@@ -78,7 +79,7 @@
 								<button	button type="button" class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">More Filter</button>
 							</div>
 						</div>
-					</form>
+					<!-- </form> -->
 					<div class="collapse" id="collapseExample" style="margin-left: 10px; margin-right: 10px;">
 						<br>
 						<div class="row">
@@ -126,6 +127,8 @@
 				</div>
 				<!-- /.box-footer-->
 			</div>
+		</div>
+		<div class="col-md-12" id="result">
 		</div>
 		<div class="col-md-12">
 			<div class="box">

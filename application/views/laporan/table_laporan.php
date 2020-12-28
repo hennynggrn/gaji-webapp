@@ -16,7 +16,7 @@
 						<div class="input-group">
 							<input type="text" class="form-control" placeholder="Cari nama atau npm ...">
 							<span class="input-group-btn">
-								<button type="submit" name="search" id="search-btn" class="btn btn-flat">
+								<button type="button" name="search" id="search-btn" class="btn btn-flat">
 									<i class="fa fa-search"></i>
 								</button>
 							</span>

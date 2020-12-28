@@ -338,7 +338,7 @@
 							<div class="col-xs-2"></div>
 							<div class="col-xs-5"></div>
 							<div class="col-xs-5">
-								<h5>Yogyakarta, <?php echo fullConvertIDN(date('Y-m-d'), $short = NULL, $day = FALSE);?></h5>
+								<h5>Yogyakarta, <?php echo $today_date;?></h5>
 								<br><br>
 								<h5>Juru bayar,</h5>
 								<h5 class="text-bold"><?php echo $bendahara['nama'];?></h5>
