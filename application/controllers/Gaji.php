@@ -29,6 +29,7 @@ class Gaji extends CI_Controller {
 			$date_today = date('Y-m-d'); // tanggal sekarang
 			$data['desc'] = month($date_today).' '.date('Y', strtotime($date_today));
 			$data['month'] = $month_today;
+			var_dump($data);
 			$this->template->load('index','gaji/detail_gaji',$data);
 		}
 	}
@@ -54,6 +55,7 @@ class Gaji extends CI_Controller {
 				$id_bank = $explode[1];
 
 				var_dump($id_pegawai);
+				var_dump($id_angsuran);
 				var_dump($id_kop);
 				var_dump($id_bank);
 
@@ -109,7 +111,7 @@ class Gaji extends CI_Controller {
 								<tbody>
 					';
 
-					foreach ($data['pegawais'] as $key => $pegawai) {
+				foreach ($data['pegawais'] as $key => $pegawai) {
 					if (($pegawai['honor'] != NULL) && ($pegawai['honor'] == 0)) {
 						$honor = 'Rp. &nbsp;&nbsp; 0 &nbsp;&nbsp;<small>(belum ditentukan)</small>';
 						$honor_val = 0;

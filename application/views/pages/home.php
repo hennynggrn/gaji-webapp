@@ -3,33 +3,30 @@
 	<!-- Info boxes -->
 	<div class="row">
 		<div class="col-md-3 col-sm-2 col-xs-12">
+			
 			<div class="info-box">
 				<span class="info-box-icon bg-aqua"><i class="fa fa-fw fa-money"></i></span>
 
 				<div class="info-box-content">
 					<span class="info-box-text">Honorarium</span>
-					<span class="info-box-number">90<small>%</small></span>
+					<span class="info-box-number"><?php echo 'Rp. &nbsp;&nbsp;'.number_format($honor,0,',','.');?>
+						<small><br><?php echo '/ '.$month;?></small>
+					</span>
 				</div>
-				<!-- /.info-box-content -->
 			</div>
-			<!-- /.info-box -->
 		</div>
-		<!-- /.col -->
 		<div class="col-md-3 col-sm-2 col-xs-12">
 			<div class="info-box">
 				<span class="info-box-icon bg-red"><i class="fa fa-fw fa-plus-circle"></i></span>
 
 				<div class="info-box-content">
 					<span class="info-box-text">Tunjangan</span>
-					<span class="info-box-number">41,410</span>
+					<span class="info-box-number"><?php echo 'Rp. &nbsp;&nbsp;'.number_format($tunjangan,0,',','.');?>
+						<small><br><?php echo '/ '.$month;?></small>
+					</span>
 				</div>
-				<!-- /.info-box-content -->
 			</div>
-			<!-- /.info-box -->
 		</div>
-		<!-- /.col -->
-
-		<!-- fix for small devices only -->
 		<div class="clearfix visible-sm-block"></div>
 
 		<div class="col-md-3 col-sm-2 col-xs-12">
@@ -37,28 +34,25 @@
 				<span class="info-box-icon bg-green"><i class="fa fa-fw fa-hand-scissors-o"></i></span>
 				<div class="info-box-content">
 					<span class="info-box-text">Potongan</span>
-					<span class="info-box-number">760</span>
+					<span class="info-box-number"><?php echo 'Rp. &nbsp;&nbsp;'.number_format($potongan,0,',','.');?>
+						<small><br><?php echo '/ '.$month;?></small>
+					</span>
 				</div>
-				<!-- /.info-box-content -->
 			</div>
-			<!-- /.info-box -->
 		</div>
-		<!-- /.col -->
 		<div class="col-md-3 col-sm-2 col-xs-12">
 			<div class="info-box">
 				<span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
 
 				<div class="info-box-content">
 					<span class="info-box-text">Gaji</span>
-					<span class="info-box-number">2,000</span>
+					<span class="info-box-number"><?php echo 'Rp. &nbsp;&nbsp;'.number_format($gaji,0,',','.');?>
+						<small><br><?php echo '/ '.$month;?></small>
+					</span>
 				</div>
-				<!-- /.info-box-content -->
 			</div>
-			<!-- /.info-box -->
 		</div>
-		<!-- /.col --> 
 	</div>
-	<!-- /.row -->
 	<div class="row">
 		<div class="col-md-12">
 			<div class="box  box-primary">
@@ -66,20 +60,18 @@
 					<h2 class="box-title">Pencarian Cepat Gaji Pegawai</h2>
 				</div>
 				<div class="box-body">
-					<!-- <form action="" method="get"> -->
-						<div class="input-group">
-							<input type="hidden" id="view" value="home">
-							<input type="text" class="form-control" id="search" placeholder="Cari nama atau npm ...">
-							<span class="input-group-btn">
-								<button type="button" name="search" id="search-btn" class="btn btn-flat">
-									<i class="fa fa-search"></i>
-								</button>
-							</span>
-							<div class="input-group-btn">
-								<button	button type="button" class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">More Filter</button>
-							</div>
+					<div class="input-group">
+						<input type="hidden" id="view" value="home">
+						<input type="text" class="form-control" id="search" placeholder="Cari nama atau npm ...">
+						<span class="input-group-btn">
+							<button type="button" name="search" id="search-btn" class="btn btn-flat">
+								<i class="fa fa-search"></i>
+							</button>
+						</span>
+						<div class="input-group-btn">
+							<button	button type="button" class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">More Filter</button>
 						</div>
-					<!-- </form> -->
+					</div>
 					<div class="collapse" id="collapseExample" style="margin-left: 10px; margin-right: 10px;">
 						<br>
 						<div class="row">

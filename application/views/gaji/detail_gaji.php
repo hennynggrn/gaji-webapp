@@ -274,7 +274,7 @@
 						if (($pjm_kop != 0) && ($pjm_bank != 0)) {
 							$id_angsuran = $pegawai['id_kop'].'-'.$pegawai['id_bank'];
 							if ($hide == FALSE) {
-								echo '<a href="'.site_url('gaji/pay_print/'.$pegawai['id_pegawai'].'/'.$id_angsuran).'" class="btn bg-orange">Bayar Pinjaman & Cetak</a></td>';
+								echo '<a href="'.site_url('gaji/pay_print_gaji/'.$pegawai['id_pegawai'].'/'.$id_angsuran).'" class="btn bg-orange">Bayar Pinjaman & Cetak</a></td>';
 							}
 						} else if (($pjm_kop != 0) || ($pjm_bank != 0)) { 
 							if ($pjm_kop == 0) {
@@ -285,7 +285,7 @@
 							}
 							$id_angsuran = $id_kop.'-'.$id_bank;
 							if ($hide == FALSE) {
-								echo '<a href="'.site_url('gaji/pay_print/'.$pegawai['id_pegawai'].'/'.$id_angsuran).'" class="btn bg-orange">Bayar Pinjaman & Cetak</a></td>';
+								echo '<a href="'.site_url('gaji/pay_print_gaji/'.$pegawai['id_pegawai'].'/'.$id_angsuran).'" class="btn bg-orange">Bayar Pinjaman & Cetak</a></td>';
 							}
 						} else {
 							$id_angsuran = $id_kop.'-'.$id_bank;

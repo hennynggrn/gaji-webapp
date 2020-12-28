@@ -8,14 +8,27 @@ class Home extends CI_Controller {
 		if(!$this->session->userdata('logged_in')){
             redirect('login');
 		} 
-		$data = $this->gaji_pegawai_all($id_pegawai = NULL);
+		$data['value'] = $this->gaji_pegawai_all($id_pegawai = NULL);
+		date_default_timezone_set('Asia/Jakarta');
+		$date_today = date('Y-m-d'); // tanggal sekarang
+		$data['month'] = month($date_today);
 		$data['title'] = 'Dashboard';
+		$data['honor'] = 0;
+		$data['tunjangan'] = 0;
+		$data['potongan'] = 0;
+		$data['gaji'] = 0;
+		foreach ($data['value'] as $key => $value) {
+			$data['honor'] += $value['honor_val'];
+			$data['tunjangan'] += $value['tunjangan_val'];
+			$data['potongan'] += $value['potongan_val'];
+			$data['gaji'] += $value['gaji'];
+		}
+		// var_dump($data);
 		$this->template->load('index','pages/home', $data);
 	}	
 
 	private function gaji_pegawai_all($id_pegawai)
 	{
-		date_default_timezone_set('Asia/Jakarta');
 		// Tunjangan
 		$data['tunjangan'] = $this->M_tunjangan->get_tunjangan()->row_array();
 		$data['pegawais'] = $this->M_pegawai->get_pegawai($id_pegawai)->result_array();
@@ -53,7 +66,50 @@ class Home extends CI_Controller {
 		} else {
 			$data['hide'] = TRUE;
 		}
-		return $data;
+		
+		$data_output = array();
+		foreach ($data['pegawais'] as $key => $pegawai) {
+			if (($pegawai['honor'] != NULL) && ($pegawai['honor'] == 0)) {
+				$honor_val = 0;
+			} else if (($pegawai['honor'] != NULL) && ($pegawai['honor'] != 0)) {
+				$honor_val = $pegawai['honor'];
+			} else {
+				$honor_val = 0;
+			}
+
+			if ($pegawai['klg_hidup'] != NULL) {
+				$pasangan = 0;
+				$anak_pertama = 0;
+				$anak_kedua = 0;
+				for ($i=0; $i < $pegawai['klg_hidup']; $i++) { 
+					if (in_array('1', $pegawai['status_klg'])) {
+						$pasangan = 1;
+					} else if (in_array('2', $pegawai['status_klg'])) {
+						$anak_pertama = 1;
+					} else {
+						$anak_kedua = 1;
+					}
+				}
+			} else {
+				$pasangan = 0;
+				$anak_pertama = 0;
+				$anak_kedua = 0;
+			}
+			$keluarga_val = ($pegawai['honor']*$pasangan*$data['tunjangan']['klg_psg'])+($pegawai['honor']*$anak_pertama*$data['tunjangan']['klg_anak'])+($pegawai['honor']*$anak_kedua*$data['tunjangan']['klg_anak']);
+			$tunjangan_val = $data['tunjangan']['beras']+$data['tunjangan']['jamsostek']+$keluarga_val+$pegawai['jabatan']+$pegawai['nominal_mk'];
+
+			(!empty($pegawai['nominal_kop'])) ? $pjm_kop = $pegawai['nominal_kop'] : $pjm_kop = 0;
+			(!empty($pegawai['nominal_bank'])) ? $pjm_bank = $pegawai['nominal_bank'] : $pjm_bank = 0;
+			$pinjaman = $pjm_kop+$pjm_bank;
+			$potongan_val = $data['potongan']['sosial']+$data['potongan']['infaq']+$data['potongan']['jsr']+$data['potongan']['aisiyah']+$data['potongan']['jamsostek']+$pinjaman;
+			$gaji = $honor_val+$tunjangan_val-$potongan_val;
+
+			$data_output[$key]['honor_val'] = $honor_val;
+			$data_output[$key]['tunjangan_val'] = $tunjangan_val;
+			$data_output[$key]['potongan_val'] = $potongan_val;
+			$data_output[$key]['gaji'] = $gaji;
+		} 
+		return $data_output;
 	}
 }
 

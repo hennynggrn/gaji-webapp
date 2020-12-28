@@ -115,6 +115,7 @@
 														<p>
 															<input type="hidden" name="id_pinjaman" value="<?php echo $angsuran['id_pinjaman'];?>">
 															<input type="hidden" name="id_angsuran" value="<?php echo $angsuran['id_angsuran'];?>">
+															<input type="hidden" name="payOff_byGaji" value="<?php echo $angsuran['payOff_byGaji'];?>">
 															<input type="hidden" name="repay" value="1">
 															Anda akan membayar angsuran sebesar <b class="text-primary"><?php echo 'Rp. '.number_format($angsuran['nominal'],0,',','.');?></b> ?
 														</p>
@@ -122,7 +123,8 @@
 														<p>
 															<input type="hidden" name="id_pinjaman" value="<?php echo $angsuran['id_pinjaman'];?>">
 															<input type="hidden" name="id_angsuran" value="<?php echo $angsuran['id_angsuran'];?>">
-															<input type="hidden" name="repay" value="0">
+															<input type="hidden" name="payOff_byGaji" value="0">
+															<input type="hidden" name="repay" value="0">payOff_byGaji
 															<b>Peringatan! </b><br><br>
 															Anda akan membatalkan pembayaran angsuran sebesar <b class="<?php echo ($angsuran['status'] == 0) ? 'text-primary' : ''; ?>"><?php echo 'Rp. '.number_format($angsuran['nominal'],0,',','.');?></b> ?
 														</p>

@@ -7,9 +7,9 @@
 					<table class="table table-bordered table-hover responsive text-center">
 						<thead>
 							<th>No</th>
-							<th>Honorarium</th>
-							<th>Status Pegawai</th>
-							<th>Jumlah Pegawai</th>
+							<th width="200px">Honorarium</th>
+							<th width="150px">Status Pegawai</th>
+							<th width="150px">Jumlah Pegawai</th>
 							<th>Jenis Jabatan</th>
 							<th>Menu</th>
 						</thead>
@@ -23,7 +23,7 @@
 							}?>
 							<tr>
 								<td><?php echo $no++;?></td>
-								<td style="text-align: left; padding-left: 50px;">
+								<td style="text-align: left; padding-left: 20px;">
 								<?php if ($honor['honor'] == null) {
 									echo '-';
 								} else if ($honor['honor'] == 0) {

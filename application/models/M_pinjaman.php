@@ -76,7 +76,7 @@ class M_pinjaman extends CI_Model{
 			$data = array(
 				'id_pinjaman' => $last_id,
 				'tanggal_kembali' => $tgl_kembali[$i],
-				'nominal' => $nominal[$i],
+				'nominal' => $nominal[$i], 
 				'status' => 0,
 				'payOff_byGaji' => 0
 			);
@@ -87,10 +87,11 @@ class M_pinjaman extends CI_Model{
 	public function update_repay()
 	{
 		$repay = $this->input->post('repay');
+		$payOff_byGaji = $this->input->post('payOff_byGaji');
 		$id_angsuran = $this->input->post('id_angsuran');
 		
 		$this->db->where('id_angsuran', $id_angsuran);
-		return $this->db->update('angsuran', array('status' => $repay));
+		return $this->db->update('angsuran', array('status' => $repay, 'payOff_byGaji' => $payOff_byGaji));
 	}
 
 	public function update_pinjaman($id_pinjaman)

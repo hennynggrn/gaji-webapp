@@ -11,60 +11,14 @@
 						</div>
 					</div>
 					<div class="box-body">
-						<form action="" method="get">
-							<div class="input-group">
-								<input type="text" class="form-control" id="search" placeholder="Cari nama atau npm ...">
-								<span class="input-group-btn">
-									<button type="button" name="search" id="search-btn" class="btn btn-flat">
-										<i class="fa fa-search"></i>
-									</button>
-								</span>
-								<!-- <div class="input-group-btn">
-									<button	button type="button" class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">More Filter</button>
-								</div> -->
-							</div>
-						</form>
-						<!-- <div class="collapse" id="collapseExample" style="margin-left: 10px; margin-right: 10px;">
-							<br>
-							<div class="row">
-								<div class="col-md-5">
-									<div class="form-group">
-										<label>Tahun</label>
-										<div class="input-group">
-											<span class="input-group-addon"><i class="fa fa-fw fa-calendar-o"></i></span>
-											<select name="year" id="" class="form-control" name="jabatan" placeholder="Satpam" style="width: 100%;" required>
-												<option value=""></option>
-												<option value=""></option>
-											</select>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-5">
-									<div class="form-group">
-										<label>Bulan</label>
-										<div class="input-group">
-											<span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
-											<select name="month" id="" class="form-control" name="jabatan" placeholder="Satpam" style="width: 100%;" required>
-												<option value=""></option>
-												<option value=""></option>
-											</select>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-2">
-									<div class="form-group">
-										<label>&nbsp;</label>
-										<div class="input-group">
-											<span class="input-group-btn" >
-												<button type="button" name="reset" id="reset-btn" style="width: 100%;" class="btn btn-default">
-													<i class="fa fa-fw fa-refresh"></i> Reset
-												</button>
-											</span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div> -->
+						<div class="input-group">
+							<input type="text" class="form-control" id="search" placeholder="Cari nama atau npm ...">
+							<span class="input-group-btn">
+								<button type="button" name="search" id="search-btn" class="btn btn-flat">
+									<i class="fa fa-search"></i>
+								</button>
+							</span>
+						</div>
 					</div>
 				</div>
 			</div>
