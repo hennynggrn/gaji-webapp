@@ -25,7 +25,7 @@
 									</td>
 								</tr>
 								<tr>
-									<td style="width: 100px">NIP</td>
+									<td style="width: 100px">NBM</td>
 									<td style="width: 20px">:</td>
 									<td><?php echo $pegawai['nbm']; ?></td>
 								</tr>
@@ -106,6 +106,11 @@
 									</td>
 								</tr>
 								<tr>
+									<td style="width: 150px">Masa Kerja</td>
+									<td style="width: 20px">:</td>
+									<td><?php echo ($pegawai['masa_kerja'] != 0) ? $pegawai['tahun'].' tahun' : '<small>(belum genap 1 tahun)</small>';?></td>
+								</tr>
+								<tr>
 									<td>Jenis Pegawai</td>
 									<td>:</td>
 									<td><?php echo ($pegawai['jns_pegawai'] == 0) ? 'Guru' : 'Karyawan'; ?></td>
@@ -135,7 +140,7 @@
 									<td width="1">Honorarium</td>
 									<td>:</td>
 									<td><?php echo 'Rp. '.number_format($pegawai['honor'],2,',','.');
-									echo '<small class="text-bold">'; if($pegawai['honor'] == 0) echo ' (belum ditetapkan) </small>';?></td>
+									echo '<small class="text-bold">'; if($pegawai['honor'] == 0) echo ' (belum ditentukan) </small>';?></td>
 								</tr>
 								<?php endif;?>
 							</tbody>

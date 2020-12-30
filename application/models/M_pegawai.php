@@ -25,19 +25,20 @@ class M_pegawai extends CI_Model{
 
 	public function add_pegawai()
 	{
-		$id_pegawai=$this->input->post('id_pegawai');
-		$nbm=$this->input->post('nbm');
-		$nama=$this->input->post('nama');
-		$tempat_lahir=$this->input->post('tempat_lahir');
-		$tgl_lahir=$this->input->post('tgl_lahir');
-		$agama=$this->input->post('agama');
-		$umur=$this->input->post('umur');
-		$gender=$this->input->post('gender');
-		$email=$this->input->post('email');
-		$telepon=$this->input->post('telepon');
-		$status=$this->input->post('status');
-		$jns_pegawai=$this->input->post('jns_pegawai');
-		$status_pegawai = $this->input->post('status_pgw');
+		$id_pegawai = $this->input->post('id_pegawai');
+		$nbm = $this->input->post('nbm');
+		$nama = $this->input->post('nama');
+		$tempat_lahir = $this->input->post('tempat_lahir');
+		$tgl_lahir = $this->input->post('tgl_lahir');
+		$agama = $this->input->post('agama');
+		$umur = $this->input->post('umur');
+		$gender = $this->input->post('gender');
+		$email = $this->input->post('email');
+		$telepon = $this->input->post('telepon');
+		$status = $this->input->post('status');
+		$masakerja = $this->input->post('masa_kerja');
+		$jns_pegawai = $this->input->post('jns_pegawai');
+		$status_pegawai   = $this->input->post('status_pgw');
 		switch ($status_pegawai) {
 			case 'P':
 				$status_pgw = 'P';
@@ -79,15 +80,16 @@ class M_pegawai extends CI_Model{
 			'jns_pegawai' => $jns_pegawai,
 			'status_pegawai' => $status_pgw,
 			'honor' => $honor,
-			'masa_kerja' => 0
+			'masa_kerja' => $masakerja
 		);
 		return $this->db->insert("pegawai", $data);
 	}
 
-	public function get_pegawai_detail($where, $table)
+	public function get_pegawai_detail($where)
 	{
-		$this->db->select($table.'.*');
-		return $this->db->get_where($table, $where);
+		$this->db->select('*');
+		$this->db->join('masakerja m', 'm.id_masakerja = p.masa_kerja', 'LEFT');
+		return $this->db->get_where('pegawai p', $where);
 	}
 
 	public function update_pegawai()
@@ -103,6 +105,7 @@ class M_pegawai extends CI_Model{
 		$email = $this->input->post('email');
 		$telepon = $this->input->post('telepon');
 		$status = $this->input->post('status');
+		$masakerja = $this->input->post('masa_kerja');
 		$jns_pegawai = $this->input->post('jns_pegawai');
 		$status_pegawai = $this->input->post('status_pgw');
 		switch ($status_pegawai) {
@@ -144,7 +147,8 @@ class M_pegawai extends CI_Model{
 			'status' => $status,
 			'jns_pegawai' => $jns_pegawai,
 			'status_pegawai' => $status_pgw,
-			'honor' => $honor
+			'honor' => $honor,
+			'masa_kerja' => $masakerja
 		);
 		return $this->db->update("pegawai", $data, array('id_pegawai' => $id_pegawai));
 	}

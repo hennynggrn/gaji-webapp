@@ -53,18 +53,33 @@ class Gaji extends CI_Controller {
 				$explode = explode('-', $id_angsuran);
 				$id_kop = $explode[0];
 				$id_bank = $explode[1];
+				if ($id_kop) {
+					$id = $id_kop;
+					$id = $this->M_pinjaman->get_angsuran($id)->result_array();
+				}
+				if ($id_bank) {
+					$id = $id_bank;
+					$id = $this->M_pinjaman->get_angsuran($id)->result_array();
+				}
 
+				// $pinjaman = $this->M_pinjaman->get_pinjaman($id)->row_array();
+				// if ($pinjaman['jml_angsuran']-$pinjaman['status_ang'] == 0) {
+				// 	$status = 1;
+				// } else {
+				// 	$status = 0;
+				// }
+				// $res['pinjaman'] = $this->M_pinjaman->update_status_pinjaman($id, $status);
 				var_dump($id_pegawai);
 				var_dump($id_angsuran);
-				var_dump($id_kop);
-				var_dump($id_bank);
+				var_dump($id);
+				var_dump($id);
 
-				$res['repay'] = $this->M_gaji->repay($id_kop, $id_bank);
-				if ($res) {
-					redirect('detail/'.$id_pegawai);
-				} else {
-					echo "<h2> Gagal Memproses Data </h2>";
-				}
+				// $res['repay'] = $this->M_gaji->repay($id_kop, $id_bank);
+				// if ($res) {
+				// 	redirect('detail/'.$id_pegawai);
+				// } else {
+				// 	echo "<h2> Gagal Memproses Data </h2>";
+				// }
 			} else {
 				redirect('detail/'.$id_pegawai);
 			}
@@ -119,35 +134,32 @@ class Gaji extends CI_Controller {
 						$honor = 'Rp. &nbsp;&nbsp;'.number_format($pegawai['honor'],0,',','.');
 						$honor_val = $pegawai['honor'];
 					} else {
-						$honor = '-';
+						$honor = 'Rp. &nbsp;&nbsp; 0';
 						$honor_val = 0;
 					}
 
+					$pasangan = 0;
+					$anak_pertama = 0;
+					$anak_kedua = 0;
 					if ($pegawai['klg_hidup'] != NULL) {
-						$pasangan = 0;
-						$anak_pertama = 0;
-						$anak_kedua = 0;
-						for ($i=0; $i < $pegawai['klg_hidup']; $i++) { 
-							if (in_array('1', $pegawai['status_klg'])) {
-								$pasangan = 1;
-							} else if (in_array('2', $pegawai['status_klg'])) {
-								$anak_pertama = 1;
-							} else {
-								$anak_kedua = 1;
-							}
+						if (in_array('1', $pegawai['status_klg'])){
+							$pasangan = 1;
+						} 
+						if (in_array('2', $pegawai['status_klg'])) {
+							$anak_pertama = 1;
+						} 
+						if (in_array('3', $pegawai['status_klg'])) {
+							$anak_kedua = 1;
 						}
-					} else {
-						$pasangan = 0;
-						$anak_pertama = 0;
-						$anak_kedua = 0;
 					}
 					$keluarga_val = ($pegawai['honor']*$pasangan*$data['tunjangan']['klg_psg'])+($pegawai['honor']*$anak_pertama*$data['tunjangan']['klg_anak'])+($pegawai['honor']*$anak_kedua*$data['tunjangan']['klg_anak']);
 					$tunjangan_val = $data['tunjangan']['beras']+$data['tunjangan']['jamsostek']+$keluarga_val+$pegawai['jabatan']+$pegawai['nominal_mk'];
 
+					($pegawai['status_pegawai'] != 'P') ? $aisiyah_val = 0 : $aisiyah_val = $data['potongan']['aisiyah'];
 					(!empty($pegawai['nominal_kop'])) ? $pjm_kop = $pegawai['nominal_kop'] : $pjm_kop = 0;
 					(!empty($pegawai['nominal_bank'])) ? $pjm_bank = $pegawai['nominal_bank'] : $pjm_bank = 0;
 					$pinjaman = $pjm_kop+$pjm_bank;
-					$potongan_val = $data['potongan']['sosial']+$data['potongan']['infaq']+$data['potongan']['jsr']+$data['potongan']['aisiyah']+$data['potongan']['jamsostek']+$pinjaman;
+					$potongan_val = $data['potongan']['sosial']+$data['potongan']['infaq']+$data['potongan']['jsr']+$aisiyah_val+$data['potongan']['jamsostek']+$pinjaman;
 					$gaji = $honor_val+$tunjangan_val-$potongan_val;
 
 					if ((stripos($pegawai['nama'], $query) !== FALSE) || stripos($pegawai['nbm'], $query) !== FALSE) {
@@ -270,6 +282,7 @@ class Gaji extends CI_Controller {
 			} else {
 				$data['hide'] = TRUE;
 			}
+			// var_dump($data['pegawais']);
 			return $data;
 	}
 
@@ -325,7 +338,7 @@ class Gaji extends CI_Controller {
 				// BANK
 				if ($data['pinjaman_bank']['id_pegawai'] == $data['pegawai']['id_pegawai']) {
 					$data['pegawai']['nominal_bank'] = $data['pinjaman_bank']['nominal'];
-					$data['pegawai']['id_bank'] = $data['pinjaman_kop']['id_angsuran'];
+					$data['pegawai']['id_bank'] = $data['pinjaman_bank']['id_angsuran'];
 				}
 			}
 			if (authUserLevel() == TRUE){
@@ -333,6 +346,7 @@ class Gaji extends CI_Controller {
 			} else {
 				$data['hide'] = TRUE;
 			}
+			// var_dump($data['pegawai']);
 			return $data;
 		}
 	}

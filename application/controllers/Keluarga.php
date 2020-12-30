@@ -43,14 +43,15 @@ class Keluarga extends CI_Controller {
 		if(!$this->session->userdata('logged_in')){
             redirect('login');
 		} else {
-			$data['pegawai'] = $this->M_pegawai->get_pegawai($id_pegawai)->row_array();
-			$data['keluargas'] = $this->M_keluarga->get_anggota_keluarga($id_pegawai)->result_array();
 			$data['title'] = 'Detail Anggota Keluarga';
+			$data['pegawai'] = $this->M_pegawai->get_pegawai($id_pegawai)->row_array();
+			$data['keluargas'] = $this->M_keluarga->get_keluarga_pegawai($id_pegawai)->result_array();
 			if (authUserLevel() == TRUE){
 				$data['hide'] = FALSE;
 			} else {
 				$data['hide'] = TRUE;
 			}
+			// var_dump($data['keluargas']);
 			$this->template->load('index','keluarga/detail_keluarga', $data);
 		}
 	}
@@ -63,6 +64,7 @@ class Keluarga extends CI_Controller {
 			$data['title'] = 'Edit Keluarga Pegawai';
 			$where = array('id_pegawai' => $id_pegawai);
 			$data['pegawai'] = $this->M_pegawai->get_pegawai_detail($where,'pegawai')->row_array();
+			$data['masakerjas']= $this->M_masakerja->get_masakerja()->result_array();
 			$data['keluargas'] = $this->M_keluarga->get_keluarga_pegawai($id_pegawai,'keluarga')->result_array();
 			$data['jabatans'] = $this->M_jabatan->get_jabatan($id_pegawai)->result_array();
 			$data['id_anggota_keluarga'] = $id_pegawai;

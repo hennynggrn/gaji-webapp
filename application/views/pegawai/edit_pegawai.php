@@ -233,6 +233,19 @@
 							</div>
 						</div>
 						<div class="form-group">
+							<label class="col-sm-2 control-label">Masa Kerja</label>
+							<div class="col-sm-10">
+								<select class="form-control" name="masa_kerja" placeholder="Pilih tahun masa kerja" style="width: 100%; background-color: white;" required>
+									<option disabled>Pilih Tahun Masa Kerja</option>
+									<?php foreach ($masakerjas as $key => $masakerja) : ?>
+									<option value=<?php echo '"'.$masakerja['id_masakerja'].'"'; echo ($masakerja['id_masakerja'] == $pegawai['masa_kerja']) ? 'selected' : '';?>>
+										<?php echo ($masakerja['id_masakerja'] == 0) ? '(belum genap 1 tahun)' : $masakerja['tahun'].' tahun';?>
+									</option>
+									<?php endforeach; ?>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
 							<label class="col-sm-2 control-label">Jenis Pegawai</label>
 							<div class="col-sm-10">
 								<select class="form-control" name="jns_pegawai" id="jns_pegawai">

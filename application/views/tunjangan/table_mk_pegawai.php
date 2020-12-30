@@ -59,7 +59,7 @@
 																<?php echo ($masakerja['id_masakerja'] == 0) ? '(belum genap 1 tahun)' : $masakerja['tahun'].' tahun';?>
 															</option>
 															<?php endforeach; ?>
-														</select>
+														</select> 
 													</div>
 												</div>
 											</div>

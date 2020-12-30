@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 27, 2020 at 05:28 AM
+-- Generation Time: Dec 30, 2020 at 08:57 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -44,19 +44,19 @@ CREATE TABLE `angsuran` (
 --
 
 INSERT INTO `angsuran` (`id_angsuran`, `id_pinjaman`, `tanggal_kembali`, `nominal`, `status`, `payOff_byGaji`, `id_gaji`, `created_at`, `created_by`) VALUES
-(4, 2, '2020-12-24', 100000, 0, 1, NULL, '2020-12-02 04:33:47', NULL),
+(4, 2, '2020-12-24', 100000, 1, 1, NULL, '2020-12-02 04:33:47', NULL),
 (5, 3, '2020-11-10', 1000000, 1, 1, NULL, '2020-12-02 04:35:44', NULL),
 (6, 3, '2020-12-26', 500000, 0, 0, NULL, '2020-12-02 04:35:45', NULL),
 (7, 4, '2020-11-03', 1500000, 0, 0, NULL, '2020-12-02 04:37:13', NULL),
 (8, 4, '2020-12-25', 1500000, 0, 0, NULL, '2020-12-02 04:37:13', NULL),
 (30, 1, '2020-11-16', 4000000, 1, 0, NULL, '2020-12-03 07:44:23', NULL),
 (31, 1, '2021-01-01', 3000000, 0, 0, NULL, '2020-12-03 07:45:04', NULL),
-(37, 7, '2020-11-17', 20000, 1, 0, NULL, '2020-12-03 08:03:26', NULL),
-(39, 7, '2020-12-31', 60000, 0, 0, NULL, '2020-12-03 08:04:28', NULL),
+(37, 7, '2020-11-17', 20000, 0, 0, NULL, '2020-12-03 08:03:26', NULL),
+(39, 7, '2020-12-31', 60000, 1, 1, NULL, '2020-12-03 08:04:28', NULL),
 (40, 3, '2019-10-01', 899995, 1, 0, NULL, '2020-12-13 23:08:31', NULL),
 (41, 1, '2020-12-09', 800000, 0, 0, NULL, '2020-12-14 00:41:59', NULL),
-(42, 8, '2020-11-09', 166666, 1, 0, NULL, '2020-12-14 01:09:38', NULL),
-(43, 8, '2020-12-22', 90000, 1, 1, NULL, '2020-12-14 01:09:38', NULL);
+(42, 8, '2020-11-09', 166666, 0, 0, NULL, '2020-12-14 01:09:38', NULL),
+(43, 8, '2020-12-22', 90000, 0, 0, NULL, '2020-12-14 01:09:38', NULL);
 
 -- --------------------------------------------------------
 
@@ -168,7 +168,12 @@ INSERT INTO `jbt_pegawai` (`id_jbt_pegawai`, `id_jabatan`, `id_pegawai`, `create
 (67, 8, 7, '2020-12-18 23:13:52', NULL),
 (70, 13, 7, '2020-12-18 23:13:52', NULL),
 (78, 11, 9, '2020-12-27 02:00:03', NULL),
-(86, 13, 9, '2020-12-27 02:16:35', NULL);
+(86, 13, 9, '2020-12-27 02:16:35', NULL),
+(87, 4, 6, '2020-12-27 06:33:31', NULL),
+(88, 5, 6, '2020-12-27 06:33:31', NULL),
+(89, 8, 6, '2020-12-27 06:33:31', NULL),
+(90, 2, 5, '2020-12-27 23:31:01', NULL),
+(91, 4, 5, '2020-12-27 23:31:01', NULL);
 
 -- --------------------------------------------------------
 
@@ -202,7 +207,9 @@ INSERT INTO `keluarga` (`id_anggota_klg`, `nama`, `id_status`, `s_hidup`, `gende
 (87, 'Aasasss', 1, '1', 'P', 9, '2020-12-19 16:56:18', NULL),
 (88, 'Namm', 2, '1', 'P', 9, '2020-12-19 16:56:18', NULL),
 (89, 'sasa', 3, '1', 'P', 9, '2020-12-19 16:56:18', NULL),
-(90, 'yun', 2, '1', 'P', 5, '2020-12-19 19:14:17', NULL);
+(90, 'yun', 2, '1', 'P', 5, '2020-12-19 19:14:17', NULL),
+(91, 'Dede', 1, '1', 'P', 10, '2020-12-30 17:25:14', NULL),
+(92, 'Irish', 2, '1', 'P', 10, '2020-12-30 17:25:14', NULL);
 
 -- --------------------------------------------------------
 
@@ -300,11 +307,12 @@ CREATE TABLE `pegawai` (
 
 INSERT INTO `pegawai` (`id_pegawai`, `nbm`, `nama`, `foto`, `tempat_lahir`, `tgl_lahir`, `telepon`, `jns_pegawai`, `gender`, `email`, `status_pegawai`, `status`, `agama`, `umur`, `honor`, `masa_kerja`, `created_at`, `updated_at`, `created_by`, `updated_by`) VALUES
 (2, '124', 'Rifky', NULL, 'Baubau', '1998-02-12', 1897656, 'G', 'P', 'rifky@gmail.com', 'T1', 0, 'Hindu', '21', '0', 2, NULL, '2020-12-01 23:55:10', NULL, NULL),
-(5, '123', 'Budi', NULL, 'Taman', '1889-03-12', 2121212, 'K', 'L', 'budi@gmail.com', 'T1', 1, 'Islam', '31', '100000', 9, NULL, '2020-12-01 23:55:10', NULL, NULL),
-(6, '212', 'Dizzy', NULL, 'Taman', '1111-11-12', 1212, 'G', 'P', 'qsqs@czsd', 'T0', 1, 'Islam', '21', NULL, 3, NULL, '2020-12-01 23:55:10', NULL, NULL),
-(7, '1212', 'Henuiii', NULL, 'Taman', '1111-11-11', 90787, 'G', 'P', 'wodi@gmail.com', 'P', 1, 'Islam', '48', '200000', 0, NULL, '2020-12-01 23:55:10', NULL, NULL),
+(5, '123', 'Budi Sujioto', NULL, 'Taman', '1889-03-12', 2121212, 'G', 'L', 'budi@gmail.com', 'T1', 1, 'Islam', '31', '900000', 9, NULL, '2020-12-01 23:55:10', NULL, NULL),
+(6, '212', 'Dizzy', NULL, 'Taman', '1111-11-12', 1212, 'G', 'P', 'qsqs@czsd', 'T1', 1, 'Islam', '21', '50000', 3, NULL, '2020-12-01 23:55:10', NULL, NULL),
+(7, '1212', 'Henuiii', NULL, 'Taman', '1111-11-11', 90787, 'G', 'P', 'wodi@gmail.com', 'P', 1, 'Islam', '48', NULL, 0, NULL, '2020-12-01 23:55:10', NULL, NULL),
 (8, '121', 'Wawan', NULL, 'dasas', '2222-02-22', 545346, 'K', 'L', 'wodi@gmail.com', 'T0', 1, 'Islam', '56', NULL, 0, NULL, '2020-12-01 23:55:10', NULL, NULL),
-(9, '12121', 'Niu', NULL, 'Taman', '2020-12-15', 21212, '', 'L', 'budi@gmail.com', 'T1', 1, 'Islam', '45', '0', 40, NULL, '2020-12-08 08:37:52', NULL, NULL);
+(9, '12121', 'Niu', NULL, 'Taman', '2020-12-15', 21212, 'G', 'L', 'budi@gmail.com', 'P', 1, 'Islam', '45', NULL, 40, NULL, '2020-12-08 08:37:52', NULL, NULL),
+(10, '123', 'Casa', NULL, 'Taman', '2020-12-01', 8768, 'K', 'L', 'wodi@gmail.com', 'T0', 1, 'Islam', '24', NULL, 16, NULL, '2020-12-30 17:25:14', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -334,7 +342,7 @@ INSERT INTO `pinjaman` (`id_pinjaman`, `kode_pinjaman`, `total_pinjaman`, `statu
 (3, 'KOP', 1500000, 0, '2019-10-02', '', 6, '2020-12-02 04:35:44', NULL),
 (4, 'BANK', 5000000, 0, '2020-12-10', 'edit here', 8, '2020-12-02 04:37:13', NULL),
 (7, 'KOP', 70000, 0, '2020-11-05', '', 5, '2020-12-03 08:03:26', NULL),
-(8, 'KOP', 50000, 1, '2020-12-14', '', 5, '2020-12-14 01:09:38', NULL);
+(8, 'KOP', 50000, 0, '2020-12-14', '', 5, '2020-12-14 01:09:38', NULL);
 
 -- --------------------------------------------------------
 
@@ -412,10 +420,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `fullname`, `address`, `id_pegawai`, `phone`, `online_status`, `last_online`, `created_at`, `modified_at`, `level_id`) VALUES
-(9, 'sady', 'sady@gmail.com', 'd111144832a1b8a9f5639512c9c6746d', 'Sady', NULL, NULL, '12345', 0, '2020-12-23 17:36:03', '2020-12-22 18:55:53', '2020-12-23 17:36:03', 4),
-(10, 'weird_dev', 'weird@developer.com', 'df6896d40c28d507fab5a8f3d8f4118b', 'Weird Developer', NULL, NULL, '085245553390', 1, '2020-12-25 19:45:06', '2020-12-22 21:21:24', '2020-12-25 19:45:06', 0),
-(11, 'bendahara', 'bendahara@gmail.com', '62f7dec74b78ba0398e6a9f317f55126', 'Bendahara', NULL, NULL, '00001111', 0, '2020-12-23 16:46:32', '2020-12-23 16:12:03', '2020-12-23 16:46:32', 2),
-(12, 'admin_sigukar', 'admin@gmail.com', '0192023a7bbd73250516f069df18b500', 'Admin SIGUKAR', NULL, NULL, '000111', 0, '2020-12-23 18:12:08', '2020-12-23 16:47:36', '2020-12-23 18:12:08', 1);
+(10, 'weird_dev', 'weird@developer.com', 'df6896d40c28d507fab5a8f3d8f4118b', 'Weird Developer', 'Jl. Bumi Rt.10 Blok 8', 2, '085245553390', 1, '2020-12-30 18:24:07', '2020-12-22 21:21:24', '2020-12-30 18:24:07', 0),
+(11, 'bendahara', 'bendahara@gmail.com', '62f7dec74b78ba0398e6a9f317f55126', 'Dizzy Ainun', 'Jl. Kusumanegara', 6, '11112222', 0, '2020-12-27 23:30:12', '2020-12-23 16:12:03', '2020-12-27 23:30:12', 2),
+(13, 'sady_o', 'sady@gmail.com', 'd111144832a1b8a9f5639512c9c6746d', 'Sady', '', 7, '0909090', 0, '2020-12-30 18:20:35', '2020-12-27 20:07:56', '2020-12-30 18:20:35', 4),
+(14, 'wawan_s', 'kepsek@gmail.com', 'a2ed32cae296647110b3dbbf60c3f445', 'Wawan Saputra', '', 8, '0909090', 0, '2020-12-30 18:22:04', '2020-12-27 20:12:15', '2020-12-30 18:22:04', 3),
+(15, 'admin_sigukar', 'admin@gmail.com', '0192023a7bbd73250516f069df18b500', 'Admin SIGUKAR', '', NULL, '0909090', 0, '2020-12-27 23:29:05', '2020-12-27 20:23:56', '2020-12-27 23:29:05', 1);
 
 -- --------------------------------------------------------
 
@@ -560,13 +569,13 @@ ALTER TABLE `jabatan`
 -- AUTO_INCREMENT for table `jbt_pegawai`
 --
 ALTER TABLE `jbt_pegawai`
-  MODIFY `id_jbt_pegawai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `id_jbt_pegawai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT for table `keluarga`
 --
 ALTER TABLE `keluarga`
-  MODIFY `id_anggota_klg` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `id_anggota_klg` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- AUTO_INCREMENT for table `pinjaman`
@@ -578,7 +587,7 @@ ALTER TABLE `pinjaman`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(16) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(16) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables

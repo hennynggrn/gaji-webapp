@@ -15,10 +15,12 @@ class M_keluarga extends CI_Model{
 		}
 	}
 	
-	public function get_keluarga_pegawai($id, $table)
+	public function get_keluarga_pegawai($id)
 	{
+		$this->db->select('k.*, p.gender gender_pegawai');
 		$this->db->order_by('id_status', 'ASC');
-		return $this->db->get_where($table, array('id_pegawai'=>$id));
+		$this->db->join('pegawai p','p.id_pegawai = k.id_pegawai', 'RIGHT');
+		return $this->db->get_where('keluarga k', array('k.id_pegawai' => $id));
 	}
 
 	public function get_anggota_keluarga($id_pegawai)

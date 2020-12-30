@@ -30,7 +30,7 @@
 													$honor = $pegawai['honor'];
 												} else {
 													echo 'Rp. &nbsp; 0 &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-fw fa-warning text-danger" 
-														  title="Honor belum ditentukan! Silahkan edit untuk menambahkan." 
+														  title="Honor belum ditentukan! Silahkan edit pegawai untuk menambahkan di menu pegawai." 
 														  data-tooltip="tooltip" data-placement="top"></i>';
 													$honor = 0;
 												}
@@ -74,25 +74,21 @@
 										if (empty($pegawai['klg_hidup'])) {
 											$keluarga_val = 0;
 										} else {
+											$pasangan = 0;
+											$anak_pertama = 0;
+											$anak_kedua = 0;
 											if ($pegawai['klg_hidup'] != NULL) {
-												$pasangan = 0;
-												$anak_pertama = 0;
-												$anak_kedua = 0;
-												for ($i=0; $i < $pegawai['klg_hidup']; $i++) { 
-													if (in_array('1', $pegawai['status_klg'])) {
-														$pasangan = 1;
-													} else if (in_array('2', $pegawai['status_klg'])) {
-														$anak_pertama = 1;
-													} else {
-														$anak_kedua = 1;
-													}
+												if (in_array('1', $pegawai['status_klg'])){
+													$pasangan = 1;
+												} 
+												if (in_array('2', $pegawai['status_klg'])) {
+													$anak_pertama = 1;
+												} 
+												if (in_array('3', $pegawai['status_klg'])) {
+													$anak_kedua = 1;
 												}
-											} else {
-												$pasangan = 0;
-												$anak_pertama = 0;
-												$anak_kedua = 0;
 											}
-											$keluarga_val = ($pegawai['honor']*$pasangan*$tunjangan['klg_psg'])+($pegawai['honor']*$anak_pertama*$tunjangan['klg_anak'])+($pegawai['honor']*$anak_kedua*$tunjangan['klg_anak']);
+											$keluarga_val = ($honor*$pasangan*$tunjangan['klg_psg'])+($honor*$anak_pertama*$tunjangan['klg_anak'])+($honor*$anak_kedua*$tunjangan['klg_anak']);
 										}
 										// $tunjangan_val = $tunjangan['beras']+$tunjangan['jamsostek']+$keluarga_val+$pegawai['jabatan']+$pegawai['nominal_mk'];
 										echo 'Rp. &nbsp;&nbsp;'.number_format($keluarga_val,0,',','.');
@@ -237,22 +233,20 @@
 										<input class="potongan" type="hidden" value="<?php echo $potongan['jamsostek'];?>">
 									</td>
 									<td>
-										Rp. &nbsp;<?php echo number_format($potongan['aisiyah'],0,',','.');?>
-										<input class="potongan" type="hidden" value="<?php echo $potongan['aisiyah'];?>">
+										Rp. &nbsp;<?php 
+										($pegawai['status_pegawai'] != 'P') ? $aisiyah_val = 0 : $aisiyah_val = $potongan['aisiyah'];
+										echo number_format($aisiyah_val,0,',','.');?>
+										<input class="potongan" type="hidden" value="<?php echo $aisiyah_val;?>">
 									</td>
 									<td>
-										Rp. &nbsp;
-										<?php
-											(!empty($pegawai['nominal_kop'])) ? $pjm_kop = $pegawai['nominal_kop'] : $pjm_kop = 0;
-											echo number_format($pjm_kop,0,',','.');
-										?>
+										Rp. &nbsp;<?php
+										(!empty($pegawai['nominal_kop'])) ? $pjm_kop = $pegawai['nominal_kop'] : $pjm_kop = 0;
+										echo number_format($pjm_kop,0,',','.');?>
 										<input class="potongan" type="hidden" value="<?php echo $pjm_kop;?>">
 									</td>
-									<td>Rp. &nbsp;
-										<?php
-											(!empty($pegawai['nominal_bank'])) ? $pjm_bank = $pegawai['nominal_bank'] : $pjm_bank = 0;
-											echo number_format($pjm_bank,0,',','.');
-										?>
+									<td>Rp. &nbsp;<?php
+										(!empty($pegawai['nominal_bank'])) ? $pjm_bank = $pegawai['nominal_bank'] : $pjm_bank = 0;
+										echo number_format($pjm_bank,0,',','.');?>
 										<input class="potongan" type="hidden" value="<?php echo $pjm_bank;?>">
 									</td>
 								</tr>

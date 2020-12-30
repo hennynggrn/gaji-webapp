@@ -25,7 +25,7 @@
 								<td><?php echo $no++;?></td>
 								<td style="text-align: left; padding-left: 20px;">
 								<?php if ($honor['honor'] == null) {
-									echo '-';
+									echo '(kosong)';
 								} else if ($honor['honor'] == 0) {
 									echo 'Rp. &nbsp;&nbsp;0 &nbsp;&nbsp;<small>(belum ditentukan)</small>';
 								} else {

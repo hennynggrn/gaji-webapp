@@ -29,6 +29,7 @@ class Pegawai extends CI_Controller {
 				$data['id_pgw'] = $this->M_pegawai->get_id_pegawai()->row_array();
 				$data['id_pegawai'] = $data['id_pgw']['id_pegawai'];
 				$data['jabatans'] = $this->M_jabatan->get_jabatan($id)->result_array();
+				$data['masakerjas']= $this->M_masakerja->get_masakerja()->result_array();
 				$this->template->load('index', 'pegawai/add_pegawai', $data);
 			} else {
 				redirect('pegawai');
@@ -68,15 +69,16 @@ class Pegawai extends CI_Controller {
 		} else {
 			$data['title'] = 'Detail Pegawai';
 			$where = array('id_pegawai' => $id);
-			$data['pegawai'] = $this->M_pegawai->get_pegawai_detail($where,'pegawai')->row_array();
-			$data['keluargas'] = $this->M_keluarga->get_keluarga_pegawai($id,'keluarga')->result_array();
+			$data['pegawai'] = $this->M_pegawai->get_pegawai_detail($where)->row_array();
+			
+			$data['keluargas'] = $this->M_keluarga->get_keluarga_pegawai($id)->result_array();
 			$data['jabatans'] = $this->M_jabatan->get_jabatan_pegawai($id)->result_array();
 			if (authUserLevel() == TRUE){
 				$data['hide'] = FALSE;
 			} else {
 				$data['hide'] = TRUE;
 			}
-			// var_dump($data['pegawai']);
+			// var_dump($data['keluargas']);
 			$this->template->load('index', 'pegawai/detail_pegawai', $data);
 		}
 	}
@@ -90,6 +92,7 @@ class Pegawai extends CI_Controller {
 				$data['title'] = 'Edit Pegawai';
 				$where = array('id_pegawai' => $id);
 				$data['pegawai'] = $this->M_pegawai->get_pegawai_detail($where,'pegawai')->row_array();
+				$data['masakerjas']= $this->M_masakerja->get_masakerja()->result_array();
 				$data['keluargas'] = $this->M_keluarga->get_keluarga_pegawai($id,'keluarga')->result_array();
 				$data['jabatans'] = $this->M_jabatan->get_jabatan($id)->result_array();
 
@@ -97,7 +100,7 @@ class Pegawai extends CI_Controller {
 				foreach ($data['keluargas'] as $key => $value) {
 					$data['id_status'][] = $data['keluargas'][$key]['id_status'];			
 				}
-
+				// var_dump($data['pegawai']);
 				$this->template->load('index','pegawai/edit_pegawai', $data);
 			} else {
 				redirect('pegawai');

@@ -15,12 +15,11 @@
 				<div class="box-body">
 					<table class="table table-bordered table-hover responsive text-center">
 						<thead>
-							<th style="width: 10px">No</th>
+							<th>No</th>
 							<th>NBM</th>
 							<th>Nama</th>
 							<th>Jenis Kelamin</th>
-							<th>E-mail</th>
-							<th>Telepon</th>
+							<th>Masa Kerja</th>
 							<th>Jenis Pegawai</th>
 							<th>Status Pegawai</th>
 							<th>Honorarium</th>
@@ -36,8 +35,7 @@
 								<td><?php echo $pegawai['nbm'] ?></td>
 								<td style="text-align: left; padding-left: 5px;"><?php echo $pegawai['nama'] ?></td>
 								<td><?php echo ($pegawai['gender'] == 'P') ? 'Perempuan' : 'Laki-laki';?></td>
-								<td style="text-align: left; padding-left: 5px;"><?php echo $pegawai['email'] ?></td>
-								<td><?php echo ($pegawai['telepon'] != 0) ? $pegawai['telepon'] : '-';?></td>
+								<td><?php echo ($pegawai['masa_kerja'] != 0) ? $pegawai['tahun'].' tahun' : '<small>(belum genap 1 tahun)</small>';?></td>
 								<td><?php echo ($pegawai['jns_pegawai'] == 0) ? 'Guru' : 'Karyawan';?></td>
 								<td>
 									<?php switch ($pegawai['status_pegawai']) {
@@ -52,7 +50,15 @@
 											break;
 									}?>
 								</td>
-								<td style="text-align: left; padding-left: 5px;"><?php echo ($pegawai['honor'] == NULL) ? '-' : 'Rp. '.number_format($pegawai['honor'],0,',','.');?></td>
+								<td style="text-align: left; padding-left: 5px;"><?php 
+									if ($pegawai['honor'] == NULL) {
+										echo 'Rp. &nbsp;&nbsp; 0'; 
+									} else if ($pegawai['honor'] == 0) {
+										echo 'Rp. &nbsp;&nbsp; 0 <small>(belum ditentukan)</small>';
+									} else {
+										echo 'Rp. &nbsp;&nbsp;'.number_format($pegawai['honor'],0,',','.');
+									}?>
+								</td>
 								<td>
 									<a href="<?php echo site_url('pegawai/detail/'.$pegawai['id_pegawai']);?>" title="Detail" data-tooltip="tooltip" data-placement="top">
 										<span class="badge bg-green"><i class="fa fa-fw fa-info-circle"></i></span>
