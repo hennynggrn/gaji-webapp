@@ -39,11 +39,17 @@ class M_pinjaman extends CI_Model{
 		}
 	}
 
-	public function get_angsuran($id = TRUE)
+	public function get_angsuran($id = TRUE, $id_angsuran)
 	{
-		$this->db->select('*');
-		$this->db->order_by('tanggal_kembali');
-		return $this->db->get_where('angsuran a', array('a.id_pinjaman' => $id));
+		if ($id != NULL) {
+			$this->db->select('*');
+			$this->db->order_by('tanggal_kembali');
+			return $this->db->get_where('angsuran a', array('a.id_pinjaman' => $id));
+		} else {
+			$this->db->select('*');
+			$this->db->order_by('tanggal_kembali');
+			return $this->db->get_where('angsuran a', array('a.id_angsuran' => $id_angsuran));
+		}
 		
 	}
 	

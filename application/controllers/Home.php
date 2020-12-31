@@ -38,7 +38,8 @@ class Home extends CI_Controller {
 		
 		// Potongan
 		$data['potongan']= $this->M_potongan->get_potongan()->row_array();
-		$data['pinjaman_kop'] = $this->M_gaji->get_pinjaman($id_pegawai, $kode = 'KOP')->result_array();
+		
+		$data['pinjaman_kop'] = $this->M_gaji->get_pinjaman($id_pegawai, $kode = 'KOP', $status = TRUE)->result_array();
 		$data['pinjaman_bank'] = $this->M_gaji->get_pinjaman($id_pegawai, $kode = 'BANK')->result_array();
 
 		foreach ($data['pegawais'] as $key => $value) {

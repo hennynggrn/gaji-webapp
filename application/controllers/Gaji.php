@@ -53,44 +53,36 @@ class Gaji extends CI_Controller {
 				$explode = explode('-', $id_angsuran);
 				$id_kop = $explode[0];
 				$id_bank = $explode[1];
-				if ($id_kop) {
-					$id = $id_kop;
-					$id = $this->M_pinjaman->get_angsuran($id)->result_array();
-				}
-				if ($id_bank) {
-					$id = $id_bank;
-					$id = $this->M_pinjaman->get_angsuran($id)->result_array();
+				$res['repay'] = $this->M_gaji->repay($id_kop, $id_bank);
+
+				$kop = $this->M_pinjaman->get_angsuran($id = NULL, $id_kop)->row_array();
+				$bank = $this->M_pinjaman->get_angsuran($id = NULL, $id_bank)->row_array();
+
+				$pinjaman_kop = $this->M_pinjaman->get_pinjaman($kop['id_pinjaman'])->row_array();
+				if ($pinjaman_kop) {
+					if ($pinjaman_kop['jml_angsuran']-$pinjaman_kop['status_ang'] == 0) {
+						$status = 1;
+					} else {
+						$status = 0;
+					}
+					$res['pinjaman_kop'] = $this->M_pinjaman->update_status_pinjaman($pinjaman_kop['id_pinjaman'], $status);
 				}
 
-				// $pinjaman = $this->M_pinjaman->get_pinjaman($id)->row_array();
-				// if ($pinjaman['jml_angsuran']-$pinjaman['status_ang'] == 0) {
-				// 	$status = 1;
-				// } else {
-				// 	$status = 0;
-				// }
-				// $res['pinjaman'] = $this->M_pinjaman->update_status_pinjaman($id, $status);
-				var_dump($id_pegawai);
-				var_dump($id_angsuran);
-				var_dump($id);
-				var_dump($id);
-
-				// $res['repay'] = $this->M_gaji->repay($id_kop, $id_bank);
-				// if ($res) {
-				// 	redirect('detail/'.$id_pegawai);
-				// } else {
-				// 	echo "<h2> Gagal Memproses Data </h2>";
-				// }
+				$pinjaman_bank = $this->M_pinjaman->get_pinjaman($bank['id_pinjaman'])->row_array();
+				if ($pinjaman_bank) {
+					if ($pinjaman_bank['jml_angsuran']-$pinjaman_bank['status_ang'] == 0) {
+						$status = 1;
+					} else {
+						$status = 0;
+					}
+					$res['pinjaman_bank'] = $this->M_pinjaman->update_status_pinjaman($pinjaman_bank['id_pinjaman'], $status);
+				}
+				$data = $this->gaji_pegawai($id_pegawai);
+				$this->load->view('gaji/paycheck_output', $data);
 			} else {
 				redirect('detail/'.$id_pegawai);
 			}
 		}
-		
-		
-		 
-		// $this->load->model('M_gaji');
-		// $data['tampil']= $this->M_gaji->get_gaji()->result_array();
-
-		// $this->template->load('index','gaji/print_det_gaji',$data);
 	}
 
 	public function search_gaji($id_pegawai = NULL) 
@@ -230,9 +222,6 @@ class Gaji extends CI_Controller {
 					</div">
 					';
 			}
-			
-			// var_dump($output);
-			
 			echo $output;
 		}
 	}
@@ -254,9 +243,10 @@ class Gaji extends CI_Controller {
 			
 			// Potongan
 			$data['potongan']= $this->M_potongan->get_potongan()->row_array();
-			$data['pinjaman_kop'] = $this->M_gaji->get_pinjaman($id_pegawai, $kode = 'KOP')->result_array();
-			$data['pinjaman_bank'] = $this->M_gaji->get_pinjaman($id_pegawai, $kode = 'BANK')->result_array();
 
+			$data['pinjaman_kop'] = $this->M_gaji->get_pinjaman($id_pegawai, $kode = 'KOP', $status = TRUE)->result_array();
+			$data['pinjaman_bank'] = $this->M_gaji->get_pinjaman($id_pegawai, $kode = 'BANK')->result_array();
+			
 			foreach ($data['pegawais'] as $key => $value) {
 				// Keluarga
 				if ($data['keluargas'][$key]['id_pegawai'] == $data['pegawais'][$key]['id_pegawai']) {
@@ -282,7 +272,8 @@ class Gaji extends CI_Controller {
 			} else {
 				$data['hide'] = TRUE;
 			}
-			// var_dump($data['pegawais']);
+			// var_dump($data['pinjaman_kop']);
+			// var_dump($data['pinjaman_bank']);
 			return $data;
 	}
 
@@ -308,6 +299,7 @@ class Gaji extends CI_Controller {
 			
 			// Potongan
 			$data['potongan']= $this->M_potongan->get_potongan()->row_array();
+
 			$data['pinjaman_kop'] = $this->M_gaji->get_pinjaman($id_pegawai, $kode = 'KOP')->row_array();
 			$data['pinjaman_bank'] = $this->M_gaji->get_pinjaman($id_pegawai, $kode = 'BANK')->row_array();
 
@@ -332,6 +324,7 @@ class Gaji extends CI_Controller {
 				if ($data['pinjaman_kop']['id_pegawai'] == $data['pegawai']['id_pegawai']) {
 					$data['pegawai']['nominal_kop'] = $data['pinjaman_kop']['nominal'];
 					$data['pegawai']['id_kop'] = $data['pinjaman_kop']['id_angsuran'];
+					$data['pegawai']['payOff_byGaji_Kop'] = $data['pinjaman_kop']['payOff_byGaji'];
 				}
 			}
 			if ($data['pinjaman_bank'] != NULL) {
@@ -339,6 +332,7 @@ class Gaji extends CI_Controller {
 				if ($data['pinjaman_bank']['id_pegawai'] == $data['pegawai']['id_pegawai']) {
 					$data['pegawai']['nominal_bank'] = $data['pinjaman_bank']['nominal'];
 					$data['pegawai']['id_bank'] = $data['pinjaman_bank']['id_angsuran'];
+					$data['pegawai']['payOff_byGaji_Bank'] = $data['pinjaman_bank']['payOff_byGaji'];
 				}
 			}
 			if (authUserLevel() == TRUE){

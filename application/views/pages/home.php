@@ -3,10 +3,8 @@
 	<!-- Info boxes -->
 	<div class="row">
 		<div class="col-md-3 col-sm-2 col-xs-12">
-			
 			<div class="info-box">
 				<span class="info-box-icon bg-aqua"><i class="fa fa-fw fa-money"></i></span>
-
 				<div class="info-box-content">
 					<span class="info-box-text">Honorarium</span>
 					<span class="info-box-number"><?php echo 'Rp. &nbsp;&nbsp;'.number_format($honor,0,',','.');?>
@@ -114,10 +112,6 @@
 						</div>
 					</div>
 				</div>
-				<!-- /.box-body -->
-				<div class="box-footer">
-				</div>
-				<!-- /.box-footer-->
 			</div>
 		</div>
 		<div class="col-md-12" id="result">

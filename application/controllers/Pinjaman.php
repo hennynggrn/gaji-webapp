@@ -95,7 +95,7 @@ class Pinjaman extends CI_Controller {
 		} else {
 			$data['title'] = 'Detail Pinjaman';
 			$data['pinjaman'] = $this->M_pinjaman->get_pinjaman($id)->row_array();
-			$data['angsurans'] = $this->M_pinjaman->get_angsuran($id)->result_array();
+			$data['angsurans'] = $this->M_pinjaman->get_angsuran($id, $id_angsuran = NULL)->result_array();
 			if (authUserLevel() == TRUE){
 				$data['hide'] = FALSE;
 			} else {
@@ -116,7 +116,7 @@ class Pinjaman extends CI_Controller {
 				$data['title'] = 'Bayar Angsuran Pinjaman';
 				$data['pay'] = TRUE;
 				$data['pinjaman'] = $this->M_pinjaman->get_pinjaman($id)->row_array();
-				$data['angsurans'] = $this->M_pinjaman->get_angsuran($id)->result_array();
+				$data['angsurans'] = $this->M_pinjaman->get_angsuran($id, $id_angsuran = NULL)->result_array();
 				$this->template->load('index','pinjaman/detail_pinjaman', $data);
 			} else {
 				redirect('pinjaman');
@@ -161,7 +161,7 @@ class Pinjaman extends CI_Controller {
 				$data['title']= 'Edit Pinjaman';
 				$data['pegawais'] = $this->M_pinjaman->get_pegawai_pinjaman($id)->result_array();
 				$data['pinjaman'] = $this->M_pinjaman->get_pinjaman($id)->row_array();
-				$data['angsurans'] = $this->M_pinjaman->get_angsuran($id)->result_array();
+				$data['angsurans'] = $this->M_pinjaman->get_angsuran($id, $id_angsuran = NULL)->result_array();
 				$this->template->load('index','pinjaman/edit_pinjaman', $data);
 			} else {
 				redirect('pinjaman');

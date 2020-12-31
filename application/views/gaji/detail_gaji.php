@@ -240,13 +240,37 @@
 									</td>
 									<td>
 										Rp. &nbsp;<?php
-										(!empty($pegawai['nominal_kop'])) ? $pjm_kop = $pegawai['nominal_kop'] : $pjm_kop = 0;
-										echo number_format($pjm_kop,0,',','.');?>
+										if (!empty($pegawai['nominal_kop'])) { 
+											$pjm_kop = $pegawai['nominal_kop'];
+											$kop_val = 1;
+											if ($pegawai['payOff_byGaji_Kop'] == 1) {
+												$info = '<i class="fa fa-fw fa-info-circle text-info" title="Sudah Terbayar." data-tooltip="tooltip" data-placement="top"></i>';
+											} else {
+												$info = '';
+											}
+										 } else {
+											 $pjm_kop = 0;
+											 $kop_val = 0;
+											 $info = '';
+										 } 
+										echo number_format($pjm_kop,0,',','.').' '.$info;?>
 										<input class="potongan" type="hidden" value="<?php echo $pjm_kop;?>">
 									</td>
 									<td>Rp. &nbsp;<?php
-										(!empty($pegawai['nominal_bank'])) ? $pjm_bank = $pegawai['nominal_bank'] : $pjm_bank = 0;
-										echo number_format($pjm_bank,0,',','.');?>
+										if (!empty($pegawai['nominal_bank'])) { 
+											$pjm_bank = $pegawai['nominal_bank'];
+											$bank_val = 1;
+											if ($pegawai['payOff_byGaji_Bank'] == 1) {
+												$info = '<i class="fa fa-fw fa-info-circle text-info" title="Sudah Terbayar." data-tooltip="tooltip" data-placement="top"></i>';
+											} else {
+												$info = '';
+											}
+										 } else {
+											 $pjm_bank = 0;
+											 $bank_val = 0;
+											 $info = '';
+										 } 
+										echo number_format($pjm_bank,0,',','.').' '.$info;?>
 										<input class="potongan" type="hidden" value="<?php echo $pjm_bank;?>">
 									</td>
 								</tr>
@@ -265,10 +289,38 @@
 					<?php 
 						$id_kop = 0;
 						$id_bank = 0;
+						
+						if ($pjm_kop == 0) {
+							$status_kop = 1;
+						} else {
+							if (!empty($pegawai['payOff_byGaji_Kop']) && ($pegawai['payOff_byGaji_Kop'] == 1)) {
+								$kop_val = 0;
+								$status_kop = 1;
+							} else {
+								$status_kop = 0;
+							}
+						}
+						if ($pjm_bank == 0) {
+							$status_bank = 1;
+						} else {
+							if (!empty($pegawai['payOff_byGaji_Bank']) && ($pegawai['payOff_byGaji_Bank'] == 1)) {
+								$bank_val = 0;
+								$status_bank = 1;
+							} else {
+								$status_bank = 0;
+							}
+						}
+						$pinjaman = ($pjm_kop*$kop_val)+($pjm_bank*$bank_val);
+
 						if (($pjm_kop != 0) && ($pjm_bank != 0)) {
 							$id_angsuran = $pegawai['id_kop'].'-'.$pegawai['id_bank'];
 							if ($hide == FALSE) {
-								echo '<a href="'.site_url('gaji/pay_print_gaji/'.$pegawai['id_pegawai'].'/'.$id_angsuran).'" class="btn bg-orange">Bayar Pinjaman & Cetak</a></td>';
+								if (($status_kop == 0) || ($status_bank == 0)) {
+									echo '<a href="" data-toggle="modal" data-target="#pay'.$pegawai['id_pegawai'].'" class="btn bg-orange">Bayar Pinjaman & Cetak</a>';
+								} else {
+									echo '<i class="fa fa-fw fa-info-circle text-info" title="Semua Pinjaman Sudah Terbayar." data-tooltip="tooltip" data-placement="top"></i>
+										  <a href="" class="btn bg-orange disabled">Bayar Pinjaman & Cetak</a>';
+								}
 							}
 						} else if (($pjm_kop != 0) || ($pjm_bank != 0)) { 
 							if ($pjm_kop == 0) {
@@ -279,13 +331,39 @@
 							}
 							$id_angsuran = $id_kop.'-'.$id_bank;
 							if ($hide == FALSE) {
-								echo '<a href="'.site_url('gaji/pay_print_gaji/'.$pegawai['id_pegawai'].'/'.$id_angsuran).'" class="btn bg-orange">Bayar Pinjaman & Cetak</a></td>';
+								if (($status_kop == 0) || ($status_bank == 0)) {
+									echo '<a href="" data-toggle="modal" data-target="#pay'.$pegawai['id_pegawai'].'" class="btn bg-orange">Bayar Pinjaman & Cetak</a>';
+								} else {
+									echo '<i class="fa fa-fw fa-info-circle text-info" title="Semua Pinjaman Sudah Terbayar." data-tooltip="tooltip" data-placement="top"></i>
+										  <a href="" class="btn bg-orange disabled">Bayar Pinjaman & Cetak</a>';
+								}
 							}
 						} else {
 							$id_angsuran = $id_kop.'-'.$id_bank;
 						}
 					?>
-					<a href="<?php echo site_url('print/'.$pegawai['id_pegawai'])?>" target="_BLANK" class="btn bg-blue edit-btn">Cetak</a></td>
+					<a href="<?php echo site_url('print/'.$pegawai['id_pegawai'])?>" target="_BLANK" class="btn bg-blue edit-btn">Cetak</a>
+					<!-- Modal Repay Angsuran-->
+					<div class="modal fade" id="pay<?php echo $pegawai['id_pegawai'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="myModalLabel">Bayar Pinjaman Angsuran Bulan <?php echo $desc;?></h4>
+								</div>
+								<div class="modal-body">
+									<p>
+										Anda akan membayar angsuran sebesar <b class="text-primary"><?php echo 'Rp. '.number_format($pinjaman,0,',','.');?></b> ?
+									</p>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Batal</button>
+									<a href="<?php echo site_url('gaji/pay_print_gaji/'.$pegawai['id_pegawai'].'/'.$id_angsuran);?>" type="button" class="btn btn-primary pull-right edit-btn" target="_BLANK">Bayar</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- End Modal -->
 				</span>
 			</div>
 		</div>
