@@ -7,6 +7,8 @@ $route['delete/(:any)'] = 'user/delete_user/$1';
 $route['unlink/(:any)'] = 'user/unlink_pegawai/$1';
 $route['user'] = 'user/index';
 
+$route['backup'] = 'backup/index';
+
 $route['laporan'] = 'laporan/index';
 
 $route['print/(:any)'] = 'gaji/print_gaji/$1';

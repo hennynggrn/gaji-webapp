@@ -103,9 +103,7 @@ class Gaji extends CI_Controller {
 			// $input = preg_quote($query, '~');
 			if (!empty($data)) {
 				$output .= '
-					<div class="box box-primary">
-						<div class="box-body">
-							<table class="table table-bordered table-hover text-center">
+							<table class="table table-bordered table-hover text-center" style="background-color: white;">
 								<thead>
 									<th>No</th>
 									<th>Nama</th>
@@ -218,8 +216,6 @@ class Gaji extends CI_Controller {
 				$output .= '
 								</tbody>
 							</table">
-						</div>
-					</div">
 					';
 			}
 			echo $output;

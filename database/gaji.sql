@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 30, 2020 at 08:57 PM
+-- Generation Time: Dec 31, 2020 at 09:07 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -46,65 +46,176 @@ CREATE TABLE `angsuran` (
 INSERT INTO `angsuran` (`id_angsuran`, `id_pinjaman`, `tanggal_kembali`, `nominal`, `status`, `payOff_byGaji`, `id_gaji`, `created_at`, `created_by`) VALUES
 (4, 2, '2020-12-24', 100000, 1, 1, NULL, '2020-12-02 04:33:47', NULL),
 (5, 3, '2020-11-10', 1000000, 1, 1, NULL, '2020-12-02 04:35:44', NULL),
-(6, 3, '2020-12-26', 500000, 0, 0, NULL, '2020-12-02 04:35:45', NULL),
-(7, 4, '2020-11-03', 1500000, 0, 0, NULL, '2020-12-02 04:37:13', NULL),
-(8, 4, '2020-12-25', 1500000, 0, 0, NULL, '2020-12-02 04:37:13', NULL),
+(6, 3, '2020-12-26', 500000, 1, 1, NULL, '2020-12-02 04:35:45', NULL),
+(7, 4, '2020-11-03', 1500000, 1, 0, NULL, '2020-12-02 04:37:13', NULL),
+(8, 4, '2020-12-25', 1500000, 1, 1, NULL, '2020-12-02 04:37:13', NULL),
 (30, 1, '2020-11-16', 4000000, 1, 0, NULL, '2020-12-03 07:44:23', NULL),
 (31, 1, '2021-01-01', 3000000, 0, 0, NULL, '2020-12-03 07:45:04', NULL),
-(37, 7, '2020-11-17', 20000, 0, 0, NULL, '2020-12-03 08:03:26', NULL),
+(37, 7, '2020-11-17', 20000, 1, 0, NULL, '2020-12-03 08:03:26', NULL),
 (39, 7, '2020-12-31', 60000, 1, 1, NULL, '2020-12-03 08:04:28', NULL),
 (40, 3, '2019-10-01', 899995, 1, 0, NULL, '2020-12-13 23:08:31', NULL),
-(41, 1, '2020-12-09', 800000, 0, 0, NULL, '2020-12-14 00:41:59', NULL),
-(42, 8, '2020-11-09', 166666, 0, 0, NULL, '2020-12-14 01:09:38', NULL),
-(43, 8, '2020-12-22', 90000, 0, 0, NULL, '2020-12-14 01:09:38', NULL);
+(41, 1, '2020-12-09', 800000, 1, 1, NULL, '2020-12-14 00:41:59', NULL),
+(42, 8, '2020-11-09', 166666, 1, 0, NULL, '2020-12-14 01:09:38', NULL),
+(43, 8, '2020-10-22', 90000, 1, 1, NULL, '2020-12-14 01:09:38', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bulan`
+-- Table structure for table `b_gaji`
 --
 
-CREATE TABLE `bulan` (
-  `id_bulan` int(11) NOT NULL,
-  `bulan` varchar(50) DEFAULT NULL,
-  `angka` int(2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `bulan`
---
-
-INSERT INTO `bulan` (`id_bulan`, `bulan`, `angka`) VALUES
-(1, 'Januari', 1),
-(2, 'Februari', 2),
-(3, 'Maret', 3),
-(4, 'April', 4),
-(5, 'Mei', 5),
-(6, 'Juni', 6),
-(7, 'Juli', 7),
-(8, 'Agustus', 8),
-(9, 'September', 9),
-(10, 'Oktober', 10),
-(11, 'November', 11),
-(12, 'Desember', 12);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `gaji`
---
-
-CREATE TABLE `gaji` (
+CREATE TABLE `b_gaji` (
   `id_gaji` int(11) NOT NULL,
-  `id_honor` int(11) NOT NULL,
-  `id_potongan` int(11) NOT NULL,
-  `id_tunjangan` int(11) NOT NULL,
-  `jml_gaji` varchar(100) NOT NULL,
-  `date_dinamis` date NOT NULL,
-  `date_statis` date NOT NULL,
+  `honor` int(11) NOT NULL,
+  `tunjangan` int(11) NOT NULL,
+  `potongan` int(11) NOT NULL,
+  `gaji` int(11) NOT NULL,
   `id_pegawai` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `created_by` int(11) DEFAULT NULL
+  `created_by` int(11) DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_by` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `b_jabatan`
+--
+
+CREATE TABLE `b_jabatan` (
+  `id_b_jabatan` int(11) NOT NULL,
+  `id_jabatan` int(11) NOT NULL,
+  `jabatan` varchar(100) DEFAULT NULL,
+  `jml_jam` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_by` int(11) NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_by` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `b_jbt_pegawai`
+--
+
+CREATE TABLE `b_jbt_pegawai` (
+  `id_b_jbt_pegawai` int(11) NOT NULL,
+  `id_jbt_pegawai` int(11) NOT NULL,
+  `id_jabatan` int(11) DEFAULT NULL,
+  `id_pegawai` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_by` int(11) NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_by` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `b_keluarga`
+--
+
+CREATE TABLE `b_keluarga` (
+  `id_b_keluarga` int(11) NOT NULL,
+  `id_anggota_klg` int(11) NOT NULL,
+  `nama` varchar(100) DEFAULT NULL,
+  `id_status` int(1) UNSIGNED DEFAULT NULL,
+  `s_hidup` enum('0','1') DEFAULT NULL,
+  `gender` enum('P','L') DEFAULT NULL,
+  `id_pegawai` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_by` int(11) NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_by` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `b_masakerja`
+--
+
+CREATE TABLE `b_masakerja` (
+  `id_b_masakerja` int(11) NOT NULL,
+  `id_masakerja` int(11) NOT NULL,
+  `tahun` int(11) NOT NULL,
+  `nominal_mk` int(50) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_by` int(11) NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_by` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `b_pegawai`
+--
+
+CREATE TABLE `b_pegawai` (
+  `id_b_pegawai` int(11) NOT NULL,
+  `id_pegawai` int(11) NOT NULL,
+  `nbm` varchar(100) DEFAULT NULL,
+  `nama` varchar(100) NOT NULL,
+  `foto` varchar(300) DEFAULT NULL,
+  `tempat_lahir` varchar(100) NOT NULL,
+  `tgl_lahir` date NOT NULL,
+  `telepon` int(20) NOT NULL,
+  `jns_pegawai` enum('G','K') NOT NULL,
+  `gender` enum('P','L') NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `status_pegawai` enum('P','T0','T1') DEFAULT NULL,
+  `status` int(1) NOT NULL,
+  `agama` enum('Islam','Protestan','Katolik','Hindu','Buddha','Khonghucu') NOT NULL,
+  `umur` varchar(20) NOT NULL,
+  `honor` varchar(11) DEFAULT NULL,
+  `masa_kerja` int(11) NOT NULL,
+  `id_tunjangan` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_by` int(11) DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `b_potongan`
+--
+
+CREATE TABLE `b_potongan` (
+  `id_potongan` int(11) NOT NULL,
+  `sosial` int(11) NOT NULL,
+  `infaq` int(11) NOT NULL,
+  `jsr` int(11) NOT NULL,
+  `aisiyah` int(11) DEFAULT NULL,
+  `jamsostek` int(11) DEFAULT NULL,
+  `ket` varchar(300) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_by` int(11) DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_by` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `b_tunjangan`
+--
+
+CREATE TABLE `b_tunjangan` (
+  `id_tunjangan` int(11) NOT NULL,
+  `beras` int(11) DEFAULT NULL,
+  `jamsostek` int(11) DEFAULT NULL,
+  `klg_psg` float DEFAULT NULL,
+  `klg_anak` float DEFAULT NULL,
+  `jabatan` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_by` int(11) NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -118,27 +229,29 @@ CREATE TABLE `jabatan` (
   `jabatan` varchar(100) DEFAULT NULL,
   `jml_jam` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `created_by` int(11) DEFAULT NULL
+  `created_by` int(11) DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `jabatan`
 --
 
-INSERT INTO `jabatan` (`id_jabatan`, `jabatan`, `jml_jam`, `created_at`, `created_by`) VALUES
-(1, 'Kepala Sekolah', 10, '2020-12-01 23:59:22', NULL),
-(2, 'Bendahara', 24, '2020-12-01 23:59:22', NULL),
-(3, 'PAI', 4, '2020-12-01 23:59:22', NULL),
-(4, 'Humas', 12, '2020-12-01 23:59:22', NULL),
-(5, 'Tatip', 4, '2020-12-01 23:59:22', NULL),
-(6, 'Ko. BK', 6, '2020-12-01 23:59:22', NULL),
-(7, 'Koordinator PAI', 8, '2020-12-01 23:59:22', NULL),
-(8, 'Koordinator Mata Pelajaran', 4, '2020-12-01 23:59:22', NULL),
-(9, 'Laboran', 10, '2020-12-01 23:59:22', NULL),
-(10, 'Koordinator Literasi', 4, '2020-12-01 23:59:22', NULL),
-(11, 'Koordinator Ortonom', 6, '2020-12-01 23:59:22', NULL),
-(12, 'Ka Perpus', 12, '2020-12-01 23:59:22', NULL),
-(13, 'Sarpras', 12, '2020-12-01 23:59:22', NULL);
+INSERT INTO `jabatan` (`id_jabatan`, `jabatan`, `jml_jam`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
+(1, 'Kepala Sekolah', 10, '2020-12-01 23:59:22', NULL, '2020-10-07 04:57:28', NULL),
+(2, 'Bendahara', 24, '2020-12-01 23:59:22', NULL, '2020-12-31 04:57:28', NULL),
+(3, 'PAI', 4, '2020-12-01 23:59:22', NULL, '2020-12-31 04:57:28', NULL),
+(4, 'Humas', 12, '2020-12-01 23:59:22', NULL, '2020-12-31 04:57:28', NULL),
+(5, 'Tatip', 4, '2020-12-01 23:59:22', NULL, '2020-12-31 04:57:28', NULL),
+(6, 'Ko. BK', 6, '2020-12-01 23:59:22', NULL, '2020-12-31 04:57:28', NULL),
+(7, 'Koordinator PAI', 8, '2020-12-01 23:59:22', NULL, '2020-12-31 04:57:28', NULL),
+(8, 'Koordinator Mata Pelajaran', 4, '2020-12-01 23:59:22', NULL, '2020-12-31 04:57:28', NULL),
+(9, 'Laboran', 10, '2020-12-01 23:59:22', NULL, '2020-12-31 04:57:28', NULL),
+(10, 'Koordinator Literasi', 4, '2020-12-01 23:59:22', NULL, '2020-12-31 04:57:28', NULL),
+(11, 'Koordinator Ortonom', 6, '2020-12-01 23:59:22', NULL, '2020-12-31 04:57:28', NULL),
+(12, 'Ka Perpus', 12, '2020-12-01 23:59:22', NULL, '2020-12-31 04:57:28', NULL),
+(13, 'Sarpras', 12, '2020-12-01 23:59:22', NULL, '2020-12-31 04:57:28', NULL);
 
 -- --------------------------------------------------------
 
@@ -151,29 +264,31 @@ CREATE TABLE `jbt_pegawai` (
   `id_jabatan` int(11) DEFAULT NULL,
   `id_pegawai` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `created_by` int(11) DEFAULT NULL
+  `created_by` int(11) DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `jbt_pegawai`
 --
 
-INSERT INTO `jbt_pegawai` (`id_jbt_pegawai`, `id_jabatan`, `id_pegawai`, `created_at`, `created_by`) VALUES
-(46, 5, 5, '2020-12-01 23:58:26', NULL),
-(47, 2, 6, '2020-12-01 23:58:26', NULL),
-(53, 11, 7, '2020-12-01 23:58:26', NULL),
-(55, 3, 8, '2020-12-01 23:58:26', NULL),
-(56, 7, 8, '2020-12-01 23:58:26', NULL),
-(66, 12, 9, '2020-12-08 08:37:52', NULL),
-(67, 8, 7, '2020-12-18 23:13:52', NULL),
-(70, 13, 7, '2020-12-18 23:13:52', NULL),
-(78, 11, 9, '2020-12-27 02:00:03', NULL),
-(86, 13, 9, '2020-12-27 02:16:35', NULL),
-(87, 4, 6, '2020-12-27 06:33:31', NULL),
-(88, 5, 6, '2020-12-27 06:33:31', NULL),
-(89, 8, 6, '2020-12-27 06:33:31', NULL),
-(90, 2, 5, '2020-12-27 23:31:01', NULL),
-(91, 4, 5, '2020-12-27 23:31:01', NULL);
+INSERT INTO `jbt_pegawai` (`id_jbt_pegawai`, `id_jabatan`, `id_pegawai`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
+(46, 5, 5, '2020-12-01 23:58:26', NULL, '2020-11-02 05:28:44', NULL),
+(47, 2, 6, '2020-12-01 23:58:26', NULL, '2020-12-31 05:28:44', NULL),
+(53, 11, 7, '2020-12-01 23:58:26', NULL, '2020-12-31 05:28:44', NULL),
+(55, 3, 8, '2020-12-01 23:58:26', NULL, '2020-12-31 05:28:44', NULL),
+(56, 7, 8, '2020-12-01 23:58:26', NULL, '2020-12-31 05:28:44', NULL),
+(66, 12, 9, '2020-12-08 08:37:52', NULL, '2020-12-31 05:28:44', NULL),
+(67, 8, 7, '2020-12-18 23:13:52', NULL, '2020-12-31 05:28:44', NULL),
+(70, 13, 7, '2020-12-18 23:13:52', NULL, '2020-12-31 05:28:44', NULL),
+(78, 11, 9, '2020-12-27 02:00:03', NULL, '2020-12-31 05:28:44', NULL),
+(86, 13, 9, '2020-12-27 02:16:35', NULL, '2020-12-31 05:28:44', NULL),
+(87, 4, 6, '2020-12-27 06:33:31', NULL, '2020-12-31 05:28:44', NULL),
+(88, 5, 6, '2020-12-27 06:33:31', NULL, '2020-12-31 05:28:44', NULL),
+(89, 8, 6, '2020-12-27 06:33:31', NULL, '2020-12-31 05:28:44', NULL),
+(90, 2, 5, '2020-12-27 23:31:01', NULL, '2020-12-31 05:28:44', NULL),
+(91, 4, 5, '2020-12-27 23:31:01', NULL, '2020-12-31 05:28:44', NULL);
 
 -- --------------------------------------------------------
 
@@ -189,27 +304,29 @@ CREATE TABLE `keluarga` (
   `gender` enum('P','L') DEFAULT NULL,
   `id_pegawai` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `created_by` int(11) DEFAULT NULL
+  `created_by` int(11) DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_by` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `keluarga`
 --
 
-INSERT INTO `keluarga` (`id_anggota_klg`, `nama`, `id_status`, `s_hidup`, `gender`, `id_pegawai`, `created_at`, `created_by`) VALUES
-(74, 'Bumi', 1, '1', 'L', 6, '2020-12-01 23:57:22', NULL),
-(75, 'Nirwana M', 2, '1', 'L', 6, '2020-12-01 23:57:22', NULL),
-(76, 'Waff', 1, '0', 'L', 7, '2020-12-01 23:57:22', NULL),
-(77, 'wawan', 2, '1', 'L', 7, '2020-12-01 23:57:22', NULL),
-(80, 'Hinda', 1, '0', 'P', 5, '2020-12-01 23:57:22', NULL),
-(82, 'Santi', 1, '1', 'P', 8, '2020-12-01 23:57:22', NULL),
-(83, 'Mumut', 2, '1', 'L', 8, '2020-12-01 23:57:22', NULL),
-(87, 'Aasasss', 1, '1', 'P', 9, '2020-12-19 16:56:18', NULL),
-(88, 'Namm', 2, '1', 'P', 9, '2020-12-19 16:56:18', NULL),
-(89, 'sasa', 3, '1', 'P', 9, '2020-12-19 16:56:18', NULL),
-(90, 'yun', 2, '1', 'P', 5, '2020-12-19 19:14:17', NULL),
-(91, 'Dede', 1, '1', 'P', 10, '2020-12-30 17:25:14', NULL),
-(92, 'Irish', 2, '1', 'P', 10, '2020-12-30 17:25:14', NULL);
+INSERT INTO `keluarga` (`id_anggota_klg`, `nama`, `id_status`, `s_hidup`, `gender`, `id_pegawai`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
+(74, 'Bumi', 1, '1', 'L', 6, '2020-12-01 23:57:22', NULL, '2020-12-31 06:07:57', 0),
+(75, 'Nirwana M', 2, '1', 'L', 6, '2020-12-01 23:57:22', NULL, '2020-12-31 06:07:57', 0),
+(76, 'Waff', 1, '0', 'L', 7, '2020-12-01 23:57:22', NULL, '2020-12-31 06:07:57', 0),
+(77, 'wawan', 2, '1', 'L', 7, '2020-12-01 23:57:22', NULL, '2020-12-31 06:07:57', 0),
+(80, 'Hinda', 1, '0', 'P', 5, '2020-12-01 23:57:22', NULL, '2020-12-31 06:07:57', 0),
+(82, 'Santi', 1, '1', 'P', 8, '2020-12-01 23:57:22', NULL, '2020-12-31 06:07:57', 0),
+(83, 'Mumut', 2, '1', 'L', 8, '2020-12-01 23:57:22', NULL, '2020-12-31 06:07:57', 0),
+(87, 'Aasasss', 1, '1', 'P', 9, '2020-12-19 16:56:18', NULL, '2020-12-31 06:07:57', 0),
+(88, 'Namm', 2, '1', 'P', 9, '2020-12-19 16:56:18', NULL, '2020-12-31 06:07:57', 0),
+(89, 'sasa', 3, '1', 'P', 9, '2020-12-19 16:56:18', NULL, '2020-12-31 06:07:57', 0),
+(90, 'yun', 2, '1', 'P', 5, '2020-12-19 19:14:17', NULL, '2020-12-31 06:07:57', 0),
+(91, 'Dede', 1, '1', 'P', 10, '2020-12-30 17:25:14', NULL, '2020-12-31 06:07:57', 0),
+(92, 'Irish', 2, '1', 'P', 10, '2020-12-30 17:25:14', NULL, '2020-11-03 06:07:57', 0);
 
 -- --------------------------------------------------------
 
@@ -222,55 +339,57 @@ CREATE TABLE `masakerja` (
   `tahun` int(11) NOT NULL,
   `nominal_mk` int(50) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `created_by` int(11) DEFAULT NULL
+  `created_by` int(11) DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_by` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `masakerja`
 --
 
-INSERT INTO `masakerja` (`id_masakerja`, `tahun`, `nominal_mk`, `created_at`, `created_by`) VALUES
-(0, 0, 0, '2020-12-08 08:05:22', NULL),
-(1, 1, 2000, '2020-12-01 23:56:07', NULL),
-(2, 2, 4000, '2020-12-01 23:56:07', NULL),
-(3, 3, 6000, '2020-12-01 23:56:07', NULL),
-(4, 4, 8000, '2020-12-01 23:56:07', NULL),
-(5, 5, 20000, '2020-12-01 23:56:07', NULL),
-(6, 6, 22000, '2020-12-01 23:56:07', NULL),
-(7, 7, 24000, '2020-12-01 23:56:07', NULL),
-(8, 8, 26000, '2020-12-01 23:56:07', NULL),
-(9, 9, 28000, '2020-12-01 23:56:07', NULL),
-(10, 10, 42000, '2020-12-01 23:56:07', NULL),
-(11, 11, 42000, '2020-12-01 23:56:07', NULL),
-(12, 12, 44000, '2020-12-01 23:56:07', NULL),
-(13, 13, 46000, '2020-12-01 23:56:07', NULL),
-(14, 14, 48000, '2020-12-01 23:56:07', NULL),
-(15, 15, 65000, '2020-12-01 23:56:07', NULL),
-(16, 16, 67000, '2020-12-01 23:56:07', NULL),
-(17, 17, 69000, '2020-12-01 23:56:07', NULL),
-(18, 18, 71000, '2020-12-01 23:56:07', NULL),
-(19, 19, 73000, '2020-12-01 23:56:07', NULL),
-(20, 20, 93000, '2020-12-01 23:56:07', NULL),
-(21, 21, 95000, '2020-12-01 23:56:07', NULL),
-(22, 22, 97000, '2020-12-01 23:56:07', NULL),
-(23, 23, 99000, '2020-12-01 23:56:07', NULL),
-(24, 24, 101000, '2020-12-01 23:56:07', NULL),
-(25, 25, 125000, '2020-12-01 23:56:07', NULL),
-(26, 26, 127000, '2020-12-01 23:56:07', NULL),
-(27, 27, 129000, '2020-12-01 23:56:07', NULL),
-(28, 28, 131000, '2020-12-01 23:56:07', NULL),
-(29, 29, 133000, '2020-12-01 23:56:07', NULL),
-(30, 30, 160000, '2020-12-01 23:56:07', NULL),
-(31, 31, 162000, '2020-12-01 23:56:07', NULL),
-(32, 32, 164000, '2020-12-01 23:56:07', NULL),
-(33, 33, 166000, '2020-12-01 23:56:07', NULL),
-(34, 34, 168000, '2020-12-01 23:56:07', NULL),
-(35, 35, 200000, '2020-12-01 23:56:07', NULL),
-(36, 36, 202000, '2020-12-01 23:56:07', NULL),
-(37, 37, 204000, '2020-12-01 23:56:07', NULL),
-(38, 38, 206000, '2020-12-01 23:56:07', NULL),
-(39, 39, 208000, '2020-12-01 23:56:07', NULL),
-(40, 40, 245000, '2020-12-01 23:56:07', NULL);
+INSERT INTO `masakerja` (`id_masakerja`, `tahun`, `nominal_mk`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
+(0, 0, 0, '2020-12-08 08:05:22', NULL, '2020-05-06 05:44:47', 0),
+(1, 1, 2000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(2, 2, 4000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(3, 3, 6000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(4, 4, 8000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(5, 5, 20000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(6, 6, 22000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(7, 7, 24000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(8, 8, 26000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(9, 9, 28000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(10, 10, 42000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(11, 11, 42000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(12, 12, 44000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(13, 13, 46000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(14, 14, 48000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(15, 15, 65000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(16, 16, 67000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(17, 17, 69000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(18, 18, 71000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(19, 19, 73000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(20, 20, 93000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(21, 21, 95000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(22, 22, 97000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(23, 23, 99000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(24, 24, 101000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(25, 25, 125000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(26, 26, 127000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(27, 27, 129000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(28, 28, 131000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(29, 29, 133000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(30, 30, 160000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(31, 31, 162000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(32, 32, 164000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(33, 33, 166000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(34, 34, 168000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(35, 35, 200000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(36, 36, 202000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(37, 37, 204000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(38, 38, 206000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(39, 39, 208000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0),
+(40, 40, 245000, '2020-12-01 23:56:07', NULL, '2020-12-31 05:44:47', 0);
 
 -- --------------------------------------------------------
 
@@ -295,8 +414,8 @@ CREATE TABLE `pegawai` (
   `umur` varchar(20) NOT NULL,
   `honor` varchar(11) DEFAULT NULL,
   `masa_kerja` int(11) NOT NULL,
-  `created_at` date DEFAULT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -306,7 +425,7 @@ CREATE TABLE `pegawai` (
 --
 
 INSERT INTO `pegawai` (`id_pegawai`, `nbm`, `nama`, `foto`, `tempat_lahir`, `tgl_lahir`, `telepon`, `jns_pegawai`, `gender`, `email`, `status_pegawai`, `status`, `agama`, `umur`, `honor`, `masa_kerja`, `created_at`, `updated_at`, `created_by`, `updated_by`) VALUES
-(2, '124', 'Rifky', NULL, 'Baubau', '1998-02-12', 1897656, 'G', 'P', 'rifky@gmail.com', 'T1', 0, 'Hindu', '21', '0', 2, NULL, '2020-12-01 23:55:10', NULL, NULL),
+(2, '124', 'Rifky', NULL, 'Baubau', '1998-02-12', 1897656, 'G', 'P', 'rifky@gmail.com', 'T1', 0, 'Hindu', '21', '0', 2, NULL, '2020-11-16 23:55:10', NULL, NULL),
 (5, '123', 'Budi Sujioto', NULL, 'Taman', '1889-03-12', 2121212, 'G', 'L', 'budi@gmail.com', 'T1', 1, 'Islam', '31', '900000', 9, NULL, '2020-12-01 23:55:10', NULL, NULL),
 (6, '212', 'Dizzy', NULL, 'Taman', '1111-11-12', 1212, 'G', 'P', 'qsqs@czsd', 'T1', 1, 'Islam', '21', '50000', 3, NULL, '2020-12-01 23:55:10', NULL, NULL),
 (7, '1212', 'Henuiii', NULL, 'Taman', '1111-11-11', 90787, 'G', 'P', 'wodi@gmail.com', 'P', 1, 'Islam', '48', NULL, 0, NULL, '2020-12-01 23:55:10', NULL, NULL),
@@ -338,11 +457,11 @@ CREATE TABLE `pinjaman` (
 
 INSERT INTO `pinjaman` (`id_pinjaman`, `kode_pinjaman`, `total_pinjaman`, `status`, `start_date`, `ket_pinjaman`, `id_pegawai`, `created_at`, `created_by`) VALUES
 (1, 'KOP', 1000000, 0, '2020-12-03', '<p>\r\n\r\n</p><ul><li>angsuran kedua dibayar telat</li></ul><p></p>', 2, '2020-12-02 04:33:02', NULL),
-(2, 'BANK', 300000, 0, '2020-10-13', '', 5, '2020-12-02 04:33:47', NULL),
-(3, 'KOP', 1500000, 0, '2019-10-02', '', 6, '2020-12-02 04:35:44', NULL),
-(4, 'BANK', 5000000, 0, '2020-12-10', 'edit here', 8, '2020-12-02 04:37:13', NULL),
-(7, 'KOP', 70000, 0, '2020-11-05', '', 5, '2020-12-03 08:03:26', NULL),
-(8, 'KOP', 50000, 0, '2020-12-14', '', 5, '2020-12-14 01:09:38', NULL);
+(2, 'BANK', 300000, 1, '2020-10-13', '', 5, '2020-12-02 04:33:47', NULL),
+(3, 'KOP', 1500000, 1, '2019-10-02', '', 6, '2020-12-02 04:35:44', NULL),
+(4, 'BANK', 5000000, 1, '2020-12-10', 'edit here', 8, '2020-12-02 04:37:13', NULL),
+(7, 'KOP', 70000, 1, '2020-11-05', '', 5, '2020-12-03 08:03:26', NULL),
+(8, 'KOP', 50000, 1, '2020-12-14', '', 5, '2020-12-14 01:09:38', NULL);
 
 -- --------------------------------------------------------
 
@@ -359,15 +478,17 @@ CREATE TABLE `potongan` (
   `jamsostek` int(11) DEFAULT NULL,
   `ket` varchar(300) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `created_by` int(11) DEFAULT NULL
+  `created_by` int(11) DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_by` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `potongan`
 --
 
-INSERT INTO `potongan` (`id_potongan`, `sosial`, `infaq`, `jsr`, `aisiyah`, `jamsostek`, `ket`, `created_at`, `created_by`) VALUES
-('1', 10000, 5000, 10000, 11000, 66500, '<p></p><ul><li>Bu Santi sakit (dana sosial jadi 10 rb)</li></ul><p></p>', '2020-12-01 23:51:52', NULL);
+INSERT INTO `potongan` (`id_potongan`, `sosial`, `infaq`, `jsr`, `aisiyah`, `jamsostek`, `ket`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
+('1', 10000, 5000, 10000, 11000, 66500, '<p></p><ul><li>Bu Santi sakit (dana sosial jadi 10 rb)</li></ul><p></p>', '2020-12-01 23:51:52', NULL, '2020-12-31 06:49:55', 0);
 
 -- --------------------------------------------------------
 
@@ -383,15 +504,17 @@ CREATE TABLE `tunjangan` (
   `klg_anak` float DEFAULT NULL,
   `jabatan` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `created_by` int(11) DEFAULT NULL
+  `created_by` int(11) DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_by` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tunjangan`
 --
 
-INSERT INTO `tunjangan` (`id_tunjangan`, `beras`, `jamsostek`, `klg_psg`, `klg_anak`, `jabatan`, `created_at`, `created_by`) VALUES
-('1', 80000, 400000, 0.05, 0.025, 25000, '2020-12-01 23:51:20', NULL);
+INSERT INTO `tunjangan` (`id_tunjangan`, `beras`, `jamsostek`, `klg_psg`, `klg_anak`, `jabatan`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
+('1', 80000, 400000, 0.05, 0.025, 25000, '2020-12-01 23:51:20', NULL, '2020-12-31 06:52:03', 0);
 
 -- --------------------------------------------------------
 
@@ -460,16 +583,53 @@ ALTER TABLE `angsuran`
   ADD KEY `fk_angsuran_pinjaman` (`id_pinjaman`);
 
 --
--- Indexes for table `bulan`
+-- Indexes for table `b_gaji`
 --
-ALTER TABLE `bulan`
-  ADD PRIMARY KEY (`id_bulan`);
+ALTER TABLE `b_gaji`
+  ADD PRIMARY KEY (`id_gaji`);
 
 --
--- Indexes for table `gaji`
+-- Indexes for table `b_jabatan`
 --
-ALTER TABLE `gaji`
-  ADD PRIMARY KEY (`id_gaji`);
+ALTER TABLE `b_jabatan`
+  ADD PRIMARY KEY (`id_b_jabatan`);
+
+--
+-- Indexes for table `b_jbt_pegawai`
+--
+ALTER TABLE `b_jbt_pegawai`
+  ADD PRIMARY KEY (`id_b_jbt_pegawai`);
+
+--
+-- Indexes for table `b_keluarga`
+--
+ALTER TABLE `b_keluarga`
+  ADD PRIMARY KEY (`id_b_keluarga`);
+
+--
+-- Indexes for table `b_masakerja`
+--
+ALTER TABLE `b_masakerja`
+  ADD PRIMARY KEY (`id_b_masakerja`);
+
+--
+-- Indexes for table `b_pegawai`
+--
+ALTER TABLE `b_pegawai`
+  ADD PRIMARY KEY (`id_b_pegawai`),
+  ADD KEY `fk_pegawai_mk` (`masa_kerja`);
+
+--
+-- Indexes for table `b_potongan`
+--
+ALTER TABLE `b_potongan`
+  ADD PRIMARY KEY (`id_potongan`);
+
+--
+-- Indexes for table `b_tunjangan`
+--
+ALTER TABLE `b_tunjangan`
+  ADD PRIMARY KEY (`id_tunjangan`);
 
 --
 -- Indexes for table `jabatan`
@@ -503,7 +663,6 @@ ALTER TABLE `masakerja`
 --
 ALTER TABLE `pegawai`
   ADD PRIMARY KEY (`id_pegawai`),
-  ADD KEY `fk_status_pgw` (`status_pegawai`),
   ADD KEY `fk_pegawai_mk` (`masa_kerja`);
 
 --
@@ -554,10 +713,52 @@ ALTER TABLE `angsuran`
   MODIFY `id_angsuran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
--- AUTO_INCREMENT for table `gaji`
+-- AUTO_INCREMENT for table `b_gaji`
 --
-ALTER TABLE `gaji`
+ALTER TABLE `b_gaji`
   MODIFY `id_gaji` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `b_jabatan`
+--
+ALTER TABLE `b_jabatan`
+  MODIFY `id_b_jabatan` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `b_jbt_pegawai`
+--
+ALTER TABLE `b_jbt_pegawai`
+  MODIFY `id_b_jbt_pegawai` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `b_keluarga`
+--
+ALTER TABLE `b_keluarga`
+  MODIFY `id_b_keluarga` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `b_masakerja`
+--
+ALTER TABLE `b_masakerja`
+  MODIFY `id_b_masakerja` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `b_pegawai`
+--
+ALTER TABLE `b_pegawai`
+  MODIFY `id_b_pegawai` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `b_potongan`
+--
+ALTER TABLE `b_potongan`
+  MODIFY `id_potongan` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `b_tunjangan`
+--
+ALTER TABLE `b_tunjangan`
+  MODIFY `id_tunjangan` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `jabatan`

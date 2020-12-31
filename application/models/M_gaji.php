@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class M_gaji extends CI_Model{
+class M_gaji extends CI_Model {
 
 	public function get_jabatan_detail($id_pegawai = TRUE, $jabatan_val)
 	{

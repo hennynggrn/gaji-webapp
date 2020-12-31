@@ -58,7 +58,7 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('Template','database','form_validation', 'session', 'user_agent');
+$autoload['libraries'] = array('Template', 'database','form_validation', 'session', 'user_agent');
 
 /* unused
 user_agent
@@ -133,4 +133,4 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('M_user','M_doors','M_pegawai', 'M_keluarga', 'M_jabatan', 'M_honor', 'M_tunjangan', 'M_masakerja', 'M_potongan', 'M_pinjaman', 'M_gaji');
+$autoload['model'] = array('M_backup', 'M_user','M_doors','M_pegawai', 'M_keluarga', 'M_jabatan', 'M_honor', 'M_tunjangan', 'M_masakerja', 'M_potongan', 'M_pinjaman', 'M_gaji');

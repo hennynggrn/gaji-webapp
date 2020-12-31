@@ -22,9 +22,16 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-12" id="result">
+			<div class="col-md-12">
 				<div class="box box-primary">
-					<div class="box-body">
+					<div class="box-header with-border">
+						<div class="pull-left">
+							<a type="button" class="btn btn-primary disabled" href="<?php echo site_url('backup');?>">
+								<i class="fa fa-book"></i> &nbsp;&nbsp;Buat Laporan
+							</a> &nbsp;&nbsp; <i class="fa fa-fw fa-info-circle text-info" title="Aktif di akhir bulan." data-tooltip="tooltip" data-placement="top"></i>
+						</div>
+					</div>
+					<div class="box-body" id="result">
 						<table class="table table-bordered table-hover text-center">
 							<thead>
 								<th>No</th>

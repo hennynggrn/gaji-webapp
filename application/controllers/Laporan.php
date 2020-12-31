@@ -8,14 +8,5 @@ class Laporan extends CI_Controller {
 		$data['title'] = 'Tabel Laporan';
 		$this->template->load('index','laporan/table_laporan', $data);
 	}
-
-	public function detail_laporan()
-	{
-		
-	}
-	
-	public function print_laporan()
-	{
-
-	}
 }
+?>
