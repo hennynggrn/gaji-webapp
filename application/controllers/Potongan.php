@@ -42,9 +42,10 @@ class Potongan extends CI_Controller {
 			if (authUserLevel() == TRUE){	
 				$res['potongan'] = $this->M_potongan->update_potongan();
 				if ($res) {
+					$this->session->set_flashdata('message_success', 'Data potongan berhasil diedit');
 					redirect('potongan');
 				} else {
-					echo "<h2> Gagal Edit Data Potongan </h2>";
+					$this->session->set_flashdata('message_failed', 'Data potongan gagal diedit');
 				}
 			} else {
 				redirect('potongan');

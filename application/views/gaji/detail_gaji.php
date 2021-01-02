@@ -355,6 +355,9 @@
 									<p>
 										Anda akan membayar angsuran sebesar <b class="text-primary"><?php echo 'Rp. '.number_format($pinjaman,0,',','.');?></b> ?
 									</p>
+									<p class="text-warning">
+										<i class="fa fa-fw fa-warning"></i> Setelah membayar, pastikan untuk refresh atau muat ulang halaman ini.
+									</p>
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Batal</button>

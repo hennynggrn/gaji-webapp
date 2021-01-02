@@ -123,7 +123,7 @@
 					<div class="col-md-12">
 						<div class="header-edit">
 							<div class="logo-header">
-								<img class=" user-image img-circle" src="<?php echo base_url('assets/dist/img/smpmuh9.jpeg');?>" width="50px" height="50px" alt="Logo SMP Muhammadiyah 9">
+								<img class=" user-image img-circle" src="<?php echo base_url('assets/dist/img/upload/smpmuh9.jpeg');?>" width="50px" height="50px" alt="Logo SMP Muhammadiyah 9">
 							</div>
 							<div class="caption-header">
 								<div class="box-edit">

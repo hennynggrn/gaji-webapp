@@ -101,12 +101,17 @@ class User extends CI_Controller {
 					$enc_password = md5($this->input->post('password'));
 				}
 				$res['user'] = $this->M_user->update_user($enc_password, $id);
-				if (!empty($this->input->post('profile_id')) && ($this->input->post('profile_id') == 1)) {
-					redirect('profile/'.$id);
+				$view = $this->uri->segment(1);
+				if ($res) {
+					$this->session->set_flashdata('message_success', 'Data pengguna berhasil diedit');
+					if ($view == 'profile') {
+						redirect('profile/'.$id);
+					} else {
+						redirect('user');
+					}
 				} else {
-					redirect('user');
+					$this->session->set_flashdata('message_failed', 'Data pengguna gagal diedit');
 				}
-				var_dump($_POST);
 			} else {
 				redirect(base_url());
 			}
@@ -121,10 +126,15 @@ class User extends CI_Controller {
 			if (authUserAdmin() == TRUE) {
 				$res['unlink'] = $this->M_user->unlink_pegawai($id);
 				$view = $this->uri->segment(1);
-				if ($view == 'profile') {
-					redirect('profile/'.$id);
+				if ($res) {
+					$this->session->set_flashdata('message_success', 'Data pegawai berhasil dihubungkan');
+					if ($view == 'profile') {
+						redirect('profile/'.$id);
+					} else {
+						redirect('user');
+					}
 				} else {
-					redirect('user');
+					$this->session->set_flashdata('message_failed', 'Data pegawai gagal dihubungkan');
 				}
 			} else {
 				redirect(base_url());
@@ -139,7 +149,12 @@ class User extends CI_Controller {
 		} else {
 			if (authUserAdmin() == TRUE) {
 				$res['delete'] = $this->M_user->delete_user($id);
-				redirect('user');
+				if ($res) {
+					$this->session->set_flashdata('message_success', 'Data pengguna berhasil dihapus');
+					redirect('user');
+				} else {
+					$this->session->set_flashdata('message_failed', 'Data pengguna gagal dihapus');
+				}
 			} else {
 				redirect(base_url());
 			}

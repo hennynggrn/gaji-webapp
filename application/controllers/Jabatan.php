@@ -66,9 +66,10 @@ class Jabatan extends CI_Controller {
 				$res['pegawai'] = $this->M_jabatan->add_pegawai_jabatan($last_id);
 
 				if ($res) {
+					$this->session->set_flashdata('message_success', 'Data jabatan berhasil ditambahkan');
 					redirect('jabatan');
 				} else {
-					echo "<h2> Gagal Tambah Jabatan </h2>";
+					$this->session->set_flashdata('message_failed', 'Data jabatan gagal ditambahkan');
 				}
 			} else {
 				redirect('jabatan');
@@ -128,9 +129,10 @@ class Jabatan extends CI_Controller {
 				$res['jabatan'] = $this->M_jabatan->update_jabatan();
 				$res['pegawai'] = $this->M_jabatan->update_pegawai_jabatan();
 				if ($res) {
+					$this->session->set_flashdata('message_success', 'Data jabatan berhasil diedit');
 					redirect('jabatan');
 				} else {
-					echo "<h2> Gagal Edit Jabatan </h2>";
+					$this->session->set_flashdata('message_failed', 'Data jabatan gagal diedit');
 				}
 			} else {
 				redirect('jabatan');
@@ -145,11 +147,11 @@ class Jabatan extends CI_Controller {
 		} else {
 			if (authUserLevel() == TRUE){
 				$res['jabatan'] = $this->M_jabatan->delete_jabatan($id);
-
 				if ($res) {
+					$this->session->set_flashdata('message_success', 'Data jabatan berhasil dihapus');
 					redirect('jabatan');
 				} else {
-					echo "<h2> Gagal Hapus Jabatan  </h2>";
+					$this->session->set_flashdata('message_failed', 'Data jabatan gagal dihapus');
 				}
 			} else {
 				redirect('jabatan');
@@ -166,11 +168,11 @@ class Jabatan extends CI_Controller {
 			$id_pegawai = $this->uri->segment(4);
 			if (authUserLevel() == TRUE){
 				$res['pegawai'] = $this->M_jabatan->delete_pegawai($id_jabatan, $id_pegawai);
-
 				if ($res) {
+					$this->session->set_flashdata('message_success', 'Data pegawai berhasil dihapus dari jabatan');
 					redirect('jabatan/detail/'.$id_jabatan);
 				} else {
-					echo "<h2> Gagal Hapus Jabatan  </h2>";
+					$this->session->set_flashdata('message_failed', 'Data pegawai gagal dihapus dari jabatan');
 				}
 			} else {
 				redirect('jabatan/detail/'.$id_jabatan);

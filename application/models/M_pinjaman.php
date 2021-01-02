@@ -6,7 +6,7 @@ class M_pinjaman extends CI_Model{
 	public function get_pinjaman($id = TRUE)
 	{
 		if ($id != NULL) {
-			$this->db->select('*, pjm.id_pinjaman, count(a.id_angsuran) jml_angsuran, max(a.tanggal_kembali) end_date, 
+			$this->db->select('*, pjm.id_pinjaman, count(a.id_angsuran) jml_angsuran, max(a.tanggal_kembali) end_date, max(a.paid_date) paid_date,
 							   sum(a.status) status_ang, pjm.status status_pjm');
 			$this->db->join('angsuran a', 'a.id_pinjaman = pjm.id_pinjaman', 'LEFT');
 			$this->db->join('pegawai p', 'p.id_pegawai = pjm.id_pegawai', 'LEFT');
@@ -95,9 +95,21 @@ class M_pinjaman extends CI_Model{
 		$repay = $this->input->post('repay');
 		$payOff_byGaji = $this->input->post('payOff_byGaji');
 		$id_angsuran = $this->input->post('id_angsuran');
-		
+		$paid_date = NULL;
+		$cancel_date = NULL;
+		if ($repay == 1) {
+			$paid_date = date('Y-m-d h:i:s');
+		} else {
+			$cancel_date = date('Y-m-d h:i:s');
+		}
+		$data = array(
+			'status' => $repay, 
+			'payOff_byGaji' => $payOff_byGaji,
+			'paid_date' => $paid_date,
+			'cancel_date' => $cancel_date
+		);
 		$this->db->where('id_angsuran', $id_angsuran);
-		return $this->db->update('angsuran', array('status' => $repay, 'payOff_byGaji' => $payOff_byGaji));
+		return $this->db->update('angsuran', $data);
 	}
 
 	public function update_pinjaman($id_pinjaman)

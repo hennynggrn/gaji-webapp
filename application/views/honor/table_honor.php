@@ -57,7 +57,7 @@
 											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 											<h4 class="modal-title" id="myModalLabel">Edit Data Honor <b class="text-primary">Rp. <?php echo number_format($honor['honor'],0,',','.');?></b></h4>
 										</div>
-										<form class="form-horizontal" role="form" method="post" action="<?php echo site_url('honor/update_honor');?>">
+										<form role="form" method="post" action="<?php echo site_url('honor/update_honor');?>">
 											<div class="modal-body">
 												<div class="form-group">
 													<div class="input-group">

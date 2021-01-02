@@ -46,9 +46,10 @@ class Tunjangan extends CI_Controller {
 				$res['tunjangan'] = $this->M_tunjangan->update_tunjangan();
 				$res['masakerja'] = $this->M_masakerja->update_masakerja();
 				if ($res) {
+					$this->session->set_flashdata('message_success', 'Data tunjangan berhasil diedit');
 					redirect('tunjangan');
 				} else {
-					echo "<h2> Gagal Edit Data Tunjangan </h2>";
+					$this->session->set_flashdata('message_failed', 'Data tunjangan gagal diedit');
 				}
 			} else {
 				redirect('tunjangan');
@@ -81,9 +82,10 @@ class Tunjangan extends CI_Controller {
 			if (authUserLevel() == TRUE){	
 				$res['pegawai'] = $this->M_masakerja->update_mk_pegawai();
 				if ($res) {
+					$this->session->set_flashdata('message_success', 'Data masa kerja pegawai berhasil diedit');
 					redirect('tunjangan/masakerja/pegawai');
 				} else {
-					echo "<h2> Gagal Edit Data Masa Kerja Pegawai </h2>";
+					$this->session->set_flashdata('message_failed', 'Data masa kerja pegawai gagal diedit');
 				}
 			} else {
 				redirect('tunjangan/masakerja/pegawai');

@@ -50,11 +50,11 @@ class Pegawai extends CI_Controller {
 				if ($this->input->post('status') == 1) {
 					$res['keluarga']=$this->M_keluarga->add_keluarga(); 
 				};
-
 				if ($res) {
+					$this->session->set_flashdata('message_success', 'Data pegawai berhasil ditambahkan');
 					redirect('pegawai');
 				} else {
-					echo "<h2> Gagal Tambah Data Pegawai </h2>";
+					$this->session->set_flashdata('message_failed', 'Data pegawai gagal ditambahkan');
 				}
 			} else {
 				redirect('pegawai');
@@ -136,18 +136,21 @@ class Pegawai extends CI_Controller {
 				
 				if ($res) {
 					if ((isset($edit_keluarga)) && ($edit_keluarga == 1)) {
+						$this->session->set_flashdata('message_success', 'Data anggota keluarga pegawai berhasil diedit');
 						redirect('keluarga/detail/'.$id_anggota_keluarga);
 					} else if ((isset($edit_honor)) && ($edit_honor == 1)) {
+						$this->session->set_flashdata('message_success', 'Data honor pegawai berhasil diedit');
 						if ($pegawai['honor'] != NULL) {
 							redirect('honor/detail/'.$pegawai['honor']);
 						} else {
 							redirect('honor/detail/null');
 						}
 					} else {
+						$this->session->set_flashdata('message_success', 'Data pegawai berhasil diedit');
 						redirect('pegawai/detail/'.$id);
 					}
 				} else {
-					echo "<h2> Gagal Edit Data Pegawai </h2>";
+					$this->session->set_flashdata('message_failed', 'Data gagal diedit');
 				}
 			} else {
 				redirect('pegawai/detail/'.$id);
@@ -161,13 +164,12 @@ class Pegawai extends CI_Controller {
             redirect('login');
 		} else {
 			if (authUserLevel() == TRUE){
-				
 				$res['pegawai'] = $this->M_pegawai->delete_pegawai($id);
-
 				if ($res) {
+					$this->session->set_flashdata('message_success', 'Data pegawai berhasil dihapus');
 					redirect('pegawai');
 				} else {
-					echo "<h2> Gagal Hapus Data Pegawai </h2>";
+					$this->session->set_flashdata('message_failed', 'Data pegawai gagal dihapus');
 				}
 			} else {
 				redirect('pegawai');

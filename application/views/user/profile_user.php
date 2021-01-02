@@ -113,7 +113,6 @@
 						<div class="modal-body">
 							<div class="form-group">
 								<label for="">Nama Lengkap</label>
-								<input type="hidden" class="form-control" name="profile_id" value="1">
 								<input type="hidden" class="form-control" name="id" value="<?php echo $user['id'];?>">
 								<input type="text" class="form-control" name="fullname" placeholder="Budi Sanjono" value="<?php echo $user['fullname'];?>" required>
 							</div>

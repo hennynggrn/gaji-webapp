@@ -3,10 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Honor extends CI_Controller {
 
-	// function __construct() {
-	// 	parent::__construct();
-	// }
-
 	public function index($honor = NULL)
 	{
 		if(!$this->session->userdata('logged_in')){
@@ -76,6 +72,7 @@ class Honor extends CI_Controller {
 				$data['keluargas'] = $this->M_keluarga->get_keluarga_pegawai($id,'keluarga')->result_array();
 				$data['jabatans'] = $this->M_jabatan->get_jabatan($id)->result_array();
 				$data['edit_honor'] = TRUE;
+				$data['masakerjas']= $this->M_masakerja->get_masakerja()->result_array();
 
 				$data['id_status'] = array();
 				foreach ($data['keluargas'] as $key => $value) {
@@ -110,12 +107,14 @@ class Honor extends CI_Controller {
 				$res['honor'] = $this->M_honor->update_honor($id, $id_honor);
 				if ($res) {
 					if ((isset($detail_honor)) && ($detail_honor == 1)) {
+						$this->session->set_flashdata('message_success', 'Data honor berhasil diedit');
 						redirect('honor/detail/'.$honor);
 					} else {
+						$this->session->set_flashdata('message_success', 'Data honor berhasil diedit');
 						redirect('honor');
 					}
 				} else {
-					echo "<h2> Gagal Edit Data Honor </h2>";
+					$this->session->set_flashdata('message_failed', 'Data honor gagal diedit');
 				}
 			} else {
 				redirect('honor/detail/'.$id_honor);
@@ -133,9 +132,10 @@ class Honor extends CI_Controller {
 			if (authUserLevel() == TRUE){
 				$res['honor'] = $this->M_honor->delete_honor($id);
 				if ($res) {
+					$this->session->set_flashdata('message_success', 'Data honor berhasil dihapus');
 					redirect('honor');
 				} else {
-					echo "<h2> Gagal Hapus Data Honor </h2>";
+					$this->session->set_flashdata('message_failed', 'Data honor gagal dihapus');
 				}
 			} else {
 				redirect('honor/detail/'.$honor);

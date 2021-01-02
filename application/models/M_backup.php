@@ -13,11 +13,11 @@ class M_backup extends CI_Model
 		$this->db->query('
 			INSERT INTO b_tunjangan (beras, jamsostek, klg_psg, klg_anak, jabatan, created_by)
 			SELECT beras, jamsostek, klg_psg, klg_anak, jabatan, '.$user.'
-			FROM tunjangan t
-			WHERE month(t.updated_at) = '.$month.' AND year(t.updated_at) = '.$year
-			);
+			FROM tunjangan t'
+		);
 		$id_tunjangan = $this->db->insert_id();
 		return $id_tunjangan;
+		// WHERE month(t.updated_at) = '.$month.' AND year(t.updated_at) = '.$year
 	}
 
 	public function backup_potongan()
@@ -30,9 +30,8 @@ class M_backup extends CI_Model
 		$data =  $this->db->query('
 			INSERT INTO b_potongan (sosial, infaq, jsr, aisiyah, jamsostek, ket, created_by)
 			SELECT sosial, infaq, jsr, aisiyah, jamsostek, ket, '.$user.'
-			FROM potongan po
-			WHERE month(po.updated_at) = '.$month.' AND year(po.updated_at) = '.$year
-			);
+			FROM potongan po'
+		);
 		return $data;
 	}
 
@@ -47,8 +46,7 @@ class M_backup extends CI_Model
 		$data = $this->db->query('
 			INSERT INTO b_jabatan (id_jabatan, jabatan, jml_jam, created_by)
 			SELECT id_jabatan, jabatan, jml_jam, '.$user.'
-			FROM jabatan j
-			WHERE month(j.updated_at) = '.$month.' AND year(j.updated_at) = '.$year
+			FROM jabatan j'
 		);
 		return $data;
 	}
@@ -65,8 +63,7 @@ class M_backup extends CI_Model
 		$data = $this->db->query('
 			INSERT INTO b_jbt_pegawai (id_jbt_pegawai, id_jabatan, id_pegawai, created_by)
 			SELECT id_jbt_pegawai, id_jabatan, id_pegawai, '.$user.'
-			FROM jbt_pegawai jp
-			WHERE month(jp.updated_at) = '.$month.' AND year(jp.updated_at) = '.$year
+			FROM jbt_pegawai jp'
 		);
 		return $data;
 	}
@@ -83,10 +80,9 @@ class M_backup extends CI_Model
 		$data = $this->db->query('
 			INSERT INTO b_masakerja (id_masakerja, tahun, nominal_mk, created_by)
 			SELECT id_masakerja, tahun, nominal_mk, '.$user.'
-			FROM masakerja mk
-			WHERE month(mk.updated_at) = '.$month.' AND year(mk.updated_at) = '.$year
+			FROM masakerja mk'
 		);
-		return $data;
+		return $data; 
 	}
 	
 	public function backup_pegawai($id_tunjangan)
@@ -101,8 +97,7 @@ class M_backup extends CI_Model
 				   agama, umur, honor, masa_kerja, created_by, id_tunjangan)
 			SELECT id_pegawai, nbm, nama, foto, tempat_lahir, tgl_lahir, telepon, jns_pegawai, gender, email, status_pegawai, status,
 				   agama, umur, honor, masa_kerja, '.$user.', '.$id_tunjangan.'
-			FROM pegawai p
-			WHERE month(p.updated_at) = '.$month.' AND year(p.updated_at) = '.$year
+			FROM pegawai p'
 		);
 		return $data;
 	}
@@ -117,8 +112,7 @@ class M_backup extends CI_Model
 		$data = $this->db->query('
 			INSERT INTO b_keluarga (id_anggota_klg, nama, id_status, s_hidup, gender, id_pegawai, created_by)
 			SELECT id_anggota_klg, nama, id_status, s_hidup, gender, id_pegawai, '.$user.'
-			FROM keluarga k
-			WHERE month(k.updated_at) = '.$month.' AND year(k.updated_at) = '.$year
+			FROM keluarga k'
 		);
 		return $data;
 	}

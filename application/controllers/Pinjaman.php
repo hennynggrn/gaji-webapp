@@ -47,6 +47,7 @@ class Pinjaman extends CI_Controller {
             redirect('login');
 		} else {
 			if (authUserLevel() == TRUE){
+				date_default_timezone_set('Asia/Jakarta');
 				$data['title']= 'Tambah Pinjaman';
 				$data['pegawais'] = $this->M_pinjaman->get_pegawai_pinjaman($id)->result_array();
 				foreach ($data['pegawais'] as $key => $value) {
@@ -76,11 +77,11 @@ class Pinjaman extends CI_Controller {
 				$res['pinjaman'] = $this->M_pinjaman->add_pinjaman();
 				$last_id = $res['pinjaman'];
 				$res['angsuran'] = $this->M_pinjaman->add_angsuran($last_id);
-
 				if ($res) {
+					$this->session->set_flashdata('message_success', 'Data pinjaman berhasil ditambahkan');
 					redirect('pinjaman');
 				} else {
-					echo "<h2> Gagal Tambah Data Pinjaman </h2>";
+					$this->session->set_flashdata('message_failed', 'Data pinjaman gagal ditambahkan');
 				}
 			} else {
 				redirect('pinjaman');
@@ -101,7 +102,7 @@ class Pinjaman extends CI_Controller {
 			} else {
 				$data['hide'] = TRUE;
 			}
-			// var_dump($data['pinjaman']);
+			var_dump($data['pinjaman']);
 			$this->template->load('index','pinjaman/detail_pinjaman', $data);
 		}
 	}
@@ -141,9 +142,14 @@ class Pinjaman extends CI_Controller {
 				$res['pinjaman'] = $this->M_pinjaman->update_status_pinjaman($id, $status);
 
 				if ($res) {
+					if ($status == 1) {
+						$this->session->set_flashdata('message_success', 'Angsuran pinjaman berhasil dibayar');
+					} else {
+						$this->session->set_flashdata('message_success', 'Pembayaran angsuran pinjaman berhasil dibatalkan');
+					}
 					redirect('pinjaman/pay/'.$id);
 				} else {
-					echo "<h2> Gagal Tambah Data Pinjaman </h2>";
+					$this->session->set_flashdata('message_failed', 'Angsuran pinjaman gagal dibayar');
 				}
 			} else {
 				redirect('pinjaman');
@@ -178,16 +184,16 @@ class Pinjaman extends CI_Controller {
 				$id_pinjaman = $this->input->post('id_pinjaman');
 				$res['pinjaman'] = $this->M_pinjaman->update_pinjaman($id_pinjaman);
 				$res['angsuran'] = $this->M_pinjaman->update_angsuran($id_pinjaman);
-				
 				if ($res) {
+					$this->session->set_flashdata('message_success', 'Data pinjaman berhasil diedit');
 					redirect('pinjaman/pay/'.$id_pinjaman);
 				} else {
-					echo "<h2> Gagal Edit Data Pinjaman </h2>";
+					$this->session->set_flashdata('message_failed', 'Data pinjaman gagal diedit');
 				}
 			} else {
 				redirect('pinjaman');
 			}
-		}
+		} 
 	}
 
 	public function delete_pinjaman($id_pinjaman)
@@ -198,9 +204,10 @@ class Pinjaman extends CI_Controller {
 			if (authUserLevel() == TRUE){
 				$res['pinjaman'] = $this->M_pinjaman->delete_pinjaman($id_pinjaman);
 				if ($res) {
+					$this->session->set_flashdata('message_success', 'Data pinjaman berhasil dihapus');
 					redirect('pinjaman');
 				} else {
-					echo "<h2> Gagal Menghapus Data Pinjaman </h2>";
+					$this->session->set_flashdata('message_failed', 'Data pinjaman gagal dihapus');
 				}
 			} else {
 				redirect('pinjaman');

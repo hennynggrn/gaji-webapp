@@ -99,7 +99,7 @@ class M_gaji extends CI_Model {
 
 	public function repay($id_kop, $id_bank)
 	{
-		$data = array('payOff_byGaji' => 1, 'status' => 1);
+		$data = array('payOff_byGaji' => 1, 'status' => 1, 'paid_date' => date('Y-m-d h:i:s'));
 		if ($id_kop != 0) {
 			$this->db->where('id_angsuran', $id_kop);
 			$db['kop'] = $this->db->update('angsuran', $data);

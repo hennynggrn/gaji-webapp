@@ -5,7 +5,7 @@
 			<div class="box box-primary">
 				<div class="box-header">
 				</div>
-				<form class="form-horizontal" role="form" method="post" action="<?php echo site_url('pinjaman/update_pinjaman');?>" >
+				<form class="form-horizontal" onsubmit="return validatePjm(this);" role="form" method="post" action="<?php echo site_url('pinjaman/update_pinjaman');?>" >
 					<div class="box-body">
 						<div class="form-group">
 							<input type="hidden" value="<?php echo $pinjaman['id_pinjaman'];?>" name="id_pinjaman">
@@ -27,11 +27,8 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Kode Pinjaman</label>
 							<div class="col-sm-10">
-								<select class="form-control" name="kode" id="kode" placeholder="Pilih Jenis Pinjaman" required>
-									<option disabled>Pilih Jenis Pinjaman</option>
-									<option value="kop" <?php echo ($pinjaman['kode_pinjaman'] == 'KOP') ? 'selected' : '';?>>Koperasi Murni</option>
-									<option value="bank" <?php echo ($pinjaman['kode_pinjaman'] == 'BANK') ? 'selected' : '';?>>Bank Bina Drajat Warga (BDW)</option>
-								</select>
+								<input type="hidden" value="<?php echo ($pinjaman['kode_pinjaman'] == 'BANK') ? 'BANK' : 'KOP';?>" name="kode" required>
+								<input type="text" value="<?php echo ($pinjaman['kode_pinjaman'] == 'BANK') ? 'Bank Bina Drajat Warga (BDW)' : 'Koperasi Murni';?>" class="form-control" disabled>
 							</div>
 						</div>
 						<div class="form-group">
@@ -45,7 +42,7 @@
 							<div class="col-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon">Rp.</span>
-									<input type="number" value="<?php echo $pinjaman['total_pinjaman'];?>" class="form-control" name="total_pjm" placeholder="2000000" required>
+									<input type="number" value="<?php echo $pinjaman['total_pinjaman'];?>" class="form-control" id="total_pjm" name="total_pjm" placeholder="2000000" required>
 								</div>
 							</div>
 						</div>
@@ -109,14 +106,18 @@
 									</tbody>
 									<tfoot>
 										<tr>
-											<td colspan="4">
-												<div id="btnAdd" class="btn-group">
-													<a href="#" class='btn btn-success'>Tambah Angsuran</a>
-												</div>
+											<td colspan="2">
+												<span class="pull-right">Total Angsuran :</span>
+											</td>
+											<td colspan="2">
+												<span class="text-bold pull-left">Rp. <span id="total_ang">0</span></span>
 											</td>
 										</tr>
 									</tfoot>
 								</table>
+							</div>
+							<div class="col-sm-10 pull-right">
+								<button  id="btnAdd" class='btn btn-success btn-block'>Tambah Angsuran</button>
 							</div>
 						</div>
 						<div class="form-group">

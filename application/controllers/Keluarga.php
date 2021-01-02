@@ -28,9 +28,10 @@ class Keluarga extends CI_Controller {
 				$id = $this->input->post('id_anggota_klg');
 				$res['keluarga']= $this->M_keluarga->update_keluarga();
 				if ($res) {
+					$this->session->set_flashdata('message_success', 'Data anggota keluarga berhasil diedit');
 					redirect('keluarga');
 				} else {
-					echo "<h2> Gagal Edit Data Anggota Keluarga </h2>";
+					$this->session->set_flashdata('message_failed', 'Data anggota keluarga gagal diedit');
 				}
 			} else {
 				redirect('keluarga');
@@ -75,7 +76,6 @@ class Keluarga extends CI_Controller {
 				$data['id_status'][] = $data['keluargas'][$key]['id_status'];			
 			}
 			$data['onload'] = 'focusKeluarga(this);';
-			// echo '<script type="text/javascript">focusKeluarga(this);</script>';
 			if (authUserLevel() == TRUE){
 				$data['hide'] = FALSE;
 			} else {

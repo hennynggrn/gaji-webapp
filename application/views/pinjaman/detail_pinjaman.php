@@ -51,7 +51,7 @@
 								<tr>
 									<td>Status</td>
 									<td>:</td>
-									<td><?php echo ($pinjaman['status_pjm'] == 1) ? '<span class="badge bg-green">Lunas</span>' : '<span class="badge bg-red">Belum Lunas</span>';?></td>
+									<td><?php echo ($pinjaman['status_pjm'] == 1) ? '<span class="badge bg-green">Lunas</span> pada '.fullConvertIDN($pinjaman['paid_date'], $short = NULL, $day = FALSE) : '<span class="badge bg-red">Belum Lunas</span>';?></td>
 								</tr>
 								<tr>
 									<td>Keterangan</td>
@@ -93,7 +93,11 @@
 										<td><?php echo $no++;?></td>
 										<td style="text-align: left;"><?php echo 'Rp. '.number_format($angsuran['nominal'],0,',','.');?></td>
 										<td><?php echo fullConvertIDN($angsuran['tanggal_kembali'], $short = TRUE,  $day = TRUE);?></td>
-										<td><?php echo ($angsuran['status'] == 1) ? '<span class="badge bg-green">Terbayar</span>' : '<span class="badge bg-red">Belum Dibayar</span>';?></td>
+										<td><?php 
+											($angsuran['paid_date'] != NULL) ? $paid_date = ' pada '.fullConvertIDN($angsuran['paid_date'], $short = NULL, $day = FALSE) : $paid_date = '';
+											($angsuran['cancel_date'] != NULL) ? $cancel_date = 'Dibatalkan pada '.fullConvertIDN($angsuran['cancel_date'], $short = NULL, $day = FALSE) : $cancel_date = '';
+											($angsuran['payOff_byGaji'] != 1) ? $pay_method = 'Dibayar Manual'.$paid_date : $pay_method = 'Dibayar Gaji Bulanan'.$paid_date;
+											echo ($angsuran['status'] == 1) ? '<span type="button" class="badge bg-green" title="'.$pay_method.'" data-tooltip="tooltip" data-placement="top">Terbayar</span>' : '<span class="badge bg-red" title="'.$cancel_date.'" data-tooltip="tooltip" data-placement="top">Belum Dibayar</span>';?></td>
 										<?php if ($hide == FALSE) { ?>
 											<td style="background-color: rgb(234, 255, 241);">
 												<a href="" class="" data-toggle="modal" data-target="#repayAngsuran<?php echo $angsuran['id_angsuran'];?>" data-tooltip="tooltip" title="<?php echo ($angsuran['status'] == 1) ? 'Batalkan Pembayaran' : 'Bayar';?>" data-placement="top">

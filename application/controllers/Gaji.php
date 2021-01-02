@@ -14,6 +14,14 @@ class Gaji extends CI_Controller {
 			$date_today = date('Y-m-d'); // tanggal sekarang
 			$data['desc'] = month($date_today).' '.date('Y', strtotime($date_today));
 			$data['month'] = $month_today;
+			$data['setting'] = $this->M_setting->get_data()->row_array();
+			$date_backup = $data['setting']['backup_date'];
+			if ((date('d') >= $date_backup) && (date('Y-m') == $month_today)) {
+				$data['backup'] = TRUE;
+			} else {
+				$data['backup'] = FALSE;
+			}
+			// var_dump($date_backup);
 			$this->template->load('index','gaji/table_gaji', $data);
 		}
 	}
@@ -58,27 +66,37 @@ class Gaji extends CI_Controller {
 				$kop = $this->M_pinjaman->get_angsuran($id = NULL, $id_kop)->row_array();
 				$bank = $this->M_pinjaman->get_angsuran($id = NULL, $id_bank)->row_array();
 
-				$pinjaman_kop = $this->M_pinjaman->get_pinjaman($kop['id_pinjaman'])->row_array();
-				if ($pinjaman_kop) {
-					if ($pinjaman_kop['jml_angsuran']-$pinjaman_kop['status_ang'] == 0) {
-						$status = 1;
-					} else {
-						$status = 0;
+				if ($kop != NULL) {
+					$pinjaman_kop = $this->M_pinjaman->get_pinjaman($kop['id_pinjaman'])->row_array();
+					if ($pinjaman_kop) {
+						if ($pinjaman_kop['jml_angsuran']-$pinjaman_kop['status_ang'] == 0) {
+							$status = 1;
+						} else {
+							$status = 0;
+						}
+						$res['pinjaman_kop'] = $this->M_pinjaman->update_status_pinjaman($pinjaman_kop['id_pinjaman'], $status);
 					}
-					$res['pinjaman_kop'] = $this->M_pinjaman->update_status_pinjaman($pinjaman_kop['id_pinjaman'], $status);
 				}
-
-				$pinjaman_bank = $this->M_pinjaman->get_pinjaman($bank['id_pinjaman'])->row_array();
-				if ($pinjaman_bank) {
-					if ($pinjaman_bank['jml_angsuran']-$pinjaman_bank['status_ang'] == 0) {
-						$status = 1;
-					} else {
-						$status = 0;
+				if ($bank != NULL) {
+					$pinjaman_bank = $this->M_pinjaman->get_pinjaman($bank['id_pinjaman'])->row_array();
+					if ($pinjaman_bank) {
+						if ($pinjaman_bank['jml_angsuran']-$pinjaman_bank['status_ang'] == 0) {
+							$status = 1;
+						} else {
+							$status = 0;
+						}
+						$res['pinjaman_bank'] = $this->M_pinjaman->update_status_pinjaman($pinjaman_bank['id_pinjaman'], $status);
 					}
-					$res['pinjaman_bank'] = $this->M_pinjaman->update_status_pinjaman($pinjaman_bank['id_pinjaman'], $status);
 				}
-				$data = $this->gaji_pegawai($id_pegawai);
-				$this->load->view('gaji/paycheck_output', $data);
+				
+				if ($res) {
+					$this->session->set_flashdata('message_success', 'Pinjaman berhasil dibayar');
+					$data = $this->gaji_pegawai($id_pegawai);
+					$this->load->view('gaji/paycheck_output', $data);
+				} else {
+					$this->session->set_flashdata('message_failed', 'Pinjaman gagal dibayar');
+					redirect('detail/'.$id_pegawai);
+				}
 			} else {
 				redirect('detail/'.$id_pegawai);
 			}
@@ -224,7 +242,7 @@ class Gaji extends CI_Controller {
 
 	private function gaji_pegawai_all($id_pegawai)
 	{
-			date_default_timezone_set('Asia/Jakarta');
+			getDateZone();
 			$month_today = date('Y-m'); // bulan & tahun ini
 			$date_today = date('Y-m-d'); // tanggal sekarang
 			$data['desc'] = month($date_today).' '.date('Y', strtotime($date_today));
@@ -278,7 +296,7 @@ class Gaji extends CI_Controller {
 		if(!$this->session->userdata('logged_in')){
             redirect('login');
         } else {
-			date_default_timezone_set('Asia/Jakarta');
+			getDateZone();
 			$date_today = date('Y-m-d'); // tanggal sekarang
 			$month_today = date('Y-m'); // bulan & tahun ini
 			$data['desc'] = month($date_today).' '.date('Y', strtotime($date_today));

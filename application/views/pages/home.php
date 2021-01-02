@@ -123,7 +123,7 @@
 				</div>
 				<div class="box-body">
 					<div class="col-md-4">
-						<img class="img-rounded" src="<?php echo base_url();?>assets/dist/img/smpmuh9.jpeg"/ width="70%" style="padding:1%;margin:20%" >
+						<img class="img-rounded" src="<?php echo base_url();?>assets/dist/img/upload/smpmuh9.jpeg"/ width="70%" style="padding:1%;margin:20%" >
 					</div>
 
 					<div class="col-md-8">

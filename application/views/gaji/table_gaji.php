@@ -26,9 +26,17 @@
 				<div class="box box-primary">
 					<div class="box-header with-border">
 						<div class="pull-left">
-							<a type="button" class="btn btn-primary disabled" href="<?php echo site_url('backup');?>">
+							<a type="button" class="btn btn-primary <?php echo ($backup == TRUE) ? '' : 'disabled';?>" href="" data-target="#backup" data-toggle="modal">
 								<i class="fa fa-book"></i> &nbsp;&nbsp;Buat Laporan
-							</a> &nbsp;&nbsp; <i class="fa fa-fw fa-info-circle text-info" title="Aktif di akhir bulan." data-tooltip="tooltip" data-placement="top"></i>
+							</a> &nbsp;&nbsp; 
+							<?php if ($backup == FALSE) { ?>
+								<i class="fa fa-fw fa-info-circle text-info" title="Aktif di atas tanggal <?php echo $setting['backup_date'];?> atau silahkan atur ulang di pengaturan." data-tooltip="tooltip" data-placement="top"></i>
+							<?php } ?>
+						</div>
+						<div class="pull-right">
+							<a href="" type="button" class="btn btn-default" data-target="#setting" data-toggle="modal">
+								<i class="fa fa-gear"></i> &nbsp;&nbsp;Pengaturan
+							</a>
 						</div>
 					</div>
 					<div class="box-body" id="result">
@@ -112,6 +120,62 @@
 							</tbody>
 						</table>
 					</div>
+					<!-- Modal Delete Honor per Pegawai-->
+					<div class="modal fade" id="backup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="myModalLabel">Tambah Laporan</h4>
+								</div>
+								<div class="modal-body">
+									<p>
+										Anda akan menyimpan semua data terbaru atau pernah diubah ? <br>
+									</p>
+									<p class="text-info">
+										<i class="fa fa-fw fa-info-circle"></i> Semua informasi laporan dapat diakses di menu laporan.
+									</p>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Batal</button>
+									<a type="button" href="<?php echo site_url('backup');?>" class="btn btn-primary pull-right edit-btn">Simpan</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- End Modal -->
+					<!-- Modal Delete Honor per Pegawai-->
+					<div class="modal fade" id="setting" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="myModalLabel">Pengaturan</h4>
+								</div>
+								<form role="form" method="post" action="<?php echo site_url('setting/updated_data');?>">
+									<div class="modal-body">
+										<div class="form-group">
+											<label for="control-label">Tanggal Buat Laporan</label>
+											<div class="input-group">
+												<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+												<select name="date" class="form-control">
+												<?php for ($i=1; $i <= 31 ; $i++) {
+													($setting['backup_date'] == $i) ? $selected = 'selected' : $selected = '';
+													echo '<option value="'.$i.'" '.$selected.'>'.$i.'</option>';
+												} ?>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Tutup</button>
+										<button type="submit" class="btn btn-primary pull-right edit-btn">Simpan</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<!-- End Modal -->
 					<div class="box-footer clearfix">
 						<ul class="pagination pagination-sm no-margin pull-right">
 							<li><a href="#">&laquo;</a></li>

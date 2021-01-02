@@ -5,7 +5,7 @@
 			<div class="box box-primary">
 				<div class="box-header">
 				</div>
-				<form class="form-horizontal" onsubmit="return validasiAngsuran(this);" role="form" method="post" action="<?php echo site_url('pinjaman/insert_pinjaman');?>" >
+				<form class="form-horizontal" onsubmit="return validatePjm(this);" role="form" method="post" action="<?php echo site_url('pinjaman/insert_pinjaman');?>" >
 					<div class="box-body">
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Nama Pegawai</label>
@@ -28,7 +28,7 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Tanggal Pinjam</label>
 							<div class="col-sm-10">
-								<input type="date" id="today_date" class="form-control" name="tgl_pjm" placeholder="" required>
+								<input type="date" class="form-control" name="tgl_pjm" value="<?php getDateZone(); echo date('Y-m-d');?>" placeholder="" required>
 							</div>
 						</div>
 						<div class="form-group">
@@ -36,7 +36,7 @@
 							<div class="col-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon">Rp.</span>
-									<input type="number" class="form-control" name="total_pjm" placeholder="2000000" required>
+									<input type="number" class="form-control" id="total_pjm" name="total_pjm" placeholder="2000000" required>
 								</div>
 							</div>
 						</div>
@@ -45,15 +45,7 @@
 							<div class="col-sm-10">
 								<input type="number" value="0" class="form-control" id="jumlahAng" name="jml_angsuran" disabled placeholder="">
 							</div>
-						</div>
-
-						<!-- <div class="form-group">
-							<label class="col-sm-2 control-label">ID</label>
-							<div class="col-sm-10">
-								<input type="number" value="" class="form-control" name="id_borrower" placeholder="ID Peminjam">
-							</div>
-						</div> -->
-
+						</div> 
 						<div class="form-group">
 							<label class="col-sm-2 control-label"></label>
 							<div class="col-sm-10">
@@ -67,17 +59,6 @@
 										</tr>
 										<?php $no=1; ?>
 									</thead>
-									<!-- <tr>
-										<td><input type="number" class="form-control" name="nomor" placeholder="nomor"></td>
-										<td><input type="date" class="form-control" name="tgl_kembali" placeholder="Tanggal Kembali"></td>
-										<td><input type="int" class="form-control" name="nom_angsuran" placeholder="Nilai Angsuran"></td>
-										<td>
-											<div id="btnAdd" class="btn-group">
-												<a href="#" class='btn btn-primary' >
-													<i class="fa fa-plus"></i></a>
-											</div>
-										</td>
-									</tr> -->
 									<tbody id="angsuranTable">
 										<tr class="num">
 											<td>1</td>
@@ -88,7 +69,7 @@
 											<td> 
 												<div class="input-group">
 													<span class="input-group-addon">Rp.</span>
-													<input type="number" class="form-control" name="nominal[0]" placeholder="150000" required>
+													<input type="number" class="form-control num_val" name="nominal[0]" placeholder="150000" required>
 												</div>
 											</td>
 											<td>
@@ -102,14 +83,18 @@
 									</tbody>
 									<tfoot>
 										<tr>
-											<td colspan="4">
-												<div id="btnAdd" class="btn-group">
-													<a href="#" class='btn btn-success'>Tambah Angsuran</a>
-												</div>
+											<td colspan="2">
+												<span class="pull-right">Total Angsuran :</span>
+											</td>
+											<td colspan="2">
+												<span class="text-bold pull-left">Rp. <span id="total_ang">0</span></span>
 											</td>
 										</tr>
 									</tfoot>
 								</table>
+							</div>
+							<div class="col-sm-10 pull-right">
+								<button  id="btnAdd" class='btn btn-success btn-block'>Tambah Angsuran</button>
 							</div>
 						</div>
 						<div class="form-group">

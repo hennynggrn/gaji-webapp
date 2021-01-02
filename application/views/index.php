@@ -155,7 +155,7 @@
 					<li class="header">MAIN NAVIGATION</li>
 					<li class="<?php if($this->uri->segment(1) == ''){echo 'active';}?>">
 						<a href="<?php echo base_url(); ?>">
-							<i class="fa fa-folder"></i>
+							<i class="fa fa-home"></i>
 							<span>Home</span>
 						</a>
 					</li>
@@ -177,7 +177,7 @@
 						if(($segment == 'pegawai') || ($segment == 'honor') || ($segment == 'tunjangan') || ($segment == 'keluarga') 
 						|| ($segment == 'jabatan') || ($segment == 'potongan') || ($segment == 'pinjaman')){echo 'active';}?>">
 							<a href="#">
-								<i class="fa fa-dashboard"></i> <span>Data Master</span>
+								<i class="fa fa-database"></i> <span>Data Master</span>
 								<span class="pull-right-container">
 									<i class="fa fa-angle-left pull-right"></i>
 								</span>
@@ -202,7 +202,7 @@
 					<?php if($this->session->userdata('logged_in') && (authUserAdmin() == TRUE)){?>
 						<li class="<?php if($this->uri->segment(1) == 'user'){echo 'active';}?>">
 							<a href="<?php echo site_url('user'); ?>">
-								<i class="fa fa-book"></i>
+								<i class="fa fa-users"></i>
 								<span>Daftar Pengguna</span>
 							</a>
 						</li>
@@ -526,7 +526,10 @@
 		});
 
 		// Today date
-		document.getElementById('today_date').value = new Date().toISOString().slice(0, 10);
+		// document.getElementById('today_date').value = new Date().toISOString()..slice(0, 10);
+		// var today_date = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
+		// today_date.toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
+		// document.getElementById('today_date').value = today_date;
 	</script>
 
 	<!-- Toast  -->
@@ -542,6 +545,32 @@
 					hideAfter: 6000,
 					loaderBg: 'rgb(54, 158, 91)',  // To change the background
 					bgColor: ' rgb(89, 186, 123)',
+					textColor: 'white'
+				})
+			<?php } ?>
+			<?php if($this->session->userdata('message_success')){ ?>
+				$.toast({
+					heading: 'Berhasil',
+					text: '<?php echo $this->session->userdata('message_success');?>',
+					icon: 'success',
+					loader: true,        // Change it to false to disable loader
+					position: 'bottom-left',   
+					hideAfter: 4000,
+					loaderBg: 'rgb(54, 158, 91)',  // To change the background
+					bgColor: ' rgb(89, 186, 123)',
+					textColor: 'white'
+				})
+			<?php } ?>
+			<?php if($this->session->userdata('message_failed')){ ?>
+				$.toast({
+					heading: 'Gagal',
+					text: '<?php echo $this->session->userdata('message_failed');?>',
+					icon: 'warning',
+					loader: true,        // Change it to false to disable loader
+					position: 'bottom-left',   
+					hideAfter: 4000,
+					loaderBg: 'rgb(116, 47, 47)',  // To change the background
+					bgColor: 'rgb(177, 80, 80)',
 					textColor: 'white'
 				})
 			<?php } ?>
@@ -780,6 +809,18 @@
 				var rowCount = $('.tableAngsuran tbody .num').length;
 				document.getElementById('jumlahAng').value = rowCount; 
 			<?php } ?>
+			let num_val = 0;
+			$('.num_val').each(function() {
+				num_val += Number($(this).val());
+			});
+			$('#total_ang').text(number_format(num_val, 0, ',', '.'));
+			$('.num_val').keyup(function() {
+				let num_val = 0;
+				$('.num_val').each(function() {
+					num_val += Number($(this).val());
+				});
+				$('#total_ang').text(number_format(num_val, 0, ',', '.'));
+			});
 
 			$('body').on('click', '.remove', function () {
 				$(this).closest('tr').remove();
@@ -790,7 +831,14 @@
 				});
 				var rowCount = $('.tableAngsuran tbody .num').length;
 				document.getElementById('jumlahAng').value = rowCount;
+				let num_val = 0;
+				$('.num_val').each(function() {
+					num_val += Number($(this).val());
+				});
+				$('#total_ang').text(number_format(num_val, 0, ',', '.'));
+				// $('#total_ang').text(rowCount);
 			});
+			
 			$('#btnAdd').bind('click', function () {
 				// var j = 0; j++;
 				var div = $('<tr class="num" />');
@@ -802,18 +850,145 @@
 					$($(this).find('td')[0]).html(i+1);
 				});   
 				var rowCount = $('.tableAngsuran tbody .num').length;
-				document.getElementById('jumlahAng').value = rowCount;     
+				document.getElementById('jumlahAng').value = rowCount;
+				$('.num_val').keyup(function() {
+					let num_val = 0;
+					$('.num_val').each(function() {
+						num_val += Number($(this).val());
+					});
+					$('#total_ang').text(number_format(num_val, 0, ',', '.'));
+				});
 			});
 		});
 		function GetField(value1, value2, value3) {
 			j = j + 1;
-			return '<td></td>' + '<td><input type="hidden" name="idsField[' + j + ']" value= "' + j + '"><input type="hidden" name="id_angsuran[' + j + ']" value= "' + value1 + '"><input type="date" class="form-control" name="tgl_kembaliField[' + j + ']" placeholder="Tanggal Kembali" value= "' + value2 + '">' + '</td>' + '</td>' + '<td> <div class="input-group"><span class="input-group-addon">Rp.</span><input type="number" class="form-control" name="nominalField[' + j + ']" placeholder="150000" value="' + value3 + '"></div></td>' + '<td><div class="remove btn-group"><a href="#" class="btn btn-danger" ><i class="fa fa-close"></i></a></div></td>'; 	
+			return '<td></td>' + '<td><input type="hidden" name="idsField[' + j + ']" value= "' + j + '"><input type="hidden" name="id_angsuran[' + j + ']" value= "' + value1 + '"><input type="date" class="form-control" name="tgl_kembaliField[' + j + ']" placeholder="Tanggal Kembali" value= "' + value2 + '">' + '</td>' + '</td>' + '<td> <div class="input-group"><span class="input-group-addon">Rp.</span><input type="number" class="form-control num_val" name="nominalField[' + j + ']" placeholder="150000" value="' + value3 + '"></div></td>' + '<td><div class="remove btn-group"><a href="#" class="btn btn-danger" ><i class="fa fa-close"></i></a></div></td>'; 	
 		}
 		function GetDynamicTextBox(value) {
 			j = j + 1;
-			return '<td></td>' + '<td><input type="hidden" name="ids[' + j + ']" value= "' + j + '"><input type="date" class="form-control" name="tgl_kembali[' + j + ']" placeholder="Tanggal Kembali" value= "' + value + '" required>' + '</td>' + '<td> <div class="input-group"><span class="input-group-addon">Rp.</span><input type="number" class="form-control" name="nominal[' + j + ']" placeholder="150000" value="' + value + '" required></div></td>' + '<td><div class="remove btn-group"><a href="#" class="btn btn-danger" ><i class="fa fa-close"></i></a></div></td>'; 	
+			return '<td></td>' + '<td><input type="hidden" name="ids[' + j + ']" value= "' + j + '"><input type="date" class="form-control" name="tgl_kembali[' + j + ']" placeholder="Tanggal Kembali" value= "' + value + '" required>' + '</td>' + '<td> <div class="input-group"><span class="input-group-addon">Rp.</span><input type="number" class="form-control num_val" name="nominal[' + j + ']" placeholder="150000" value="' + value + '" required></div></td>' + '<td><div class="remove btn-group"><a href="#" class="btn btn-danger" ><i class="fa fa-close"></i></a></div></td>'; 	
 		}
 		
+	</script>
+
+	<!-- Set Kode Pinjaman sesuai dengan status peminjaman -->
+	<script>
+		$(document).ready(function(){
+			<?php if (isset($pegawais)) { ?>
+				var arrPinjaman = <?php echo json_encode($pegawais);?>;
+			$('#pegawai').html('');
+			$.each(arrPinjaman, function(key, value) {   
+				var disabled = false;
+				var desc = '';
+				switch (value.status_pjm) {
+					case 'OpenLoad':
+						break;
+					case 'OnBankKop':
+						disabled = true;
+						desc = ' (sedang meminjam di Bank & Koperasi)';
+						break;
+					case 'OnBank':
+						desc = ' (sedang meminjam di Bank)';
+						break;
+					case 'OnKop':
+						desc = ' (sedang meminjam di Koperasi)';
+						break;
+				}
+				$('#pegawai')
+					.append($("<option></option>")
+						.attr("value", value.id_pegawai)
+						.attr("disabled", disabled)
+						.text(value.nama + desc));
+			});
+
+			var val = $('#pegawai option:nth-child(1)').val();
+			var status_load = '';
+			$.each(arrPinjaman, function(key, value) {   
+				if (val == value.id_pegawai) {
+					status_load = value.status_pjm;
+				}					
+			});
+			
+			if (status_load === 'OpenLoan') {
+				openLoan();
+			} else if (status_load === 'OnBank') {
+				disableBank();
+			} else if (status_load === 'OnKop') {
+				disableKop();
+			}
+
+			$('#pegawai').change(function(){
+				var val_change = $(this).val();
+				$.each(arrPinjaman, function(key, value) {   
+					if (val_change == value.id_pegawai) {
+						status = value.status_pjm;
+					}					
+				});
+				if (status === 'OpenLoan') {
+					openLoan();
+				} else if (status === 'OnBank') {
+					disableBank();
+				} else if (status === 'OnKop') {
+					disableKop();
+				}
+			});
+			<?php };?>
+		});
+
+		function openLoan(){
+			$('#kop').prop("disabled", false);
+			$('#bank').prop("disabled", false);
+		}
+
+		function disableKop(){
+			$('#kop').prop("disabled", true);
+			$('#bank').prop("disabled", false);
+			$('#bank').prop("selected", true);
+		}
+
+		function disableBank(){
+			$('#bank').prop("disabled", true);
+			$('#kop').prop("disabled", false);
+			$('#kop').prop("selected", true);
+		}
+	</script>
+
+	<!-- Validasi Pinjaman minimal 1 angsuran -->
+	<script>
+		function validatePjm(that) {
+			if (that.jumlahAng.value == 0) {
+				$.toast({
+					heading: 'Gagal Menyimpan',
+					text: 'Pinjaman wajib minimal 1 angsuran, untuk mengisi data tanggal pengembalian. Silahkan tambah angsuran!',
+					icon: 'warning',
+					hideAfter: false,
+					position: 'mid-center',
+					bgColor: 'rgb(177, 80, 80)',
+					textColor: 'white'
+				});
+				$('html, body').animate({ scrollTop: $('#jumlahAng').offset().top }, 'slow');
+				return (false);
+			}
+
+			let total_pjm = $('#total_pjm').val();
+			let num_val = 0;
+			$('.num_val').each(function() {
+				num_val += Number($(this).val());
+			});
+			if (num_val != total_pjm) {
+				$.toast({
+					heading: 'Gagal Menyimpan',
+					text: 'Total nominal angsuran harus sama dengan total pinjaman yang diisi. Silahkan koreksi kembali!',
+					icon: 'warning',
+					hideAfter: false,
+					position: 'mid-center',
+					bgColor: 'rgb(177, 80, 80)',
+					textColor: 'white'
+				});
+				$('html, body').animate({ scrollTop: $('#total_pjm').offset().top }, 'slow');
+				return (false);
+			}
+		}		
 	</script>
 
 	<!-- Jenis Pegawai jika onchange maka Status Pegawai dan Honor akan menyesuaikan validasi 'honor untuk pegawai tetap' -->
@@ -903,99 +1078,6 @@
 			$('#info_honor').show();
 			$('#honor').val('');
 			$('#honor').prop('disabled', true);
-		}
-	</script>
-
-	<!-- Set Kode Pinjaman sesuai dengan status peminjaman -->
-	<script>
-		$(document).ready(function(){
-			<?php if (isset($pegawais)) { ?>
-				var arrPinjaman = <?php echo json_encode($pegawais);?>;
-			$('#pegawai').html('');
-			$.each(arrPinjaman, function(key, value) {   
-				var disabled = false;
-				var desc = '';
-				switch (value.status_pjm) {
-					case 'OpenLoad':
-						break;
-					case 'OnBankKop':
-						disabled = true;
-						desc = ' (sedang meminjam di Bank & Koperasi)';
-						break;
-					case 'OnBank':
-						desc = ' (sedang meminjam di Bank)';
-						break;
-					case 'OnKop':
-						desc = ' (sedang meminjam di Koperasi)';
-						break;
-				}
-				$('#pegawai')
-					.append($("<option></option>")
-						.attr("value", value.id_pegawai)
-						.attr("disabled", disabled)
-						.text(value.nama + desc));
-			});
-
-			var val = $('#pegawai option:nth-child(1)').val();
-			var status_load = '';
-			$.each(arrPinjaman, function(key, value) {   
-				if (val == value.id_pegawai) {
-					status_load = value.status_pjm;
-				}					
-			});
-			
-			if (status_load === 'OpenLoan') {
-				openLoan();
-			} else if (status_load === 'OnBank') {
-				disableBank();
-			} else if (status_load === 'OnKop') {
-				disableKop();
-			}
-
-			$('#pegawai').change(function(){
-				var val_change = $(this).val();
-				$.each(arrPinjaman, function(key, value) {   
-					if (val_change == value.id_pegawai) {
-						status = value.status_pjm;
-					}					
-				});
-				if (status === 'OpenLoan') {
-					openLoan();
-				} else if (status === 'OnBank') {
-					disableBank();
-				} else if (status === 'OnKop') {
-					disableKop();
-				}
-			});
-			<?php };?>
-		});
-
-		function openLoan(){
-			$('#kop').prop("disabled", false);
-			$('#bank').prop("disabled", false);
-		}
-
-		function disableKop(){
-			$('#kop').prop("disabled", true);
-			$('#bank').prop("disabled", false);
-			$('#bank').prop("selected", true);
-		}
-
-		function disableBank(){
-			$('#bank').prop("disabled", true);
-			$('#kop').prop("disabled", false);
-			$('#kop').prop("selected", true);
-		}
-	</script>
-
-	<!-- Validasi Pinjaman minimal 1 angsuran -->
-	<script>
-		function validasiAngsuran(that) {
-			if (that.jumlahAng.value == 0) {
-				window.alert('Pinjaman wajib minimal 1 angsuran, untuk mengisi data tanggal pengembalian. Silahkan tambah angsuran!');
-				$('html, body').animate({ scrollTop: $('#jumlahAng').offset().top }, 'slow');
-				return (false);
-			}
 		}
 	</script>
 
