@@ -58,7 +58,7 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Jenis Kelamin</label>
 							<div class="col-sm-10">
-								<select class="form-control" name="gender" required>
+								<select class="form-control" id="gender" name="gender" required>
 								<option value='P' <?php if($pegawai['gender'] == 'P') {echo 'selected';}?>>Perempuan</option>
 								<option value='L' <?php if($pegawai['gender'] == 'L') {echo 'selected';}?>>Laki-laki</option>
 								</select>
@@ -125,8 +125,8 @@
 									<div  class="col-sm-2">
 										<select class="form-control <?php echo $member;?>" name="gender_anggota[<?php echo $key;?>]">
 											<option disabled>Pilih Gender</option>
-											<option value='P' <?php echo ($keluarga['gender'] == 'P') ? 'selected': '';?>>Perempuan</option>
-											<option value='L' <?php echo ($keluarga['gender'] == 'L') ? 'selected': '';?>>Laki-laki</option>
+											<option value='P' <?php echo ($keluarga['gender'] == 'P') ? 'selected': '';?> id="gender_p">Perempuan</option>
+											<option value='L' <?php echo ($keluarga['gender'] == 'L') ? 'selected': '';?> id="gender_l">Laki-laki</option>
 										</select>
 									</div>
 									<div  class="col-sm-2">
@@ -147,8 +147,8 @@
 										<div  class="col-sm-2">
 											<select class="form-control mate" name="gender_anggota[0]" placeholder="Gender">
 												<option disabled>Pilih Gender</option>
-												<option value="P">Perempuan</option>
-												<option value="L">Laki-laki</option>
+												<option value="P" id="gender_p">Perempuan</option>
+												<option value="L" id="gender_l">Laki-laki</option>
 											</select>
 										</div>
 										<div  class="col-sm-2">

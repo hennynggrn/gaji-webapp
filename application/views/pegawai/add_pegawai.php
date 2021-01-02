@@ -54,9 +54,9 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Jenis Kelamin</label>
 							<div class="col-sm-10">
-								<select class="form-control" name="gender" required>
-								<option value='P'>Perempuan</option>
-								<option value='L'>Laki-laki</option>
+								<select class="form-control" name="gender" id="gender" required>
+									<option value='P'>Perempuan</option>
+									<option value='L'>Laki-laki</option>
 								</select>
 							</div>
 						</div>
@@ -102,8 +102,8 @@
 								<div  class="col-sm-2">
 									<select class="form-control mate" name="gender_anggota[0]" placeholder="Gender">
 										<option disabled>Pilih Gender</option>
-										<option value='P'>Perempuan</option>
-										<option value='L'>Laki-laki</option>
+										<option value='P' id="gender_p">Perempuan</option>
+										<option value='L' id="gender_l">Laki-laki</option>
 									</select>
 								</div>
 								<div  class="col-sm-2">

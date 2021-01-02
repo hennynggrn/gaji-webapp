@@ -196,12 +196,17 @@ class M_pinjaman extends CI_Model{
 		foreach ($angsuran as $key => $value) {
 			$old_angsuran[] = $angsuran[$key]['id_angsuran'];			
 		}
-		$deff = array_diff($old_angsuran, $id_angsuran);
+		if (!empty($id_angsuran)) {
+			$deff = array_diff($old_angsuran, $id_angsuran);
+		} else {
+			$deff = $old_angsuran;
+		}
 		
 		foreach ($deff as $i => $value) {
-			$this->db->where('id_angsuran', $old_angsuran[$i]);
+			$this->db->where('id_angsuran', $value);
 			$this->db->delete('angsuran');
 		}
+		// var_dump($deff);
 	}
 
 	public function delete_pinjaman($id_pinjaman)

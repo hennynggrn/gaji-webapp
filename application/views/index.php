@@ -749,6 +749,15 @@
 	
 	<!-- Tampilkan form input Keluarga jika Menikah on checked -->
 	<script>
+		var gender = $('#gender').val();
+		$('#gender').on('change', function() {
+			if ($(this).val() == 'P') {
+				$('#gender_l').prop('selected', true);
+			} else {
+				$('#gender_p').prop('selected', true);
+			}
+		});
+
 		$(document).ready(function(){
 			if ($('#married').prop('checked') === true) {
 				$('#tambah_keluarga').show();
@@ -766,10 +775,16 @@
 			})
 		})
 		
+		if (gender == 'P') {
+			$('#gender_l').prop('selected', true);
+		} else {
+			$('#gender_p').prop('selected', true);
+		}
 		function add_keluarga(that) {
 			if (that.value == 1) {
 				document.getElementById('tambah_keluarga').style.display = 'block';
 				$('#mate').prop('required', true);
+				
 			}
 		}
 		function close_keluarga(that) {
@@ -836,7 +851,6 @@
 					num_val += Number($(this).val());
 				});
 				$('#total_ang').text(number_format(num_val, 0, ',', '.'));
-				// $('#total_ang').text(rowCount);
 			});
 			
 			$('#btnAdd').bind('click', function () {

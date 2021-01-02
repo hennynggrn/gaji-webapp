@@ -184,6 +184,8 @@ class Pinjaman extends CI_Controller {
 				$id_pinjaman = $this->input->post('id_pinjaman');
 				$res['pinjaman'] = $this->M_pinjaman->update_pinjaman($id_pinjaman);
 				$res['angsuran'] = $this->M_pinjaman->update_angsuran($id_pinjaman);
+				// var_dump($_POST);
+				// var_dump($id_pinjaman);
 				if ($res) {
 					$this->session->set_flashdata('message_success', 'Data pinjaman berhasil diedit');
 					redirect('pinjaman/pay/'.$id_pinjaman);
