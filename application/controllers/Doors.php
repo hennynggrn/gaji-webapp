@@ -111,8 +111,9 @@
             if(!$this->session->userdata('logged_in')){
                 redirect('login');
             }
-            
-            // set status log out
+             
+			// set status log out
+			getDateZone();
             $user_id = $this->session->userdata('user_id');
             $this->M_doors->set_status_logout($user_id);
 

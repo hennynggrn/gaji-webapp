@@ -450,7 +450,8 @@
 	<script src="<?php echo base_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js');?>"></script>
 	 <!-- Toast -->
 	<script src="<?php echo base_url('assets/plugins/jquery-toast-plugin/dist/jquery.toast.min.js');?>"></script>
-
+	<!-- TWBS Pagination -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.1/jquery.twbsPagination.min.js"></script>
 	<!-- Page script -->
 	<!-- Libraries/Plugin -->
 	<script>
@@ -890,62 +891,63 @@
 		$(document).ready(function(){
 			<?php if (isset($pegawais)) { ?>
 				var arrPinjaman = <?php echo json_encode($pegawais);?>;
-			$('#pegawai').html('');
-			$.each(arrPinjaman, function(key, value) {   
-				var disabled = false;
-				var desc = '';
-				switch (value.status_pjm) {
-					case 'OpenLoad':
-						break;
-					case 'OnBankKop':
-						disabled = true;
-						desc = ' (sedang meminjam di Bank & Koperasi)';
-						break;
-					case 'OnBank':
-						desc = ' (sedang meminjam di Bank)';
-						break;
-					case 'OnKop':
-						desc = ' (sedang meminjam di Koperasi)';
-						break;
-				}
-				$('#pegawai')
-					.append($("<option></option>")
-						.attr("value", value.id_pegawai)
-						.attr("disabled", disabled)
-						.text(value.nama + desc));
-			});
-
-			var val = $('#pegawai option:nth-child(1)').val();
-			var status_load = '';
-			$.each(arrPinjaman, function(key, value) {   
-				if (val == value.id_pegawai) {
-					status_load = value.status_pjm;
-				}					
-			});
-			
-			if (status_load === 'OpenLoan') {
-				openLoan();
-			} else if (status_load === 'OnBank') {
-				disableBank();
-			} else if (status_load === 'OnKop') {
-				disableKop();
-			}
-
-			$('#pegawai').change(function(){
-				var val_change = $(this).val();
+				$('#pegawai').html('');
 				$.each(arrPinjaman, function(key, value) {   
-					if (val_change == value.id_pegawai) {
-						status = value.status_pjm;
+					var disabled = false;
+					var desc = '';
+					switch (value.status_pjm) {
+						case 'OpenLoad':
+							desc = ' open';
+							break;
+						case 'OnBankKop':
+							disabled = true;
+							desc = ' (sedang meminjam di Bank & Koperasi)';
+							break;
+						case 'OnBank':
+							desc = ' (sedang meminjam di Bank)';
+							break;
+						case 'OnKop':
+							desc = ' (sedang meminjam di Koperasi)';
+							break;
+					}
+					$('#pegawai')
+						.append($("<option></option>")
+							.attr("value", value.id_pegawai)
+							.attr("disabled", disabled)
+							.text(value.nama + desc));
+				});
+
+				var val = $('#pegawai option:nth-child(1)').val();
+				var status_load = '';
+				$.each(arrPinjaman, function(key, value) {   
+					if (val == value.id_pegawai) {
+						status_load = value.status_pjm;
 					}					
 				});
-				if (status === 'OpenLoan') {
+				
+				if (status_load === 'OpenLoan') {
 					openLoan();
-				} else if (status === 'OnBank') {
+				} else if (status_load === 'OnBank') {
 					disableBank();
-				} else if (status === 'OnKop') {
+				} else if (status_load === 'OnKop') {
 					disableKop();
 				}
-			});
+
+				$('#pegawai').change(function(){
+					var val_change = $(this).val();
+					$.each(arrPinjaman, function(key, value) {   
+						if (val_change == value.id_pegawai) {
+							status = value.status_pjm;
+						}					
+					});
+					if (status === 'OpenLoan') {
+						openLoan();
+					} else if (status === 'OnBank') {
+						disableBank();
+					} else if (status === 'OnKop') {
+						disableKop();
+					}
+				});
 			<?php };?>
 		});
 
@@ -1171,6 +1173,19 @@
 						$('#result').html(data);
 					}
 				});
+			}
+		});
+	</script>
+	<script>
+		var pages = <?php echo (isset($pages)) ? $pages : 0;?>;
+		$('#pagination').twbsPagination({
+			totalPages: Math.ceil(pages/5),
+			visiblePages: 6,
+			next: '&laquo;',
+			prev: '&raquo;',
+			onPageClick: function (event, page) {
+				//fetch content and render here
+				$('#page-content').text('Page ' + page) + ' content here';
 			}
 		});
 	</script>

@@ -194,7 +194,7 @@
 					</div>
 				</div>
 				<div class="box-footer text-info">
-					<h5 class="text-bold">Info :</h5>
+					<h5 class="text-bold"><i class="fa fa-fw fa-info-circle"></i>&nbsp;&nbsp; Info :</h5>
 					<ul>
 						<li>Edit untuk menambahkan/mengubah anggota keluarga</li>
 					</ul>
@@ -203,9 +203,9 @@
 		</div>
 		<?php endif;?>
 		<div class="col-md-12">
-			<a href="<?php echo site_url('pegawai')?>" class="pull-left btn btn-default">Kembali</a>
+			<a href="<?php echo site_url('pegawai')?>" class="pull-left btn btn-default"><i class="fa fa-fw fa-arrow-left"></i>&nbsp;&nbsp; Kembali</a>
 			<?php if ($hide == FALSE) { ?>
-				<a href="<?php echo site_url('pegawai/edit/'.$id)?>" class="pull-right btn btn-warning edit-btn">Edit</a></td>
+				<a href="<?php echo site_url('pegawai/edit/'.$id)?>" class="pull-right btn btn-warning"><i class="fa fa-fw fa-edit"></i>&nbsp;&nbsp; Edit</a></td>
 			<?php } ?>
 		</div>
 	</div>

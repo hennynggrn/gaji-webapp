@@ -30,9 +30,8 @@
 						<div class="row">
 							<div class="col-md-5">
 								<div class="form-group">
-									<label>Tahun</label>
 									<div class="input-group">
-										<span class="input-group-addon"><i class="fa fa-fw fa-calendar-o"></i></span>
+										<span class="input-group-addon text-bold">Tahun</span>
 										<select name="year" id="" class="form-control" name="jabatan" placeholder="Satpam" style="width: 100%;" required>
 											<option value=""></option>
 											<option value=""></option>
@@ -42,23 +41,24 @@
 							</div>
 							<div class="col-md-5">
 								<div class="form-group">
-									<label>Bulan</label>
 									<div class="input-group">
-										<span class="input-group-addon"><i class="fa fa-fw fa-calendar"></i></span>
+										<span class="input-group-addon text-bold">Bulan</span>
 										<select name="month" id="" class="form-control" name="jabatan" placeholder="Satpam" style="width: 100%;" required>
-											<option value=""></option>
-											<option value=""></option>
+											<option value="" disabled>Pilih Bulan</option>
+											<?php $months = getMonth();
+											foreach ($months as $key => $month) {
+												echo '<option value="'.$key.'">'.$month.'</option>';
+											} ?>
 										</select>
 									</div>
 								</div>
 							</div>
 							<div class="col-md-2">
 								<div class="form-group">
-									<label>&nbsp;</label>
 									<div class="input-group">
 										<span class="input-group-btn" >
 											<button type="button" name="reset" id="reset-btn" style="width: 100%;" class="btn btn-default">
-												<i class="fa fa-fw fa-refresh"></i> Reset
+												<i class="fa fa-fw fa-refresh"></i>&nbsp;&nbsp; Reset
 											</button>
 										</span>
 									</div>

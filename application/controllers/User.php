@@ -8,6 +8,7 @@ class User extends CI_Controller {
 		if (!$this->session->userdata('logged_in')) {
 			redirect('login');
 		} else {
+			getDateZone();
 			if (authUserAdmin() == TRUE) {
 				$data['title'] = 'Tabel Pengguna';
 				$data['pegawais'] = $this->M_pegawai->get_pegawai($id_pegawai)->result_array();
@@ -101,7 +102,7 @@ class User extends CI_Controller {
 					$enc_password = md5($this->input->post('password'));
 				}
 				$res['user'] = $this->M_user->update_user($enc_password, $id);
-				$view = $this->uri->segment(1);
+				$view = $this->input->post('view');
 				if ($res) {
 					$this->session->set_flashdata('message_success', 'Data pengguna berhasil diedit');
 					if ($view == 'profile') {
@@ -123,11 +124,11 @@ class User extends CI_Controller {
 		if (!$this->session->userdata('logged_in')) {
 			redirect('login');
 		} else {
-			if (authUserAdmin() == TRUE) {
+			if (($this->session->userdata('user_id') == $id) || (authUserAdmin() == TRUE)) {
 				$res['unlink'] = $this->M_user->unlink_pegawai($id);
 				$view = $this->uri->segment(1);
 				if ($res) {
-					$this->session->set_flashdata('message_success', 'Data pegawai berhasil dihubungkan');
+					$this->session->set_flashdata('message_success', 'Link data pegawai berhasil dihapus');
 					if ($view == 'profile') {
 						redirect('profile/'.$id);
 					} else {

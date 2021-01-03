@@ -49,8 +49,9 @@
 
 		if ($ci->session->userdata('user_level_id') !== NULL) {
 			$token_id = $ci->session->userdata('user_level_id');
+			$auth_level = array('3');// for Kepsek -> gaji, pegawai, & laporan
 
-			if ($token_id == 3) { // for Kepsek -> gaji, pegawai, & laporan
+			if (in_array($token_id, $auth_level)) {
 				return TRUE;
 			} else {
 				return FALSE;

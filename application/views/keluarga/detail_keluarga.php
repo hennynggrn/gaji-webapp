@@ -3,14 +3,6 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="box box-primary">
-				<!-- <div class="box-header with-border">
-					<h3 class="box-title"> 
-						<a href="<?php echo site_url('keluarga/add');?>" class='btn btn-primary' >
-							<i class="fa fa-plus-square-o"></i> Tambah Data 
-						</a>
-					</h3>
-				</div> -->
-				<!-- /.box-header -->
 				<div class="box-body">
 					<table class="table table-bordered table-hover responsive text-center">
 						<thead>
@@ -63,9 +55,9 @@
 			</div>
 		</div>
 		<div class="col-md-12">
-			<a href="<?php echo base_url('keluarga')?>" class="pull-left btn btn-default">Kembali</a>
+			<a href="<?php echo base_url('keluarga')?>" class="pull-left btn btn-default"><i class="fa fa-fw fa-arrow-left"></i>&nbsp;&nbsp; Kembali</a>
 			<?php if ($hide == FALSE) { ?>
-				<a href="<?php echo base_url('keluarga/edit/'.$pegawai['id_pegawai'])?>" class="edit-keluarga pull-right btn btn-warning edit-btn">Edit</a>
+				<a href="<?php echo base_url('keluarga/edit/'.$pegawai['id_pegawai'])?>" class="edit-keluarga pull-right btn btn-warning"><i class="fa fa-fw fa-edit"></i>&nbsp;&nbsp; Edit</a>
 			<?php } ?>
 		</div>
 	</div>

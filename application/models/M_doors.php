@@ -38,7 +38,8 @@
         {
             // set status logout to 0 for offline
             $data = array(
-                'online_status' => 0
+                'online_status' => 0,
+                'last_online' => date('Y-m-d h:i:s')
             );
             $this->db->where('id', $user_id);
             return $this->db->update('users', $data);

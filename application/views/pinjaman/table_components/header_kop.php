@@ -19,7 +19,7 @@
 		<?php if ($hide == FALSE) { ?>
 			<div class="btn-group">
 				<a href="<?php echo site_url('pinjaman/add');?>" class='btn btn-primary' >
-					<i class="fa fa-plus-square-o"></i> Tambah Data 
+					<i class="fa fa-plus-square-o"></i>&nbsp;&nbsp; Tambah Data 
 				</a>
 			</div>
 		<?php } ?>

@@ -37,43 +37,51 @@ class M_gaji extends CI_Model {
 	{
 		$month = date('m');
 		$year = date('Y');
+		// var_dump($month);
+		// var_dump($year);
 		if ($id_pegawai != NULL) {
 			switch ($kode) {
 				case 'KOP':
 					$this->db->select('*, pjm.status status_pjm');
-					$this->db->order_by('p.nama');
+					$this->db->order_by('a.tanggal_kembali');
 					$this->db->join('pinjaman pjm', 'p.id_pegawai = pjm.id_pegawai AND pjm.kode_pinjaman = "'.$kode.'"', 'LEFT OUTER');
-					$this->db->join('angsuran a', 'a.id_pinjaman = pjm.id_pinjaman AND (month(a.tanggal_kembali) = "'.$month.'" AND year(a.tanggal_kembali) = "'.$year.'") AND (a.status = 0 OR a.payOff_byGaji = 1)', 'LEFT OUTER');
+					$this->db->join('angsuran a', 'a.id_pinjaman = pjm.id_pinjaman', 'LEFT OUTER');
 					$this->db->group_by('p.id_pegawai');
-					return $this->db->get_where('pegawai p', array('pjm.id_pegawai' => $id_pegawai));
+					$this->db->where('month(a.tanggal_kembali) = "'.$month.'" AND year(a.tanggal_kembali) = "'.$year.'" AND (a.status = 0 OR a.payOff_byGaji = 1)');
+					return $this->db->get_where('pegawai p', array(
+						'pjm.id_pegawai' => $id_pegawai,
+					));
 					break;
 
 				case 'BANK':
 					$this->db->select('*, pjm.status status_pjm');
-					$this->db->order_by('p.nama');
+					$this->db->order_by('a.tanggal_kembali');
 					$this->db->join('pinjaman pjm', 'p.id_pegawai = pjm.id_pegawai AND pjm.kode_pinjaman = "'.$kode.'"', 'LEFT OUTER');
-					$this->db->join('angsuran a', 'a.id_pinjaman = pjm.id_pinjaman AND (month(a.tanggal_kembali) = "'.$month.'" AND year(a.tanggal_kembali) = "'.$year.'") AND (a.status = 0 OR a.payOff_byGaji = 1)', 'LEFT OUTER');
+					$this->db->join('angsuran a', 'a.id_pinjaman = pjm.id_pinjaman', 'LEFT OUTER');
 					$this->db->group_by('p.id_pegawai');
-					return $this->db->get_where('pegawai p', array('pjm.id_pegawai' => $id_pegawai));
+					$this->db->where('month(a.tanggal_kembali) = "'.$month.'" AND year(a.tanggal_kembali) = "'.$year.'" AND (a.status = 0 OR a.payOff_byGaji = 1)');
+					return $this->db->get_where('pegawai p', array(
+						'pjm.id_pegawai' => $id_pegawai,
+					));
 					break;
 			}
 		} else {
 			switch ($kode) {
 				case 'KOP':
 					$this->db->select('*, pjm.status status_pjm');
-					$this->db->order_by('p.nama');
 					$this->db->join('pinjaman pjm', 'p.id_pegawai = pjm.id_pegawai AND pjm.kode_pinjaman = "'.$kode.'"', 'LEFT OUTER');
-					$this->db->join('angsuran a', 'a.id_pinjaman = pjm.id_pinjaman AND (month(a.tanggal_kembali) = "'.$month.'" AND year(a.tanggal_kembali) = "'.$year.'") AND (a.status = 0 OR a.payOff_byGaji = 1)', 'LEFT OUTER');
+					$this->db->join('angsuran a', 'a.id_pinjaman = pjm.id_pinjaman', 'LEFT OUTER');
 					$this->db->group_by('p.id_pegawai');
+					$this->db->where('month(a.tanggal_kembali) = "'.$month.'" AND year(a.tanggal_kembali) = "'.$year.'" AND (a.status = 0 OR a.payOff_byGaji = 1)');
 					return $this->db->get('pegawai p');
 					break;
 
 				case 'BANK':
 					$this->db->select('*, pjm.status status_pjm');
-					$this->db->order_by('p.nama');
 					$this->db->join('pinjaman pjm', 'p.id_pegawai = pjm.id_pegawai AND pjm.kode_pinjaman = "'.$kode.'"', 'LEFT OUTER');
-					$this->db->join('angsuran a', 'a.id_pinjaman = pjm.id_pinjaman AND (month(a.tanggal_kembali) = "'.$month.'" AND year(a.tanggal_kembali) = "'.$year.'") AND (a.status = 0 OR a.payOff_byGaji = 1)', 'LEFT OUTER');
+					$this->db->join('angsuran a', 'a.id_pinjaman = pjm.id_pinjaman', 'LEFT OUTER');
 					$this->db->group_by('p.id_pegawai');
+					$this->db->where('month(a.tanggal_kembali) = "'.$month.'" AND year(a.tanggal_kembali) = "'.$year.'" AND (a.status = 0 OR a.payOff_byGaji = 1)');
 					return $this->db->get('pegawai p');
 					break;
 			}
@@ -95,7 +103,7 @@ class M_gaji extends CI_Model {
 				return $this->db->get_where('angsuran a', array('a.id_pinjaman' => $id_pinjaman));
 				break;
 		}
-	}
+	} 
 
 	public function repay($id_kop, $id_bank)
 	{

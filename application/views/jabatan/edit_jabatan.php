@@ -4,7 +4,6 @@
 		<div class="col-md-12">
 			<div class="box box-primary">
 				<div class="box-header"></div>
-				<!-- /.box-header -->
 				<form role="form" method="post" action="<?php echo site_url('jabatan/update_jabatan')?>">
 					<div class="box-body">
 						<div class="row">

@@ -7,7 +7,7 @@
 					<div class="box-header with-border">
 						<h3 class="box-title"> 
 							<a href="<?php echo site_url('pegawai/add');?>" class='btn btn-primary' >
-								<i class="fa fa-plus-square-o"></i> Tambah Data 
+								<i class="fa fa-plus-square-o"></i>&nbsp;&nbsp; Tambah Data 
 							</a>
 						</h3>
 					</div>
@@ -100,12 +100,12 @@
 				</div>
 				<!-- /.box-body -->
 				<div class="box-footer clearfix">
-					<ul class="pagination pagination-sm no-margin pull-right">
-						<li><a href="#">&laquo;</a></li>
+					<ul class="pagination pagination-sm no-margin pull-right" id="pagination">
+						<!-- <li><a href="#">&laquo;</a></li>
 						<li><a href="#">1</a></li>
 						<li><a href="#">2</a></li>
 						<li><a href="#">3</a></li>
-						<li><a href="#">&raquo;</a></li>
+						<li><a href="#">&raquo;</a></li> -->
 					</ul>
 				</div>
 			</div>

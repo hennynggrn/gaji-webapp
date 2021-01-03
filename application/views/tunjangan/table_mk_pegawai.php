@@ -48,19 +48,17 @@
 										</div>
 										<form role="form" method="post" action="<?php echo site_url('tunjangan/update_mk_pegawai');?>">
 											<div class="modal-body">
-												<div class="form-group">
-													<div class="input-group">
-														<span class="input-group-addon">Masa Kerja</span>
-														<input type="hidden" value="<?php echo $pegawai['id_pegawai'];?>" name="pegawai">
-														<select class="form-control" name="masa_kerja" placeholder="Pilih tahun masa kerja" style="width: 100%; background-color: white;" required>
-															<option disabled>Pilih Tahun Masa Kerja</option>
-															<?php foreach ($masakerjas as $key => $masakerja) : ?>
-															<option value=<?php echo '"'.$masakerja['id_masakerja'].'"'; echo ($masakerja['id_masakerja'] == $pegawai['masa_kerja']) ? 'selected' : '';?>>
-																<?php echo ($masakerja['id_masakerja'] == 0) ? '(belum genap 1 tahun)' : $masakerja['tahun'].' tahun';?>
-															</option>
-															<?php endforeach; ?>
-														</select> 
-													</div>
+												<div class="input-group">
+													<span class="input-group-addon">Masa Kerja</span>
+													<input type="hidden" value="<?php echo $pegawai['id_pegawai'];?>" name="pegawai">
+													<select class="form-control" name="masa_kerja" placeholder="Pilih tahun masa kerja" style="width: 100%; background-color: white;" required>
+														<option disabled>Pilih Tahun Masa Kerja</option>
+														<?php foreach ($masakerjas as $key => $masakerja) : ?>
+														<option value=<?php echo '"'.$masakerja['id_masakerja'].'"'; echo ($masakerja['id_masakerja'] == $pegawai['masa_kerja']) ? 'selected' : '';?>>
+															<?php echo ($masakerja['id_masakerja'] == 0) ? '(belum genap 1 tahun)' : $masakerja['tahun'].' tahun';?>
+														</option>
+														<?php endforeach; ?>
+													</select> 
 												</div>
 											</div>
 											<div class="modal-footer">
@@ -89,7 +87,7 @@
 			</div>
 		</div>
 		<div class="col-md-12">
-			<a href="<?php echo site_url('tunjangan')?>" class="pull-left btn btn-default">Kembali</a>
+			<a href="<?php echo site_url('tunjangan')?>" class="pull-left btn btn-default"><i class="fa fa-fw fa-arrow-left"></i>&nbsp;&nbsp; Kembali</a>
 		</div>
 	</div>
 			<!-- /.box -->

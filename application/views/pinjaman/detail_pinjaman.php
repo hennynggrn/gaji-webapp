@@ -158,9 +158,9 @@
 			</div>
 		</div>
 		<div class="col-md-12">
-			<a href="<?php echo site_url('pinjaman')?>" class="pull-left btn btn-default">Kembali</a>
+			<a href="<?php echo site_url('pinjaman')?>" class="pull-left btn btn-default"><i class="fa fa-fw fa-arrow-left"></i>&nbsp;&nbsp; Kembali</a>
 			<?php if ($hide == FALSE) { ?>
-				<a href="<?php echo site_url('pinjaman/edit/'.$pinjaman['id_pinjaman'])?>" class="pull-right btn btn-warning edit-btn">Edit</a></td>
+				<a href="<?php echo site_url('pinjaman/edit/'.$pinjaman['id_pinjaman'])?>" class="pull-right btn btn-warning"><i class="fa fa-fw fa-edit"></i>&nbsp;&nbsp; Edit</a>
 			<?php } ?>
 		</div>
 	</div>

@@ -7,7 +7,7 @@
 				<div class="box-header with-border">
 					<h3 class="box-title">
 						<a href="<?php echo site_url('jabatan/add');?>" class='btn btn-primary'>
-						<i class="fa fa-plus-square-o"></i> Tambah Data </a>
+						<i class="fa fa-plus-square-o"></i>&nbsp;&nbsp; Tambah Data </a>
 					</h3>
 				</div>
 				<?php } ?>

@@ -284,7 +284,7 @@
 				</div>
 			</div>
 			<div class="col-md-12">
-				<a href="<?php echo base_url('table')?>" class="pull-left btn btn-default">Kembali</a>
+				<a href="<?php echo base_url('table')?>" class="pull-left btn btn-default"><i class="fa fa-fw fa-arrow-left"></i>&nbsp;&nbsp;  Kembali</a>
 				<span class="pull-right">
 					<?php 
 						$id_kop = 0;
@@ -342,7 +342,7 @@
 							$id_angsuran = $id_kop.'-'.$id_bank;
 						}
 					?>
-					<a href="<?php echo site_url('print/'.$pegawai['id_pegawai'])?>" target="_BLANK" class="btn bg-blue edit-btn">Cetak</a>
+					<a href="<?php echo site_url('print/'.$pegawai['id_pegawai'])?>" target="_BLANK" class="btn bg-blue"><i class="fa fa-fw fa-print"></i>&nbsp;&nbsp; Cetak</a>
 					<!-- Modal Repay Angsuran-->
 					<div class="modal fade" id="pay<?php echo $pegawai['id_pegawai'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 						<div class="modal-dialog" role="document">
@@ -356,7 +356,12 @@
 										Anda akan membayar angsuran sebesar <b class="text-primary"><?php echo 'Rp. '.number_format($pinjaman,0,',','.');?></b> ?
 									</p>
 									<p class="text-warning">
-										<i class="fa fa-fw fa-warning"></i> Setelah membayar, pastikan untuk refresh atau muat ulang halaman ini.
+										
+									</p>
+									<p class="text-warning"><i class="fa fa-fw fa-warning"></i>&nbsp;&nbsp; Peringatan : <br>
+										<ul class="text-warning">
+											<li> Setelah membayar, pastikan untuk refresh atau muat ulang halaman ini.</li>
+										</ul>
 									</p>
 								</div>
 								<div class="modal-footer">

@@ -38,6 +38,11 @@
 									<td><?php echo ($user['address'] != NULL) ? $user['address'] : '-';?></td>
 								</tr>
 								<tr>
+									<th>Tanggal Bergabung</th>
+									<td>:</td>
+									<td><?php echo fullConvertIDN(date('Y-m-d', strtotime($user['created_at'])), $short = NULL, $day = FALSE);?></td>
+								</tr>
+								<tr>
 									<th>Status Online</th>
 									<td>:</td>
 									<td><?php 
@@ -113,6 +118,7 @@
 						<div class="modal-body">
 							<div class="form-group">
 								<label for="">Nama Lengkap</label>
+								<input type="hidden" class="form-control" name="view" value="profile">
 								<input type="hidden" class="form-control" name="id" value="<?php echo $user['id'];?>">
 								<input type="text" class="form-control" name="fullname" placeholder="Budi Sanjono" value="<?php echo $user['fullname'];?>" required>
 							</div>
@@ -152,7 +158,7 @@
 									if ($user['level_id'] == 1) { 
 										if ($hide == FALSE) { ?>
 											<div class="form-group">
-												<label for="">Level User asda</label>
+												<label for="">Level User</label>
 												<select class="form-control" name="level_id" required>
 													<option disabled>Pilih Level User</option>
 													<option value="1" <?php echo ($user['level_id'] == 1) ? 'selected': '';?>>Administrator</option> 
@@ -163,18 +169,19 @@
 											</div>
 							<?php } else { ?>
 								<input type="hidden" name="level_id" value="<?php echo $user['level_id'];?>">
-							<?php }} else { ?>
-								<div class="form-group">
-									<label for="">Level User</label>
-									<select class="form-control" name="level_id" required>
-										<option disabled>Pilih Level User</option>
-										<option value="1" <?php echo ($user['level_id'] == 1) ? 'selected': '';?>>Administrator</option> 
-										<option value="2" <?php echo ($user['level_id'] == 2) ? 'selected': '';?>>Bendahara</option>
-										<option value="3" <?php echo ($user['level_id'] == 3) ? 'selected': '';?>>Kepala Sekolah</option>
-										<option value="4" <?php echo ($user['level_id'] == 4) ? 'selected': '';?>>Operator</option>
-									</select>
-								</div>
-							<?php }} ?>
+							<?php }} else {
+								if (authUserAdmin() == TRUE) { ?>
+									<div class="form-group">
+										<label for="">Level User12</label>
+										<select class="form-control" name="level_id" required>
+											<option disabled>Pilih Level User</option>
+											<option value="1" <?php echo ($user['level_id'] == 1) ? 'selected': '';?>>Administrator</option> 
+											<option value="2" <?php echo ($user['level_id'] == 2) ? 'selected': '';?>>Bendahara</option>
+											<option value="3" <?php echo ($user['level_id'] == 3) ? 'selected': '';?>>Kepala Sekolah</option>
+											<option value="4" <?php echo ($user['level_id'] == 4) ? 'selected': '';?>>Operator</option>
+										</select>
+									</div>
+							<?php }}} ?>
 							<div class="form-group">
 								<label for="">Alamat Tinggal</label>
 								<textarea class="form-control" name="address" placeholder="Jl. Taman"><?php echo $user['address'];?></textarea>

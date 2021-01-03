@@ -78,6 +78,24 @@ function month($date){
 	return $month[(int)$explode[1]];
 }
 
+function getMonth(){
+	$month = array(
+		1 => 'Januari',
+		'Februari',
+		'Maret',
+		'April',
+		'Mei',
+		'Juni',
+		'Juli',
+		'Agustus',
+		'September',
+		'Oktober',
+		'November',
+		'Desember'
+	);
+	return $month;
+}
+
 function day($date){
 	$day_name = date('l', strtotime($date));
 	switch ($day_name) {

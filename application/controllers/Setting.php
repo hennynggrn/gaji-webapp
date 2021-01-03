@@ -8,16 +8,20 @@ class Setting extends CI_Controller {
 		if(!$this->session->userdata('logged_in')){
             redirect('login');
 		} else {
-			if (authUserLevel() == TRUE){
-				$res = $this->M_setting->updated_data();
-				if ($res) {
-					$this->session->set_flashdata('message_success', 'Pengaturan berhasil diedit');
-					redirect('table');
+			if (authUserLimited() != TRUE) {
+				if (authUserLevel() == TRUE){
+					$res = $this->M_setting->updated_data();
+					if ($res) {
+						$this->session->set_flashdata('message_success', 'Pengaturan berhasil diedit');
+						redirect('table');
+					} else {
+						$this->session->set_flashdata('message_failed', 'Pengaturan gagal diedit');
+					}
 				} else {
-					$this->session->set_flashdata('message_failed', 'Pengaturan gagal diedit');
+					redirect('table');
 				}
 			} else {
-				redirect('table');
+				redirect(base_url());
 			}
 		}
 	}

@@ -15,6 +15,7 @@ class Pegawai extends CI_Controller {
 			} else {
 				$data['hide'] = TRUE;
 			}
+			$data['pages'] = count($data['pegawais']);
 			$this->template->load('index', 'pegawai/table_pegawai', $data);
 		}
 	}

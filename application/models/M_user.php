@@ -4,7 +4,7 @@
 		public function get_user($user_id = TRUE)
 		{
 			if ($user_id != NULL) {
-				$this->db->select('*, u.id, u.email, u.id_pegawai,
+				$this->db->select('*, u.id, u.email, u.id_pegawai, u.created_at,
 							   GROUP_CONCAT(DISTINCT CONCAT(jbt.jabatan, "</span>&nbsp;<span>") ORDER BY p.nama SEPARATOR "</span>&nbsp;<span>") as result_list');
 				$this->db->order_by('fullname');
 				$this->db->join('user_level ul', 'ul.id = u.level_id', 'LEFT');
@@ -14,7 +14,7 @@
 				$this->db->group_by('u.id');
 				return $this->db->get_where('users u', array('u.id' => $user_id));
 			} else {
-				$this->db->select('*, u.id, u.email, u.id_pegawai,
+				$this->db->select('*, u.id, u.email, u.id_pegawai, u.created_at,
 							   GROUP_CONCAT(DISTINCT CONCAT(jbt.jabatan, "</span>&nbsp;<span>") ORDER BY p.nama SEPARATOR "</span>&nbsp;<span>") as result_list');
 				$this->db->order_by('fullname');
 				$this->db->join('user_level ul', 'ul.id = u.level_id', 'LEFT');

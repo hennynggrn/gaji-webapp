@@ -54,12 +54,20 @@ class Home extends CI_Controller {
 				$data['pegawais'][$key]['jabatan'] = $data['jabatans'][$key]['nominal_jbt'];
 			}
 			// KOP
-			if ($data['pinjaman_kop'][$key]['id_pegawai'] == $data['pegawais'][$key]['id_pegawai']) {
-				$data['pegawais'][$key]['nominal_kop'] = $data['pinjaman_kop'][$key]['nominal'];
+			if ($data['pinjaman_kop'] != NULL) {
+				foreach ($data['pinjaman_kop'] as $i => $kop) {
+					if ($data['pinjaman_kop'][$i]['id_pegawai'] == $data['pegawais'][$key]['id_pegawai']) {
+						$data['pegawais'][$key]['nominal_kop'] = $data['pinjaman_kop'][$i]['nominal'];
+					}
+				}
 			}
 			// BANK
-			if ($data['pinjaman_bank'][$key]['id_pegawai'] == $data['pegawais'][$key]['id_pegawai']) {
-				$data['pegawais'][$key]['nominal_bank'] = $data['pinjaman_bank'][$key]['nominal'];
+			if ($data['pinjaman_bank'] != NULL) {
+				foreach ($data['pinjaman_bank'] as $j => $bank) {
+					if ($data['pinjaman_bank'][$j]['id_pegawai'] == $data['pegawais'][$key]['id_pegawai']) {
+						$data['pegawais'][$key]['nominal_bank'] = $data['pinjaman_bank'][$j]['nominal'];
+					}
+				}
 			}
 		}
 		if (authUserLevel() == TRUE){

@@ -59,17 +59,15 @@
 										</div>
 										<form role="form" method="post" action="<?php echo site_url('honor/update_honor');?>">
 											<div class="modal-body">
-												<div class="form-group">
-													<div class="input-group">
-														<span class="input-group-addon">Rp.</span>
-														<input type="hidden" class="form-control" name="id_honor" value="<?php echo $honor['honor'];?>">
-														<input type="number" class="form-control" name="honor" placeholder="0" value="<?php echo $honor['honor'];?>">
-														<span class="input-group-addon">.00</span>
-													</div>
+												<div class="input-group">
+													<span class="input-group-addon">Rp.</span>
+													<input type="hidden" class="form-control" name="id_honor" value="<?php echo $honor['honor'];?>">
+													<input type="number" class="form-control" name="honor" placeholder="0" value="<?php echo $honor['honor'];?>">
+													<span class="input-group-addon">.00</span>
 												</div>
 											</div>
 											<div class="modal-footer">
-												<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Tutup</button>
+												<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Batal</button>
 												<button type="submit" class="btn btn-primary pull-right edit-btn">Simpan</button>
 											</div>
 										</form>

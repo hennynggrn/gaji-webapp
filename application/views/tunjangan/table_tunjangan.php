@@ -110,7 +110,7 @@
 				<!-- /.box-body -->
 				<?php if ($hide == FALSE) { ?>
 					<div class="box-footer">
-						<a href="<?php echo site_url('tunjangan/edit')?>" class="pull-right btn btn-warning edit-btn btn-block">Edit</a>
+						<a href="<?php echo site_url('tunjangan/edit')?>" class="pull-right btn btn-warning edit-btn btn-block"><i class="fa fa-fw fa-edit"></i>&nbsp;&nbsp; Edit</a>
 					</div>
 				<?php } ?>
 			</div>

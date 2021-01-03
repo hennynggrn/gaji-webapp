@@ -7,7 +7,7 @@
 					<div class="box-header with-border">
 						<h3 class="box-title"> 
 							<a href="<?php echo site_url('jabatan/edit/'.$id['id_jabatan']);?>" class='btn btn-warning'>
-								<i class="fa fa-pencil-square-o"></i> Edit Jabatan 
+								<i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp; Edit Jabatan 
 							</a>
 						</h3>
 					</div>
@@ -92,7 +92,7 @@
 			</div>
 		</div>
 		<div class="col-md-12">
-			<a href="<?php echo site_url('jabatan')?>" class="pull-left btn btn-default">Kembali</a>
+			<a href="<?php echo site_url('jabatan')?>" class="pull-left btn btn-default"><i class="fa fa-fw fa-arrow-left"></i>&nbsp;&nbsp; Kembali</a>
 		</div>
 	</div>
 			<!-- /.box -->

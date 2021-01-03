@@ -78,7 +78,7 @@
 												</div>
 											</div>
 											<div class="modal-footer">
-												<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Tutup</button>
+												<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Batal</button>
 												<button type="submit" class="btn btn-primary pull-right edit-btn">Simpan</button>
 											</div>
 										</form>

@@ -81,6 +81,12 @@
 														<b>Alamat Tinggal</b> <span class="pull-right"><?php echo (!empty($user['address'])) ? $user['address'] : '-';?></span>
 													</li>
 													<li class="list-group-item" style="background-color:#fafafa;">
+														<b>Tanggal Bergabung</b> 
+														<span class="pull-right">
+															<?php echo fullConvertIDN(date('Y-m-d', strtotime($user['created_at'])), $short = NULL, $day = FALSE);?>
+														</span>
+													</li>
+													<li class="list-group-item">
 														<b>Status Online</b> 
 														<span class="pull-right">
 															<?php 
@@ -90,7 +96,7 @@
 															?>
 														</span>
 													</li>
-													<li class="list-group-item">
+													<li class="list-group-item" style="background-color:#fafafa;">
 														<b>Hubungkan Pegawai</b> 
 														<span class="pull-right">
 															<?php 
@@ -131,8 +137,8 @@
 											</div>
 										</div>
 										<div class="modal-footer">
-											<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Tutup</button>
-											<a href="" title="Edit" class="btn btn-warning pull-right edit-btn" data-tooltip="tooltip" data-toggle="modal" data-target="#edit<?php echo $user['id'];?>" data-placement="top">Edit</a>
+											<button type="button" class="btn btn-default pull-left" data-dismiss="modal"><i class="fa fa-fw fa-close"></i>&nbsp;&nbsp; Tutup</button>
+											<a href="" title="Edit" class="btn btn-warning pull-right" data-tooltip="tooltip" data-toggle="modal" data-target="#edit<?php echo $user['id'];?>" data-placement="top"><i class="fa fa-fw fa-edit"></i>&nbsp;&nbsp; Edit</a>
 										</div>
 									</div>
 								</div>
@@ -218,7 +224,7 @@
 												</div>
 											</div>
 											<div class="modal-footer">
-												<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Tutup</button>
+												<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Batal</button>
 												<button type="submit" class="btn btn-primary pull-right edit-btn">Simpan</button>
 											</div>
 										</form>
@@ -240,7 +246,7 @@
 											</p>
 										</div>
 										<div class="modal-footer">
-											<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Tutup</button>
+											<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Batal</button>
 											<a type="button" href="<?php echo site_url('delete/'.$user['id']);?>" class="btn btn-outline pull-right edit-btn">Hapus</a>
 										</div>
 									</div>
@@ -260,7 +266,7 @@
 											</p>
 										</div>
 										<div class="modal-footer">
-											<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Tutup</button>
+											<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Batal</button>
 											<a type="button" href="<?php echo site_url('unlink/'.$user['id']);?>" class="btn btn-outline pull-right edit-btn">Hapus</a>
 										</div>
 									</div>

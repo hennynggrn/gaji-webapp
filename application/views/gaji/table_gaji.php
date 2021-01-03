@@ -24,21 +24,23 @@
 			</div>
 			<div class="col-md-12">
 				<div class="box box-primary">
-					<div class="box-header with-border">
-						<div class="pull-left">
-							<a type="button" class="btn btn-primary <?php echo ($backup == TRUE) ? '' : 'disabled';?>" href="" data-target="#backup" data-toggle="modal">
-								<i class="fa fa-book"></i> &nbsp;&nbsp;Buat Laporan
-							</a> &nbsp;&nbsp; 
-							<?php if ($backup == FALSE) { ?>
-								<i class="fa fa-fw fa-info-circle text-info" title="Aktif di atas tanggal <?php echo $setting['backup_date'];?> atau silahkan atur ulang di pengaturan." data-tooltip="tooltip" data-placement="top"></i>
-							<?php } ?>
+					<?php if (authUserLevel() == TRUE) { ?>
+						<div class="box-header with-border">
+							<div class="pull-left">
+								<a type="button" class="btn btn-primary <?php echo ($backup == TRUE) ? '' : 'disabled';?>" href="" data-target="#backup" data-toggle="modal">
+									<i class="fa fa-book"></i> &nbsp;&nbsp; Buat Laporan
+								</a> &nbsp;&nbsp; 
+								<?php if ($backup == FALSE) { ?>
+									<i class="fa fa-fw fa-info-circle text-info" title="Aktif di atas tanggal <?php echo $setting['backup_date'];?> atau silahkan atur ulang di pengaturan." data-tooltip="tooltip" data-placement="top"></i>
+								<?php } ?>
+							</div>
+							<div class="pull-right">
+								<a href="" type="button" class="btn btn-default" data-target="#setting" data-toggle="modal">
+									<i class="fa fa-gear"></i> &nbsp;&nbsp; Pengaturan
+								</a>
+							</div>
 						</div>
-						<div class="pull-right">
-							<a href="" type="button" class="btn btn-default" data-target="#setting" data-toggle="modal">
-								<i class="fa fa-gear"></i> &nbsp;&nbsp;Pengaturan
-							</a>
-						</div>
-					</div>
+					<?php } ?>
 					<div class="box-body" id="result">
 						<table class="table table-bordered table-hover text-center">
 							<thead>
@@ -130,15 +132,17 @@
 								</div>
 								<div class="modal-body">
 									<p>
-										Anda akan menyimpan semua data terbaru atau pernah diubah ? <br>
+										Anda akan menyimpan semua data terbaru atau pernah diubah di bulan <?php echo $desc;?> ? <br>
 									</p>
-									<p class="text-info">
-										<i class="fa fa-fw fa-info-circle"></i> Semua informasi laporan dapat diakses di menu laporan.
+									<p class="text-info"><i class="fa fa-fw fa-info-circle"></i>&nbsp;&nbsp; Info : <br>
+										<ul class="text-info">
+											<li>Semua informasi laporan dapat diakses di menu laporan.</li>
+										</ul>
 									</p>
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Batal</button>
-									<a type="button" href="<?php echo site_url('backup');?>" class="btn btn-primary pull-right edit-btn">Simpan</a>
+									<a type="button" href="<?php echo site_url('backup/'.$month);?>" class="btn btn-primary pull-right edit-btn">Simpan</a>
 								</div>
 							</div>
 						</div>
@@ -168,7 +172,7 @@
 										</div>
 									</div>
 									<div class="modal-footer">
-										<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Tutup</button>
+										<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Batal</button>
 										<button type="submit" class="btn btn-primary pull-right edit-btn">Simpan</button>
 									</div>
 								</form>

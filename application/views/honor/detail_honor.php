@@ -9,7 +9,7 @@
 						<div class="box-header with-border">
 						<h3 class="box-title"> 
 							<a href="" data-toggle="modal" data-target="#editHonor<?php echo $honor_val;?>" class='btn btn-warning'>
-								<i class="fa fa-pencil-square-o"></i> Edit Honorium 
+								<i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp; Edit Honorium 
 							</a>
 						</h3>
 					</div>
@@ -76,7 +76,7 @@
 														<input type="number" class="form-control" name="honor" placeholder="0" value="<?php echo $honor['honor'];?>">
 														<span class="input-group-addon">.00</span>
 													</div><br>
-													<p class="text-info">Info : <br>
+													<p class="text-info"><i class="fa fa-fw fa-info-circle"></i>&nbsp;&nbsp; Info : <br>
 														<ul class="text-info">
 															<li>untuk mengubah <b>Jenis</b> atau <b>Status Pegawai</b>&nbsp;&nbsp;
 																<a class="badge bg-orange" href="<?php echo site_url('honor/edit/'.$honor['id_pegawai']);?>">
@@ -87,7 +87,7 @@
 													</p>
 												</div>
 												<div class="modal-footer">
-													<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Tutup</button>
+													<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Batal</button>
 													<button type="submit" class="btn btn-primary pull-right edit-btn">Simpan</button>
 												</div>
 											</form>
@@ -112,7 +112,7 @@
 												</p>
 											</div>
 											<div class="modal-footer">
-												<button type="button" class="btn btn-default pull-right edit-btn" data-dismiss="modal">Tutup</button>
+												<button type="button" class="btn btn-default pull-right edit-btn" data-dismiss="modal">Batal</button>
 											</div>
 										</div>
 									</div>
@@ -166,7 +166,7 @@
 									</div>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Tutup</button>
+									<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Batal</button>
 									<button type="submit" class="btn btn-primary pull-right edit-btn">Simpan</button>
 								</div>
 							</form>
@@ -187,7 +187,7 @@
 			</div>
 		</div>
 		<div class="col-md-12">
-			<a href="<?php echo site_url('honor')?>" class="pull-left btn btn-default">Kembali</a>
+			<a href="<?php echo site_url('honor')?>" class="pull-left btn btn-default"><i class="fa fa-fw fa-arrow-left"></i>&nbsp;&nbsp; Kembali</a>
 		</div>
 	</div>
 			<!-- /.box -->
