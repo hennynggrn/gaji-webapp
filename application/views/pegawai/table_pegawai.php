@@ -36,7 +36,7 @@
 								<td style="text-align: left; padding-left: 5px;"><?php echo $pegawai['nama'] ?></td>
 								<td><?php echo ($pegawai['gender'] == 'P') ? 'Perempuan' : 'Laki-laki';?></td>
 								<td><?php echo ($pegawai['masa_kerja'] != 0) ? $pegawai['tahun'].' tahun' : '<small>(belum genap 1 tahun)</small>';?></td>
-								<td><?php echo ($pegawai['jns_pegawai'] == 0) ? 'Guru' : 'Karyawan';?></td>
+								<td><?php echo ($pegawai['jns_pegawai'] == 'G') ? 'Guru' : 'Karyawan';?></td>
 								<td>
 									<?php switch ($pegawai['status_pegawai']) {
 										case 'P':

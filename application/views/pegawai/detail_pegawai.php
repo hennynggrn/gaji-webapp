@@ -113,7 +113,7 @@
 								<tr>
 									<td>Jenis Pegawai</td>
 									<td>:</td>
-									<td><?php echo ($pegawai['jns_pegawai'] == 0) ? 'Guru' : 'Karyawan'; ?></td>
+									<td><?php echo ($pegawai['jns_pegawai'] == 'G') ? 'Guru' : 'Karyawan'; ?></td>
 								</tr>
 								<tr>
 									<td width="3">Status Pegawai</td>
