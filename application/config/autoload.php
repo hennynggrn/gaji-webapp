@@ -58,7 +58,7 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('Template', 'database','form_validation', 'session', 'user_agent');
+$autoload['libraries'] = array('Template', 'Gaji_pegawai', 'database','form_validation', 'session', 'user_agent');
 
 /* unused
 user_agent
@@ -90,7 +90,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url', 'dateConvert_helper', 'userLevel_helper', 'getDate_helper');
+$autoload['helper'] = array('url', 'dateConvert_helper', 'userLevel_helper', 'getDate_helper', 'switchStatusPegawai_helper');
 
 /*
 | -------------------------------------------------------------------

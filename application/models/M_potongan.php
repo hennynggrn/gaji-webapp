@@ -12,6 +12,7 @@ class M_potongan extends CI_Model{
 	{
 		$infaq = $this->input->post('infaq');
 		$sosial = $this->input->post('sosial');
+		$pgri = $this->input->post('pgri');
 		$aisiyah = $this->input->post('aisiyah');
 		$jsr = $this->input->post('jsr');
 		$jamsostek = $this->input->post('jamsostek');
@@ -20,6 +21,7 @@ class M_potongan extends CI_Model{
 		$data = array(
 			'infaq' => $infaq,
 			'sosial' => $sosial,
+			'pgri' => $pgri,
 			'aisiyah' => $aisiyah,
 			'jsr' => $jsr,
 			'jamsostek' => $jamsostek,

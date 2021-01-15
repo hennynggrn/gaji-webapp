@@ -2,51 +2,51 @@
 <section class="content">
 	<!-- Info boxes -->
 	<div class="row">
-		<div class="col-md-3 col-sm-2 col-xs-12">
-			<div class="info-box">
-				<span class="info-box-icon bg-aqua"><i class="fa fa-fw fa-money"></i></span>
-				<div class="info-box-content">
-					<span class="info-box-text">Honorarium</span>
-					<span class="info-box-number"><?php echo 'Rp. &nbsp;&nbsp;'.number_format($honor,0,',','.');?>
-						<small><br><?php echo '/ '.$month;?></small>
-					</span>
+		<div class="col-lg-3 col-xs-6">
+			<div class="small-box bg-primary">
+				<div class="inner">
+				<h3><small class="text-bold" style="color:white;"><?php echo 'Rp. '.number_format($honor,0,',','.');?></small></h3>
+
+				<p>Honorarium</p>
+				</div>
+				<div class="icon">
+				<i class="fa fa-fw fa-money"></i>
 				</div>
 			</div>
 		</div>
-		<div class="col-md-3 col-sm-2 col-xs-12">
-			<div class="info-box">
-				<span class="info-box-icon bg-red"><i class="fa fa-fw fa-plus-circle"></i></span>
+		<div class="col-lg-3 col-xs-6">
+			<div class="small-box bg-orange">
+				<div class="inner">
+				<h3><small class="text-bold" style="color:white;"><?php echo 'Rp. '.number_format($tunjangan,0,',','.');?></small></h3>
 
-				<div class="info-box-content">
-					<span class="info-box-text">Tunjangan</span>
-					<span class="info-box-number"><?php echo 'Rp. &nbsp;&nbsp;'.number_format($tunjangan,0,',','.');?>
-						<small><br><?php echo '/ '.$month;?></small>
-					</span>
+				<p>Tunjangan</p>
+				</div>
+				<div class="icon">
+				<i class="fa fa-fw fa-plus-circle"></i>
 				</div>
 			</div>
 		</div>
-		<div class="clearfix visible-sm-block"></div>
+		<div class="col-lg-3 col-xs-6">
+			<div class="small-box bg-red">
+				<div class="inner">
+				<h3><small class="text-bold" style="color:white;"><?php echo 'Rp. '.number_format($potongan,0,',','.');?></small></h3>
 
-		<div class="col-md-3 col-sm-2 col-xs-12">
-			<div class="info-box">
-				<span class="info-box-icon bg-green"><i class="fa fa-fw fa-hand-scissors-o"></i></span>
-				<div class="info-box-content">
-					<span class="info-box-text">Potongan</span>
-					<span class="info-box-number"><?php echo 'Rp. &nbsp;&nbsp;'.number_format($potongan,0,',','.');?>
-						<small><br><?php echo '/ '.$month;?></small>
-					</span>
+				<p>Potongan</p>
+				</div>
+				<div class="icon">
+				<i class="fa fa-fw fa-hand-scissors-o"></i>
 				</div>
 			</div>
 		</div>
-		<div class="col-md-3 col-sm-2 col-xs-12">
-			<div class="info-box">
-				<span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
+		<div class="col-lg-3 col-xs-6">
+			<div class="small-box bg-green">
+				<div class="inner">
+				<h3><small class="text-bold" style="color:white;"><?php echo 'Rp. '.number_format($gaji,0,',','.');?></small></h3>
 
-				<div class="info-box-content">
-					<span class="info-box-text">Gaji</span>
-					<span class="info-box-number"><?php echo 'Rp. &nbsp;&nbsp;'.number_format($gaji,0,',','.');?>
-						<small><br><?php echo '/ '.$month;?></small>
-					</span>
+				<p>Gaji</p>
+				</div>
+				<div class="icon">
+				<i class="ion ion-ios-people-outline"></i>
 				</div>
 			</div>
 		</div>

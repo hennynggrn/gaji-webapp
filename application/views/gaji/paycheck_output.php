@@ -161,46 +161,28 @@
 											<td colspan="2">Honor</td>
 											<td>:</td>									
 											<td>Rp. &nbsp;<?php echo number_format($pegawai['honor'],0,',','.');?></td>
+											<input id="honor" type="hidden" value="<?php echo ($pegawai['honor'] != NULL) ? $pegawai['honor'] : 0;?>">
 										</tr>
 										<tr>
 											<td class="text-center">2</td>
-											<td colspan="2">Tunjangan Keluarga</td>
+											<td colspan="2">Keluarga</td>
 											<td>:</td>									
-											<td>Rp. &nbsp;<?php 
-												if (empty($pegawai['klg_hidup'])) {
-													$keluarga_val = 0;
-												} else {
-													$pasangan = 0;
-													$anak_pertama = 0;
-													$anak_kedua = 0;
-													if ($pegawai['klg_hidup'] != NULL) {
-														if (in_array('1', $pegawai['status_klg'])){
-															$pasangan = 1;
-														} 
-														if (in_array('2', $pegawai['status_klg'])) {
-															$anak_pertama = 1;
-														} 
-														if (in_array('3', $pegawai['status_klg'])) {
-															$anak_kedua = 1;
-														}
-													}
-													$keluarga_val = ($pegawai['honor']*$pasangan*$tunjangan['klg_psg'])+($pegawai['honor']*$anak_pertama*$tunjangan['klg_anak'])+($pegawai['honor']*$anak_kedua*$tunjangan['klg_anak']);
-												}
-												echo number_format($keluarga_val,0,',','.');
-											?>
-											</td>
+											<td>Rp. &nbsp;<?php echo number_format($tunjangan['keluarga'],0,',','.');?></td>
+											<input class="tunjangan" type="hidden" value="<?php echo $tunjangan['keluarga'];?>">
 										</tr>
 										<tr>
 											<td class="text-center">3</td>
-											<td colspan="2">Tunjangan Beras</td>
+											<td colspan="2">Beras</td>
 											<td>:</td>									
 											<td>Rp. &nbsp;<?php echo number_format($tunjangan['beras'],0,',','.');?></td>
+											<input class="tunjangan" type="hidden" value="<?php echo $tunjangan['beras'];?>">
 										</tr>
 										<tr>
 											<td class="text-center">4</td>
 											<td colspan="2">Jamsostek</td>
 											<td>:</td>									
 											<td>Rp. &nbsp;<?php echo number_format($tunjangan['jamsostek'],0,',','.');?></td>
+											<input class="tunjangan" type="hidden" value="<?php echo $tunjangan['jamsostek'];?>">
 										</tr>
 										<tr>
 											<td class="text-center">5</td>
@@ -216,33 +198,27 @@
 										</tr>
 										<?php 
 											if (!empty($jabatans)) {
-												foreach ($jabatans as $key => $jbt) { ?>
+												foreach ($jabatans as $key => $jabatan) { ?>
 													<tr>
 														<td  class="text-center"></td>
 														<td  class="text-center">-</td>
-														<td><?php echo $jbt['jabatan'];?></td>
+														<td><?php echo $jabatan['jabatan'];?></td>
 														<td>:</td>
-														<td>Rp. &nbsp;<?php echo number_format($jbt['nominal_jbt'],0,',','.');?></td>
+														<td>Rp. &nbsp;<?php echo number_format($jabatan['nominal_jbt'],0,',','.');?></td>
+														<input class="tunjangan" type="hidden" value="<?php echo $jabatan['nominal_jbt'];?>">
 													</tr>
-										<?php }
-												$jabatan_val = $pegawai['jabatan'];
-											} else {
-												$jabatan_val = 0;
-											}
-										?>								
+										<?php }} ?>								
 										<tr>
 											<td class="text-center">6</td>
 											<td colspan="2">Masa Kerja</td>
 											<td>:</td>
-											<td>Rp. &nbsp;<?php echo number_format($pegawai['nominal_mk'],0,',','.');?></td>
+											<td>Rp. &nbsp;<?php echo number_format($tunjangan['masakerja'],0,',','.');?></td>
+											<input class="tunjangan" type="hidden" value="<?php echo $tunjangan['masakerja'];?>">
 										</tr>
 										<tr class="text-bold">
 											<td class="text-center" colspan="3">Jumlah</td>
 											<td>:</td>
-											<td>Rp. &nbsp;<?php 
-												$hr_tunjangan_val = $pegawai['honor']+$keluarga_val+$tunjangan['beras']+$tunjangan['jamsostek']+$jabatan_val+$pegawai['nominal_mk'];
-												echo number_format($hr_tunjangan_val,0,',','.');?>
-											</td>
+											<td>Rp. &nbsp;<span id="hr_tunjangan"></span></td>
 										</tr>
 										<!-- Potongan -->
 										<tr>
@@ -255,89 +231,91 @@
 											<td colspan="2">Infaq</td>
 											<td>:</td>									
 											<td>Rp. &nbsp;<?php echo number_format($potongan['infaq'],0,',','.');?></td>
+											<input class="potongan" type="hidden" value="<?php echo $potongan['infaq'];?>">
 										</tr>
 										<tr>
 											<td class="text-center">2</td>
 											<td colspan="2">Sosial</td>
 											<td>:</td>									
 											<td>Rp. &nbsp;<?php echo number_format($potongan['sosial'],0,',','.');?></td>
+											<input class="potongan" type="hidden" value="<?php echo $potongan['sosial'];?>">
 										</tr>
 										<tr>
 											<td class="text-center">3</td>
-											<td colspan="2">Jasa Raharja</td>
+											<td colspan="2">PGRI</td>
 											<td>:</td>									
-											<td>Rp. &nbsp;<?php echo number_format($potongan['jsr'],0,',','.');?></td>
+											<td>Rp. &nbsp;<?php echo number_format($potongan['pgri'],0,',','.');?></td>
+											<input class="potongan" type="hidden" value="<?php echo $potongan['pgri'];?>">
 										</tr>
 										<tr>
 											<td class="text-center">4</td>
-											<td colspan="2">Jamsostek</td>
+											<td colspan="2">Jasa Raharja</td>
 											<td>:</td>									
-											<td>Rp. &nbsp;<?php echo number_format($potongan['jamsostek'],0,',','.');?></td>
+											<td>Rp. &nbsp;<?php echo number_format($potongan['jsr'],0,',','.');?></td>
+											<input class="potongan" type="hidden" value="<?php echo $potongan['jsr'];?>">
 										</tr>
 										<tr>
 											<td class="text-center">5</td>
-											<td colspan="2">Aisiyah</td>
+											<td colspan="2">Jamsostek</td>
 											<td>:</td>									
-											<td>Rp. &nbsp;<?php 
-											($pegawai['status_pegawai'] != 'P') ? $aisiyah_val = 0 : $aisiyah_val = $potongan['aisiyah'];
-											echo number_format($aisiyah_val,0,',','.');?></td>
+											<td>Rp. &nbsp;<?php echo number_format($potongan['jamsostek'],0,',','.');?></td>
+											<input class="potongan" type="hidden" value="<?php echo $potongan['jamsostek'];?>">
 										</tr>
 										<tr>
 											<td class="text-center">6</td>
+											<td colspan="2">Aisiyah</td>
+											<td>:</td>									
+											<td>Rp. &nbsp;<?php echo number_format($potongan['aisiyah'],0,',','.');?></td>
+											<input class="potongan" type="hidden" value="<?php echo $potongan['aisiyah'];?>">
+										</tr>
+										<tr>
+											<td class="text-center">7</td>
 											<td colspan="2">Koperasi Murni</td>
 											<td>:</td>									
 											<td>Rp. &nbsp;<?php 
-												if (!empty($pegawai['nominal_kop'])) {
-													$kop_val = $pegawai['nominal_kop'];
+												if (!empty($potongan['nominal_kop'])) {
+													$kop_val = $potongan['nominal_kop'];
 												} else {
 													$kop_val = 0;
 												}
 												echo number_format($kop_val,0,',','.');	
 											?></td>
+											<input class="potongan" type="hidden" value="<?php echo $kop_val;?>">
 										</tr>
 										<tr>
-											<td class="text-center">7</td>
+											<td class="text-center">8</td>
 											<td colspan="2">Bank Bina Drajat Warga</td>
 											<td>:</td>									
 											<td>Rp. &nbsp;<?php 
-												if (!empty($pegawai['nominal_bank'])) {
-													$bank_val = $pegawai['nominal_bank'];
+												if (!empty($potongan['nominal_bank'])) {
+													$bank_val = $potongan['nominal_bank'];
 												} else {
 													$bank_val = 0;
 												}
 												echo number_format($bank_val,0,',','.');	
 											?></td>
+											<input class="potongan" type="hidden" value="<?php echo $bank_val;?>">
 										</tr>
 										<tr class="text-bold">
 											<td class="text-center" colspan="3">Jumlah</td>
 											<td>:</td>
-											<td>Rp. &nbsp;<?php 
-												$potongan_val = $potongan['infaq']+$potongan['sosial']+$potongan['jsr']+$potongan['jamsostek']+$aisiyah_val+$kop_val+$bank_val;
-												echo number_format($potongan_val,0,',','.');
-											?></td>
+											<td>Rp. &nbsp;<span id="potongan"></span></td>
 										</tr>
 										<tr class="text-bold printbg" >
 											<td class="text-center" colspan="3">Terima Bersih</td>
 											<td>:</td>
-											<td>Rp. &nbsp;<?php 
-												$gaji = intval($hr_tunjangan_val)-intval($potongan_val);
-												echo number_format($gaji,0,',','.');
-											?></td>
+											<td>Rp. &nbsp;<span id="gaji"></span></td>
 										</tr>
 									</tbody>
 								</table>
 							</div>
 							<div class="col-lg-2"></div>
 						</div>
-						<div class="row">
-							<div class="col-xs-12"><br></div>
-						</div>
-						<div class="row">
+						<div class="row" style="margin-top: 10px;">
 							<div class="col-xs-2"></div>
 							<div class="col-xs-5"></div>
 							<div class="col-xs-5">
-								<h5>Yogyakarta, <?php echo $today_date;?></h5>
-								<br><br>
+								<h5 style="margin-bottom: 46px;">Yogyakarta, <?php echo $today_date;?></h5>
 								<h5>Juru bayar,</h5>
 								<h5 class="text-bold"><?php echo $bendahara['nama'];?></h5>
 							</div>
@@ -376,8 +354,55 @@
 		<!-- Editor -->
 		<script src="<?php echo base_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js');?>"></script>
 
+		<!-- Output Gaji -->
+		<script>
+			$(document).ready(function(){
+				let honor = $('#honor').val();		
+				let tunjangan = 0;
+				$('.tunjangan').each(function() {
+					tunjangan += Number($(this).val());
+				});
+				let hr_tunjangan = parseInt(honor) + parseInt(tunjangan);
+				$('#hr_tunjangan').text(number_format(hr_tunjangan, 0, ',', '.'));
+				
+				let potongan = 0;
+				$('.potongan').each(function() {
+					potongan += Number($(this).val());
+				});
+				$('#potongan').text(number_format(potongan, 0, ',', '.'));
+
+				let gaji = (parseInt(honor) + parseInt(tunjangan)) - (parseInt(potongan));
+				$('#gaji').text(number_format(gaji, 0, ',', '.'));
+			});
+
+			// Format number of nominal
+			function number_format (number, decimals, dec_point, thousands_sep) {
+				// Strip all characters but numerical ones.
+				number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
+				var n = !isFinite(+number) ? 0 : +number,
+					prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+					sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+					dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+					s = '',
+					toFixedFix = function (n, prec) {
+						var k = Math.pow(10, prec);
+						return '' + Math.round(n * k) / k;
+					};
+				// Fix for IE parseFloat(0.55).toFixed(0) = 0;
+				s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+				if (s[0].length > 3) {
+					s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+				}
+				if ((s[1] || '').length < prec) {
+					s[1] = s[1] || '';
+					s[1] += new Array(prec - s[1].length + 1).join('0');
+				}
+				return s.join(dec);
+			}
+		</script>
+		
 		<script>
 			window.print();
 		</script>
-  </body>
+  	</body>
 </html>

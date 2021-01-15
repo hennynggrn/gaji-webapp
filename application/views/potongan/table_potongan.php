@@ -20,6 +20,11 @@
 									<td><?php echo 'Rp. &nbsp;&nbsp;'.number_format($potongan['sosial'],0,',','.');?></td>
 								</tr>
 								<tr>
+									<th>PGRI</th>
+									<td>:</td>
+									<td><?php echo 'Rp. &nbsp;&nbsp;'.number_format($potongan['pgri'],0,',','.');?></td>
+								</tr>
+								<tr>
 									<th>Aisiyah</th>
 									<td>:</td>
 									<td><?php echo 'Rp. &nbsp;&nbsp;'.number_format($potongan['aisiyah'],0,',','.');?></td>

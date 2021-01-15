@@ -1100,7 +1100,8 @@
 	<!-- Output Gaji -->
 	<script>
 		$(document).ready(function(){
-			let honor = $('#gaji_honor').val();		
+			let honor = $('#honor_val').val();	
+			// alert(honor);	
 			// Hitung semua class tunjangan 
 			let tunjangan = 0;
 			$('.tunjangan').each(function() {

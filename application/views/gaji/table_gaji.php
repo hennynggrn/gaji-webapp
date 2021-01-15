@@ -73,41 +73,13 @@
 										?>
 									</td>
 									<td style="text-align: left; padding-left: 15px;">
-									<?php
-										$pasangan = 0;
-										$anak_pertama = 0;
-										$anak_kedua = 0;
-										if ($pegawai['klg_hidup'] != NULL) {
-											if (in_array('1', $pegawai['status_klg'])){
-												$pasangan = 1;
-											} 
-											if (in_array('2', $pegawai['status_klg'])) {
-												$anak_pertama = 1;
-											} 
-											if (in_array('3', $pegawai['status_klg'])) {
-												$anak_kedua = 1;
-											}
-										}
-										$keluarga_val = ($pegawai['honor']*$pasangan*$tunjangan['klg_psg'])+($pegawai['honor']*$anak_pertama*$tunjangan['klg_anak'])+($pegawai['honor']*$anak_kedua*$tunjangan['klg_anak']);
-										$tunjangan_val = $tunjangan['beras']+$tunjangan['jamsostek']+$keluarga_val+$pegawai['jabatan']+$pegawai['nominal_mk'];
-										echo 'Rp. &nbsp;&nbsp;'.number_format($tunjangan_val,0,',','.');
-									?>
+										<?php echo 'Rp. &nbsp;&nbsp;'.number_format($pegawai['tunjangan_val'],0,',','.'); ?>
 									</td>
 									<td style="text-align: left; padding-left: 15px;">
-									<?php 
-										($pegawai['status_pegawai'] != 'P') ? $aisiyah_val = 0 : $aisiyah_val = $potongan['aisiyah'];
-										(!empty($pegawai['nominal_kop'])) ? $pjm_kop = $pegawai['nominal_kop'] : $pjm_kop = 0;
-										(!empty($pegawai['nominal_bank'])) ? $pjm_bank = $pegawai['nominal_bank'] : $pjm_bank = 0;
-										$pinjaman = $pjm_kop+$pjm_bank;
-										$potongan_val = $potongan['sosial']+$potongan['infaq']+$potongan['jsr']+$aisiyah_val+$potongan['jamsostek']+$pinjaman;
-										echo 'Rp. &nbsp;&nbsp;'.number_format($potongan_val,0,',','.'); 
-									?>
+										<?php echo 'Rp. &nbsp;&nbsp;'.number_format($pegawai['potongan_val'],0,',','.'); ?>
 									</td>
 									<td style="text-align: left; padding-left: 15px;">
-									<?php 
-										$gaji = $honor_val+$tunjangan_val-$potongan_val;
-										echo 'Rp. &nbsp;&nbsp;'.number_format($gaji,0,',','.'); 
-									?>
+										<?php echo 'Rp. &nbsp;&nbsp;'.number_format($pegawai['gaji_bersih'],0,',','.'); ?>
 									</td>
 									<td>
 										<a href="<?php echo site_url('detail/'.$pegawai['id_pegawai']);?>" title="Detail" data-tooltip="tooltip" data-placement="top">

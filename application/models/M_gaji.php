@@ -69,7 +69,7 @@ class M_gaji extends CI_Model {
 			switch ($kode) {
 				case 'KOP':
 					$this->db->select('*, pjm.status status_pjm');
-					$this->db->join('pinjaman pjm', 'p.id_pegawai = pjm.id_pegawai AND pjm.kode_pinjaman = "'.$kode.'"', 'LEFT OUTER');
+					$this->db->join('pinjaman pjm', 'p.id_pegawai = pjm.id_pegawai AND pjm.kode_pinjaman = "'.$kode.'" AND p.id_pegawai != ""', 'LEFT OUTER');
 					$this->db->join('angsuran a', 'a.id_pinjaman = pjm.id_pinjaman', 'LEFT OUTER');
 					$this->db->group_by('p.id_pegawai');
 					$this->db->where('month(a.tanggal_kembali) = "'.$month.'" AND year(a.tanggal_kembali) = "'.$year.'" AND (a.status = 0 OR a.payOff_byGaji = 1)');

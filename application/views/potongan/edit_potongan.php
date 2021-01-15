@@ -24,6 +24,13 @@
 									</div>
 								</div>
 								<div class="form-group">
+									<label>PGRI</label>
+									<div class="input-group">
+										<span class="input-group-addon">Rp.</span>
+										<input class="form-control"  name="pgri" value="<?php echo $potongan['pgri'];?>" style="width: 100%;">
+									</div>
+								</div>
+								<div class="form-group">
 									<label>Aisiyah</label>
 									<div class="input-group">
 										<span class="input-group-addon">Rp.</span>

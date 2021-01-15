@@ -6,7 +6,7 @@ class M_pegawai extends CI_Model{
 	public function get_pegawai($id_pegawai = TRUE)
 	{
 		if ($id_pegawai != NULL) {
-			$this->db->select('p.*, mk.*');
+			$this->db->select('p.*, honor, mk.*');
 			$this->db->join('masakerja mk', 'p.masa_kerja = mk.id_masakerja', 'LEFT');
 			return $this->db->get_where('pegawai p', array('id_pegawai' => $id_pegawai));
 		} else {
