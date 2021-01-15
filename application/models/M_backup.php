@@ -125,32 +125,23 @@ class M_backup extends CI_Model
 
 	public function backup_gaji($gaji)
 	{
-		/* Backup gaji insert records monthly
+		/* Backup gaji insert records monthly 
 		*/
 		$month = date('m');
 		$year = date('Y');
 		$user = $this->session->userdata('user_id');
-
-		$this->db->where('month(created_at)', $month);
-		$this->db->where('year(created_at)', $year);
-		$query = $this->db->delete('b_gaji');
-		// var_dump($gaji);
-		if ($query) {
-			foreach ($gaji as $key => $value) {
-				$data = array(
-					'honor' => $value['honor_val'],
-					'tunjangan' => $value['tunjangan_val'],
-					'potongan' => $value['potongan_val'],
-					'gaji' => $value['gaji'],
-					'id_pegawai' => $value['id_pegawai'],
-					'created_by' => $user,
-				);
-				$this->db->insert('b_gaji', $data);
-				// var_dump($data);
-			}
+		foreach ($gaji['pegawais'] as $key => $value) {
+			($value['honor'] != NULL) ? $honor = $value['honor'] : $honor = 0;
+			$data = array(
+				'honor' => $honor,
+				'tunjangan' => $value['tunjangan_val'],
+				'potongan' => $value['potongan_val'],
+				'gaji' => $value['gaji_bersih'],
+				'id_pegawai' => $value['id_pegawai'],
+				'created_by' => $user,
+			);
+			$this->db->insert('b_gaji', $data);
 		}
-		
-		
 	}
 }
 

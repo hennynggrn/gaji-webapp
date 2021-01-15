@@ -90,7 +90,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url', 'dateConvert_helper', 'userLevel_helper', 'getDate_helper', 'switchStatusPegawai_helper');
+$autoload['helper'] = array('url', 'dateConvert_helper', 'userLevel_helper', 'switchStatusPegawai_helper');
 
 /*
 | -------------------------------------------------------------------
@@ -133,4 +133,4 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('M_setting', 'M_backup', 'M_user','M_doors','M_pegawai', 'M_keluarga', 'M_jabatan', 'M_honor', 'M_tunjangan', 'M_masakerja', 'M_potongan', 'M_pinjaman', 'M_gaji');
+$autoload['model'] = array('M_setting', 'M_laporan', 'M_backup', 'M_user','M_doors','M_pegawai', 'M_keluarga', 'M_jabatan', 'M_honor', 'M_tunjangan', 'M_masakerja', 'M_potongan', 'M_pinjaman', 'M_gaji');

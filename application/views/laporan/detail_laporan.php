@@ -71,35 +71,44 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-12 pull-left">
 			<div class="box box-primary">
-				<div class="box-header"></div>
 				<div class="box-body">
-					<?php foreach ($gajis as $key => $gaji) { 
-						$id_date = date('Y-m', strtotime($gaji['created_at']));
-						$date = month(date('Y-m-d', strtotime($gaji['created_at']))).' '.date('Y', strtotime($gaji['created_at']));?>
-						<div class="col-md-12">
-							<div class="box bg-blue">
-								<div class="box-header">
-									<h3 class="box-title text-bold pull-left" style="color:white;"><?php echo $date;?></h3>
-									<span class="pull-right">
-										<a style="color:white;" href="<?php echo site_url('laporan/detail/'.$id_date);?>" title="Detail" data-tooltip="tooltip" data-placement="top">
-											<i class="fa fa-fw fa-info-circle"></i>
-										</a>
-										&nbsp;&nbsp;&nbsp;
-										<a style="color:white;" href="<?php echo site_url('laporan/pratinjau/'.$id_date);?>" title="Pratinjau" data-tooltip="tooltip" data-placement="top">
-											<i class="fa fa-fw fa-file-text-o"></i>
-										</a>
-										&nbsp;&nbsp;&nbsp;
-										<a style="color:white;" href="<?php echo site_url('laporan/cetak/'.$id_date);?>" title="Cetak" data-tooltip="tooltip" data-placement="top">
-											<i class="fa fa-fw fa-print"></i>
-										</a>
-									</span>
-								</div>
-							</div>
-						</div>
-					<?php } ?>
+					<table class="table table-bordered table-hover text-center">
+						<thead>
+							<th>No</th>
+							<th>Nama</th>
+							<th>Honorarium</th>
+							<th>Jumlah Tunjangan</th>
+							<th>Jumlah Potongan</th>
+							<th>Gaji Bersih</th>
+							<th>Menu</th>
+						</thead>
+						<?php
+							// $no=1; foreach ($tampil as $key) {
+						?>
+						<tbody>
+							<tr>
+								<td></td>
+								<td style="text-align: left; padding-left: 15px;"></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td>
+									<a href="<?php echo site_url('gaji/detail/1');?>" title="Detail" data-tooltip="tooltip" data-placement="top">
+										<span class="badge bg-green"><i class="fa fa-fw fa-info-circle"></i></span>
+									</a>
+									<a href="<?php echo site_url('gaji/cetak/1');?>" title="Cetak" data-tooltip="tooltip" data-placement="top">
+										<span class="badge bg-blue"><i class="fa fa-fw fa-print"></i></span>
+									</a>
+								</td>
+							</tr>
+						</tbody>
+						<?php ?>
+					</table>
 				</div>
+				<!-- /.box-body -->
 				<div class="box-footer clearfix">
 					<ul class="pagination pagination-sm no-margin pull-right">
 						<li><a href="#">&laquo;</a></li>

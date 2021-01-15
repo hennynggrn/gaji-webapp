@@ -1,5 +1,10 @@
 <?php 
 
+function getDateZone()
+{
+	date_default_timezone_set('Asia/Jakarta');
+}
+
 function fullConvertIDN($date, $short = FALSE, $day = TRUE){
 	$day_name = date('l', strtotime($date));
 	switch ($day_name) {

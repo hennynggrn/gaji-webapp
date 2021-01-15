@@ -2,7 +2,7 @@
 
 class Gaji_pegawai {
     
-	function get_data($id_pegawai)
+	function get_data($id_pegawai) 
 	{               
 		$this->CI =& get_instance();
 

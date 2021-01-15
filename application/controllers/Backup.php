@@ -1,6 +1,6 @@
 <?php
 
-class Backup extends CI_Controller
+class Backup extends CI_Controller 
 {
 	public function index()
 	{
@@ -16,7 +16,7 @@ class Backup extends CI_Controller
 				$res['masakerja'] = $this->M_backup->backup_masakerja();
 				$res['pegawais'] = $this->M_backup->backup_pegawai($id_tunjangan);
 				$res['keluargas'] = $this->M_backup->backup_keluarga();
-				$gaji = $this->gaji_pegawai_all($id_pegawai = NULL);
+				$gaji = $this->gaji_pegawai->get_data($id_pegawai = NULL);
 				$res['gaji'] = $this->M_backup->backup_gaji($gaji);
 				if ($res) {
 					$this->session->set_flashdata('message_success', 'Laporan berhasil dibuat! Cek di menu laporan');
@@ -25,6 +25,7 @@ class Backup extends CI_Controller
 					$this->session->set_flashdata('message_failed', 'Laporan gagal dibuat! Silahkan coba lagi');
 					redirect('table');
 				}
+				// var_dump($gaji);
 			} else {
 				redirect('table');
 			}
