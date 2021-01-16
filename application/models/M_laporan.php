@@ -22,6 +22,16 @@ class M_laporan extends CI_Model
 		}
 		return $data;
 	}
+
+	public function get_tunjangan($id_date)
+	{
+		$date = explode('-', $id_date);
+		$month = $date[1];
+		$year = year($id_date);
+		$this->db->select('bg.*, p.nama');
+		$this->db->join('pegawai p', 'p.id_pegawai = bg.id_pegawai', 'LEFT');
+		return $this->db->get_where('b_gaji bg', array('month(bg.created_at)' => $month, 'year(bg.created_at)' => $year));
+	}
 }
 
 ?>

@@ -87,15 +87,13 @@
 							<th>No</th>
 							<th>Nama</th>
 							<th>Honorarium</th>
-							<th>Jumlah Tunjangan</th>
-							<th>Jumlah Potongan</th>
+							<th>Tunjangan</th>
+							<th>Potongan</th>
 							<th>Gaji Bersih</th>
 							<th>Menu</th>
 						</thead>
-						<?php
-							$no=1; foreach ($gajis as $key => $gaji) {
-						?>
 						<tbody>
+							<?php $no=1; foreach ($gajis as $key => $gaji) { ?>
 							<tr>
 								<td><?php echo $no++;?></td>
 								<td style="text-align: left; padding-left: 15px;"><?php echo $gaji['nama'];?></td>
@@ -103,24 +101,12 @@
 								<td style="text-align: left;">Rp. <?php echo number_format($gaji['tunjangan'], 0, ',','.');?></td>
 								<td style="text-align: left;">Rp. <?php echo number_format($gaji['potongan'], 0, ',','.');?></td>
 								<td style="text-align: left;">Rp. <?php echo number_format($gaji['gaji'], 0, ',','.');?></td>
-								<td>
-								<a style="color: #444A4F;" href="<?php echo site_url('laporan/gaji/edit/'.$gaji['id_gaji']);?>" title="Edit" data-tooltip="tooltip" data-placement="top">
+								<td><a style="color: #444A4F;" href="<?php echo site_url('laporan/gaji/edit/'.$gaji['id_gaji']);?>" title="Edit" data-tooltip="tooltip" data-placement="top">
 									<i class="fa fa-fw fa-pencil-square-o"></i>
-								</a>
-								<!-- <div class="btn-group">
-									<a type="button" class="category dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-										<i class="text-default glyphicon glyphicon-option-vertical"></i>
-									</a>
-									
-									<ul class="dropdown-menu">
-										<li><a href="<?php echo site_url('gaji/detail/1');?>">Detail</a></li>
-										<li><a href="<?php echo site_url('gaji/cetak/1');?>">Cetak</a></li>
-									</ul>
-								</div> -->
-								</td>
+								</a></td>
 							</tr>
+							<?php } ?>
 						</tbody>
-						<?php } ?>
 					</table>
 				</div>
 				<!-- /.box-body -->
@@ -140,7 +126,7 @@
 				<div class="box-header with-border">
 					<h3 class="box-title">Tunjangan</h3>
 					<div class="box-tools pull-right">
-						<a style="color: #444A4F;" href="<?php echo site_url('laporan/gaji/edit/'.$gaji['id_gaji']);?>" class="btn btn-box-tool" title="Edit" data-tooltip="tooltip" data-placement="top">
+						<a style="color: #444A4F;" href="<?php echo site_url('laporan/tunjangan/edit/'.$gaji['id_gaji']);?>" class="btn btn-box-tool" title="Edit Tunjangan" data-tooltip="tooltip" data-placement="top">
 							<i class="fa fa-fw fa-pencil-square-o"></i>
 						</a>
 						<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Tunjangan">
@@ -170,7 +156,7 @@
 				<div class="box-header with-border">
 					<h3 class="box-title">Potongan</h3>
 					<div class="box-tools pull-right">
-						<a style="color: #444A4F;" href="<?php echo site_url('laporan/gaji/edit/'.$gaji['id_gaji']);?>" class="btn btn-box-tool" title="Edit" data-tooltip="tooltip" data-placement="top">
+						<a style="color: #444A4F;" href="<?php echo site_url('laporan/gaji/edit/'.$gaji['id_gaji']);?>" class="btn btn-box-tool" title="Edit Potongan" data-tooltip="tooltip" data-placement="top">
 							<i class="fa fa-fw fa-pencil-square-o"></i>
 						</a>
 						<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Potongan">
