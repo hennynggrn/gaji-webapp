@@ -136,17 +136,40 @@
 				</div>
 				<div class="box-body">
 					<table class="table table-hover text-center">
-						<?php
-							// $no=1; foreach ($tampil as $key) {
-						?>
 						<tbody>
 							<tr>
 								<th>Beras</th>
 								<th>:</th>
-								<td>Rp. 50.000</td>
+								<td><?php echo $tunjangan['beras'];?></td>
+							</tr>
+							<tr>
+								<th>Jamsostek</th>
+								<th>:</th>
+								<td><?php echo $tunjangan['jamsostek'];?></td>
+							</tr>
+							<tr>
+								<th>Pasangan</th>
+								<th>:</th>
+								<td><?php echo $tunjangan['klg_psg'];?></td>
+							</tr>
+							<tr>
+								<th>Anak</th>
+								<th>:</th>
+								<td><?php echo $tunjangan['klg_anak'];?></td>
+							</tr>
+							<tr>
+								<th>Jabatan</th>
+								<th>:</th>
+								<td><?php echo $tunjangan['jabatan'];?></td>
+							</tr>
+							<tr>
+								<th>Masa Kerja</th>
+								<th>:</th>
+								<td><a href="" title="Detail" data-tooltip="tooltip" data-toggle="modal" data-target="#detail<?php echo $user['id'];?>" data-placement="top">
+									<span class="badge bg-blue"><i class="fa fa-fw fa-arrow-circle-right"></i></span>
+								</a></td>
 							</tr>
 						</tbody>
-						<?php ?>
 					</table>
 				</div>
 			</div>

@@ -23,14 +23,18 @@ class M_laporan extends CI_Model
 		return $data;
 	}
 
-	public function get_tunjangan($id_date)
+	public function get_tunjangan($id_date, $tunjangan)
 	{
 		$date = explode('-', $id_date);
 		$month = $date[1];
 		$year = year($id_date);
-		$this->db->select('bg.*, p.nama');
-		$this->db->join('pegawai p', 'p.id_pegawai = bg.id_pegawai', 'LEFT');
-		return $this->db->get_where('b_gaji bg', array('month(bg.created_at)' => $month, 'year(bg.created_at)' => $year));
+		if ($tunjangan != NULL) {
+			$this->db->select('bt.*');
+			$this->db->where('(month(bt.created_at) = "'.$month.'" AND year(bt.created_at) = "'.$year.'")');
+		} else {
+			$this->db->select('bt.*, max(created_at)');
+		}
+		return $this->db->get('b_tunjangan bt');
 	}
 }
 

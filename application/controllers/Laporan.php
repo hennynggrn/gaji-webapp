@@ -20,9 +20,13 @@ class Laporan extends CI_Controller {
 		$data['title'] = 'Detail Laporan';
 		$data['desc'] = month($id_date).' '.year($id_date);
 		$data['gajis'] = $this->M_laporan->get_gaji($id_date)->result_array();
-		$data['tunjangan'] = $this->M_laporan->get_tunjangan($id_date)->row_array();
+		$data['tunjangan'] = $this->M_laporan->get_tunjangan($id_date, $tunjangan = TRUE)->row_array();
+		if ($data['tunjangan'] == NULL) {
+			$tunjangan = NULL;
+			$data['tunjangan'] = $this->M_laporan->get_tunjangan($id_date, $tunjangan)->row_array();
+		}
 		$this->template->load('index','laporan/detail_laporan', $data);
-		// var_dump($data['gajis']);
+		var_dump($data['tunjangan']);
 	}
 }
 ?>
