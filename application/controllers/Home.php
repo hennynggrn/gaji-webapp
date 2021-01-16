@@ -22,7 +22,7 @@ class Home extends CI_Controller {
 				$data['gaji'] += $value['gaji_bersih'];
 			}
 			$this->template->load('index','pages/home', $data);
-			var_dump($data['pegawais']);
+			// var_dump($data['pegawais']);
 		}
 	}	
 }
