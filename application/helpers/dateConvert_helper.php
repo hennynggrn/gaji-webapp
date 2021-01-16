@@ -64,43 +64,6 @@ function fullConvertIDN($date, $short = FALSE, $day = TRUE){
 	}
 }
 
-function month($date){
-	$month = array(
-		1 => 'Januari',
-		'Februari',
-		'Maret',
-		'April',
-		'Mei',
-		'Juni',
-		'Juli',
-		'Agustus',
-		'September',
-		'Oktober',
-		'November',
-		'Desember'
-	);
-	$explode = explode('-', $date);
-	return $month[(int)$explode[1]];
-}
-
-function getMonth(){
-	$month = array(
-		1 => 'Januari',
-		'Februari',
-		'Maret',
-		'April',
-		'Mei',
-		'Juni',
-		'Juli',
-		'Agustus',
-		'September',
-		'Oktober',
-		'November',
-		'Desember'
-	);
-	return $month;
-}
-
 function day($date){
 	$day_name = date('l', strtotime($date));
 	switch ($day_name) {
@@ -127,6 +90,48 @@ function day($date){
 			break;
 	}
 	return $day_name;
+}
+
+function month($date){
+	$month = array(
+		1 => 'Januari',
+		'Februari',
+		'Maret',
+		'April',
+		'Mei',
+		'Juni',
+		'Juli',
+		'Agustus',
+		'September',
+		'Oktober',
+		'November',
+		'Desember'
+	);
+	$explode = explode('-', $date);
+	return $month[(int)$explode[1]];
+}
+
+function year($date){
+	$year = explode('-', $date);
+	return $year[0];
+}
+
+function getMonth(){
+	$month = array(
+		1 => 'Januari',
+		'Februari',
+		'Maret',
+		'April',
+		'Mei',
+		'Juni',
+		'Juli',
+		'Agustus',
+		'September',
+		'Oktober',
+		'November',
+		'Desember'
+	);
+	return $month;
 }
 
 ?>

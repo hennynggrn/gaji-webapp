@@ -2,7 +2,7 @@
 <section class="content">
 	<div class="row">
 		<div class="col-md-12">
-			<div class="box box-primary">
+			<div class="box box-info">
 				<div class="box-header with-border">
 					<h3 class="box-title">Pencarian Cepat</h3>
 					<div class="box-tools pull-right">
@@ -21,7 +21,7 @@
 								</button>
 							</span>
 							<div class="input-group-btn">
-								<button	button type="button" class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">More Filter</button>
+								<button	button type="button" class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">More Filter</button>
 							</div>
 						</div>
 					</form>
@@ -75,9 +75,9 @@
 			<div class="box box-primary">
 				<div class="box-header"></div>
 				<div class="box-body">
-					<?php foreach ($gajis as $key => $gaji) { 
-						$id_date = date('Y-m', strtotime($gaji['created_at']));
-						$date = month(date('Y-m-d', strtotime($gaji['created_at']))).' '.date('Y', strtotime($gaji['created_at']));?>
+					<?php foreach ($laporans as $key => $laporan) { 
+						$id_date = date('Y-m', strtotime($laporan['created_at']));
+						$date = month(date('Y-m-d', strtotime($laporan['created_at']))).' '.date('Y', strtotime($laporan['created_at']));?>
 						<div class="col-md-12">
 							<div class="box bg-blue">
 								<div class="box-header">
@@ -87,11 +87,11 @@
 											<i class="fa fa-fw fa-info-circle"></i>
 										</a>
 										&nbsp;&nbsp;&nbsp;
-										<a style="color:white;" href="<?php echo site_url('laporan/pratinjau/'.$id_date);?>" title="Pratinjau" data-tooltip="tooltip" data-placement="top">
+										<a style="color:white;" href="<?php echo site_url('laporan/preview/'.$id_date);?>" title="Pratinjau" data-tooltip="tooltip" data-placement="top">
 											<i class="fa fa-fw fa-file-text-o"></i>
 										</a>
 										&nbsp;&nbsp;&nbsp;
-										<a style="color:white;" href="<?php echo site_url('laporan/cetak/'.$id_date);?>" title="Cetak" data-tooltip="tooltip" data-placement="top">
+										<a style="color:white;" href="<?php echo site_url('laporan/print/'.$id_date);?>" title="Cetak" data-tooltip="tooltip" data-placement="top">
 											<i class="fa fa-fw fa-print"></i>
 										</a>
 									</span>

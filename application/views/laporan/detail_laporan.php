@@ -2,7 +2,7 @@
 <section class="content">
 	<div class="row">
 		<div class="col-md-12">
-			<div class="box box-primary">
+			<div class="box box-info">
 				<div class="box-header with-border">
 					<h3 class="box-title">Pencarian Cepat</h3>
 					<div class="box-tools pull-right">
@@ -21,7 +21,7 @@
 								</button>
 							</span>
 							<div class="input-group-btn">
-								<button	button type="button" class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">More Filter</button>
+								<button	button type="button" class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">More Filter</button>
 							</div>
 						</div>
 					</form>
@@ -71,8 +71,16 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-12 pull-left">
+		<div class="col-md-9 pull-left">
 			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title">Gaji Pegawai</h3>
+					<div class="box-tools pull-right">
+						<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Gaji Pegawai">
+							<i class="fa fa-minus"></i>
+						</button>
+					</div>
+				</div>
 				<div class="box-body">
 					<table class="table table-bordered table-hover text-center">
 						<thead>
@@ -85,27 +93,34 @@
 							<th>Menu</th>
 						</thead>
 						<?php
-							// $no=1; foreach ($tampil as $key) {
+							$no=1; foreach ($gajis as $key => $gaji) {
 						?>
 						<tbody>
 							<tr>
-								<td></td>
-								<td style="text-align: left; padding-left: 15px;"></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
+								<td><?php echo $no++;?></td>
+								<td style="text-align: left; padding-left: 15px;"><?php echo $gaji['nama'];?></td>
+								<td style="text-align: left;">Rp. <?php echo number_format($gaji['honor'], 0, ',','.');?></td>
+								<td style="text-align: left;">Rp. <?php echo number_format($gaji['tunjangan'], 0, ',','.');?></td>
+								<td style="text-align: left;">Rp. <?php echo number_format($gaji['potongan'], 0, ',','.');?></td>
+								<td style="text-align: left;">Rp. <?php echo number_format($gaji['gaji'], 0, ',','.');?></td>
 								<td>
-									<a href="<?php echo site_url('gaji/detail/1');?>" title="Detail" data-tooltip="tooltip" data-placement="top">
-										<span class="badge bg-green"><i class="fa fa-fw fa-info-circle"></i></span>
+								<a style="color: #444A4F;" href="<?php echo site_url('laporan/gaji/edit/'.$gaji['id_gaji']);?>" title="Edit" data-tooltip="tooltip" data-placement="top">
+									<i class="fa fa-fw fa-pencil-square-o"></i>
+								</a>
+								<!-- <div class="btn-group">
+									<a type="button" class="category dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+										<i class="text-default glyphicon glyphicon-option-vertical"></i>
 									</a>
-									<a href="<?php echo site_url('gaji/cetak/1');?>" title="Cetak" data-tooltip="tooltip" data-placement="top">
-										<span class="badge bg-blue"><i class="fa fa-fw fa-print"></i></span>
-									</a>
+									
+									<ul class="dropdown-menu">
+										<li><a href="<?php echo site_url('gaji/detail/1');?>">Detail</a></li>
+										<li><a href="<?php echo site_url('gaji/cetak/1');?>">Cetak</a></li>
+									</ul>
+								</div> -->
 								</td>
 							</tr>
 						</tbody>
-						<?php ?>
+						<?php } ?>
 					</table>
 				</div>
 				<!-- /.box-body -->
@@ -119,6 +134,73 @@
 					</ul>
 				</div>
 			</div>
+		</div>
+		<div class="col-md-3 pull-right">
+			<div class="box box-warning">
+				<div class="box-header with-border">
+					<h3 class="box-title">Tunjangan</h3>
+					<div class="box-tools pull-right">
+						<a style="color: #444A4F;" href="<?php echo site_url('laporan/gaji/edit/'.$gaji['id_gaji']);?>" class="btn btn-box-tool" title="Edit" data-tooltip="tooltip" data-placement="top">
+							<i class="fa fa-fw fa-pencil-square-o"></i>
+						</a>
+						<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Tunjangan">
+							<i class="fa fa-minus"></i>
+						</button>
+					</div>
+				</div>
+				<div class="box-body">
+					<table class="table table-hover text-center">
+						<?php
+							// $no=1; foreach ($tampil as $key) {
+						?>
+						<tbody>
+							<tr>
+								<th>Beras</th>
+								<th>:</th>
+								<td>Rp. 50.000</td>
+							</tr>
+						</tbody>
+						<?php ?>
+					</table>
+				</div>
+			</div>
+		<!-- </div> -->
+		<!-- <div class="col-md-3 pull-right"> -->
+			<div class="box box-danger">
+				<div class="box-header with-border">
+					<h3 class="box-title">Potongan</h3>
+					<div class="box-tools pull-right">
+						<a style="color: #444A4F;" href="<?php echo site_url('laporan/gaji/edit/'.$gaji['id_gaji']);?>" class="btn btn-box-tool" title="Edit" data-tooltip="tooltip" data-placement="top">
+							<i class="fa fa-fw fa-pencil-square-o"></i>
+						</a>
+						<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Potongan">
+							<i class="fa fa-minus"></i>
+						</button>
+					</div>
+				</div>
+				<div class="box-body">
+					<table class="table table-hover text-center">
+						<?php
+							// $no=1; foreach ($tampil as $key) {
+						?>
+						<tbody>
+							<tr>
+								<th>Beras</th>
+								<th>:</th>
+								<td>Rp. 50.000</td>
+							</tr>
+						</tbody>
+						<?php ?>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<a onclick="history.go(-1);" class="pull-left btn btn-default"><i class="fa fa-fw fa-arrow-left"></i>&nbsp;&nbsp;  Kembali</a>
+			<span class="pull-right ">
+				<a href="<?php echo site_url('laporan/preview/'.$id_date);?>" class="btn bg-orange"><i class="fa fa-fw fa-file-text-o"></i>&nbsp;&nbsp;  Pratinjau</a>
+				<a href="<?php echo site_url('laporan/print/'.$id_date);?>" class="btn bg-blue"><i class="fa fa-fw fa-print"></i>&nbsp;&nbsp;  Cetak</a>
+			</span>
 		</div>
 	</div>
 </section>

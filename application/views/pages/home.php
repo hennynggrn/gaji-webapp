@@ -53,7 +53,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<div class="box  box-primary">
+			<div class="box  box-info">
 				<div class="box-header with-border">
 					<h2 class="box-title">Pencarian Cepat Gaji Pegawai</h2>
 				</div>
@@ -67,7 +67,7 @@
 							</button>
 						</span>
 						<div class="input-group-btn">
-							<button	button type="button" class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">More Filter</button>
+							<button	button type="button" class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">More Filter</button>
 						</div>
 					</div>
 					<div class="collapse" id="collapseExample" style="margin-left: 10px; margin-right: 10px;">
