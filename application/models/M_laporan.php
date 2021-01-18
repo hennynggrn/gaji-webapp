@@ -52,7 +52,7 @@ class M_laporan extends CI_Model
 			ORDER BY 
 				created_at DESC
 		');
-		return $data;e
+		return $data;
 	}
 }
 
