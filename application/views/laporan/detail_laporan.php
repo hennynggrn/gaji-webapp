@@ -126,51 +126,69 @@
 				<div class="box-header with-border">
 					<h3 class="box-title">Tunjangan</h3>
 					<div class="box-tools pull-right">
-						<a style="color: #444A4F;" href="<?php echo site_url('laporan/tunjangan/edit/'.$gaji['id_gaji']);?>" class="btn btn-box-tool" title="Edit Tunjangan" data-tooltip="tooltip" data-placement="top">
+						<button style="color: #444A4F;" class="btn btn-box-tool" title="Edit Tunjangan" data-tooltip="tooltip" data-placement="top">
 							<i class="fa fa-fw fa-pencil-square-o"></i>
-						</a>
+						</button>
 						<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Tunjangan">
 							<i class="fa fa-minus"></i>
 						</button>
 					</div>
 				</div>
 				<div class="box-body">
-					<table class="table table-hover text-center">
+					<table class="table table-hover text-left">
 						<tbody>
 							<tr>
 								<th>Beras</th>
 								<th>:</th>
-								<td><?php echo $tunjangan['beras'];?></td>
+								<td>Rp. <?php echo number_format($tunjangan['beras'], 0, ',','.');?></td>
 							</tr>
 							<tr>
 								<th>Jamsostek</th>
 								<th>:</th>
-								<td><?php echo $tunjangan['jamsostek'];?></td>
+								<td>Rp. <?php echo number_format($tunjangan['jamsostek'], 0, ',','.');?></td>
 							</tr>
 							<tr>
 								<th>Pasangan</th>
 								<th>:</th>
-								<td><?php echo $tunjangan['klg_psg'];?></td>
+								<td><?php echo $tunjangan['klg_psg']*100;?> %</td>
 							</tr>
 							<tr>
 								<th>Anak</th>
 								<th>:</th>
-								<td><?php echo $tunjangan['klg_anak'];?></td>
+								<td><?php echo $tunjangan['klg_anak']*100;?> %</td>
 							</tr>
 							<tr>
 								<th>Jabatan</th>
 								<th>:</th>
-								<td><?php echo $tunjangan['jabatan'];?></td>
+								<td>Rp. <?php echo number_format($tunjangan['jabatan'], 0, ',','.');?></td>
 							</tr>
 							<tr>
 								<th>Masa Kerja</th>
 								<th>:</th>
-								<td><a href="" title="Detail" data-tooltip="tooltip" data-toggle="modal" data-target="#detail<?php echo $user['id'];?>" data-placement="top">
-									<span class="badge bg-blue"><i class="fa fa-fw fa-arrow-circle-right"></i></span>
+								<td><a role="button" title="Tabel Masa Kerja" data-tooltip="tooltip" data-toggle="modal" data-target="#tableMK" data-placement="top">
+									<i class="fa fa-fw fa-table"></i> <small>Tabel</small>
 								</a></td>
 							</tr>
 						</tbody>
 					</table>
+				</div>
+			</div>
+			<div class="modal fade" id="tableMK" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel">Tabel Masa Kerja</h4>
+						</div>
+						<div class="modal-body">
+							<p>
+								table masakerja
+							</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Tutup</button>
+						</div>
+					</div>
 				</div>
 			</div>
 		<!-- </div> -->
@@ -179,28 +197,70 @@
 				<div class="box-header with-border">
 					<h3 class="box-title">Potongan</h3>
 					<div class="box-tools pull-right">
-						<a style="color: #444A4F;" href="<?php echo site_url('laporan/gaji/edit/'.$gaji['id_gaji']);?>" class="btn btn-box-tool" title="Edit Potongan" data-tooltip="tooltip" data-placement="top">
+						<button style="color: #444A4F;" class="btn btn-box-tool" title="Catatan Potongan" data-tooltip="tooltip" data-placement="top" data-target="#notePotongan" data-toggle="modal">
+							<i class="fa fa-fw fa-info-circle"></i>
+						</button>
+						<button style="color: #444A4F;" class="btn btn-box-tool" title="Edit Potongan" data-tooltip="tooltip" data-placement="top">
 							<i class="fa fa-fw fa-pencil-square-o"></i>
-						</a>
+						</button>
 						<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Potongan">
 							<i class="fa fa-minus"></i>
 						</button>
 					</div>
 				</div>
 				<div class="box-body">
-					<table class="table table-hover text-center">
-						<?php
-							// $no=1; foreach ($tampil as $key) {
-						?>
+					<table class="table table-hover text-left">
 						<tbody>
 							<tr>
-								<th>Beras</th>
+								<th>Infaq</th>
 								<th>:</th>
-								<td>Rp. 50.000</td>
+								<td>Rp. <?php echo number_format($potongan['infaq'], 0, ',','.');?></td>
+							</tr>
+							<tr>
+								<th>Sosial</th>
+								<th>:</th>
+								<td>Rp. <?php echo number_format($potongan['sosial'], 0, ',','.');?></td>
+							</tr>
+							<tr>
+								<th>PGRI</th>
+								<th>:</th>
+								<td>Rp. <?php echo number_format($potongan['pgri'], 0, ',','.');?></td>
+							</tr>
+							<tr>
+								<th>Aisiyah</th>
+								<th>:</th>
+								<td>Rp. <?php echo number_format($potongan['aisiyah'], 0, ',','.');?></td>
+							</tr>
+							<tr>
+								<th>Jasa Raharja</th>
+								<th>:</th>
+								<td>Rp. <?php echo number_format($potongan['jsr'], 0, ',','.');?></td>
+							</tr>
+							<tr>
+								<th>Jamsostek</th>
+								<th>:</th>
+								<td>Rp. <?php echo number_format($potongan['jamsostek'], 0, ',','.');?></td>
 							</tr>
 						</tbody>
-						<?php ?>
 					</table>
+				</div>
+			</div>
+			<div class="modal fade" id="notePotongan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel">Catatan Potongan</h4>
+						</div>
+						<div class="modal-body">
+							<p>
+								<?php echo $potongan['ket'];?>
+							</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Tutup</button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

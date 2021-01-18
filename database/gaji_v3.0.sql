@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 17 Jan 2021 pada 16.17
+-- Waktu pembuatan: 16 Jan 2021 pada 09.05
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.4.9
 
@@ -343,7 +343,6 @@ INSERT INTO `b_pegawai` (`id_b_pegawai`, `id_pegawai`, `nbm`, `nama`, `foto`, `t
 CREATE TABLE `b_potongan` (
   `id_potongan` int(11) NOT NULL,
   `sosial` int(11) NOT NULL,
-  `pgri` int(11) NOT NULL,
   `infaq` int(11) NOT NULL,
   `jsr` int(11) NOT NULL,
   `aisiyah` int(11) DEFAULT NULL,
@@ -359,9 +358,9 @@ CREATE TABLE `b_potongan` (
 -- Dumping data untuk tabel `b_potongan`
 --
 
-INSERT INTO `b_potongan` (`id_potongan`, `sosial`, `pgri`, `infaq`, `jsr`, `aisiyah`, `jamsostek`, `ket`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
-(1, 10000, 5000, 5000, 10000, 11000, 66500, '<p></p><ul><li>Bu Santi sakit (dana sosial jadi 10 rb)</li></ul><p></p>', '2020-11-03 05:24:57', 10, '2021-01-17 14:47:47', 0),
-(2, 10000, 5000, 5000, 10000, 11000, 66500, '<p></p><ul><li>Bu Santi sakit (dana sosial jadi 10 rb)</li></ul><p></p>', '2020-10-03 05:24:57', 10, '2021-01-17 14:47:55', 0);
+INSERT INTO `b_potongan` (`id_potongan`, `sosial`, `infaq`, `jsr`, `aisiyah`, `jamsostek`, `ket`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
+(1, 10000, 5000, 10000, 11000, 66500, '<p></p><ul><li>Bu Santi sakit (dana sosial jadi 10 rb)</li></ul><p></p>', '2020-11-03 05:24:57', 10, '2021-01-16 07:23:53', 0),
+(2, 10000, 5000, 10000, 11000, 66500, '<p></p><ul><li>Bu Santi sakit (dana sosial jadi 10 rb)</li></ul><p></p>', '2020-10-03 05:24:57', 10, '2021-01-16 07:23:46', 0);
 
 -- --------------------------------------------------------
 
@@ -387,9 +386,7 @@ CREATE TABLE `b_tunjangan` (
 --
 
 INSERT INTO `b_tunjangan` (`id_tunjangan`, `beras`, `jamsostek`, `klg_psg`, `klg_anak`, `jabatan`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
-(1, 80000, 400000, 0.05, 0.025, 25000, '2020-12-03 05:24:57', 10, '2021-01-16 07:20:49', NULL),
-(2, 80000, 400000, 0.05, 0.025, 25000, '2020-11-16 08:20:22', 15, '2021-01-16 08:21:08', NULL),
-(3, 80000, 400000, 0.05, 0.025, 25000, '2021-02-16 10:57:49', 15, '2021-01-17 14:36:05', NULL);
+(1, 80000, 400000, 0.05, 0.025, 25000, '2020-12-03 05:24:57', 10, '2021-01-16 07:20:49', NULL);
 
 -- --------------------------------------------------------
 
@@ -689,7 +686,7 @@ CREATE TABLE `setting` (
 --
 
 INSERT INTO `setting` (`id`, `backup_date`, `updated_at`, `updated_by`) VALUES
-('1', 4, '2021-01-01 02:35:44', 15);
+('1', 23, '2021-01-01 02:35:44', 10);
 
 -- --------------------------------------------------------
 
@@ -965,7 +962,7 @@ ALTER TABLE `b_potongan`
 -- AUTO_INCREMENT untuk tabel `b_tunjangan`
 --
 ALTER TABLE `b_tunjangan`
-  MODIFY `id_tunjangan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_tunjangan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `jabatan`

@@ -14,7 +14,7 @@ class M_laporan extends CI_Model
 				SELECT *, count(id_gaji) jml_gaji
 				FROM b_gaji
 				GROUP BY 
-					CAST(YEAR(created_at) AS INTEGER) + "-" + CAST(MONTH(created_at) AS INTEGER)
+					CAST(YEAR(created_at) AS VARCHAR(4)) + "-" + CAST(MONTH(created_at) AS VARCHAR(2))
 				ORDER BY 
 					created_at DESC
 			');
@@ -52,7 +52,7 @@ class M_laporan extends CI_Model
 			ORDER BY 
 				created_at DESC
 		');
-		return $data;e
+		return $data;
 	}
 }
 
