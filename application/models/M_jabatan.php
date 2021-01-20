@@ -19,7 +19,7 @@ class M_jabatan extends CI_Model{
 		}
 	}
 
-	public function get_bendahara($id_jabatan, $jabatan)
+	public function get_pegawai_auth($id_jabatan, $jabatan)
 	{
 		if ($id_jabatan != '2') {
 			$this->db->select(' p.*, jbt.id_jabatan, jabatan, jml_jam');

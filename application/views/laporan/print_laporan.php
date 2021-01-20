@@ -30,7 +30,8 @@
 					box-sizing: border-box;
 			}
 			@media print {
-				@page { margin: 0; margin-bottom: 20px; margin-top: 30px; }
+				@page {margin: 0; margin-bottom: 20px; margin-top: 30px; size: landscape;}
+				/* @page { margin: 0; margin-bottom: 20px; margin-top: 30px; size: landscape;} */
 				body { 
 					margin: 0; 
 				}
@@ -128,8 +129,9 @@
 							</div>
 							<div class="caption-header">
 								<div class="box-edit">
-									<h4 class="">TANDA TERIMA HONORARIUM</h4>
+									<h4 class="">TANDA TERIMA INSENTIF</h4>
 									<h3 class="text-bold">SMP MUHAMMADIYAH 9 YOGYAKARTA</h3>
+									<h4 class="">BULAN <?php echo $month;?></h4>
 								</div>
 							</div>
 						</div>
@@ -139,173 +141,30 @@
 						<div class="row">
 							<div class="col-lg-2"></div>
 							<div class="col-lg-8">
-								<table class="table-edit text-left">
+								<table class="table table-bordered text-left">
+									<thead>
+										<th class="text-center">Nama</th>
+										<th class="text-center">Honor</th>
+										<th class="text-center">Tunjangan</th>
+										<th class="text-center">Potongan</th>
+										<th class="text-center">Gaji Bersih</th>
+									</thead>
 									<tbody>
+									<?php foreach ($gajis as $key => $gaji) { ?>
 										<tr>
-											<td colspan="3">Nama</td>
-											<td width="30px">:</td>
-											<td class="text-bold"><?php echo $pegawai['nama'];?></td>
+											<td class="text-center"><?php echo $gaji['nama'];?></td>
+											<td>Rp. <?php echo ($gaji['honor'] != NULL) ? number_format($gaji['honor'], 0, ',','.') : number_format(0, 0, ',','.');?></td>
+											<td>Rp. <?php echo number_format($gaji['tunjangan'], 0, ',','.');?></td>
+											<td>Rp. <?php echo number_format($gaji['potongan'], 0, ',','.');?></td>
+											<td>Rp. <?php echo number_format($gaji['gaji'], 0, ',','.');?></td>
 										</tr>
-										<tr>
-											<td colspan="3">Honorium Bulan</td>
-											<td>:</td>
-											<td><?php echo $desc;?></td>
-										</tr>
-										<!-- Tunjangan -->
-										<tr>
-											<td colspan="5" style="padding-left: 4%; text-transform: uppercase;">
-												<small class="text-bold">Honor dan Tunjangan</small>	
-											</td>
-										</tr>
-										<tr>
-											<td class="text-center">1</td>
-											<td colspan="2">Honor</td>
-											<td>:</td>									
-											<td>Rp. &nbsp;<?php echo number_format($pegawai['honor'],0,',','.');?></td>
-											<input id="honor" type="hidden" value="<?php echo ($pegawai['honor'] != NULL) ? $pegawai['honor'] : 0;?>">
-										</tr>
-										<tr>
-											<td class="text-center">2</td>
-											<td colspan="2">Keluarga</td>
-											<td>:</td>									
-											<td>Rp. &nbsp;<?php echo number_format($tunjangan['keluarga'],0,',','.');?></td>
-											<input class="tunjangan" type="hidden" value="<?php echo $tunjangan['keluarga'];?>">
-										</tr>
-										<tr>
-											<td class="text-center">3</td>
-											<td colspan="2">Beras</td>
-											<td>:</td>									
-											<td>Rp. &nbsp;<?php echo number_format($tunjangan['beras'],0,',','.');?></td>
-											<input class="tunjangan" type="hidden" value="<?php echo $tunjangan['beras'];?>">
-										</tr>
-										<tr>
-											<td class="text-center">4</td>
-											<td colspan="2">Jamsostek</td>
-											<td>:</td>									
-											<td>Rp. &nbsp;<?php echo number_format($tunjangan['jamsostek'],0,',','.');?></td>
-											<input class="tunjangan" type="hidden" value="<?php echo $tunjangan['jamsostek'];?>">
-										</tr>
-										<tr>
-											<td class="text-center">5</td>
-											<?php
-												if (empty($jabatans)) {
-													echo '<td colspan="2">Jabatan</td>
-																<td>:</td>									
-																<td>Rp. &nbsp;0</td>';
-												} else {
-													echo '<td colspan="4">Jabatan</td>';
-												}
-											?>
-										</tr>
-										<?php 
-											if (!empty($jabatans)) {
-												foreach ($jabatans as $key => $jabatan) { ?>
-													<tr>
-														<td  class="text-center"></td>
-														<td  class="text-center">-</td>
-														<td><?php echo $jabatan['jabatan'];?></td>
-														<td>:</td>
-														<td>Rp. &nbsp;<?php echo number_format($jabatan['nominal_jbt'],0,',','.');?></td>
-														<input class="tunjangan" type="hidden" value="<?php echo $jabatan['nominal_jbt'];?>">
-													</tr>
-										<?php }} ?>								
-										<tr>
-											<td class="text-center">6</td>
-											<td colspan="2">Masa Kerja</td>
-											<td>:</td>
-											<td>Rp. &nbsp;<?php echo number_format($tunjangan['masakerja'],0,',','.');?></td>
-											<input class="tunjangan" type="hidden" value="<?php echo $tunjangan['masakerja'];?>">
-										</tr>
-										<tr class="text-bold">
-											<td class="text-center" colspan="3">Jumlah</td>
-											<td>:</td>
-											<td>Rp. &nbsp;<span id="hr_tunjangan"></span></td>
-										</tr>
-										<!-- Potongan -->
-										<tr>
-											<td colspan="5" style="padding-left: 4%; text-transform: uppercase;">
-												<small class="text-bold">Potongan</small>
-											</td>
-										</tr>
-										<tr>
-											<td class="text-center">1</td>
-											<td colspan="2">Infaq</td>
-											<td>:</td>									
-											<td>Rp. &nbsp;<?php echo number_format($potongan['infaq'],0,',','.');?></td>
-											<input class="potongan" type="hidden" value="<?php echo $potongan['infaq'];?>">
-										</tr>
-										<tr>
-											<td class="text-center">2</td>
-											<td colspan="2">Sosial</td>
-											<td>:</td>									
-											<td>Rp. &nbsp;<?php echo number_format($potongan['sosial'],0,',','.');?></td>
-											<input class="potongan" type="hidden" value="<?php echo $potongan['sosial'];?>">
-										</tr>
-										<tr>
-											<td class="text-center">3</td>
-											<td colspan="2">PGRI</td>
-											<td>:</td>									
-											<td>Rp. &nbsp;<?php echo number_format($potongan['pgri'],0,',','.');?></td>
-											<input class="potongan" type="hidden" value="<?php echo $potongan['pgri'];?>">
-										</tr>
-										<tr>
-											<td class="text-center">4</td>
-											<td colspan="2">Jasa Raharja</td>
-											<td>:</td>									
-											<td>Rp. &nbsp;<?php echo number_format($potongan['jsr'],0,',','.');?></td>
-											<input class="potongan" type="hidden" value="<?php echo $potongan['jsr'];?>">
-										</tr>
-										<tr>
-											<td class="text-center">5</td>
-											<td colspan="2">Jamsostek</td>
-											<td>:</td>									
-											<td>Rp. &nbsp;<?php echo number_format($potongan['jamsostek'],0,',','.');?></td>
-											<input class="potongan" type="hidden" value="<?php echo $potongan['jamsostek'];?>">
-										</tr>
-										<tr>
-											<td class="text-center">6</td>
-											<td colspan="2">Aisiyah</td>
-											<td>:</td>									
-											<td>Rp. &nbsp;<?php echo number_format($potongan['aisiyah'],0,',','.');?></td>
-											<input class="potongan" type="hidden" value="<?php echo $potongan['aisiyah'];?>">
-										</tr>
-										<tr>
-											<td class="text-center">7</td>
-											<td colspan="2">Koperasi Murni</td>
-											<td>:</td>									
-											<td>Rp. &nbsp;<?php 
-												if (!empty($potongan['nominal_kop'])) {
-													$kop_val = $potongan['nominal_kop'];
-												} else {
-													$kop_val = 0;
-												}
-												echo number_format($kop_val,0,',','.');	
-											?></td>
-											<input class="potongan" type="hidden" value="<?php echo $kop_val;?>">
-										</tr>
-										<tr>
-											<td class="text-center">8</td>
-											<td colspan="2">Bank Bina Drajat Warga</td>
-											<td>:</td>									
-											<td>Rp. &nbsp;<?php 
-												if (!empty($potongan['nominal_bank'])) {
-													$bank_val = $potongan['nominal_bank'];
-												} else {
-													$bank_val = 0;
-												}
-												echo number_format($bank_val,0,',','.');	
-											?></td>
-											<input class="potongan" type="hidden" value="<?php echo $bank_val;?>">
-										</tr>
-										<tr class="text-bold">
-											<td class="text-center" colspan="3">Jumlah</td>
-											<td>:</td>
-											<td>Rp. &nbsp;<span id="potongan"></span></td>
-										</tr>
-										<tr class="text-bold printbg" >
-											<td class="text-center" colspan="3">Terima Bersih</td>
-											<td>:</td>
-											<td>Rp. &nbsp;<span id="gaji"></span></td>
+									<?php } ?>
+										<tr class="printbg text-bold">
+											<td class="text-center">Total</td>
+											<td>Rp. <?php echo number_format($honor, 0, ',','.');?></td>
+											<td>Rp. <?php echo number_format($tunjangan, 0, ',','.');?></td>
+											<td>Rp. <?php echo number_format($potongan, 0, ',','.');?></td>
+											<td>Rp. <?php echo number_format($gaji_total, 0, ',','.');?></td>
 										</tr>
 									</tbody>
 								</table>
@@ -313,12 +172,18 @@
 							<div class="col-lg-2"></div>
 						</div>
 						<div class="row" style="margin-top: 10px;">
-							<div class="col-xs-2"></div>
-							<div class="col-xs-5"></div>
 							<div class="col-xs-5">
-								<h5 style="margin-bottom: 46px;">Yogyakarta, <?php echo $today_date;?></h5>
-								<h5>Juru bayar,</h5>
-								<h5 class="text-bold"><?php echo $bendahara['nama'];?></h5>
+								<h5>&nbsp;</h5>
+								<h5 style="margin-bottom: 46px;">Kepala Sekolah</h5>
+								<h5><?php echo $kepsek['nama'];?></h5>
+								<h5>NBM. <?php echo $kepsek['nbm'];?></h5>
+							</div>
+							<div class="col-xs-2"></div>
+							<div class="col-xs-5">
+								<h5>Yogyakarta, <?php echo $today_date;?></h5>
+								<h5 style="margin-bottom: 46px;">Bendahara Sekolah</h5>
+								<h5><?php echo $bendahara['nama'];?></h5>
+								<h5>NBM. <?php echo $bendahara['nbm'];?></h5>
 							</div>
 							<div class="col-xs-1"></div>
 						</div>

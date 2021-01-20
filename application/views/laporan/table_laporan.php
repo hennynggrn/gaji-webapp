@@ -91,7 +91,7 @@
 											<i class="fa fa-fw fa-file-text-o"></i>
 										</a>
 										&nbsp;&nbsp;&nbsp;
-										<a style="color:white;" href="<?php echo site_url('laporan/print/'.$id_date);?>" title="Cetak" data-tooltip="tooltip" data-placement="top">
+										<a style="color:white;" href="<?php echo site_url('laporan/print/'.$id_date);?>" target="_BLANK" title="Cetak" data-tooltip="tooltip" data-placement="top">
 											<i class="fa fa-fw fa-print"></i>
 										</a>
 									</span>

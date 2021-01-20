@@ -594,6 +594,13 @@
 		$('.badge-edit > span').attr('class', 'badge bg-grey');
 	</script>
 
+	<script>
+		$(function() {
+			// alert('');
+			$('#myHoverTitle').tooltip({ content: $('#myContentHover').html() });
+		});
+	</script>
+
 	<!-- Validasi Koma ketika edit Tunjangan Keluarga -->
 	<script>
 		function validateComma(that) {

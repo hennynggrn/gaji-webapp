@@ -15,9 +15,9 @@ class Gaji_pegawai {
 		$potongan = $this->CI->M_potongan->get_potongan()->row_array();
 		$tunjangan = $this->CI->M_tunjangan->get_tunjangan()->row_array();
 		$jabatan_val = $tunjangan['jabatan'];
+		$data['bendahara'] = $this->CI->M_jabatan->get_pegawai_auth($id_jabatan = '2', $jabatan = 'Bendahara')->row_array();
 
 		if ($id_pegawai != NULL) {
-			$data['bendahara'] = $this->CI->M_jabatan->get_bendahara($id_jabatan = '2', $jabatan = 'Bendahara')->row_array();
 			$data['pegawai'] = $this->CI->M_pegawai->get_pegawai($id_pegawai)->row_array();
 			$keluargas = $this->CI->M_keluarga->get_anggota_keluarga($id_pegawai)->result_array();
 			$data['jabatans'] = $this->CI->M_gaji->get_jabatan_detail($id_pegawai, $jabatan_val)->result_array();
