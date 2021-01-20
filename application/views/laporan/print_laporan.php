@@ -25,9 +25,9 @@
 
 		<style>
 			* {
-					margin: 0;
-					padding: 0;
-					box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
 			}
 			@media print {
 				@page {margin: 0; margin-bottom: 20px; margin-top: 30px; size: landscape;}
