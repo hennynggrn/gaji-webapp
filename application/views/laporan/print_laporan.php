@@ -58,7 +58,7 @@
 				margin-top: -1.4em;
 			}	
 
-			.table-edit, tr{
+			.table-edit{
 				width: 100%;
 				border:1px solid rgb(244,244,244);
 			}
@@ -68,6 +68,10 @@
 				padding-left: 1em;
 			}
 
+			.td-none {
+				padding: 0.2em;
+				padding-left: 0em;
+			}
 			.printbg {
 				background-color: #fafafa !important;
 				color: black;
@@ -141,8 +145,9 @@
 						<div class="row">
 							<div class="col-lg-2"></div>
 							<div class="col-lg-8">
-								<table class="table table-bordered text-left">
+								<table class="table-edit table-bordered text-left">
 									<thead>
+										<th class="text-center">No</th>
 										<th class="text-center">Nama</th>
 										<th class="text-center">Honor</th>
 										<th class="text-center">Tunjangan</th>
@@ -150,9 +155,10 @@
 										<th class="text-center">Gaji Bersih</th>
 									</thead>
 									<tbody>
-									<?php foreach ($gajis as $key => $gaji) { ?>
+									<?php $no = 1; foreach ($gajis as $key => $gaji) { ?>
 										<tr>
-											<td class="text-center"><?php echo $gaji['nama'];?></td>
+											<td class="td-none text-center"><?php echo $no++;?></td>
+											<td><?php echo $gaji['nama'];?></td>
 											<td>Rp. <?php echo ($gaji['honor'] != NULL) ? number_format($gaji['honor'], 0, ',','.') : number_format(0, 0, ',','.');?></td>
 											<td>Rp. <?php echo number_format($gaji['tunjangan'], 0, ',','.');?></td>
 											<td>Rp. <?php echo number_format($gaji['potongan'], 0, ',','.');?></td>
@@ -160,7 +166,7 @@
 										</tr>
 									<?php } ?>
 										<tr class="printbg text-bold">
-											<td class="text-center">Total</td>
+											<td class="text-center" colspan="2">Total</td>
 											<td>Rp. <?php echo number_format($honor_total, 0, ',','.');?></td>
 											<td>Rp. <?php echo number_format($tunjangan_total, 0, ',','.');?></td>
 											<td>Rp. <?php echo number_format($potongan_total, 0, ',','.');?></td>
@@ -272,3 +278,4 @@
 		</script>
   	</body>
 </html>
+
