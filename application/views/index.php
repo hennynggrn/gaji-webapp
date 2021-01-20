@@ -28,11 +28,6 @@
   <style>
 	.alert-fixed {
 		position:fixed; 
-		/* top: 0px;  */
-		/* left: 0px;  */
-		/* width: 100%; */
-		/* z-index:9999;  */
-		/* border-radius:0px */
 	}
   </style>
 </head>

@@ -67,11 +67,11 @@
 				padding-left: 1em;
 			}
 
-			.printbg {
+			/* .printbg {
 				background-color: #fafafa !important;
 				color: black;
 				-webkit-print-color-adjust: exact !important;
-			}	
+			}	 */
 
 			.logo-header {
 				width: auto;
