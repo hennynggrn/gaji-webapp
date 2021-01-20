@@ -14,17 +14,18 @@ class Laporan extends CI_Controller {
 
 	public function detail()
 	{
-		getDateZone();
-		$id_date = $this->uri->segment(3);
-		$date = explode('-', $id_date);
-		$month = $date[1];
-		$year = year($id_date);
-		$data['id_date'] = $id_date;
+		// getDateZone();
+		// $id_date = $this->uri->segment(3);
+		// $date = explode('-', $id_date);
+		// $month = $date[1];
+		// $year = year($id_date);
+		// $data['id_date'] = $id_date;
+		$data = $this->data_laporan();
 		$data['title'] = 'Detail Laporan';
-		$data['desc'] = month($id_date).' '.year($id_date);
-		$data['gajis'] = $this->M_laporan->get_gaji($month, $year)->result_array();
-		$data['tunjangan'] = $this->M_laporan->get_tunjangan($month, $year)->row_array();
-		$data['potongan'] = $this->M_laporan->get_potongan($month, $year)->row_array();
+		$data['desc'] = month($data['id_date']).' '.year($data['id_date']);
+		// $data['gajis'] = $this->M_laporan->get_gaji($month, $year)->result_array();
+		// $data['tunjangan'] = $this->M_laporan->get_tunjangan($month, $year)->row_array();
+		// $data['potongan'] = $this->M_laporan->get_potongan($month, $year)->row_array();
 		$this->template->load('index','laporan/detail_laporan', $data);
 		// var_dump($id_date);
 		// var_dump($data['gajis']);
@@ -66,14 +67,14 @@ class Laporan extends CI_Controller {
 		$data['gajis'] = $this->M_laporan->get_gaji($month, $year)->result_array();
 		$data['tunjangan'] = $this->M_laporan->get_tunjangan($month, $year)->row_array();
 		$data['potongan'] = $this->M_laporan->get_potongan($month, $year)->row_array();
-		$data['honor'] = 0;
-		$data['tunjangan'] = 0;
-		$data['potongan'] = 0;
+		$data['honor_total'] = 0;
+		$data['tunjangan_total'] = 0;
+		$data['potongan_total'] = 0;
 		$data['gaji_total'] = 0;
 		foreach ($data['gajis'] as $key => $gaji) {
-			$data['honor'] += $gaji['honor'];
-			$data['tunjangan'] += $gaji['tunjangan'];
-			$data['potongan'] += $gaji['potongan'];
+			$data['honor_total'] += $gaji['honor'];
+			$data['tunjangan_total'] += $gaji['tunjangan'];
+			$data['potongan_total'] += $gaji['potongan'];
 			$data['gaji_total'] += $gaji['gaji'];
 		}
 		// $this->load->view('laporan/print_laporan', $data);

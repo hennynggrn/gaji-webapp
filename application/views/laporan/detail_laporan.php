@@ -268,7 +268,7 @@
 			<a onclick="history.go(-1);" class="pull-left btn btn-default"><i class="fa fa-fw fa-arrow-left"></i>&nbsp;&nbsp;  Kembali</a>
 			<span class="pull-right ">
 				<a href="<?php echo site_url('laporan/preview/'.$id_date);?>" class="btn bg-orange"><i class="fa fa-fw fa-file-text-o"></i>&nbsp;&nbsp;  Pratinjau</a>
-				<a href="<?php echo site_url('laporan/print/'.$id_date);?>" class="btn bg-blue"><i class="fa fa-fw fa-print"></i>&nbsp;&nbsp;  Cetak</a>
+				<a href="<?php echo site_url('laporan/print/'.$id_date);?>" target="_BLANK" class="btn bg-blue"><i class="fa fa-fw fa-print"></i>&nbsp;&nbsp;  Cetak</a>
 			</span>
 		</div>
 	</div>

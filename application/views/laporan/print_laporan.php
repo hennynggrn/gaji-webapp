@@ -161,9 +161,9 @@
 									<?php } ?>
 										<tr class="printbg text-bold">
 											<td class="text-center">Total</td>
-											<td>Rp. <?php echo number_format($honor, 0, ',','.');?></td>
-											<td>Rp. <?php echo number_format($tunjangan, 0, ',','.');?></td>
-											<td>Rp. <?php echo number_format($potongan, 0, ',','.');?></td>
+											<td>Rp. <?php echo number_format($honor_total, 0, ',','.');?></td>
+											<td>Rp. <?php echo number_format($tunjangan_total, 0, ',','.');?></td>
+											<td>Rp. <?php echo number_format($potongan_total, 0, ',','.');?></td>
 											<td>Rp. <?php echo number_format($gaji_total, 0, ',','.');?></td>
 										</tr>
 									</tbody>
