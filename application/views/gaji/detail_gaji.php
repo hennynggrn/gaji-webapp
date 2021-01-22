@@ -87,7 +87,8 @@
 			<div class="col-md-4">
 				<div class="box box-warning">
 					<div class="box-body box-profile">
-						<img class="profile-user-img img-responsive img-circle" src="<?php echo base_url('assets/dist/img/upload/user1-128x128.jpg'); ?>" alt="<?php echo 'Foto '.$pegawai['nama'];?>">
+						<img class="profile-user-img img-responsive img-circle" src="<?php echo base_url('assets/dist/img/upload/'.$pegawai['foto']); ?>" 
+						alt="<?php echo 'Foto '.$pegawai['nama'];?>">
 						<h3 class="profile-username text-center"><?php echo $pegawai['nama'];?></h3>
 
 						<p class="text-muted text-center"><?php echo $pegawai['nbm'];?></p>

@@ -41,7 +41,7 @@
 									</select>
 								</div>
 							</div>
-							<div class="col-md-12">
+							<div class="col-md-12 hide">
 								<div class="form-group">
 									<h6 class="text-primary text-bold">Daftar pegawai ditambahkan :</h6>
 									<table class="table table-hover text-center">

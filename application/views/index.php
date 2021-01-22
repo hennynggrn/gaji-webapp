@@ -125,7 +125,7 @@
 				<!-- Sidebar user panel -->
 				<div class="user-panel">
 					<div class="pull-left image">
-						<img class="img-circle" src="<?php echo base_url('assets/dist/img/upload/'.$this->session->userdata('photo')); ?>" alt="User Image">
+						<img class="img-circle" src="<?php echo base_url('assets/dist/img/upload/user1-128x128.jpg'); ?>" alt="User Image">
 					</div>
 					<div class="pull-left info">
 						<?php if($this->session->userdata('logged_in')){
