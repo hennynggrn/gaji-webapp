@@ -43,7 +43,7 @@
 				<div class="inner">
 				<h3><small class="text-bold" style="color:white;"><?php echo 'Rp. '.number_format($gaji,0,',','.');?></small></h3>
 
-				<p>Gaji</p>
+				<p>Gaji Bersih</p>
 				</div>
 				<div class="icon">
 				<i class="ion ion-ios-people-outline"></i>

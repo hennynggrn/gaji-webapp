@@ -66,6 +66,7 @@ class Laporan extends CI_Controller {
 		$data['bendahara'] = $this->M_jabatan->get_pegawai_auth($id_jabatan = '2', $jabatan = 'Bendahara')->row_array();
 		$data['gajis'] = $this->M_laporan->get_gaji($month, $year)->result_array();
 		$data['tunjangan'] = $this->M_laporan->get_tunjangan($month, $year)->row_array();
+		$data['masakerjas']= $this->M_laporan->get_masakerja()->result_array();
 		$data['potongan'] = $this->M_laporan->get_potongan($month, $year)->row_array();
 		$data['honor_total'] = 0;
 		$data['tunjangan_total'] = 0;

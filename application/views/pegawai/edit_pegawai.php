@@ -6,7 +6,7 @@
 				<div class="box-header">
 				</div>
 				<!-- /.box-header -->
-				<form class="form-horizontal" role="form" method="post" action="<?php echo site_url('pegawai/update_pegawai');?>">
+				<form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="<?php echo site_url('pegawai/update_pegawai');?>">
 					<div class="box-body">
 						<div class="form-group">
 							<label class="col-sm-2 control-label">NBM</label>
@@ -66,8 +66,25 @@
 						</div>
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Foto Diri</label>
-							<div class="col-sm-10">
+							<div class="col-sm-2">
+								<img class="profile-user-img img-responsive img-circle" src="<?php echo base_url('assets/dist/img/upload/'.$pegawai['foto']); ?>" 
+								alt="<?php echo 'Foto '.$pegawai['nama'];?>">
+							</div>
+							<div class="col-sm-8">
 								<input type="file" class="form-control" name="foto_diri">
+								<?php
+									if ($pegawai['foto'] != NULL) {
+										if ($pegawai['foto'] == 'noimage.png') {
+											$foto = '(belum ada foto diri official)';
+										} else {
+											$foto = $pegawai['foto'];
+										}
+									} else {
+										$foto = '(kosong)';
+									}
+									echo '<small>Foto sekarang : <b>'.$foto.'</b></small>';
+								?>
+                          		<input type="hidden" name="foto_diri_old" value="<?php echo $pegawai['foto'];?>">
 							</div>
 						</div>
 						<div class="form-group">
@@ -264,7 +281,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-2 control-label">Honorium</label>
+							<label class="col-sm-2 control-label">Honorarium</label>
 
 							<div class="col-sm-10">
 								<div class="input-group">

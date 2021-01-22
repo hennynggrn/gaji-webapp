@@ -83,6 +83,7 @@ class User extends CI_Controller {
 				} else {
 					$data['hide'] = FALSE;
 				}
+				
 				// var_dump($data['user']);
 				$this->template->load('index','user/profile_user', $data);
 			}

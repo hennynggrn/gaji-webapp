@@ -23,7 +23,7 @@ class M_pegawai extends CI_Model{
 		return $this->db->get_where('pegawai');
 	}
 
-	public function add_pegawai()
+	public function add_pegawai($upload_img)
 	{
 		$id_pegawai = $this->input->post('id_pegawai');
 		$nbm = $this->input->post('nbm');
@@ -69,6 +69,7 @@ class M_pegawai extends CI_Model{
 			'id_pegawai' => $id_pegawai,
 			'nbm' => $nbm,
 			'nama' => $nama,
+			'foto' => $upload_img,
 			'tempat_lahir' => $tempat_lahir,
 			'tgl_lahir' => $tgl_lahir,
 			'agama' => $agama,
@@ -92,7 +93,7 @@ class M_pegawai extends CI_Model{
 		return $this->db->get_where('pegawai p', $where);
 	}
 
-	public function update_pegawai()
+	public function update_pegawai($upload_img)
 	{
 		$id_pegawai = $this->input->post('id_pegawai');
 		$nbm = $this->input->post('nbm');
@@ -137,6 +138,7 @@ class M_pegawai extends CI_Model{
 		$data = array(
 			'nbm' => $nbm,
 			'nama' => $nama,
+			'foto' => $upload_img,
 			'tempat_lahir' => $tempat_lahir,
 			'tgl_lahir' => $tgl_lahir,
 			'agama' => $agama,

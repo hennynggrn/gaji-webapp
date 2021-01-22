@@ -9,7 +9,7 @@ class Honor extends CI_Controller {
             redirect('login');
 		} else {
 			if (authUserLimited() != TRUE) {
-				$data['title']= 'Tabel Honorium';
+				$data['title']= 'Tabel Honorarium';
 				$data['honors']= $this->M_honor->get_honor($honor)->result_array();
 				$pegawai = array();
 				foreach ($data['honors'] as $key => $value) {
@@ -44,7 +44,7 @@ class Honor extends CI_Controller {
             redirect('login');
 		} else {
 			if (authUserLimited() != TRUE) {
-				$data['title'] = 'Tabel Honorium Pegawai';
+				$data['title'] = 'Tabel Honorarium Pegawai';
 
 				if ($this->uri->segment(3) == 'null'){
 					$honor = 'null';
@@ -120,14 +120,14 @@ class Honor extends CI_Controller {
 					$res['honor'] = $this->M_honor->update_honor($id, $id_honor);
 					if ($res) {
 						if ((isset($detail_honor)) && ($detail_honor == 1)) {
-							$this->session->set_flashdata('message_success', 'Data honor berhasil diedit');
+							$this->session->set_flashdata('message_success', 'Data honorarium berhasil diedit');
 							redirect('honor/detail/'.$honor);
 						} else {
-							$this->session->set_flashdata('message_success', 'Data honor berhasil diedit');
+							$this->session->set_flashdata('message_success', 'Data honorarium berhasil diedit');
 							redirect('honor');
 						}
 					} else {
-						$this->session->set_flashdata('message_failed', 'Data honor gagal diedit');
+						$this->session->set_flashdata('message_failed', 'Data honorarium gagal diedit');
 					}
 				} else {
 					redirect('honor/detail/'.$id_honor);

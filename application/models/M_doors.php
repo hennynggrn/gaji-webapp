@@ -5,10 +5,11 @@
         public function login($email, $password)
         {
             // validate
-            $this->db->select('ul.*, ul.id ul_id, u.*, u.id id');
-            $this->db->join('user_level ul', 'ul.id = u.level_id');
-            $this->db->where('email', $email);
-            $this->db->where('password', $password);
+            $this->db->select('ul.*, ul.id ul_id, u.*, u.id id, p.foto');
+			$this->db->join('user_level ul', 'ul.id = u.level_id');
+			$this->db->join('pegawai p', 'p.id_pegawai = u.id_pegawai', 'LEFT');
+            $this->db->where('u.email', $email);
+            $this->db->where('u.password', $password);
             $result = $this->db->get('users u');
 
             // get which matched 

@@ -44,7 +44,22 @@ class Pegawai extends CI_Controller {
             redirect('login');
 		} else {
 			if (authUserLevel() == TRUE){
-				$res['pegawai'] = $this->M_pegawai->add_pegawai();
+				$config['upload_path'] = 'assets/dist/img/upload';
+				$config['allowed_types'] = 'jpeg|jpg|gif|png';
+				$config['max_size'] = 100000*1024;
+				$config['max_width'] = 2000;
+				$config['max_height'] = 2000;
+				
+				$this->load->library('upload', $config);
+				if (!$this->upload->do_upload('foto_diri')) {
+					$errors = array('error' => $this->upload->display_errors());
+					$upload_img = 'noimage.png';
+				}else {
+					$data = array('upload_data' => $this->upload->data());
+					$upload_img = $_FILES['foto_diri']['name'];        
+				}
+				
+				$res['pegawai'] = $this->M_pegawai->add_pegawai($upload_img);
 				if (!empty($this->input->post('jabatan'))) {
 					$res['jabatan'] = $this->M_jabatan->add_jabatan_pegawai();
 				};
@@ -116,7 +131,26 @@ class Pegawai extends CI_Controller {
             redirect('login');
 		} else {
 			if (authUserLevel() == TRUE){
-				$res['pegawai'] = $this->M_pegawai->update_pegawai();
+				$config['upload_path'] = 'assets/dist/img/upload';
+				$config['allowed_types'] = 'jpeg|jpg|gif|png';
+				$config['max_size'] = 100000*1024;
+				$config['max_width'] = 2000;
+				$config['max_height'] = 2000;
+				
+				$this->load->library('upload', $config);
+				if (!$this->upload->do_upload('foto_diri')) {
+					$errors = array('error' => $this->upload->display_errors());
+					if (empty($_POST['foto_diri_old'])) {
+						$foto = 'noimage.png';
+					} else {
+						$foto = $this->input->post('foto_diri_old');
+					}
+					$upload_img = $foto;
+				}else {
+					$data = array('upload_data' => $this->upload->data());
+					$upload_img = $_FILES['foto_diri']['name'];        
+				}
+				$res['pegawai'] = $this->M_pegawai->update_pegawai($upload_img);
 				if (!empty($this->input->post('jabatan'))) {
 					$res['jabatan'] = $this->M_jabatan->update_jabatan_pegawai();
 				} else {

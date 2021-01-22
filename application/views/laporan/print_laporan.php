@@ -87,7 +87,7 @@
 				
 			}
 			.caption-header {
-				width: 70%;
+				width: 50%;
 				height: 100%;
 				display:flex;
 				flex-direction: column;
@@ -149,7 +149,7 @@
 									<thead>
 										<th class="text-center">No</th>
 										<th class="text-center">Nama</th>
-										<th class="text-center">Honor</th>
+										<th class="text-center">Honorarium</th>
 										<th class="text-center">Tunjangan</th>
 										<th class="text-center">Potongan</th>
 										<th class="text-center">Gaji Bersih</th>

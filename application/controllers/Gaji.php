@@ -116,8 +116,8 @@ class Gaji extends CI_Controller {
 									<th>No</th>
 									<th>Nama</th>
 									<th>Honorarium</th>
-									<th>Jumlah Tunjangan</th>
-									<th>Jumlah Potongan</th>
+									<th>Tunjangan</th>
+									<th>Potongan</th>
 									<th>Gaji Bersih</th>
 									<th>Menu</th>
 								</thead>

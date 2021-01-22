@@ -1,6 +1,6 @@
 <!-- Main content -->
 <section class="content">
-	<div class="row">
+	<div class="row hide">
 		<div class="col-md-12">
 			<div class="box box-info">
 				<div class="box-header with-border">
@@ -90,7 +90,7 @@
 							<th>Tunjangan</th>
 							<th>Potongan</th>
 							<th>Gaji Bersih</th>
-							<th>Menu</th>
+							<th class="hide">Menu</th>
 						</thead>
 						<tbody>
 							<?php $no=1; foreach ($gajis as $key => $gaji) { ?>
@@ -101,7 +101,7 @@
 								<td style="text-align: left;">Rp. <?php echo number_format($gaji['tunjangan'], 0, ',','.');?></td>
 								<td style="text-align: left;">Rp. <?php echo number_format($gaji['potongan'], 0, ',','.');?></td>
 								<td style="text-align: left;">Rp. <?php echo number_format($gaji['gaji'], 0, ',','.');?></td>
-								<td><a style="color: #444A4F;" href="<?php echo site_url('laporan/gaji/edit/'.$gaji['id_gaji']);?>" title="Edit" data-tooltip="tooltip" data-placement="top">
+								<td class="hide"><a style="color: #444A4F;" href="<?php echo site_url('laporan/gaji/edit/'.$gaji['id_gaji']);?>" title="Edit" data-tooltip="tooltip" data-placement="top">
 									<i class="fa fa-fw fa-pencil-square-o"></i>
 								</a></td>
 							</tr>
@@ -126,7 +126,7 @@
 				<div class="box-header with-border">
 					<h3 class="box-title">Tunjangan</h3>
 					<div class="box-tools pull-right">
-						<button style="color: #444A4F;" class="btn btn-box-tool" title="Edit Tunjangan" data-tooltip="tooltip" data-placement="top">
+						<button style="color: #444A4F;" class="btn btn-box-tool hide" title="Edit Tunjangan" data-tooltip="tooltip" data-placement="top">
 							<i class="fa fa-fw fa-pencil-square-o"></i>
 						</button>
 						<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Tunjangan">
@@ -181,9 +181,38 @@
 							<h4 class="modal-title" id="myModalLabel">Tabel Masa Kerja</h4>
 						</div>
 						<div class="modal-body">
-							<p>
-								table masakerja
-							</p>
+							<div class="row">
+								<div class="pull-left col-md-6">
+									<table class="table text-center table-bordered table-hover">
+										<thead>
+											<th>Tahun</th>
+											<th>Jumlah</th>
+										</thead>
+										<?php $tahun = 1; foreach ($masakerjas as $key => $masakerja) : 
+										if ($key<1) continue;?>
+										<tr>
+											<td><?php echo $tahun++; ?></td>
+											<td style="text-align: left; padding-left: 35px;"><?php echo 'Rp. &nbsp;&nbsp;'.number_format($masakerja['nominal_mk'],0,',','.');?></td>
+										</tr>
+										<?php if ($key === 20) break; endforeach; ?>
+									</table>
+								</div>
+								<div class="pull-right col-md-6">
+									<table class="table text-center table-bordered table-hover">
+										<thead>
+											<th>Tahun</th>
+											<th>Jumlah</th>
+										</thead>
+										<?php $tahun = 21; foreach ($masakerjas as $key => $masakerja) :
+										if ($key<21) continue; ?>
+										<tr>
+											<td><?php echo $tahun++; ?></td>
+											<td style="text-align: left; padding-left: 35px;"><?php echo 'Rp. &nbsp;&nbsp;'.number_format($masakerja['nominal_mk'],0,',','.');?></td>
+										</tr>
+										<?php endforeach;  ?>
+									</table>
+								</div>
+							</div>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Tutup</button>
@@ -200,7 +229,7 @@
 						<button style="color: #444A4F;" class="btn btn-box-tool" title="Catatan Potongan" data-tooltip="tooltip" data-placement="top" data-target="#notePotongan" data-toggle="modal">
 							<i class="fa fa-fw fa-info-circle"></i>
 						</button>
-						<button style="color: #444A4F;" class="btn btn-box-tool" title="Edit Potongan" data-tooltip="tooltip" data-placement="top">
+						<button style="color: #444A4F;" class="btn btn-box-tool hide" title="Edit Potongan" data-tooltip="tooltip" data-placement="top">
 							<i class="fa fa-fw fa-pencil-square-o"></i>
 						</button>
 						<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Potongan">

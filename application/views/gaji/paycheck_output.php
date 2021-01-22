@@ -147,19 +147,19 @@
 											<td class="text-bold"><?php echo $pegawai['nama'];?></td>
 										</tr>
 										<tr>
-											<td colspan="3">Honorium Bulan</td>
+											<td colspan="3">Bulan</td>
 											<td>:</td>
 											<td><?php echo $desc;?></td>
 										</tr>
 										<!-- Tunjangan -->
 										<tr>
 											<td colspan="5" style="padding-left: 4%; text-transform: uppercase;">
-												<small class="text-bold">Honor dan Tunjangan</small>	
+												<small class="text-bold">Honorarium dan Tunjangan</small>	
 											</td>
 										</tr>
 										<tr>
 											<td class="text-center">1</td>
-											<td colspan="2">Honor</td>
+											<td colspan="2">Honorarium</td>
 											<td>:</td>									
 											<td>Rp. &nbsp;<?php echo number_format($pegawai['honor'],0,',','.');?></td>
 											<input id="honor" type="hidden" value="<?php echo ($pegawai['honor'] != NULL) ? $pegawai['honor'] : 0;?>">

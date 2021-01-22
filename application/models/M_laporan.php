@@ -54,6 +54,12 @@ class M_laporan extends CI_Model
 		');
 		return $data;
 	}
+
+	public function get_masakerja()
+	{
+		$this->db->group_by('id_masakerja');
+		return $this->db->get('b_masakerja');
+	}
 }
 
 ?>

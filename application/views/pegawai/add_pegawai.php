@@ -5,7 +5,7 @@
 			<div class="box box-primary">
 				<div class="box-header">
 				</div>
-				<form class="form-horizontal" role="form" method="post" action="<?php echo site_url().'pegawai/insert_pegawai' ?>">
+				<form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="<?php echo site_url().'pegawai/insert_pegawai' ?>">
 					<div class="box-body">
 						<div class="form-group">
 							<label class="col-sm-2 control-label">NBM</label>
@@ -59,7 +59,7 @@
 									<option value='L'>Laki-laki</option>
 								</select>
 							</div>
-						</div>
+						</div> 
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Foto Diri</label>
 							<div class="col-sm-10">
@@ -202,7 +202,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-2 control-label">Honorium</label>
+							<label class="col-sm-2 control-label">Honorarium</label>
 							<div class="col-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon">Rp.</span>

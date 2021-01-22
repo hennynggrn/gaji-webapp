@@ -9,7 +9,7 @@
 						<div class="box-header with-border">
 						<h3 class="box-title"> 
 							<a href="" data-toggle="modal" data-target="#editHonor<?php echo $honor_val;?>" class='btn btn-warning'>
-								<i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp; Edit Honorium 
+								<i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp; Edit Honorarium 
 							</a>
 						</h3>
 					</div>
@@ -65,7 +65,7 @@
 										<div class="modal-content">
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-												<h4 class="modal-title" id="myModalLabel">Edit Data Honor Pegawai <b class="text-primary"><?php echo $honor['nama'];?></b></h4>
+												<h4 class="modal-title" id="myModalLabel">Edit Data Honorarium Pegawai <b class="text-primary"><?php echo $honor['nama'];?></b></h4>
 											</div>
 											<form class="form-horizontal" role="form" method="post" action="<?php echo site_url('honor/update_honor');?>">
 												<div class="modal-body">
@@ -102,10 +102,10 @@
 										<div class="modal-content">
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-												<h4 class="modal-title" id="myModalLabel">Edit Data Honor Pegawai <b><?php echo $honor['nama'];?></b></h4>
+												<h4 class="modal-title" id="myModalLabel">Edit Data Honorarium Pegawai <b><?php echo $honor['nama'];?></b></h4>
 											</div>
 											<div class="modal-body">
-												<p>Untuk menambah honor perlu mengubah <b>Jenis</b> atau <b>Status Pegawai</b>&nbsp;&nbsp;
+												<p>Untuk menambah honorarium Anda perlu mengubah <b>Jenis</b> atau <b>Status Pegawai <?php echo $honor['nama'];?></b>&nbsp;&nbsp;
 													<a class="badge bg-orange" href="<?php echo site_url('honor/edit/'.$honor['id_pegawai']);?>">
 														Edit data pegawai<i class="fa fa-fw fa-arrow-circle-right"></i>
 													</a>
@@ -125,14 +125,14 @@
 									<div class="modal-content">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-											<h4 class="modal-title" id="myModalLabel">Hapus Data Honor</h4>
+											<h4 class="modal-title" id="myModalLabel">Hapus Data Honorarium</h4>
 										</div>
 										<div class="modal-body">
 											<p>
 												<?php if ($honor['status_pegawai'] == "T1") {
 													echo '<b>Peringatan! </b><br>'.$honor['nama'].' adalah pegawai <b>tetap</b>.<br><br>';
 												}?>
-												Menghapus akan mengatur honor <b><?php echo $honor['nama'];?></b> menjadi <b>Rp. 0</b>. Lanjutkan ?
+												Menghapus akan mengatur honorarium <b><?php echo $honor['nama'];?></b> menjadi <b>Rp. 0</b>. Lanjutkan ?
 											</p>
 											</div>
 										<div class="modal-footer">
@@ -153,7 +153,7 @@
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								<h4 class="modal-title" id="myModalLabel">Edit Data Honor <b class="text-primary"> Rp. <?php echo number_format($honor_val,0,',','.');?></b></h4>
+								<h4 class="modal-title" id="myModalLabel">Edit Data Honorarium <b class="text-primary"> Rp. <?php echo number_format($honor_val,0,',','.');?></b></h4>
 							</div>
 							<form class="form-horizontal" role="form" method="post" action="<?php echo site_url('honor/update_honor');?>">
 								<div class="modal-body">
