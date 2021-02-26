@@ -61,11 +61,12 @@ class M_laporan extends CI_Model
 		return $this->db->get('b_masakerja');
 	}
 
-// 	public function delete_laporan()
-// 	{
-// 		$this->db->group_by('id_masakerja');
-// 		return $this->db->get('b_masakerja');
-// 	}
+	public function delete_laporan($month, $year)
+	{
+		$this->db->where('month(created_at)', $month);
+		$this->db->where('year(created_at)', $year);
+		return $this->db->delete('b_gaji');
+	}
 }
 
 ?>

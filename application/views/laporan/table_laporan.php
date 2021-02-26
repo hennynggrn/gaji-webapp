@@ -94,15 +94,41 @@
 										<a style="color:white;" href="<?php echo site_url('laporan/print/'.$id_date);?>" target="_BLANK" title="Cetak" data-tooltip="tooltip" data-placement="top">
 											<i class="fa fa-fw fa-print"></i>
 										</a>
-										<!-- &nbsp;&nbsp;&nbsp;
-										<a style="color:white;" href="<?php echo site_url('laporan/delete_laporan/'.$id_date);?>" title="Hapus" data-tooltip="tooltip" data-placement="top">
+										&nbsp;&nbsp;&nbsp;
+										<a style="color:white;" href="" data-toggle="modal" data-target="#deleteLaporan<?php echo $id_date;?>" title="Hapus" data-tooltip="tooltip" data-placement="top">
 											<i class="fa fa-fw fa-trash"></i>
-										</a> -->
+										</a>
 									</span>
 								</div>
 							</div>
 						</div>
-					<?php } ?>
+						<!-- Modal Delete Honor per Pegawai-->
+						<div class="modal fade modal-danger" id="deleteLaporan<?php echo $id_date;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+										<h4 class="modal-title" id="myModalLabel">Hapus Data Laporan</h4>
+									</div>
+									<div class="modal-body">
+										<p>
+											Anda yakin akan menghapus data laporan <b><?php echo $date;?></b> ?
+										</p>
+										</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default pull-left edit-btn" data-dismiss="modal">Batal</button>
+										<a href="<?php echo site_url('laporan/delete_laporan/'.$id_date);?>" class="btn btn-outline pull-right edit-btn">Hapus</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- End Modal -->
+					<?php } 
+					
+					if ($laporans == NULL) {
+						echo '<p class="text-danger text-center text-bold">Tidak ada data laporan.</p>';
+					}?>
+					
 				</div>
 				<div class="box-footer clearfix">
 					<ul class="pagination pagination-sm no-margin pull-right">
