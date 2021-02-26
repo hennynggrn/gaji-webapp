@@ -4,6 +4,7 @@ function switch_status_pegawai($status_pegawai)
 {
 	switch ($status_pegawai) {
 		case 'P':
+		// pns
 			$switch = array(
 				// tunjangan
 				'beras' => 0,
@@ -21,10 +22,11 @@ function switch_status_pegawai($status_pegawai)
 			);
 			break;
 		case 'T0':
+		// tidak tetap
 			$switch = array(
 				// tunjangan
 				'beras' => 1,
-				'jamsostek_tj' => 1,
+				'jamsostek_tj' => 0,
 				'keluarga' => 0,
 				'jabatan' => 1,
 				'mk' => 1,
@@ -33,11 +35,12 @@ function switch_status_pegawai($status_pegawai)
 				'sosial' => 1,
 				'aisiyah' => 0,
 				'pgri' => 1,
-				'jamsostek_pt' => 1,
+				'jamsostek_pt' => 0,
 				'jsr' => 0
 			);
 			break;
 		case 'T1':
+		// tetap
 			$switch = array(
 				// tunjangan
 				'beras' => 1,
