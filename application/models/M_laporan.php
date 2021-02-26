@@ -60,6 +60,12 @@ class M_laporan extends CI_Model
 		$this->db->group_by('id_masakerja');
 		return $this->db->get('b_masakerja');
 	}
+
+// 	public function delete_laporan()
+// 	{
+// 		$this->db->group_by('id_masakerja');
+// 		return $this->db->get('b_masakerja');
+// 	}
 }
 
 ?>

@@ -7,11 +7,11 @@
 					<table class="table table-bordered table-hover responsive text-center">
 						<thead>
 							<th>No</th>
+							<th>Nama Pegawai</th>
 							<th>Nama Anggota</th>
 							<th>Status Anggota</th>
 							<th>Jenis Kelamin</th>
 							<th>Status Hidup</th>
-							<th>Nama Pegawai</th>
 							<th>Menu</th>
 						</thead>
 						<tbody>
@@ -19,6 +19,7 @@
 							$no=1; foreach ($keluargas as $key => $keluarga) : ?>
 							<tr>
 								<td><?php echo $no++;?></td>
+								<td style="text-align: left; padding-left: 15px;"><?php echo $keluarga['nama_pegawai'];?></td>
 								<td style="text-align: left; padding-left: 15px;"><?php echo $keluarga['nama'];?></td>
 								<td class="badge-edit"><?php switch ($keluarga['id_status']) {
 									case '1':
@@ -40,7 +41,6 @@
 										echo 'Hidup';
 										break;
 								}?></td>
-								<td style="text-align: left; padding-left: 15px;"><?php echo $keluarga['nama_pegawai'];?></td>
 								<td>
 									<a href="<?php echo site_url('keluarga/detail/'.$keluarga['id_pegawai']);?>" title="Detail" data-toggle="tooltip" data-placement="top">
 										<span class="badge bg-green"><i class="fa fa-fw fa-info-circle"></i></span>

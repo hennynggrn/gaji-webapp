@@ -52,6 +52,28 @@ class Laporan extends CI_Controller {
 		// var_dump($data['potongan']);
 	}
 
+	// public function delete_laporan($id_date)
+	// {
+	// 	if(!$this->session->userdata('logged_in')){
+    //         redirect('login');
+	// 	} else {
+	// 		getDateZone();
+	// 		if (authUserLevel() == TRUE){
+	// 			$res['laporan'] = $this->M_laporan->delete_laporan($id_date);
+	// 			if ($res) {
+	// 				$this->session->set_flashdata('message_success', 'Laporan berhasil dihapus');
+	// 				redirect('laporan');
+	// 			} else {
+	// 				$this->session->set_flashdata('message_failed', 'Laporan gagal dihapus');
+	// 				redirect('laporan');
+	// 			}
+	// 			// var_dump($gaji);
+	// 		} else {
+	// 			redirect('laporan');
+	// 		}
+	// 	}
+	// } 
+
 	private function data_laporan()
 	{
 		getDateZone();
