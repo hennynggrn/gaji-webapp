@@ -10,14 +10,14 @@ class Backup extends CI_Controller
 			getDateZone();
 			if (authUserLevel() == TRUE){
 				$id_tunjangan = $this->M_backup->backup_tunjangan();
-				// $res['potongan'] = $this->M_backup->backup_potongan();
-				// $res['jabatan'] = $this->M_backup->backup_jabatan();
-				// $res['jabatans_pgw'] = $this->M_backup->backup_jabatan_pegawai();
-				// $res['masakerja'] = $this->M_backup->backup_masakerja();
-				// $res['pegawais'] = $this->M_backup->backup_pegawai($id_tunjangan);
-				// $res['keluargas'] = $this->M_backup->backup_keluarga();
-				// $gaji = $this->gaji_pegawai->get_data($id_pegawai = NULL);
-				// $res['gaji'] = $this->M_backup->backup_gaji($gaji);
+				$res['potongan'] = $this->M_backup->backup_potongan();
+				$res['jabatan'] = $this->M_backup->backup_jabatan();
+				$res['jabatans_pgw'] = $this->M_backup->backup_jabatan_pegawai();
+				$res['masakerja'] = $this->M_backup->backup_masakerja();
+				$res['pegawais'] = $this->M_backup->backup_pegawai($id_tunjangan);
+				$res['keluargas'] = $this->M_backup->backup_keluarga();
+				$gaji = $this->gaji_pegawai->get_data($id_pegawai = NULL);
+				$res['gaji'] = $this->M_backup->backup_gaji($gaji);
 				if ($res) {
 					$this->session->set_flashdata('message_success', 'Laporan berhasil dibuat! Cek di menu laporan');
 					redirect('table');
